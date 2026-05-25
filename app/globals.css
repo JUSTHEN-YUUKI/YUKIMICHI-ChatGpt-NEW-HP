@@ -1,26 +1,59 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@200;300;400&family=Noto+Serif+JP:wght@200;300&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy:         #0f1f3d;
+  --navy-deep:    #07111f;
+  --navy-mid:     #0d1c35;
+  --washi:        #f8f5ef;
+  --washi-dim:    rgba(248, 245, 239, 0.65);
+  --washi-faint:  rgba(248, 245, 239, 0.35);
+  --gold:         #c9a84c;
+  --gold-light:   #dfc070;
+  --benigara:     #8b1e2f;
+  --suzu:         #8a8f99;
+  --suzu-dim:     rgba(138, 143, 153, 0.45);
+  --nav-h:        72px;
+  --section-pad:  clamp(80px, 10vw, 140px);
+  --gutter:       clamp(24px, 6vw, 100px);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--navy-deep);
+  color: var(--washi);
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
 }
+
+.section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.section-label-line { width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.section-label-text { font-size: 10px; font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+
+.section-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(34px, 4.5vw, 54px); line-height: 1.15; letter-spacing: -0.01em; color: var(--washi); margin-bottom: 28px; }
+.section-title em { font-style: italic; color: var(--gold); }
+.section-body { font-size: 13.5px; font-weight: 300; line-height: 2.1; color: var(--washi-dim); letter-spacing: 0.04em; margin-bottom: 36px; }
+
+.btn-primary { display: inline-flex; align-items: center; gap: 12px; padding: 15px 32px; background: var(--benigara); color: var(--washi); text-decoration: none; font-size: 11px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.3s, transform 0.3s; border-radius: 1px; }
+.btn-primary:hover { background: #a0233a; transform: translateY(-1px); }
+.btn-primary svg { transition: transform 0.3s; }
+.btn-primary:hover svg { transform: translateX(4px); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: transparent; border: 1px solid rgba(248,245,239,0.2); color: var(--washi-dim); text-decoration: none; font-size: 11px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: border-color 0.3s, color 0.3s; border-radius: 1px; }
+.btn-ghost:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); }
+
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+.reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.4s; }
+.reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:0.5s; }
+
+@keyframes riseIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.3; transform:scale(0.7); } }
+@keyframes scrollPulse { 0%,100% { transform:scaleY(1); opacity:1; } 50% { transform:scaleY(0.5); opacity:0.4; } }
