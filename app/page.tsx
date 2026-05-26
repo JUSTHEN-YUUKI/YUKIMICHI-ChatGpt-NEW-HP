@@ -101,12 +101,12 @@ export default function Home() {
             <div style={{ width: '32px', height: '1px', background: 'var(--gold)' }} />
             <span style={{ fontSize: '10px', fontWeight: 300, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--gold)' }}>Japan Export Partner ／ 日本発 輸出支援</span>
           </div>
-          <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 300, fontSize: 'clamp(38px,6vw,82px)', lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--washi)', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.35s both' }}>
-            Delivering<br /><em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Trust</em><br />from Japan.
-            <span style={{ display: 'block', fontFamily: "'Noto Serif JP',serif", fontSize: 'clamp(13px,1.8vw,20px)', fontWeight: 200, letterSpacing: '0.35em', color: 'var(--suzu)', marginTop: '14px' }}>日本から、誠実な道を世界へ。</span>
+          <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 300, fontSize: 'clamp(22px,3.5vw,48px)', lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--washi)', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.35s both' }}>
+            Delivering <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Trust</em> from Japan.
+            <span style={{ display: 'block', fontFamily: "'Noto Serif JP',serif", fontSize: 'clamp(16px,2.2vw,26px)', fontWeight: 200, letterSpacing: '0.35em', color: 'var(--gold)', marginTop: '14px' }}>信頼でつなぐ輸出の道へ</span>
           </h1>
-          <p style={{ fontSize: 'clamp(13px,1.3vw,15px)', fontWeight: 300, letterSpacing: '0.08em', color: 'var(--washi-dim)', maxWidth: '460px', lineHeight: 2, marginBottom: 'clamp(36px,5vh,56px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s both' }}>
-            Legal, compliant, and transparent export support<br />from Japan to the world — for influencers,<br />brands, and global partners.
+          <p style={{ fontSize: 'clamp(15px,1.5vw,18px)', fontWeight: 300, letterSpacing: '0.08em', color: 'var(--gold)', maxWidth: '460px', lineHeight: 2, marginBottom: 'clamp(36px,5vh,56px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s both' }}>
+            Export support from Japan to the world — reliable, compliant, and trusted.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.65s both' }}>
             <Link href="/contact" className="btn-primary">お問い合わせ / Contact Us <ArrowRight /></Link>
