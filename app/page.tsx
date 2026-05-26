@@ -153,8 +153,7 @@ export default function Home() {
                 />
               </div>
               <div>
-                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '16px', fontWeight: 400, color: 'var(--washi)', marginBottom: '2px' }}>林 祐樹 / Yuuki Hayashi</div>
-                <div style={{ fontSize: '10px', letterSpacing: '0.2em', color: 'var(--gold)', fontWeight: 300 }}>代表</div>
+                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '16px', fontWeight: 400, color: 'var(--washi)', marginBottom: '2px' }}>代表　林 祐樹 / Yuuki Hayashi</div>
               </div>
             </div>
           <div style={{ background: 'var(--navy-mid)', border: '1px solid rgba(201,168,76,0.12)', padding: '40px 36px', position: 'relative' }}>

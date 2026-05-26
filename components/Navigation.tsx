@@ -44,7 +44,7 @@ export default function Navigation() {
       }}>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Image
-            src="/yukimichi-logo-transparent.png"
+            src="/yukimichi-logo-favicon.png"
             alt="YUKIMICHI – SNOWPATH JAPAN"
             width={96}
             height={96}
