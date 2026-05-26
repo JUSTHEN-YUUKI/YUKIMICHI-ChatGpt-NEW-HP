@@ -51,7 +51,7 @@ export default function Navigation() {
             style={{ objectFit: 'contain' }}
             priority
           />
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(38px, 6vw, 82px)', fontWeight: 400, letterSpacing: '0.28em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(19px, 3vw, 41px)', fontWeight: 400, letterSpacing: '0.28em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
             YUKIMICHI
           </span>
         </Link>
