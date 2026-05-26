@@ -12,7 +12,7 @@
   --benigara:     #8b1e2f;
   --suzu:         #8a8f99;
   --suzu-dim:     rgba(138, 143, 153, 0.45);
-  --nav-h:        72px;
+  --nav-h:        96px;
   --section-pad:  clamp(80px, 10vw, 140px);
   --gutter:       clamp(24px, 6vw, 100px);
 }

@@ -97,21 +97,11 @@ export default function Home() {
           <span style={{ fontSize: '9px', letterSpacing: '0.3em', color: 'var(--gold)', textTransform: 'uppercase' }}>First Month — Free Handling Fee</span>
         </div>
         <div style={{ position: 'relative', zIndex: 3, maxWidth: '900px' }}>
-          <div style={{ marginBottom: 'clamp(24px,3.5vh,40px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.1s both' }}>
-            <Image
-              src="/yukimichi-logo-transparent.png"
-              alt="YUKIMICHI 雪道"
-              width={96}
-              height={96}
-              style={{ objectFit: 'contain' }}
-              priority
-            />
-          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: 'clamp(28px,4vh,48px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both' }}>
             <div style={{ width: '32px', height: '1px', background: 'var(--gold)' }} />
             <span style={{ fontSize: '10px', fontWeight: 300, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--gold)' }}>Japan Export Partner ／ 日本発 輸出支援</span>
           </div>
-          <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 300, fontSize: 'clamp(54px,9vw,120px)', lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--washi)', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.35s both' }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 300, fontSize: 'clamp(38px,6vw,82px)', lineHeight: 0.95, letterSpacing: '-0.02em', color: 'var(--washi)', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.35s both' }}>
             Delivering<br /><em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Trust</em><br />from Japan.
             <span style={{ display: 'block', fontFamily: "'Noto Serif JP',serif", fontSize: 'clamp(13px,1.8vw,20px)', fontWeight: 200, letterSpacing: '0.35em', color: 'var(--suzu)', marginTop: '14px' }}>日本から、誠実な道を世界へ。</span>
           </h1>
@@ -153,18 +143,18 @@ export default function Home() {
           <div style={{ position: 'relative' }}>
             {/* Profile photo */}
             <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ position: 'relative', width: '80px', height: '80px', borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(201,168,76,0.35)', flexShrink: 0 }}>
+              <div style={{ position: 'relative', width: '120px', height: '120px', borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(201,168,76,0.35)', flexShrink: 0 }}>
                 <Image
                   src="/profile.png"
-                  alt="林 祐樹 / Yuki Hayashi"
+                  alt="林 祐樹 / Yuuki Hayashi"
                   fill
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  sizes="80px"
+                  sizes="120px"
                 />
               </div>
               <div>
-                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '16px', fontWeight: 400, color: 'var(--washi)', marginBottom: '2px' }}>林 祐樹 / Yuki Hayashi</div>
-                <div style={{ fontSize: '10px', letterSpacing: '0.2em', color: 'var(--gold)', fontWeight: 300 }}>Representative, JUSTHEN Co., Ltd.</div>
+                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '16px', fontWeight: 400, color: 'var(--washi)', marginBottom: '2px' }}>林 祐樹 / Yuuki Hayashi</div>
+                <div style={{ fontSize: '10px', letterSpacing: '0.2em', color: 'var(--gold)', fontWeight: 300 }}>代表</div>
               </div>
             </div>
           <div style={{ background: 'var(--navy-mid)', border: '1px solid rgba(201,168,76,0.12)', padding: '40px 36px', position: 'relative' }}>

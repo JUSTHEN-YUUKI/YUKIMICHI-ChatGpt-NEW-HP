@@ -46,8 +46,8 @@ export default function Navigation() {
           <Image
             src="/yukimichi-logo-transparent.png"
             alt="YUKIMICHI – SNOWPATH JAPAN"
-            width={44}
-            height={44}
+            width={96}
+            height={96}
             style={{ objectFit: 'contain' }}
             priority
           />
