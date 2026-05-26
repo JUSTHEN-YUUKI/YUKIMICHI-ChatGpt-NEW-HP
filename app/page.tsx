@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 import Snow from '@/components/Snow'
 import ScrollReveal from '@/components/ScrollReveal'
@@ -77,6 +78,18 @@ export default function Home() {
     <>
       <section style={{ position: 'relative', minHeight: '100svh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 var(--gutter) clamp(60px,8vh,100px)', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at 65% 40%,rgba(201,168,76,0.055) 0%,transparent 60%),linear-gradient(160deg,#07111f 0%,#0a1828 50%,#07111f 100%)', zIndex: 0 }} />
+        {/* Hero background photo */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Image
+            src="/hero-bg.jpg"
+            alt=""
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.18 }}
+            priority
+            sizes="100vw"
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(7,17,31,0.92) 0%, rgba(7,17,31,0.65) 55%, rgba(7,17,31,0.82) 100%)' }} />
+        </div>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px)', backgroundSize: '80px 80px', zIndex: 1, maskImage: 'linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%)' }} />
         <Snow />
         <div style={{ position: 'absolute', top: 'calc(var(--nav-h) + 32px)', right: 'var(--gutter)', zIndex: 3, display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', border: '1px solid rgba(201,168,76,0.2)', background: 'rgba(201,168,76,0.04)', animation: 'fadeIn 1s ease 0.8s both' }}>
@@ -84,6 +97,16 @@ export default function Home() {
           <span style={{ fontSize: '9px', letterSpacing: '0.3em', color: 'var(--gold)', textTransform: 'uppercase' }}>First Month — Free Handling Fee</span>
         </div>
         <div style={{ position: 'relative', zIndex: 3, maxWidth: '900px' }}>
+          <div style={{ marginBottom: 'clamp(24px,3.5vh,40px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.1s both' }}>
+            <Image
+              src="/yukimichi-logo-transparent.png"
+              alt="YUKIMICHI 雪道"
+              width={96}
+              height={96}
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: 'clamp(28px,4vh,48px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both' }}>
             <div style={{ width: '32px', height: '1px', background: 'var(--gold)' }} />
             <span style={{ fontSize: '10px', fontWeight: 300, letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--gold)' }}>Japan Export Partner ／ 日本発 輸出支援</span>
@@ -127,6 +150,23 @@ export default function Home() {
           <Link href="/about" className="btn-ghost">会社概要を見る <ArrowRight size={12} /></Link>
         </ScrollReveal>
         <ScrollReveal delay={150}>
+          <div style={{ position: 'relative' }}>
+            {/* Profile photo */}
+            <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <div style={{ position: 'relative', width: '80px', height: '80px', borderRadius: '50%', overflow: 'hidden', border: '1.5px solid rgba(201,168,76,0.35)', flexShrink: 0 }}>
+                <Image
+                  src="/profile.png"
+                  alt="林 祐樹 / Yuki Hayashi"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                  sizes="80px"
+                />
+              </div>
+              <div>
+                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '16px', fontWeight: 400, color: 'var(--washi)', marginBottom: '2px' }}>林 祐樹 / Yuki Hayashi</div>
+                <div style={{ fontSize: '10px', letterSpacing: '0.2em', color: 'var(--gold)', fontWeight: 300 }}>Representative, JUSTHEN Co., Ltd.</div>
+              </div>
+            </div>
           <div style={{ background: 'var(--navy-mid)', border: '1px solid rgba(201,168,76,0.12)', padding: '40px 36px', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: '3px', height: '60px', background: 'var(--gold)' }} />
             <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '22px', fontWeight: 400, color: 'var(--washi)', marginBottom: '24px' }}>JUSTHEN Co., Ltd.</div>
@@ -139,6 +179,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
           </div>
         </ScrollReveal>
       </section>

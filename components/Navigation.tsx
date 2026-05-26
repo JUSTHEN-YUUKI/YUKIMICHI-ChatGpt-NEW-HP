@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
@@ -41,12 +42,17 @@ export default function Navigation() {
         WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(201,168,76,0.12)' : '1px solid transparent',
       }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 400, letterSpacing: '0.3em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
-            YUKIMICHI – SNOWPATH JAPAN
-          </span>
-          <span style={{ fontFamily: "'Noto Serif JP', serif", fontSize: '9px', fontWeight: 200, letterSpacing: '0.25em', color: 'var(--suzu)', lineHeight: 1 }}>
-            雪道 ／ JUSTHEN Co., Ltd.
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Image
+            src="/yukimichi-logo-transparent.png"
+            alt="YUKIMICHI – SNOWPATH JAPAN"
+            width={44}
+            height={44}
+            style={{ objectFit: 'contain' }}
+            priority
+          />
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 400, letterSpacing: '0.28em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
+            YUKIMICHI
           </span>
         </Link>
 
