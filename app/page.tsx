@@ -117,7 +117,7 @@ export default function Home() {
         </div>
 
         {/* Main hero content */}
-        <div style={{ position: 'relative', zIndex: 3, maxWidth: '860px' }}>
+        <div style={{ position: 'relative', zIndex: 3, maxWidth: '760px' }}>
 
           {/* Eyebrow */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both' }}>
