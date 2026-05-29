@@ -135,11 +135,10 @@ export default function Home() {
             color: 'var(--washi)',
             marginBottom: 'clamp(16px,2.5vh,28px)',
             animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s both',
-          }}>
-            日本から、世界へ。<br />
-            <span style={{ color: 'var(--gold)' }}>信頼でつなぐ</span>輸出の道。
-          </h1>
-
+           }}></h1> 
+           日本から、世界へ。<br />
+  　　　　　<span style={{ color: 'var(--gold)' }}>信頼でつなぐ</span><br />
+  　　　　　輸出の道。
           {/* English sub-headline */}
           <p style={{
             fontFamily: "'Cormorant Garamond',serif",
