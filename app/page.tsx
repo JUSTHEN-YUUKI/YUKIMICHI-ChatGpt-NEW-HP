@@ -160,7 +160,7 @@ export default function Home() {
             fontSize: 'clamp(13px,1.4vw,16px)',
             fontWeight: 300,
             letterSpacing: '0.06em',
-            color: 'var(--washi-dim)',
+            color: 'rgba(248,245,239,0.68)',
             maxWidth: '520px',
             lineHeight: 2.2,
             marginBottom: 'clamp(36px,5vh,56px)',
