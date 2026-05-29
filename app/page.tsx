@@ -137,7 +137,8 @@ export default function Home() {
             animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s both',
           }}>
             日本から、世界へ。<br />
-            <span style={{ color: 'var(--gold)' }}>信頼でつなぐ</span>輸出の道。
+            <span style={{ color: 'var(--gold)' }}>信頼でつなぐ<br />
+            輸出の道。
           </h1>
 
           {/* English sub-headline */}
@@ -202,7 +203,7 @@ export default function Home() {
       <section style={{ background: 'var(--navy-mid)', borderTop: '1px solid rgba(201,168,76,0.1)', borderBottom: '1px solid rgba(201,168,76,0.1)', padding: '32px var(--gutter)' }}>
         <ScrollReveal stagger>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-            {['古物商許可証 第305581606050号','税関輸出入者コード 10000NKS0000','初回1ヶ月 手配手数料無料','法令遵守 / Full Compliance','DHL / FedEx / EMS / 航空 / 海上'].map((text) => (
+            {['古物商許可証 第305581606050号','初回手配手数料無料','法令遵守 / Full Compliance','DHL / FedEx / EMS / ヤマト国際宅急便 / 航空 / 海上'].map((text) => (
               <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--gold)', opacity: 0.7, flexShrink: 0, display: 'block' }} />
                 <span style={{ fontSize: '10.5px', fontWeight: 300, letterSpacing: '0.1em', color: 'var(--washi-dim)' }}>{text}</span>
@@ -335,7 +336,7 @@ export default function Home() {
         <ScrollReveal>
           <div className="section-label"><div className="section-label-line" /><span className="section-label-text">Pricing</span></div>
           <h2 className="section-title">Transparent<br /><em>Pricing.</em></h2>
-          <p className="section-body" style={{ maxWidth: '520px' }}>初回1ヶ月は手配手数料無料。2ヶ月目以降は輸送方法により手数料が設定されます。商品代・送料・関税はすべて実費です。</p>
+          <p className="section-body" style={{ maxWidth: '520px' }}>初回は手配手数料無料。2回目以降は輸送方法により手数料が設定されます。商品代・送料・関税はすべて実費です。</p>
         </ScrollReveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginTop: '56px' }} className="price-grid">
           {priceCards.map((c) => <PriceCard key={c.label} {...c} />)}
@@ -358,7 +359,7 @@ export default function Home() {
               Start Your<br /><em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Snowpath</em><br />Today.
             </h2>
             <p style={{ fontSize: '13px', fontWeight: 300, color: 'var(--washi-dim)', lineHeight: 2.1, letterSpacing: '0.05em', marginBottom: '44px' }}>
-              初回1ヶ月は手配手数料無料でお試しいただけます。<br />
+              初回は手配手数料無料でお試しいただけます。<br />
               まずはご希望の商品・仕向地をお知らせください。<br />
               For new partners — no handling fee for the first month.
             </p>
