@@ -83,7 +83,7 @@ export default function Home() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        padding: 'calc(var(--nav-h) + clamp(40px,6vh,80px)) var(--gutter) clamp(60px,8vh,100px)',
+        padding: 'calc(var(--nav-h) + clamp(70px,9vh,120px)) var(--gutter) clamp(90px,12vh,140px)',
         overflow: 'hidden',
       }}>
         {/* Hero background — new logistics image at higher opacity */}
@@ -129,7 +129,7 @@ export default function Home() {
           <h1 style={{
             fontFamily: "'Noto Serif JP',serif",
             fontWeight: 200,
-            fontSize: 'clamp(28px,4.5vw,58px)',
+            fontSize: 'clamp(34px,5.5vw,72px)',
             lineHeight: 1.65,
             letterSpacing: '0.12em',
             color: 'var(--washi)',
@@ -144,9 +144,9 @@ export default function Home() {
           <p style={{
             fontFamily: "'Cormorant Garamond',serif",
             fontWeight: 300,
-            fontSize: 'clamp(18px,2.6vw,32px)',
+            fontSize: 'clamp(22px,3vw,40px)',
             fontStyle: 'italic',
-            letterSpacing: '0.04em',
+            letterSpacing: '0.08em',
             color: 'rgba(248,245,239,0.62)',
             lineHeight: 1.5,
             marginBottom: 'clamp(14px,2vh,24px)',
@@ -162,7 +162,7 @@ export default function Home() {
             letterSpacing: '0.06em',
             color: 'var(--washi-dim)',
             maxWidth: '520px',
-            lineHeight: 2,
+            lineHeight: 2.2,
             marginBottom: 'clamp(36px,5vh,56px)',
             animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.54s both',
           }}>
@@ -171,7 +171,7 @@ export default function Home() {
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.66s both' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '22px', flexWrap: 'wrap', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.66s both' }}>
             <Link href="/contact" className="btn-primary">
               Request a Quote <ArrowRight />
             </Link>
