@@ -83,7 +83,7 @@ export default function Home() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        padding: 'calc(var(--nav-h) + clamp(70px,9vh,120px)) var(--gutter) clamp(90px,12vh,140px)',
+        padding: 'calc(var(--nav-h) + clamp(40px,6vh,80px)) var(--gutter) clamp(60px,8vh,100px)',
         overflow: 'hidden',
       }}>
         {/* Hero background — new logistics image at higher opacity */}
@@ -117,7 +117,7 @@ export default function Home() {
         </div>
 
         {/* Main hero content */}
-        <div style={{ position: 'relative', zIndex: 3, maxWidth: '760px' }}>
+        <div style={{ position: 'relative', zIndex: 3, maxWidth: '860px' }}>
 
           {/* Eyebrow */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: 'clamp(20px,3vh,36px)', animation: 'riseIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both' }}>
@@ -129,23 +129,24 @@ export default function Home() {
           <h1 style={{
             fontFamily: "'Noto Serif JP',serif",
             fontWeight: 200,
-            fontSize: 'clamp(34px,5.5vw,72px)',
+            fontSize: 'clamp(28px,4.5vw,58px)',
             lineHeight: 1.65,
             letterSpacing: '0.12em',
             color: 'var(--washi)',
             marginBottom: 'clamp(16px,2.5vh,28px)',
             animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s both',
-           }}></h1> 
-           日本から、世界へ。<br />
-  　　　　　<span style={{ color: 'var(--gold)' }}>信頼でつなぐ</span><br />
-  　　　　　輸出の道。
+          }}>
+            日本から、世界へ。<br />
+            <span style={{ color: 'var(--gold)' }}>信頼でつなぐ</span>輸出の道。
+          </h1>
+
           {/* English sub-headline */}
           <p style={{
             fontFamily: "'Cormorant Garamond',serif",
             fontWeight: 300,
-            fontSize: 'clamp(22px,3vw,40px)',
+            fontSize: 'clamp(18px,2.6vw,32px)',
             fontStyle: 'italic',
-            letterSpacing: '0.08em',
+            letterSpacing: '0.04em',
             color: 'rgba(248,245,239,0.62)',
             lineHeight: 1.5,
             marginBottom: 'clamp(14px,2vh,24px)',
@@ -159,9 +160,9 @@ export default function Home() {
             fontSize: 'clamp(13px,1.4vw,16px)',
             fontWeight: 300,
             letterSpacing: '0.06em',
-            color: 'rgba(248,245,239,0.68)',
+            color: 'var(--washi-dim)',
             maxWidth: '520px',
-            lineHeight: 2.2,
+            lineHeight: 2,
             marginBottom: 'clamp(36px,5vh,56px)',
             animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.54s both',
           }}>
@@ -170,7 +171,7 @@ export default function Home() {
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '22px', flexWrap: 'wrap', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.66s both' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap', animation: 'riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.66s both' }}>
             <Link href="/contact" className="btn-primary">
               Request a Quote <ArrowRight />
             </Link>
@@ -201,7 +202,7 @@ export default function Home() {
       <section style={{ background: 'var(--navy-mid)', borderTop: '1px solid rgba(201,168,76,0.1)', borderBottom: '1px solid rgba(201,168,76,0.1)', padding: '32px var(--gutter)' }}>
         <ScrollReveal stagger>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-            {['古物商許可証 第305581606050号','初回手配手数料無料','法令遵守 / Full Compliance','DHL / FedEx / EMS / 航空 / 海上'].map((text) => (
+            {['古物商許可証 第305581606050号','税関輸出入者コード 10000NKS0000','初回1ヶ月 手配手数料無料','法令遵守 / Full Compliance','DHL / FedEx / EMS / 航空 / 海上'].map((text) => (
               <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--gold)', opacity: 0.7, flexShrink: 0, display: 'block' }} />
                 <span style={{ fontSize: '10.5px', fontWeight: 300, letterSpacing: '0.1em', color: 'var(--washi-dim)' }}>{text}</span>
@@ -334,7 +335,7 @@ export default function Home() {
         <ScrollReveal>
           <div className="section-label"><div className="section-label-line" /><span className="section-label-text">Pricing</span></div>
           <h2 className="section-title">Transparent<br /><em>Pricing.</em></h2>
-          <p className="section-body" style={{ maxWidth: '520px' }}>初回は手配手数料無料。２回目以降は輸送方法により手数料が設定されます。商品代・送料・関税はすべて実費です。</p>
+          <p className="section-body" style={{ maxWidth: '520px' }}>初回1ヶ月は手配手数料無料。2ヶ月目以降は輸送方法により手数料が設定されます。商品代・送料・関税はすべて実費です。</p>
         </ScrollReveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px', marginTop: '56px' }} className="price-grid">
           {priceCards.map((c) => <PriceCard key={c.label} {...c} />)}
@@ -357,7 +358,7 @@ export default function Home() {
               Start Your<br /><em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Snowpath</em><br />Today.
             </h2>
             <p style={{ fontSize: '13px', fontWeight: 300, color: 'var(--washi-dim)', lineHeight: 2.1, letterSpacing: '0.05em', marginBottom: '44px' }}>
-              初回は手配手数料無料でお試しいただけます。<br />
+              初回1ヶ月は手配手数料無料でお試しいただけます。<br />
               まずはご希望の商品・仕向地をお知らせください。<br />
               For new partners — no handling fee for the first month.
             </p>
