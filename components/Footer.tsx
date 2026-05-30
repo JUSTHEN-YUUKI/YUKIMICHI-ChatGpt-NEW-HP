@@ -10,6 +10,7 @@ const footerLinks = [
   { href: '/faq', label: 'FAQ' },
   { href: '/restricted', label: '禁止・制限品目' },
   { href: '/terms', label: '取引条件' },
+  { href: '/privacy', label: 'プライバシーポリシー' },
   { href: '/contact', label: 'お問い合わせ' },
 ]
 
