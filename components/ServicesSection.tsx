@@ -1,0 +1,355 @@
+"use client"
+
+import Link from "next/link"
+import type { ReactNode } from "react"
+import ScrollReveal from "@/components/ScrollReveal"
+
+function ArrowRight({ size = 14 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 14 14" fill="none">
+      <path
+        d="M2 7h10M8 3l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function IconBox() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <path d="M3.3 7 12 12l8.7-5" />
+      <path d="M12 22V12" />
+    </svg>
+  )
+}
+
+function IconPlane() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <path d="M22 2 11 13" />
+      <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+    </svg>
+  )
+}
+
+function IconShip() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <path d="M3 18h18" />
+      <path d="M5 18 3 11h18l-2 7" />
+      <path d="M7 11V6h10v5" />
+      <path d="M9 6V3h6v3" />
+      <path d="M4 21c1.2 0 1.2-1 2.4-1s1.2 1 2.4 1 1.2-1 2.4-1 1.2 1 2.4 1 1.2-1 2.4-1 1.2 1 2.4 1 1.2-1 2.4-1" />
+    </svg>
+  )
+}
+
+function IconShield() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
+function IconGlobe() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 0 20" />
+      <path d="M12 2a15.3 15.3 0 0 0 0 20" />
+    </svg>
+  )
+}
+
+function IconAI() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M9 9h6v6H9z" />
+      <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" />
+    </svg>
+  )
+}
+
+interface Service {
+  num: string
+  icon: ReactNode
+  title: string
+  titleJp: string
+  desc: string
+  points: string[]
+}
+
+const services: Service[] = [
+  {
+    num: "01",
+    icon: <IconBox />,
+    title: "Procurement",
+    titleJp: "日本国内の商品調達",
+    desc: "海外バイヤー向けに、日本国内の商品リサーチ・購入代行・仕入れ支援を行います。小ロットやサンプル出荷の相談にも対応します。",
+    points: ["商品リサーチ", "購入代行", "小ロット相談"],
+  },
+  {
+    num: "02",
+    icon: <IconGlobe />,
+    title: "International Express",
+    titleJp: "国際宅配便",
+    desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、商品内容・納期・コストに応じた国際配送方法を検討します。",
+    points: ["EMS", "DHL / FedEx / UPS", "ヤマト国際宅急便"],
+  },
+  {
+    num: "03",
+    icon: <IconPlane />,
+    title: "Air Freight",
+    titleJp: "航空貨物",
+    desc: "緊急輸送、高付加価値商品、短納期案件に向けて、航空貨物や国際エクスプレスを活用した輸送をサポートします。",
+    points: ["緊急輸送", "短納期", "高付加価値商品"],
+  },
+  {
+    num: "04",
+    icon: <IconShip />,
+    title: "Sea Freight",
+    titleJp: "海上輸送",
+    desc: "FCL・LCLを含む海上輸送の相談に対応します。大量輸送や継続出荷など、コストを重視した輸送にも適しています。",
+    points: ["FCL", "LCL", "コスト最適化"],
+  },
+  {
+    num: "05",
+    icon: <IconShield />,
+    title: "Compliance",
+    titleJp: "輸出コンプライアンス",
+    desc: "輸出可否、書類準備、インボイス作成、規制品確認など、国際取引で重要となる基本的な確認業務をサポートします。",
+    points: ["書類準備", "規制確認", "透明な取引"],
+  },
+  {
+    num: "06",
+    icon: <IconAI />,
+    title: "AI / DX Support",
+    titleJp: "AI・DX支援",
+    desc: "AI翻訳、問い合わせ整理、見積ドラフト作成、業務効率化など、輸出業務のスピードと正確性を高める仕組みづくりを支援します。",
+    points: ["AI翻訳", "見積補助", "業務効率化"],
+  },
+]
+
+function ServiceCard({ service }: { service: Service }) {
+  return (
+    <div
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.018) 100%)",
+        border: "1px solid rgba(201,168,76,0.12)",
+        padding: "34px 30px",
+        minHeight: "360px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "120px",
+          height: "120px",
+          background:
+            "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: "13px",
+          letterSpacing: "0.3em",
+          color: "var(--gold)",
+          opacity: 0.7,
+          marginBottom: "22px",
+        }}
+      >
+        {service.num}
+      </div>
+
+      <div
+        style={{
+          width: "42px",
+          height: "42px",
+          color: "var(--gold)",
+          marginBottom: "24px",
+          opacity: 0.9,
+        }}
+      >
+        {service.icon}
+      </div>
+
+      <h3
+        style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: "26px",
+          fontWeight: 400,
+          color: "var(--washi)",
+          marginBottom: "4px",
+          lineHeight: 1.1,
+        }}
+      >
+        {service.title}
+      </h3>
+
+      <div
+        style={{
+          fontFamily: "'Noto Serif JP', serif",
+          fontSize: "12px",
+          fontWeight: 200,
+          letterSpacing: "0.18em",
+          color: "var(--suzu)",
+          marginBottom: "20px",
+        }}
+      >
+        {service.titleJp}
+      </div>
+
+      <p
+        style={{
+          fontSize: "12.5px",
+          fontWeight: 300,
+          lineHeight: 2,
+          color: "var(--washi-dim)",
+          letterSpacing: "0.04em",
+          marginBottom: "24px",
+        }}
+      >
+        {service.desc}
+      </p>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+        }}
+      >
+        {service.points.map((point) => (
+          <span
+            key={point}
+            style={{
+              border: "1px solid rgba(201,168,76,0.18)",
+              color: "var(--washi-faint)",
+              padding: "6px 10px",
+              fontSize: "10px",
+              letterSpacing: "0.08em",
+              lineHeight: 1,
+            }}
+          >
+            {point}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default function ServicesSection() {
+  return (
+    <section
+      id="services"
+      style={{
+        position: "relative",
+        padding: "var(--section-pad) var(--gutter)",
+        background:
+          "linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%)",
+        borderTop: "1px solid rgba(201,168,76,0.08)",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          left: "-14%",
+          top: "18%",
+          width: "460px",
+          height: "460px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(141,183,217,0.08) 0%, transparent 68%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <ScrollReveal>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "32px",
+            alignItems: "flex-end",
+            flexWrap: "wrap",
+            marginBottom: "56px",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <div>
+            <div className="section-label">
+              <div className="section-label-line" />
+              <span className="section-label-text">Services</span>
+            </div>
+
+            <h2 className="section-title">
+              Export Support<br />
+              for <em>Global Trade.</em>
+            </h2>
+
+            <p className="section-body" style={{ maxWidth: "620px", marginBottom: 0 }}>
+              日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、
+              輸出書類、AI・DX支援まで。海外バイヤーが安心して日本と取引できる
+              体制づくりをサポートします。
+            </p>
+          </div>
+
+          <Link href="/contact" className="btn-ghost">
+            Request a Quote <ArrowRight size={12} />
+          </Link>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal stagger>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gap: "18px",
+            position: "relative",
+            zIndex: 1,
+          }}
+          className="services-v2-grid"
+        >
+          {services.map((service) => (
+            <ServiceCard key={service.num} service={service} />
+          ))}
+        </div>
+      </ScrollReveal>
+
+      <style>{`
+        @media (max-width: 1050px) {
+          .services-v2-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+        }
+
+        @media (max-width: 680px) {
+          .services-v2-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
+    </section>
+  )
+}
