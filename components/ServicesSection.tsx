@@ -18,12 +18,13 @@ function ArrowRight({ size = 14 }: { size?: number }) {
   )
 }
 
-function IconBox() {
+function IconCart() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <path d="M3.3 7 12 12l8.7-5" />
-      <path d="M12 22V12" />
+      <path d="M6 6h15l-1.5 8.5H8L6 3H3" />
+      <circle cx="9" cy="20" r="1.5" />
+      <circle cx="18" cy="20" r="1.5" />
+      <path d="M9 10h8" />
     </svg>
   )
 }
@@ -86,24 +87,27 @@ interface Service {
   titleJp: string
   desc: string
   points: string[]
+  accent: string
 }
 
 const services: Service[] = [
   {
     num: "01",
-    icon: <IconBox />,
-    title: "Procurement",
+    icon: <IconCart />,
+    title: "Japan Procurement",
     titleJp: "日本国内の商品調達",
-    desc: "海外バイヤー向けに、日本国内の商品リサーチ・購入代行・仕入れ支援を行います。小ロットやサンプル出荷の相談にも対応します。",
-    points: ["商品リサーチ", "購入代行", "小ロット相談"],
+    desc: "海外バイヤー向けに、日本国内の商品リサーチ・購入代行・仕入れ支援を行います。北海道・日本ブランドの商品、小ロット、サンプル出荷の相談にも対応します。",
+    points: ["商品リサーチ", "購入代行", "小ロット相談", "日本国内調達"],
+    accent: "HOKKAIDO / JAPAN",
   },
   {
     num: "02",
     icon: <IconGlobe />,
-    title: "International Express",
+    title: "Express Logistics",
     titleJp: "国際宅配便",
-    desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、商品内容・納期・コストに応じた国際配送方法を検討します。",
-    points: ["EMS", "DHL / FedEx / UPS", "ヤマト国際宅急便"],
+    desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、商品内容・納期・コストに応じた国際配送方法を比較し、最適な発送手段を検討します。",
+    points: ["EMS", "DHL", "FedEx / UPS", "ヤマト国際宅急便"],
+    accent: "EXPRESS",
   },
   {
     num: "03",
@@ -111,23 +115,26 @@ const services: Service[] = [
     title: "Air Freight",
     titleJp: "航空貨物",
     desc: "緊急輸送、高付加価値商品、短納期案件に向けて、航空貨物や国際エクスプレスを活用した輸送をサポートします。",
-    points: ["緊急輸送", "短納期", "高付加価値商品"],
+    points: ["緊急輸送", "短納期", "高付加価値商品", "航空貨物"],
+    accent: "AIR CARGO",
   },
   {
     num: "04",
     icon: <IconShip />,
     title: "Sea Freight",
     titleJp: "海上輸送",
-    desc: "FCL・LCLを含む海上輸送の相談に対応します。大量輸送や継続出荷など、コストを重視した輸送にも適しています。",
-    points: ["FCL", "LCL", "コスト最適化"],
+    desc: "FCL・LCLを含む海上輸送の相談に対応します。大量輸送、継続出荷、コスト重視の案件に適した輸送方法を検討します。",
+    points: ["FCL", "LCL", "大量輸送", "コスト最適化"],
+    accent: "SEA FREIGHT",
   },
   {
     num: "05",
     icon: <IconShield />,
-    title: "Compliance",
+    title: "Export Compliance",
     titleJp: "輸出コンプライアンス",
     desc: "輸出可否、書類準備、インボイス作成、規制品確認など、国際取引で重要となる基本的な確認業務をサポートします。",
-    points: ["書類準備", "規制確認", "透明な取引"],
+    points: ["書類準備", "規制確認", "インボイス", "透明な取引"],
+    accent: "COMPLIANCE",
   },
   {
     num: "06",
@@ -135,7 +142,8 @@ const services: Service[] = [
     title: "AI / DX Support",
     titleJp: "AI・DX支援",
     desc: "AI翻訳、問い合わせ整理、見積ドラフト作成、業務効率化など、輸出業務のスピードと正確性を高める仕組みづくりを支援します。",
-    points: ["AI翻訳", "見積補助", "業務効率化"],
+    points: ["AI翻訳", "見積補助", "問い合わせ整理", "業務効率化"],
+    accent: "AI / DX",
   },
 ]
 
@@ -143,36 +151,39 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <div
       style={{
-        background:
-          "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.018) 100%)",
-        border: "1px solid rgba(201,168,76,0.12)",
-        padding: "34px 30px",
-        minHeight: "360px",
         position: "relative",
+        minHeight: "390px",
+        padding: "36px 30px",
+        border: "1px solid rgba(201,168,76,0.14)",
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.016) 100%)",
         overflow: "hidden",
       }}
     >
       <div
         style={{
           position: "absolute",
-          top: 0,
-          right: 0,
-          width: "120px",
-          height: "120px",
+          top: "-80px",
+          right: "-80px",
+          width: "210px",
+          height: "210px",
+          borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 68%)",
           pointerEvents: "none",
         }}
       />
 
       <div
         style={{
+          position: "absolute",
+          top: "24px",
+          right: "24px",
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "13px",
-          letterSpacing: "0.3em",
-          color: "var(--gold)",
-          opacity: 0.7,
-          marginBottom: "22px",
+          fontSize: "42px",
+          lineHeight: 1,
+          color: "rgba(201,168,76,0.08)",
+          letterSpacing: "0.04em",
         }}
       >
         {service.num}
@@ -180,8 +191,21 @@ function ServiceCard({ service }: { service: Service }) {
 
       <div
         style={{
-          width: "42px",
-          height: "42px",
+          fontSize: "9px",
+          letterSpacing: "0.32em",
+          textTransform: "uppercase",
+          color: "var(--gold)",
+          opacity: 0.75,
+          marginBottom: "18px",
+        }}
+      >
+        {service.accent}
+      </div>
+
+      <div
+        style={{
+          width: "46px",
+          height: "46px",
           color: "var(--gold)",
           marginBottom: "24px",
           opacity: 0.9,
@@ -193,11 +217,11 @@ function ServiceCard({ service }: { service: Service }) {
       <h3
         style={{
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "26px",
+          fontSize: "clamp(26px, 2.4vw, 34px)",
           fontWeight: 400,
           color: "var(--washi)",
-          marginBottom: "4px",
-          lineHeight: 1.1,
+          marginBottom: "5px",
+          lineHeight: 1.05,
         }}
       >
         {service.title}
@@ -229,23 +253,18 @@ function ServiceCard({ service }: { service: Service }) {
         {service.desc}
       </p>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px",
-        }}
-      >
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
         {service.points.map((point) => (
           <span
             key={point}
             style={{
               border: "1px solid rgba(201,168,76,0.18)",
               color: "var(--washi-faint)",
-              padding: "6px 10px",
+              padding: "7px 10px",
               fontSize: "10px",
               letterSpacing: "0.08em",
               lineHeight: 1,
+              background: "rgba(7,17,31,0.28)",
             }}
           >
             {point}
@@ -272,10 +291,26 @@ export default function ServicesSection() {
       <div
         style={{
           position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px)",
+          backgroundSize: "86px 86px",
+          pointerEvents: "none",
+          opacity: 0.65,
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
           left: "-14%",
           top: "18%",
-          width: "460px",
-          height: "460px",
+          width: "520px",
+          height: "520px",
           borderRadius: "50%",
           background:
             "radial-gradient(circle, rgba(141,183,217,0.08) 0%, transparent 68%)",
@@ -286,50 +321,74 @@ export default function ServicesSection() {
       <ScrollReveal>
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "32px",
-            alignItems: "flex-end",
-            flexWrap: "wrap",
-            marginBottom: "56px",
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 0.95fr) minmax(0, 1.05fr)",
+            gap: "clamp(40px, 6vw, 80px)",
+            alignItems: "end",
+            marginBottom: "62px",
             position: "relative",
             zIndex: 1,
           }}
+          className="services-premium-head"
         >
           <div>
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Services</span>
+              <span className="section-label-text">Premium Export Services</span>
             </div>
 
             <h2 className="section-title">
-              Export Support<br />
-              for <em>Global Trade.</em>
+              Hokkaido to<br />
+              Sea & Air<br />
+              <em>Global Trade.</em>
             </h2>
-
-            <p className="section-body" style={{ maxWidth: "620px", marginBottom: 0 }}>
-              日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、
-              輸出書類、AI・DX支援まで。海外バイヤーが安心して日本と取引できる
-              体制づくりをサポートします。
-            </p>
           </div>
 
-          <Link href="/contact" className="btn-ghost">
-            Request a Quote <ArrowRight size={12} />
-          </Link>
+          <div>
+            <p className="section-body" style={{ marginBottom: "26px" }}>
+              YUKIMICHIは、日本国内の商品調達から国際宅配便、航空貨物、海上輸送、
+              輸出コンプライアンス、AI・DX支援まで、海外バイヤーが安心して日本と取引できる
+              実務型の輸出サポートを提供します。
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+                marginBottom: "4px",
+              }}
+            >
+              {["HOKKAIDO", "SEA FREIGHT", "AIR FREIGHT", "EXPRESS", "GLOBAL TRADE"].map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    border: "1px solid rgba(201,168,76,0.18)",
+                    color: "var(--gold)",
+                    padding: "7px 10px",
+                    fontSize: "9.5px",
+                    letterSpacing: "0.16em",
+                    background: "rgba(201,168,76,0.045)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </ScrollReveal>
 
       <ScrollReveal stagger>
         <div
           style={{
+            position: "relative",
+            zIndex: 1,
             display: "grid",
             gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
             gap: "18px",
-            position: "relative",
-            zIndex: 1,
           }}
-          className="services-v2-grid"
+          className="services-premium-grid"
         >
           {services.map((service) => (
             <ServiceCard key={service.num} service={service} />
@@ -337,15 +396,72 @@ export default function ServicesSection() {
         </div>
       </ScrollReveal>
 
+      <ScrollReveal delay={160}>
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            marginTop: "44px",
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 1.15fr) minmax(0, 0.85fr)",
+            gap: "24px",
+            alignItems: "center",
+          }}
+          className="services-premium-logistics"
+        >
+          <div
+            style={{
+              border: "1px solid rgba(201,168,76,0.14)",
+              background: "rgba(255,255,255,0.025)",
+              padding: "32px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.32em",
+                color: "var(--gold)",
+                textTransform: "uppercase",
+                marginBottom: "12px",
+              }}
+            >
+              Logistics Policy
+            </div>
+            <p
+              style={{
+                fontSize: "12.5px",
+                lineHeight: 2,
+                color: "var(--washi-dim)",
+                letterSpacing: "0.04em",
+                margin: 0,
+              }}
+            >
+              航空貨物・海上輸送・国際宅配便は、それぞれ納期、コスト、通関難易度、貨物特性が異なります。
+              YUKIMICHIでは、単に安い配送方法を選ぶのではなく、到着までの安全性、スピード、
+              コストバランスを踏まえて輸送方法を検討します。
+            </p>
+          </div>
+
+          <Link href="/contact" className="btn-primary" style={{ justifyContent: "center" }}>
+            Request Logistics Support <ArrowRight />
+          </Link>
+        </div>
+      </ScrollReveal>
+
       <style>{`
         @media (max-width: 1050px) {
-          .services-v2-grid {
+          .services-premium-head,
+          .services-premium-logistics {
+            grid-template-columns: 1fr !important;
+          }
+
+          .services-premium-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
           }
         }
 
         @media (max-width: 680px) {
-          .services-v2-grid {
+          .services-premium-grid {
             grid-template-columns: 1fr !important;
           }
         }
