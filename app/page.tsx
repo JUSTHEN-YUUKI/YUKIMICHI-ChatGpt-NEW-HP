@@ -218,76 +218,220 @@ export default function Home() {
       {/* 
           ABOUT + REPRESENTATIVE
        */}
-      <section style={{ padding: 'var(--section-pad) var(--gutter)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 'clamp(48px,6vw,100px)', alignItems: 'center' }}>
+      <section
+        style={{
+          padding: 'var(--section-pad) var(--gutter)',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(360px,1fr))',
+          gap: 'clamp(48px,6vw,100px)',
+          alignItems: 'center',
+        }}
+      >
+        {/* LEFT */}
         <ScrollReveal>
-          <div className="section-label"><div className="section-label-line" /><span className="section-label-text">About Us</span></div>
-          <h2 className="section-title">A Clear Path<br />from Japan<br />to the <em>World.</em></h2>
-          <p className="section-body">YUKIMICHI  SNOWPATH JAPAN  JUSTHEN Co., Ltd. <br /><br /><br /><br />We source authentic products legally in Japan and deliver them worldwide with full compliance and transparency.</p>
-          <Link href="/about" className="btn-ghost"> <ArrowRight size={12} /></Link>
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">
+              About YUKIMICHI
+            </span>
+          </div>
+
+          <h2 className="section-title">
+            From Japan<br />
+            to the <em>World.</em>
+          </h2>
+
+          <p className="section-body">
+            YUKIMICHI（雪道）は、
+            JUSTHEN CO., LTD.が運営する
+            日本発の輸出サポートブランドです。
+            <br /><br />
+            日本国内の商品調達から、
+            国際配送、輸出書類作成、
+            コンプライアンス対応まで、
+            海外のお客様が安心して取引できる
+            輸出環境を提供しています。
+            <br /><br />
+            私たちは単なる発送代行ではなく、
+            日本と世界を信頼でつなぐ
+            長期的なパートナーを目指しています。
+          </p>
+
+          <Link href="/contact" className="btn-primary">
+            Contact Us
+            <ArrowRight />
+          </Link>
         </ScrollReveal>
 
+        {/* RIGHT */}
         <ScrollReveal delay={150}>
-          <div style={{ position: 'relative' }}>
-            {/* Representative  larger, more authoritative */}
-            <div style={{ marginBottom: '32px', display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
-              {/* Square portrait  more executive/corporate than circle */}
-              <div style={{
+          <div
+            style={{
+              position: 'relative',
+            }}
+          >
+            {/* PHOTO */}
+            <div
+              style={{
                 position: 'relative',
-                width: '140px',
-                height: '168px',
-                flexShrink: 0,
+                width: '100%',
+                aspectRatio: '4 / 5',
                 overflow: 'hidden',
-                borderRadius: '2px',
-                border: '1px solid rgba(201,168,76,0.3)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-              }}>
-                <Image
-                  src="/profile.png"
-                  alt="   / Yuuki Hayashi  JUSTHEN Co., Ltd."
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  sizes="140px"
-                />
-                {/* Subtle gold overlay on bottom */}
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', background: 'linear-gradient(to top, rgba(7,17,31,0.7), transparent)' }} />
-              </div>
-              <div style={{ paddingTop: '8px' }}>
-                {/* Title label */}
-                <div style={{ fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--gold)', opacity: 0.8, marginBottom: '8px' }}>
-                  Representative Director
-                </div>
-                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '20px', fontWeight: 400, color: 'var(--washi)', marginBottom: '4px', lineHeight: 1.2 }}>
-                  Yuuki Hayashi
-                </div>
-                <div style={{ fontFamily: "'Noto Serif JP',serif", fontSize: '14px', fontWeight: 200, color: 'var(--washi-dim)', marginBottom: '14px', letterSpacing: '0.15em' }}>
-                   
-                </div>
-                <div style={{ fontSize: '11px', fontWeight: 300, letterSpacing: '0.1em', color: 'var(--washi-faint)', lineHeight: 1.9 }}>
-                  JUSTHEN Co., Ltd.<br />
-                  <br />
-                  Sapporo, Japan
-                </div>
-              </div>
+                borderRadius: '4px',
+                border: '1px solid rgba(201,168,76,0.2)',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.45)',
+                marginBottom: '36px',
+              }}
+            >
+              <Image
+                src="/representative.jpg"
+                alt="Representative"
+                fill
+                sizes="(max-width:768px) 100vw, 50vw"
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(to top, rgba(7,17,31,0.92) 0%, rgba(7,17,31,0.1) 60%, transparent 100%)',
+                }}
+              />
             </div>
 
-            {/* Company credentials card */}
-            <div style={{ background: 'var(--navy-mid)', border: '1px solid rgba(201,168,76,0.12)', padding: '40px 36px', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '3px', height: '60px', background: 'var(--gold)' }} />
-              <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '22px', fontWeight: 400, color: 'var(--washi)', marginBottom: '24px' }}>JUSTHEN Co., Ltd.</div>
-              {[
-                { num:'01', title:' / Full Compliance',    desc:'' },
-                { num:'02', title:' / From 1 Unit',    desc:'1' },
-                { num:'03', title:'AI / DX ',                  desc:'AI' },
-                { num:'04', title:' / Multilingual',      desc:'' },
-              ].map(({ num, title, desc }) => (
-                <div key={num} style={{ display: 'flex', gap: '14px', marginBottom: '20px' }}>
-                  <span style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '28px', fontWeight: 300, color: 'var(--gold)', lineHeight: 1, minWidth: '44px' }}>{num}</span>
-                  <div style={{ paddingTop: '4px' }}>
-                    <strong style={{ display: 'block', color: 'var(--washi)', fontWeight: 300, fontSize: '13px', marginBottom: '2px' }}>{title}</strong>
-                    <span style={{ fontSize: '12px', color: 'var(--washi-faint)', fontWeight: 300 }}>{desc}</span>
-                  </div>
+            {/* MESSAGE CARD */}
+            <div
+              style={{
+                background: 'var(--navy-mid)',
+                border: '1px solid rgba(201,168,76,0.15)',
+                padding: '40px',
+                position: 'relative',
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '4px',
+                  height: '80px',
+                  background: 'var(--gold)',
+                }}
+              />
+
+              <div
+                style={{
+                  fontSize: '10px',
+                  letterSpacing: '0.35em',
+                  textTransform: 'uppercase' as const,
+                  color: 'var(--gold)',
+                  marginBottom: '14px',
+                }}
+              >
+                Representative Message
+              </div>
+
+              <h3
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '28px',
+                  fontWeight: 400,
+                  color: 'var(--washi)',
+                  marginBottom: '24px',
+                }}
+              >
+                Yuuki Hayashi
+              </h3>
+
+              <p
+                style={{
+                  fontSize: '13px',
+                  lineHeight: 2.1,
+                  color: 'var(--washi-dim)',
+                  marginBottom: '20px',
+                }}
+              >
+                私は会社員時代、
+                成田空港・横浜港・品川港に関連する
+                国際物流業務に携わり、
+                輸出入事務や物流オペレーションの
+                実務経験を積んできました。
+              </p>
+
+              <p
+                style={{
+                  fontSize: '13px',
+                  lineHeight: 2.1,
+                  color: 'var(--washi-dim)',
+                  marginBottom: '20px',
+                }}
+              >
+                航空貨物・海上貨物に関する
+                書類管理や各種調整業務を通じて、
+                国際物流は正確さと信頼によって
+                支えられていることを学びました。
+              </p>
+
+              <p
+                style={{
+                  fontSize: '13px',
+                  lineHeight: 2.1,
+                  color: 'var(--washi-dim)',
+                }}
+              >
+                YUKIMICHIはその経験を基盤として
+                生まれた輸出サポートブランドです。
+                <br />
+                日本から世界へ。
+                信頼でつなぐ輸出の道。
+                <br /><br />
+                法令遵守と透明性を大切にしながら、
+                お客様の海外展開をサポートいたします。
+              </p>
+
+              <div
+                style={{
+                  marginTop: '28px',
+                  paddingTop: '24px',
+                  borderTop: '1px solid rgba(201,168,76,0.12)',
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '22px',
+                    color: 'var(--gold)',
+                  }}
+                >
+                  Yuuki Hayashi
                 </div>
-              ))}
+
+                <div
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.2em',
+                    color: 'var(--suzu)',
+                    marginTop: '4px',
+                  }}
+                >
+                  REPRESENTATIVE DIRECTOR
+                </div>
+
+                <div
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.15em',
+                    color: 'var(--washi-faint)',
+                    marginTop: '8px',
+                  }}
+                >
+                  JUSTHEN CO., LTD.
+                </div>
+              </div>
             </div>
           </div>
         </ScrollReveal>
