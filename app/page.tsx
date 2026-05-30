@@ -1,5 +1,6 @@
 "use client"
 
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
@@ -80,7 +81,7 @@ const flowSteps = [
 ]
 
   return (
-    <>
+    <React.Fragment>
       {/* 
           HERO  full viewport
        */}
@@ -527,6 +528,6 @@ const flowSteps = [
           </div>
         </ScrollReveal>
       </section>
-    </>
+    </React.Fragment>
   )
 }
