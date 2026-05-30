@@ -70,12 +70,14 @@ function IconGlobe() {
   )
 }
 
-function IconAI() {
+function IconBuyer() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-      <rect x="4" y="4" width="16" height="16" rx="2" />
-      <path d="M9 9h6v6H9z" />
-      <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" />
+      <path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+      <path d="M2.5 21a5.5 5.5 0 0 1 11 0" />
+      <path d="M17 8.5h4.5v7H17z" />
+      <path d="M17 12h4.5" />
+      <path d="M14 15.5h3" />
     </svg>
   )
 }
@@ -138,12 +140,12 @@ const services: Service[] = [
   },
   {
     num: "06",
-    icon: <IconAI />,
-    title: "AI / DX Support",
-    titleJp: "AI・DX支援",
-    desc: "AI翻訳、問い合わせ整理、見積ドラフト作成、業務効率化など、輸出業務のスピードと正確性を高める仕組みづくりを支援します。",
-    points: ["AI翻訳", "見積補助", "問い合わせ整理", "業務効率化"],
-    accent: "AI / DX",
+    icon: <IconBuyer />,
+    title: "Buyer Support",
+    titleJp: "海外バイヤー対応",
+    desc: "海外法人、小売店、越境EC事業者、インフルエンサー向けに、日本商品を安心して取引できるよう条件整理と継続取引を支援します。",
+    points: ["法人対応", "小売店相談", "越境EC", "継続取引"],
+    accent: "BUYER SUPPORT",
   },
 ]
 
@@ -347,7 +349,7 @@ export default function ServicesSection() {
           <div>
             <p className="section-body" style={{ marginBottom: "26px" }}>
               YUKIMICHIは、日本国内の商品調達から国際宅配便、航空貨物、海上輸送、
-              輸出コンプライアンス、AI・DX支援まで、海外バイヤーが安心して日本と取引できる
+              輸出コンプライアンス、海外バイヤー対応まで、海外バイヤーが安心して日本と取引できる
               実務型の輸出サポートを提供します。
             </p>
 
