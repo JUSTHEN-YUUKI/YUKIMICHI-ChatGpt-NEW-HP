@@ -55,17 +55,22 @@ function FlowStep({ num, title, desc }: FlowStepProps) {
   )
 }
 
+
+export default function Home() {
+
 const services = [
   { num: '01', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>, title: 'Procurement', titleJp: '', desc: '' },
   { num: '02', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m-4 12h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/></svg>, title: 'Logistics', titleJp: '', desc: 'EMSDHLFedExUPS' },
   { num: '03', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>, title: 'Compliance', titleJp: '', desc: '' },
 ]
 
+
 const priceCards = [
   { label: 'Express', icon: '', name: 'International Express', fee: '15', unit: '% + min 10,000', note: 'EMS / DHL / FedEx / UPS\n', highlight: false },
   { label: 'Air Cargo', icon: '', name: 'Air Freight', fee: '10', unit: '% + min 30,000', note: '\n', highlight: true },
   { label: 'Sea Freight', icon: '', name: 'Sea Container', fee: '7', unit: '% + min 30,000', note: 'FCL / LCL \n', highlight: false },
 ]
+
 
 const flowSteps = [
   { num: '01', title: '', desc: '' },
@@ -74,7 +79,6 @@ const flowSteps = [
   { num: '04', title: '', desc: '' },
 ]
 
-export default function Home() {
   return (
     <>
       {/* 
