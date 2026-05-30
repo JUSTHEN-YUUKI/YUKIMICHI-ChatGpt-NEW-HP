@@ -242,19 +242,19 @@ export default function Home() {
           </h2>
 
           <p className="section-body">
-            YUKIMICHI（雪道）は、
-            JUSTHEN CO., LTD.が運営する
-            日本発の輸出サポートブランドです。
+            YUKIMICHI\uff08\u96ea\u9053\uff09\u306f\u3001
+            JUSTHEN CO., LTD.\u304c\u904b\u55b6\u3059\u308b
+            \u65e5\u672c\u767a\u306e\u8f38\u51fa\u30b5\u30dd\u30fc\u30c8\u30d6\u30e9\u30f3\u30c9\u3067\u3059\u3002
             <br /><br />
-            日本国内の商品調達から、
-            国際配送、輸出書類作成、
-            コンプライアンス対応まで、
-            海外のお客様が安心して取引できる
-            輸出環境を提供しています。
+            \u65e5\u672c\u56fd\u5185\u306e\u5546\u54c1\u8abf\u9054\u304b\u3089\u3001
+            \u56fd\u969b\u914d\u9001\u3001\u8f38\u51fa\u66f8\u985e\u4f5c\u6210\u3001
+            \u30b3\u30f3\u30d7\u30e9\u30a4\u30a2\u30f3\u30b9\u5bfe\u5fdc\u307e\u3067\u3001
+            \u6d77\u5916\u306e\u304a\u5ba2\u69d8\u304c\u5b89\u5fc3\u3057\u3066\u53d6\u5f15\u3067\u304d\u308b
+            \u8f38\u51fa\u74b0\u5883\u3092\u63d0\u4f9b\u3057\u3066\u3044\u307e\u3059\u3002
             <br /><br />
-            私たちは単なる発送代行ではなく、
-            日本と世界を信頼でつなぐ
-            長期的なパートナーを目指しています。
+            \u79c1\u305f\u3061\u306f\u5358\u306a\u308b\u767a\u9001\u4ee3\u884c\u3067\u306f\u306a\u304f\u3001
+            \u65e5\u672c\u3068\u4e16\u754c\u3092\u4fe1\u983c\u3067\u3064\u306a\u3050
+            \u9577\u671f\u7684\u306a\u30d1\u30fc\u30c8\u30ca\u30fc\u3092\u76ee\u6307\u3057\u3066\u3044\u307e\u3059\u3002
           </p>
 
           <Link href="/contact" className="btn-primary">
@@ -355,11 +355,11 @@ export default function Home() {
                   marginBottom: '20px',
                 }}
               >
-                私は会社員時代、
-                成田空港・横浜港・品川港に関連する
-                国際物流業務に携わり、
-                輸出入事務や物流オペレーションの
-                実務経験を積んできました。
+                \u79c1\u306f\u4f1a\u793e\u54e1\u6642\u4ee3\u3001
+                \u6210\u7530\u7a7a\u6e2f\u30fb\u6a2a\u6d5c\u6e2f\u30fb\u54c1\u5ddd\u6e2f\u306b\u95a2\u9023\u3059\u308b
+                \u56fd\u969b\u7269\u6d41\u696d\u52d9\u306b\u643a\u308f\u308a\u3001
+                \u8f38\u51fa\u5165\u4e8b\u52d9\u3084\u7269\u6d41\u30aa\u30da\u30ec\u30fc\u30b7\u30e7\u30f3\u306e
+                \u5b9f\u52d9\u7d4c\u9a13\u3092\u7a4d\u3093\u3067\u304d\u307e\u3057\u305f\u3002
               </p>
 
               <p
@@ -370,10 +370,10 @@ export default function Home() {
                   marginBottom: '20px',
                 }}
               >
-                航空貨物・海上貨物に関する
-                書類管理や各種調整業務を通じて、
-                国際物流は正確さと信頼によって
-                支えられていることを学びました。
+                \u822a\u7a7a\u8ca8\u7269\u30fb\u6d77\u4e0a\u8ca8\u7269\u306b\u95a2\u3059\u308b
+                \u66f8\u985e\u7ba1\u7406\u3084\u5404\u7a2e\u8abf\u6574\u696d\u52d9\u3092\u901a\u3058\u3066\u3001
+                \u56fd\u969b\u7269\u6d41\u306f\u6b63\u78ba\u3055\u3068\u4fe1\u983c\u306b\u3088\u3063\u3066
+                \u652f\u3048\u3089\u308c\u3066\u3044\u308b\u3053\u3068\u3092\u5b66\u3073\u307e\u3057\u305f\u3002
               </p>
 
               <p
@@ -383,14 +383,14 @@ export default function Home() {
                   color: 'var(--washi-dim)',
                 }}
               >
-                YUKIMICHIはその経験を基盤として
-                生まれた輸出サポートブランドです。
+                YUKIMICHI\u306f\u305d\u306e\u7d4c\u9a13\u3092\u57fa\u76e4\u3068\u3057\u3066
+                \u751f\u307e\u308c\u305f\u8f38\u51fa\u30b5\u30dd\u30fc\u30c8\u30d6\u30e9\u30f3\u30c9\u3067\u3059\u3002
                 <br />
-                日本から世界へ。
-                信頼でつなぐ輸出の道。
+                \u65e5\u672c\u304b\u3089\u4e16\u754c\u3078\u3002
+                \u4fe1\u983c\u3067\u3064\u306a\u3050\u8f38\u51fa\u306e\u9053\u3002
                 <br /><br />
-                法令遵守と透明性を大切にしながら、
-                お客様の海外展開をサポートいたします。
+                \u6cd5\u4ee4\u9075\u5b88\u3068\u900f\u660e\u6027\u3092\u5927\u5207\u306b\u3057\u306a\u304c\u3089\u3001
+                \u304a\u5ba2\u69d8\u306e\u6d77\u5916\u5c55\u958b\u3092\u30b5\u30dd\u30fc\u30c8\u3044\u305f\u3057\u307e\u3059\u3002
               </p>
 
               <div
