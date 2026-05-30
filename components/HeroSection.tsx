@@ -1,6 +1,4 @@
-from pathlib import Path
-
-content = r"""'use client'
+'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -92,9 +90,3 @@ export default function HeroSection() {
     </section>
   )
 }
-"""
-
-path = "/mnt/data/HeroSection-v2.tsx"
-Path(path).write_text(content, encoding="utf-8")
-
-print(path)
