@@ -67,16 +67,12 @@ export default function Navigation() {
         >
           <Image
             src="/yukimichi-logo-favicon.png"
-            alt="YUKIMICHI – SNOWPATH JAPAN"
+            alt="YUKIMICHI - SNOWPATH JAPAN"
             width={76}
             height={76}
             priority
-            style={{
-              objectFit: "contain",
-              flexShrink: 0,
-            }}
+            style={{ objectFit: "contain", flexShrink: 0 }}
           />
-
           <span
             style={{
               display: "flex",
@@ -100,6 +96,7 @@ export default function Navigation() {
               YUKIMICHI
             </span>
             <span
+              className="nav-subtitle"
               style={{
                 fontSize: "9px",
                 letterSpacing: "0.28em",
@@ -107,7 +104,6 @@ export default function Navigation() {
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
               }}
-              className="nav-subtitle"
             >
               Snowpath Japan
             </span>
@@ -148,7 +144,6 @@ export default function Navigation() {
               </li>
             )
           })}
-
           <li style={{ marginLeft: "14px" }}>
             <Link
               href="/contact"
@@ -219,8 +214,7 @@ export default function Navigation() {
             position: "fixed",
             inset: 0,
             zIndex: 999,
-            background:
-              "linear-gradient(180deg, rgba(7,17,31,0.98) 0%, rgba(13,28,53,0.98) 100%)",
+            background: "linear-gradient(180deg, rgba(7,17,31,0.98) 0%, rgba(13,28,53,0.98) 100%)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -237,34 +231,35 @@ export default function Navigation() {
               textAlign: "center",
             }}
           >
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "30px",
-                  fontWeight: 300,
-                  letterSpacing: "0.14em",
-                  color: pathname === href ? "var(--gold)" : "var(--washi-dim)",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(201,168,76,0.1)",
-                  paddingBottom: "16px",
-                }}
-              >
-                {label}
-              </Link>
-            ))}
+            {navLinks.map(({ href, label }) => {
+              const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "30px",
+                    fontWeight: 300,
+                    letterSpacing: "0.14em",
+                    color: active ? "var(--gold)" : "var(--washi-dim)",
+                    textDecoration: "none",
+                    borderBottom: "1px solid rgba(201,168,76,0.1)",
+                    paddingBottom: "16px",
+                  }}
+                >
+                  {label}
+                </Link>
+              )
+            })}
 
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
               className="btn-primary"
-              style={{
-                justifyContent: "center",
-                marginTop: "12px",
-              }}
+              style={{ justifyContent: "center", marginTop: "12px" }}
             >
               お問い合わせ
             </Link>
@@ -274,19 +269,12 @@ export default function Navigation() {
 
       <style>{`
         @media (max-width: 1120px) {
-          .nav-desktop {
-            display: none !important;
-          }
-
-          .nav-burger {
-            display: flex !important;
-          }
+          .nav-desktop { display: none !important; }
+          .nav-burger { display: flex !important; }
         }
 
         @media (max-width: 520px) {
-          .nav-subtitle {
-            display: none !important;
-          }
+          .nav-subtitle { display: none !important; }
         }
       `}</style>
     </>

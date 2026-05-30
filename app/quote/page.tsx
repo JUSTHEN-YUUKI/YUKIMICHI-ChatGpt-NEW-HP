@@ -1,103 +1,141 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Quote Request | YUKIMICHI - SNOWPATH JAPAN',
+  description: 'YUKIMICHIのお見積り依頼ページ。日本からの輸出見積に必要な情報を整理します。',
+}
+
+const requiredItems = [
+  '商品名または商品URL',
+  '希望数量',
+  '仕向国・都市',
+  '希望納期',
+  '希望配送方法',
+  '法人または個人の区分',
+  '用途、販売予定、必要書類',
+]
+
+function ArrowRight() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export default function QuotePage() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        padding: "160px 40px 100px",
-        background: "#07111f",
-        color: "#f8f5ef",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1000px",
-          margin: "0 auto",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "48px",
-            marginBottom: "20px",
-          }}
-        >
-          見積依頼
+    <>
+      <section className="quote-hero">
+        <div className="section-label">
+          <div className="section-label-line" />
+          <span className="section-label-text">Quotation</span>
+        </div>
+        <h1 className="quote-title">
+          Request an
+          <br />
+          <em>Estimate.</em>
         </h1>
-
-        <p
-          style={{
-            opacity: 0.8,
-            lineHeight: 2,
-            marginBottom: "60px",
-          }}
-        >
-          商品情報・数量・配送先をご入力ください。
-          内容確認後、担当者よりお見積りをご案内いたします。
+        <p className="section-body quote-lead">
+          正確な見積には、商品情報、数量、仕向地、配送条件が必要です。
+          国際送料、関税、VAT/GST、保険、特殊梱包、規制確認費用は案件ごとに確認します。
         </p>
+      </section>
 
-        <form
-          style={{
-            display: "grid",
-            gap: "20px",
-          }}
-        >
-          <input
-            type="text"
-            placeholder="会社名"
-            style={{
-              padding: "16px",
-              background: "#0f1f3d",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "#fff",
-            }}
-          />
+      <section className="quote-section">
+        <div>
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Required Details</span>
+          </div>
+          <h2 className="section-title">
+            Send These
+            <br />
+            <em>Details.</em>
+          </h2>
+          <p className="section-body">
+            以下の情報をメールまたはお問い合わせページからお送りください。商品や国により、輸出入規制、認証、危険品判定、通関書類の追加確認が必要になる場合があります。
+          </p>
+          <div className="quote-actions">
+            <a href="mailto:info@justhen.co.jp" className="btn-primary">
+              メールで依頼する <ArrowRight />
+            </a>
+            <Link href="/contact" className="btn-ghost">
+              お問い合わせへ <ArrowRight />
+            </Link>
+          </div>
+        </div>
 
-          <input
-            type="text"
-            placeholder="ご担当者名"
-            style={{
-              padding: "16px",
-              background: "#0f1f3d",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "#fff",
-            }}
-          />
+        <ul className="quote-list">
+          {requiredItems.map((item, index) => (
+            <li key={item}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-          <input
-            type="email"
-            placeholder="メールアドレス"
-            style={{
-              padding: "16px",
-              background: "#0f1f3d",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "#fff",
-            }}
-          />
-
-          <textarea
-            rows={8}
-            placeholder="商品名・数量・配送先国をご記入ください"
-            style={{
-              padding: "16px",
-              background: "#0f1f3d",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "#fff",
-            }}
-          />
-
-          <button
-            type="submit"
-            style={{
-              background: "#8b1e2f",
-              color: "#fff",
-              border: "none",
-              padding: "18px",
-              cursor: "pointer",
-            }}
-          >
-            見積依頼を送信
-          </button>
-        </form>
-      </div>
-    </main>
+      <style>{`
+        .quote-hero {
+          min-height: 68svh;
+          padding: calc(var(--nav-h) + 84px) var(--gutter) 72px;
+          background:
+            radial-gradient(ellipse 70% 48% at 78% 24%, rgba(201,168,76,0.08), transparent 64%),
+            linear-gradient(160deg, var(--navy-deep) 0%, var(--navy-mid) 62%, var(--navy-deep) 100%);
+          border-bottom: 1px solid rgba(201,168,76,0.1);
+        }
+        .quote-title {
+          font-family: 'Cormorant Garamond', serif;
+          font-weight: 300;
+          font-size: clamp(46px, 8vw, 96px);
+          line-height: 0.98;
+          color: var(--washi);
+          margin-bottom: 28px;
+        }
+        .quote-title em { color: var(--gold); font-style: italic; }
+        .quote-lead { max-width: 760px; }
+        .quote-section {
+          padding: var(--section-pad) var(--gutter);
+          display: grid;
+          grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+          gap: clamp(36px, 6vw, 92px);
+          align-items: start;
+        }
+        .quote-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+        .quote-list {
+          list-style: none;
+          border: 1px solid rgba(201,168,76,0.14);
+          background: linear-gradient(180deg, rgba(13,28,53,0.96), rgba(7,17,31,0.95));
+          padding: 24px;
+        }
+        .quote-list li {
+          display: grid;
+          grid-template-columns: 54px minmax(0, 1fr);
+          gap: 18px;
+          align-items: center;
+          padding: 18px 0;
+          border-bottom: 1px solid rgba(248,245,239,0.08);
+          color: var(--washi-dim);
+          font-size: 14px;
+          line-height: 1.7;
+        }
+        .quote-list li:last-child { border-bottom: 0; }
+        .quote-list span {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 28px;
+          font-weight: 300;
+        }
+        @media (max-width: 900px) {
+          .quote-section { grid-template-columns: 1fr; }
+        }
+      `}</style>
+    </>
   )
 }
