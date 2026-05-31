@@ -6,9 +6,10 @@ import { useLanguage } from '@/components/LanguageProvider'
 
 type LanguageSwitcherProps = {
   className?: string
+  variant?: 'compact' | 'full'
 }
 
-export default function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ className, variant = 'compact' }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage()
 
   return (
@@ -41,12 +42,13 @@ export default function LanguageSwitcher({ className }: LanguageSwitcherProps) {
               fontSize: '10px',
               letterSpacing: '0.08em',
               minHeight: '30px',
-              minWidth: '34px',
+              minWidth: variant === 'full' ? '86px' : '48px',
               padding: '6px 8px',
               textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
             }}
           >
-            {languageLabels[item]}
+            {variant === 'full' ? `${languageLabels[item].split(' ')[0]} ${languageNames[item]}` : languageLabels[item]}
           </button>
         )
       })}

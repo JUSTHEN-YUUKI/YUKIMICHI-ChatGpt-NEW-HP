@@ -4,6 +4,7 @@ import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+import { translateStaticText } from '@/lib/staticTextTranslations'
 
 type InquiryType = 'quote' | 'contact'
 
@@ -86,7 +87,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
       const result = (await response.json()) as { ok?: boolean; autoReplyOk?: boolean; error?: string }
 
       if (!response.ok || !result.ok) {
-        throw new Error(result.error || formCommon.defaultError)
+        throw new Error(result.error ? translateStaticText(language, result.error) : formCommon.defaultError)
       }
 
       setSubmitState('success')

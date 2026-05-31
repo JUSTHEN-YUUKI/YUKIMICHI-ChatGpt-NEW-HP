@@ -151,7 +151,7 @@ export default function Navigation() {
             )
           })}
           <li style={{ marginLeft: "10px" }}>
-            <LanguageSwitcher />
+            <LanguageSwitcher variant="full" />
           </li>
           <li style={{ marginLeft: "14px" }}>
             <Link

@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import BackToTopButton from '@/components/BackToTopButton'
 import { LanguageProvider } from '@/components/LanguageProvider'
+import ContentTranslationBridge from '@/components/ContentTranslationBridge'
 
 export const metadata: Metadata = {
   title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
@@ -46,6 +47,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <BackToTopButton />
+          <ContentTranslationBridge />
         </LanguageProvider>
       </body>
     </html>
