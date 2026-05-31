@@ -62,7 +62,8 @@ export default function RepresentativeSection() {
             style={{
               position: "relative",
               width: "100%",
-              aspectRatio: "4 / 5",
+              aspectRatio: "16 / 9",
+              maxHeight: "520px",
               overflow: "hidden",
               border: "1px solid rgba(201,168,76,0.2)",
               boxShadow: "0 24px 80px rgba(0,0,0,0.48)",
@@ -70,13 +71,13 @@ export default function RepresentativeSection() {
             }}
           >
             <Image
-              src="/representative.JPG"
+              src="/profile.png"
               alt="Representative of JUSTHEN CO., LTD."
               fill
               sizes="(max-width: 900px) 100vw, 48vw"
               style={{
                 objectFit: "cover",
-                objectPosition: "38% 40%",
+                objectPosition: "center center",
               }}
             />
 
@@ -85,7 +86,7 @@ export default function RepresentativeSection() {
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to top, rgba(7,17,31,0.92) 0%, rgba(7,17,31,0.16) 48%, rgba(7,17,31,0.08) 100%)",
+                  "linear-gradient(180deg, rgba(7,17,31,0.08) 0%, rgba(7,17,31,0.18) 54%, rgba(7,17,31,0.42) 100%)",
               }}
             />
 
