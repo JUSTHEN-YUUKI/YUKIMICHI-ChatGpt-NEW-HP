@@ -11,7 +11,7 @@ const companyItems = [
   ['Service Brand', 'YUKIMICHI - SNOWPATH JAPAN'],
   ['Company', 'JUSTHEN Co., Ltd. / 株式会社ジャッセン'],
   ['Representative', 'Yuuki Hayashi / 林 祐樹'],
-  ['Location', 'Sapporo, Hokkaido, Japan / 北海道札幌市'],
+  ['Location', '8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan'],
   ['License', '古物商許可証 第305581606050号 東京都公安委員会'],
 ]
 

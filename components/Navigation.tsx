@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "@/components/NewTabLink"
+import LinkBehaviorToggle from "@/components/LinkBehaviorToggle"
 import { usePathname } from "next/navigation"
 
 const navLinks = [
@@ -144,6 +145,9 @@ export default function Navigation() {
               </li>
             )
           })}
+          <li style={{ marginLeft: "10px" }}>
+            <LinkBehaviorToggle />
+          </li>
           <li style={{ marginLeft: "14px" }}>
             <Link
               href="/contact"
@@ -254,6 +258,8 @@ export default function Navigation() {
                 </Link>
               )
             })}
+
+            <LinkBehaviorToggle />
 
             <Link
               href="/contact"

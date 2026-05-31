@@ -96,7 +96,7 @@ export default function ProductShowcaseSection() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className="visual-film-frame" aria-label="Main visual area for future product and logistics film">
+          <div className="visual-film-frame" aria-label="Main visual area for product and logistics film">
             <div className="visual-film-header">
               <span>Main Visual Area</span>
               <span>Product &amp; Logistics Film</span>

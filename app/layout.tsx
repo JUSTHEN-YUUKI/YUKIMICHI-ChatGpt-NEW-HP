@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import BackToTopButton from '@/components/BackToTopButton'
+import { LinkBehaviorProvider } from '@/components/LinkBehaviorProvider'
 
 export const metadata: Metadata = {
   title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
@@ -9,6 +11,11 @@ export const metadata: Metadata = {
     'YUKIMICHI provides legal, transparent, and reliable export support from Japan, including product procurement, international express, air freight, sea freight, and export documentation support.',
   keywords:
     'Japan export, Japanese supplier, small lot export, international express, air freight, sea freight, Japanese trading company',
+  icons: {
+    icon: '/yukimichi-logo-favicon.png',
+    shortcut: '/yukimichi-logo-favicon.png',
+    apple: '/yukimichi-logo-favicon.png',
+  },
 }
 
 export default function RootLayout({
@@ -26,9 +33,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <LinkBehaviorProvider>
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+          <BackToTopButton />
+        </LinkBehaviorProvider>
       </body>
     </html>
   )

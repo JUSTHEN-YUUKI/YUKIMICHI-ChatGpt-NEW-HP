@@ -71,12 +71,12 @@ export default function RepresentativeSection() {
           >
             <Image
               src="/representative.JPG"
-              alt="YUKIMICHI representative team"
+              alt="Representative of JUSTHEN CO., LTD."
               fill
               sizes="(max-width: 900px) 100vw, 48vw"
               style={{
                 objectFit: "cover",
-                objectPosition: "center center",
+                objectPosition: "38% 40%",
               }}
             />
 

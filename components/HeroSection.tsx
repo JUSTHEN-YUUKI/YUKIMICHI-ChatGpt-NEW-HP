@@ -65,9 +65,8 @@ export default function HeroSection() {
           }}
         >
           日本から、世界へ。<br />
-          <span style={{ color: 'var(--gold)' }}>
-            信頼でつなぐ輸出の道。
-          </span>
+          信頼でつなぐ<br />
+          輸出の道。
         </h1>
 
         <p

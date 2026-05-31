@@ -42,6 +42,7 @@ export default function Footer() {
           <div className="site-footer__company-list">
             <p>JUSTHEN CO., LTD.</p>
             <p>株式会社ジャッセン</p>
+            <p>8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
             <a href="mailto:exporter@justhen.co.jp" className="site-footer__email">
               exporter@justhen.co.jp
             </a>
