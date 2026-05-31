@@ -151,7 +151,7 @@ export default function Navigation() {
             )
           })}
           <li style={{ marginLeft: "10px" }}>
-            <LanguageSwitcher variant="full" />
+            <LanguageSwitcher />
           </li>
           <li style={{ marginLeft: "14px" }}>
             <Link
@@ -240,7 +240,7 @@ export default function Navigation() {
               textAlign: "center",
             }}
           >
-            <LanguageSwitcher />
+            <LanguageSwitcher variant="full" />
 
             {navLinks.map(({ href, labelKey }) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
