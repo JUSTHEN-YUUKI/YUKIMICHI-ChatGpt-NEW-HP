@@ -14,6 +14,12 @@ const footerLinks = [
   { href: '/privacy', label: 'プライバシーポリシー' },
 ]
 
+const locationMapSrc =
+  'https://www.google.com/maps?q=%E3%80%92060-0032%20%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%97%E4%BA%8C%E6%9D%A1%E6%9D%B18-5-15&output=embed'
+
+const locationMapLink =
+  'https://www.google.com/maps/search/?api=1&query=%E3%80%92060-0032%20%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%97%E4%BA%8C%E6%9D%A1%E6%9D%B18-5-15'
+
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -42,6 +48,7 @@ export default function Footer() {
           <div className="site-footer__company-list">
             <p>JUSTHEN CO., LTD.</p>
             <p>株式会社ジャッセン</p>
+            <p>〒060-0032 北海道札幌市中央区北二条東8-5-15</p>
             <p>8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
             <a href="mailto:exporter@justhen.co.jp" className="site-footer__email">
               exporter@justhen.co.jp
@@ -49,6 +56,23 @@ export default function Footer() {
             <p>古物商許可証 第305581606050号</p>
             <p>東京都公安委員会</p>
           </div>
+
+          <div className="site-footer__map-frame">
+            <iframe
+              title="JUSTHEN CO., LTD. location map"
+              src={locationMapSrc}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <a
+            href={locationMapLink}
+            className="site-footer__map-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            地図が表示されない場合はGoogle Mapsで確認
+          </a>
         </section>
       </div>
 
@@ -163,6 +187,39 @@ export default function Footer() {
           width: fit-content;
           border-bottom: 1px solid rgba(201, 168, 76, 0.28);
           padding-bottom: 3px;
+        }
+
+        .site-footer__map-frame {
+          margin-top: 16px;
+          min-height: 172px;
+          overflow: hidden;
+          border: 1px solid rgba(201, 168, 76, 0.28);
+          border-radius: 6px;
+          background: rgba(248, 245, 239, 0.04);
+        }
+
+        .site-footer__map-frame iframe {
+          display: block;
+          width: 100%;
+          height: 172px;
+          border: 0;
+          filter: saturate(0.82) contrast(0.95);
+        }
+
+        .site-footer__map-link {
+          display: inline-flex;
+          margin-top: 10px;
+          color: rgba(216, 211, 199, 0.58);
+          font-size: 11px;
+          font-weight: 300;
+          letter-spacing: 0.08em;
+          line-height: 1.6;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .site-footer__map-link:hover {
+          color: var(--gold);
         }
 
         .site-footer__bottom {
