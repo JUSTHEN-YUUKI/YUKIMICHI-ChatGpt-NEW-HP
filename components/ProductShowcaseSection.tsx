@@ -46,13 +46,13 @@ const visualCards = [
     num: "05",
     title: "Air Freight",
     text: "緊急輸送・高付加価値商品・短納期対応",
-    label: "Air Cargo Visual",
+    label: "Air Freight Visual",
   },
   {
     num: "06",
     title: "Sea Freight",
     text: "FCL / LCL / コンテナ輸送 / 大型貨物",
-    label: "Sea Cargo Visual",
+    label: "Sea Freight Visual",
   },
 ]
 

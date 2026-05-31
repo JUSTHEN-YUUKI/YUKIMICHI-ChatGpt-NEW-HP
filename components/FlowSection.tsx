@@ -26,13 +26,13 @@ const flowSteps = [
   },
   {
     num: "02",
-    title: "Consultation",
+    title: "Product Review",
     titleJp: "内容確認",
     desc: "取扱可否、配送方法、輸出に関する注意点、必要情報を確認します。小ロットやサンプル出荷の相談も可能です。",
   },
   {
     num: "03",
-    title: "Quotation",
+    title: "Quote Preparation",
     titleJp: "お見積り",
     desc: "商品代金、手配手数料、国際送料、想定される追加費用をできるだけ分かりやすく整理して提示します。",
   },
@@ -44,13 +44,13 @@ const flowSteps = [
   },
   {
     num: "05",
-    title: "Export & Shipping",
+    title: "International Shipping",
     titleJp: "輸出・国際発送",
     desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便、航空貨物、海上輸送などから案件に合う方法を選定します。",
   },
   {
     num: "06",
-    title: "Delivery",
+    title: "Delivery & Follow-up",
     titleJp: "納品・フォロー",
     desc: "追跡情報を共有し、到着までの流れを確認します。継続取引や次回見積りの相談にも対応します。",
   },
@@ -94,13 +94,14 @@ export default function FlowSection() {
         >
           <div className="section-label" style={{ justifyContent: "center" }}>
             <div className="section-label-line" />
-            <span className="section-label-text">Export Flow</span>
+            <span className="section-label-text">Export Process</span>
             <div className="section-label-line" />
           </div>
 
           <h2 className="section-title" style={{ textAlign: "center" }}>
-            Simple, Clear,<br />
-            <em>Trusted</em> Process.
+            A Clear Process<br />
+            for International<br />
+            <em>Export.</em>
           </h2>
 
           <p className="section-body" style={{ marginBottom: 0 }}>
@@ -237,7 +238,7 @@ export default function FlowSection() {
                 marginBottom: "8px",
               }}
             >
-              First Consultation
+              Initial Consultation
             </div>
             <p
               style={{
@@ -254,7 +255,7 @@ export default function FlowSection() {
           </div>
 
           <Link href="/contact" className="btn-primary">
-            Start Inquiry <ArrowRight />
+            Start Export Inquiry <ArrowRight />
           </Link>
         </div>
       </ScrollReveal>

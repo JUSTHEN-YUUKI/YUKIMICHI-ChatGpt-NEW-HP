@@ -18,7 +18,7 @@ const pricingPlans = [
   },
   {
     label: 'Air Freight',
-    title: 'Air Cargo',
+    title: 'Air Freight',
     fee: '10%',
     minimum: 'Minimum 30,000 JPY',
     target: '航空貨物',
@@ -26,7 +26,7 @@ const pricingPlans = [
   },
   {
     label: 'Sea Freight',
-    title: 'Sea Cargo',
+    title: 'Sea Freight',
     fee: '7%',
     minimum: 'Minimum 30,000 JPY',
     target: 'FCL / LCL',

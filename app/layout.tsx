@@ -4,11 +4,11 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'YUKIMICHI – SNOWPATH JAPAN | Export from Japan',
+  title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
   description:
-    'YUKIMICHI – SNOWPATH JAPAN. Legal, compliant, and trusted export support from Japan to the world. Operated by JUSTHEN Co., Ltd.',
+    'YUKIMICHI provides legal, transparent, and reliable export support from Japan, including product procurement, international express, air freight, sea freight, and export documentation support.',
   keywords:
-    'Japan export, Japanese supplier, small lot export, AI export support, Japanese trading company',
+    'Japan export, Japanese supplier, small lot export, international express, air freight, sea freight, Japanese trading company',
 }
 
 export default function RootLayout({

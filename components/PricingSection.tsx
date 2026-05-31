@@ -29,7 +29,7 @@ const pricePlans = [
     points: ["EMS", "DHL / FedEx / UPS", "ヤマト国際宅急便", "小ロット対応"],
   },
   {
-    label: "Air Cargo",
+    label: "Air Freight",
     title: "Air Freight",
     titleJp: "航空貨物",
     fee: "10",
@@ -99,12 +99,13 @@ export default function PricingSection() {
           <div>
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Pricing</span>
+              <span className="section-label-text">Handling Fee Structure</span>
             </div>
 
             <h2 className="section-title">
-              Transparent<br />
-              <em>Pricing.</em>
+              Transparent Pricing<br />
+              for Export<br />
+              <em>Support.</em>
             </h2>
 
             <p className="section-body" style={{ maxWidth: "650px", marginBottom: 0 }}>
@@ -113,8 +114,8 @@ export default function PricingSection() {
             </p>
           </div>
 
-          <Link href="/contact" className="btn-ghost">
-            Request Quote <ArrowRight size={12} />
+          <Link href="/quote" className="btn-ghost">
+            Request a Quote <ArrowRight size={12} />
           </Link>
         </div>
       </ScrollReveal>
@@ -171,7 +172,7 @@ export default function PricingSection() {
                   marginBottom: "22px",
                 }}
               >
-                {plan.highlight ? "Recommended" : plan.label}
+                {plan.highlight ? "Priority Option" : plan.label}
               </div>
 
               <h3
@@ -284,7 +285,7 @@ export default function PricingSection() {
               marginBottom: "16px",
             }}
           >
-            Notes
+            Important Pricing Notes
           </div>
 
           <div

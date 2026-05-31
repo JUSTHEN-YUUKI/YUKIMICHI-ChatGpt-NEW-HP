@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Trade Flow | YUKIMICHI - SNOWPATH JAPAN',
+  title: 'Export Process | YUKIMICHI - SNOWPATH JAPAN',
   description: 'YUKIMICHIの取引の流れ。問い合わせから内容確認、見積、商品調達、梱包・書類準備、国際発送、納品後フォローまで。',
 }
 
@@ -16,19 +16,19 @@ const steps = [
   {
     number: '02',
     title: '内容確認',
-    en: 'Requirement Check',
+    en: 'Product Review',
     text: '輸出可否、数量、配送条件、必要書類、相手国側の確認事項を整理します。不明点は推測せず追加確認します。',
   },
   {
     number: '03',
     title: '見積',
-    en: 'Quotation',
+    en: 'Quote Preparation',
     text: '商品代、手配手数料、国際送料、保険、想定される追加費用を分けて提示します。関税やVAT/GSTは参考情報として扱います。',
   },
   {
     number: '04',
     title: '商品調達',
-    en: 'Sourcing',
+    en: 'Product Procurement',
     text: '日本国内の正規流通を前提に調達します。限定品、中古品、サンプル出荷は案件ごとに可否を確認します。',
   },
   {
@@ -46,7 +46,7 @@ const steps = [
   {
     number: '07',
     title: '納品・フォロー',
-    en: 'Delivery Follow-up',
+    en: 'Delivery & Follow-up',
     text: '追跡状況を確認し、通関や受取時の確認事項をフォローします。継続取引では次回改善点も整理します。',
   },
 ]
@@ -65,7 +65,7 @@ export default function FlowPage() {
       <section className="flow-hero">
         <div className="section-label">
           <div className="section-label-line" />
-          <span className="section-label-text">Trade Flow</span>
+          <span className="section-label-text">Export Process</span>
         </div>
         <h1 className="flow-title">
           From First Contact
@@ -97,7 +97,7 @@ export default function FlowPage() {
         <div>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Before Quotation</span>
+            <span className="section-label-text">Before Quote Request</span>
           </div>
           <h2 className="section-title">
             Please Share

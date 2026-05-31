@@ -105,7 +105,7 @@ const services: Service[] = [
   {
     num: "02",
     icon: <IconGlobe />,
-    title: "Express Logistics",
+    title: "International Express",
     titleJp: "国際宅配便",
     desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、商品内容・納期・コストに応じた国際配送方法を比較し、最適な発送手段を検討します。",
     points: ["EMS", "DHL", "FedEx / UPS", "ヤマト国際宅急便"],
@@ -132,7 +132,7 @@ const services: Service[] = [
   {
     num: "05",
     icon: <IconShield />,
-    title: "Export Compliance",
+    title: "Compliance Review",
     titleJp: "輸出コンプライアンス",
     desc: "輸出可否、書類準備、インボイス作成、規制品確認など、国際取引で重要となる基本的な確認業務をサポートします。",
     points: ["書類準備", "規制確認", "インボイス", "透明な取引"],
@@ -141,7 +141,7 @@ const services: Service[] = [
   {
     num: "06",
     icon: <IconBuyer />,
-    title: "Buyer Support",
+    title: "Global Buyer Support",
     titleJp: "海外バイヤー対応",
     desc: "海外法人、小売店、越境EC事業者、インフルエンサー向けに、日本商品を安心して取引できるよう条件整理と継続取引を支援します。",
     points: ["法人対応", "小売店相談", "越境EC", "継続取引"],
@@ -336,13 +336,13 @@ export default function ServicesSection() {
           <div>
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Premium Export Services</span>
+              <span className="section-label-text">Export Support Services</span>
             </div>
 
             <h2 className="section-title">
-              Hokkaido to<br />
-              Sea & Air<br />
-              <em>Global Trade.</em>
+              Export Support<br />
+              from Japan<br />
+              <em>to the World.</em>
             </h2>
           </div>
 
@@ -361,7 +361,7 @@ export default function ServicesSection() {
                 marginBottom: "4px",
               }}
             >
-              {["HOKKAIDO", "SEA FREIGHT", "AIR FREIGHT", "EXPRESS", "GLOBAL TRADE"].map((tag) => (
+              {["HOKKAIDO", "SEA FREIGHT", "AIR FREIGHT", "EXPRESS", "GLOBAL LOGISTICS"].map((tag) => (
                 <span
                   key={tag}
                   style={{
@@ -445,7 +445,7 @@ export default function ServicesSection() {
           </div>
 
           <Link href="/contact" className="btn-primary" style={{ justifyContent: "center" }}>
-            Request Logistics Support <ArrowRight />
+            Contact Export Support <ArrowRight />
           </Link>
         </div>
       </ScrollReveal>

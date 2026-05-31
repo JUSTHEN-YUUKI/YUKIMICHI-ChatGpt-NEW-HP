@@ -55,14 +55,14 @@ const coreServices = [
   {
     code: 'E',
     title: '輸出書類・確認事項整理',
-    en: 'Export Documents',
+    en: 'Export Documentation',
     points: ['Invoice', 'Packing List', '商品情報整理', '配送情報整理', '見積条件整理'],
     note: '必要書類は商品内容、配送方法、配送先国、取引条件により異なります。',
   },
   {
     code: 'F',
     title: '規制確認・コンプライアンス',
-    en: 'Compliance Check',
+    en: 'Compliance Review',
     points: [
       '禁止・制限品目の事前確認を行います。',
       '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品などは個別確認します。',
@@ -212,7 +212,7 @@ export default function ServicesPage() {
 
       <section className="services-scope">
         <article className="services-list-panel">
-          <span className="services-kicker">What We Can Support</span>
+          <span className="services-kicker">Support Scope</span>
           <h2>対応範囲</h2>
           <p>YUKIMICHIが実務上の整理・確認・手配相談として対応できる主な範囲です。</p>
           <ul>

@@ -88,8 +88,8 @@ export default function FAQSection() {
           </div>
 
           <h2 className="section-title">
-            Before You<br />
-            Start <em>Export.</em>
+            Frequently Asked<br />
+            <em>Questions.</em>
           </h2>
 
           <p className="section-body">
@@ -102,7 +102,7 @@ export default function FAQSection() {
           </p>
 
           <Link href="/contact" className="btn-primary">
-            Ask a Question <ArrowRight />
+            Contact Us <ArrowRight />
           </Link>
         </ScrollReveal>
 

@@ -30,12 +30,12 @@ export default function QuotePage() {
       <section className="quote-hero">
         <div className="section-label">
           <div className="section-label-line" />
-          <span className="section-label-text">Quotation</span>
+          <span className="section-label-text">Quote Request</span>
         </div>
         <h1 className="quote-title">
-          Request an
+          Request a
           <br />
-          <em>Estimate.</em>
+          <em>Quote.</em>
         </h1>
         <p className="section-body quote-lead">
           正確な見積には、商品情報、数量、仕向地、配送条件が必要です。
@@ -50,7 +50,7 @@ export default function QuotePage() {
             <span className="section-label-text">Required Details</span>
           </div>
           <h2 className="section-title">
-            Send These
+            Share Key
             <br />
             <em>Details.</em>
           </h2>
@@ -58,7 +58,7 @@ export default function QuotePage() {
             以下の情報をメールまたはお問い合わせページからお送りください。商品や国により、輸出入規制、認証、危険品判定、通関書類の追加確認が必要になる場合があります。
           </p>
           <div className="quote-actions">
-            <a href="mailto:info@justhen.co.jp" className="btn-primary">
+            <a href="mailto:exporter@justhen.co.jp" className="btn-primary">
               メールで依頼する <ArrowRight />
             </a>
             <Link href="/contact" className="btn-ghost">

@@ -114,7 +114,7 @@ export default function AboutSection() {
               Contact Us <ArrowRight />
             </Link>
             <Link href="/services" className="btn-ghost">
-              Services <ArrowRight size={12} />
+              Export Services <ArrowRight size={12} />
             </Link>
           </div>
         </ScrollReveal>
@@ -154,7 +154,7 @@ export default function AboutSection() {
                   marginBottom: "18px",
                 }}
               >
-                Trusted Gateway to Japan
+                Trusted Export Support from Japan
               </div>
 
               <p

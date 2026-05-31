@@ -11,7 +11,7 @@ const terms = [
   {
     code: 'A',
     title: '見積について',
-    en: 'Quotation',
+    en: 'Quote Preparation',
     items: [
       '見積は商品情報、数量、配送先国、配送方法、サイズ、重量、取扱条件をもとに作成します。',
       '見積金額は、商品価格、手配手数料、国際送料、梱包費、保険料、規制確認費用などにより変動します。',
@@ -236,7 +236,7 @@ export default function TermsPage() {
 
       <section className="terms-cta">
         <div>
-          <span>Confirm and Consult</span>
+          <span>Confirm Terms Before Inquiry</span>
           <h2>取引条件を確認して相談する</h2>
           <p>
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取引条件を確認したうえで、見積と手配可否を案内します。

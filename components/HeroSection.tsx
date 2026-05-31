@@ -16,7 +16,7 @@ export default function HeroSection() {
     >
       <Image
         src="/hero-bg.jpg"
-        alt="Hokkaido International Logistics"
+        alt="Hokkaido-based export support from Japan"
         fill
         priority
         style={{
@@ -45,7 +45,7 @@ export default function HeroSection() {
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">
-            HOKKAIDO × SEA FREIGHT × AIR FREIGHT
+            JAPAN EXPORT × HOKKAIDO × GLOBAL LOGISTICS
           </span>
         </div>
 

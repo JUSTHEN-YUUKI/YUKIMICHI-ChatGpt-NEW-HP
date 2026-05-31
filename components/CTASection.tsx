@@ -81,7 +81,7 @@ export default function CTASection() {
         >
           <div className="section-label" style={{ justifyContent: "center" }}>
             <div className="section-label-line" />
-            <span className="section-label-text">Get Started</span>
+            <span className="section-label-text">Export Inquiry</span>
             <div className="section-label-line" />
           </div>
 
@@ -150,11 +150,11 @@ export default function CTASection() {
               flexWrap: "wrap",
             }}
           >
-            <Link href="/contact" className="btn-primary">
+            <Link href="/quote" className="btn-primary">
               Request a Quote <ArrowRight />
             </Link>
 
-            <Link href="mailto:info@justhen.co.jp" className="btn-ghost">
+            <Link href="mailto:exporter@justhen.co.jp" className="btn-ghost">
               Email Us <ArrowRight size={12} />
             </Link>
           </div>
@@ -169,7 +169,7 @@ export default function CTASection() {
               letterSpacing: "0.04em",
             }}
           >
-            Delivering Trust from Japan.
+            Trusted Export Support from Japan.
           </div>
         </div>
       </ScrollReveal>

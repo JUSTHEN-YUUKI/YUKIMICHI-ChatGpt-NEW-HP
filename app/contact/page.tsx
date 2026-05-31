@@ -89,7 +89,7 @@ export default function ContactPage() {
           </div>
 
           <a className="contact-mail-card" href={inquiryMailto}>
-            <span>Official Inquiry Mail</span>
+            <span>Official Inquiry Email</span>
             <strong>exporter@justhen.co.jp</strong>
             <small>メールで問い合わせる</small>
           </a>
@@ -107,8 +107,8 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <span className="contact-kicker">Quotation</span>
-            <h2>Estimate Request</h2>
+            <span className="contact-kicker">Quote Request</span>
+            <h2>Request a Quote</h2>
             <p>費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。</p>
             <Link href="/quote" className="btn-ghost">
               お見積りページへ進む <ArrowRight />
