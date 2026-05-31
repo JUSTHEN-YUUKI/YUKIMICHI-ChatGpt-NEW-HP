@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import InquiryForm from '@/components/InquiryForm'
 
 export const metadata: Metadata = {
   title: 'お見積り | YUKIMICHI - SNOWPATH JAPAN',
@@ -14,7 +15,7 @@ const quoteFlow = [
   {
     step: '01',
     title: '商品情報を送る',
-    text: '商品URL、数量、配送先国、希望納期をメール本文に記載してください。',
+    text: '商品URL、数量、配送先国、希望納期をフォームまたはメールでお知らせください。',
   },
   {
     step: '02',
@@ -68,17 +69,6 @@ const noticeItems = [
   '商品内容、配送先国、数量、サイズ、重量、用途により対応可否・費用は変動します。',
   '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは事前確認が必要です。',
   '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提です。',
-]
-
-const mailFields = [
-  '会社名：',
-  'ご担当者名：',
-  '商品URL：',
-  '数量：',
-  '配送先国：',
-  '希望納期：',
-  '希望配送方法：',
-  '相談内容：',
 ]
 
 function ArrowRight() {
@@ -194,19 +184,16 @@ export default function QuotePage() {
       <section className="quote-mail">
         <div>
           <span>Official Quotation Email</span>
-          <h2>メール本文に記載してご連絡ください</h2>
+          <h2>フォームから見積内容を送信</h2>
           <p>
-            メールリンクを開くと、件名「YUKIMICHI Export Quotation」と本文テンプレートが入った状態で起動します。
+            必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。
+            メールで直接連絡したい場合は、補助導線としてメールリンクも利用できます。
           </p>
           <a href={quoteMailto} className="quote-mail-address">
-            exporter@justhen.co.jp へ見積相談する
+            exporter@justhen.co.jp
           </a>
         </div>
-        <div className="quote-mail-template" aria-label="Quotation email template">
-          {mailFields.map((field) => (
-            <div key={field}>{field}</div>
-          ))}
-        </div>
+        <InquiryForm type="quote" mailtoHref={quoteMailto} />
       </section>
 
       <style>{`
@@ -402,10 +389,11 @@ export default function QuotePage() {
         }
 
         .quote-mail {
-          align-items: center;
+          align-items: start;
           background:
             linear-gradient(135deg, rgba(139,30,47,0.32), transparent 48%),
             var(--navy-mid);
+          grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
         }
 
         .quote-mail span {
@@ -427,29 +415,6 @@ export default function QuotePage() {
           margin-top: 20px;
           overflow-wrap: anywhere;
           text-decoration: none;
-        }
-
-        .quote-mail-template {
-          display: grid;
-          gap: 10px;
-          border: 1px solid rgba(201,168,76,0.18);
-          background: rgba(7,17,31,0.72);
-          padding: clamp(22px, 4vw, 34px);
-        }
-
-        .quote-mail-template div {
-          border-bottom: 1px solid rgba(248,245,239,0.08);
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.06em;
-          line-height: 1.8;
-          min-height: 34px;
-          padding-bottom: 8px;
-        }
-
-        .quote-mail-template div:last-child {
-          border-bottom: 0;
-          min-height: 88px;
         }
 
         @media (max-width: 1180px) {

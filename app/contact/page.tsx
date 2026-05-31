@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import InquiryForm from '@/components/InquiryForm'
 
 export const metadata: Metadata = {
   title: 'Contact | YUKIMICHI - SNOWPATH JAPAN',
@@ -8,15 +9,6 @@ export const metadata: Metadata = {
 
 const inquiryMailto =
   'mailto:exporter@justhen.co.jp?subject=YUKIMICHI%20Inquiry&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0D%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0D%0A%E5%95%86%E5%93%81URL%EF%BC%9A%0D%0A%E6%95%B0%E9%87%8F%EF%BC%9A%0D%0A%E9%85%8D%E9%80%81%E5%85%88%E5%9B%BD%EF%BC%9A%0D%0A%E5%B8%8C%E6%9C%9B%E7%B4%8D%E6%9C%9F%EF%BC%9A%0D%0A%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A'
-
-const fieldItems = [
-  { label: '会社名 / Company', example: 'Example Trading Co., Ltd.' },
-  { label: 'ご担当者名 / Name', example: 'Your name' },
-  { label: 'メールアドレス / Email', example: 'buyer@example.com' },
-  { label: '商品URL / Product URL', example: 'https://example.com/product' },
-  { label: '配送先国 / Destination Country', example: 'Country / City' },
-  { label: '相談内容 / Message', example: '商品名、数量、希望納期、配送方法など' },
-]
 
 const helpfulItems = [
   '商品名・商品URL',
@@ -74,25 +66,13 @@ export default function ContactPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Inquiry Details</span>
           </div>
-          <h2>メール本文に記載いただきたい内容</h2>
+          <h2>フォームからお問い合わせを送信</h2>
           <p className="contact-panel-lead">
-            以下の項目をメール本文に記載してご連絡ください。メールリンクを開くと、基本項目入りの本文テンプレートが立ち上がります。
+            必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。
+            商品URL・配送先国・相談内容が分かると、確認がスムーズです。
           </p>
 
-          <div className="contact-form" aria-label="Inquiry details checklist">
-            {fieldItems.map((field) => (
-              <div className="contact-field" key={field.label}>
-                <span>{field.label}</span>
-                <div>{field.example}</div>
-              </div>
-            ))}
-          </div>
-
-          <a className="contact-mail-card" href={inquiryMailto}>
-            <span>Official Inquiry Email</span>
-            <strong>exporter@justhen.co.jp</strong>
-            <small>メールで問い合わせる</small>
-          </a>
+          <InquiryForm type="contact" mailtoHref={inquiryMailto} />
         </div>
 
         <aside className="contact-aside">
@@ -189,69 +169,11 @@ export default function ContactPage() {
           letter-spacing: 0.05em;
           margin: 0 0 28px;
         }
-        .contact-form {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
-        }
-        .contact-field {
-          display: grid;
-          gap: 8px;
-        }
-        .contact-field span {
-          color: var(--gold);
-          font-size: 11px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-        }
-        .contact-field div {
-          min-height: 52px;
-          border: 1px solid rgba(248,245,239,0.14);
-          background: rgba(7,17,31,0.82);
-          color: var(--washi-faint);
-          padding: 14px 16px;
-          font-size: 13px;
-          display: flex;
-          align-items: center;
-        }
-        .contact-field:last-child {
-          grid-column: 1 / -1;
-        }
-        .contact-field:last-child div {
-          min-height: 118px;
-          align-items: flex-start;
-        }
-        .contact-mail-card {
-          margin-top: 28px;
-          display: grid;
-          gap: 8px;
-          padding: 24px;
-          border: 1px solid rgba(201,168,76,0.22);
-          background:
-            linear-gradient(135deg, rgba(139,30,47,0.28), transparent 48%),
-            rgba(201,168,76,0.045);
-          color: var(--washi);
-          text-decoration: none;
-        }
-        .contact-mail-card span,
         .contact-kicker {
           color: var(--gold);
           font-size: 10px;
           letter-spacing: 0.34em;
           text-transform: uppercase;
-        }
-        .contact-mail-card strong {
-          color: var(--washi);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(28px, 4vw, 42px);
-          font-weight: 300;
-          line-height: 1.05;
-          overflow-wrap: anywhere;
-        }
-        .contact-mail-card small {
-          color: var(--washi-dim);
-          font-size: 12px;
-          letter-spacing: 0.12em;
         }
         .contact-aside {
           display: grid;
@@ -326,11 +248,6 @@ export default function ContactPage() {
         @media (max-width: 900px) {
           .contact-section,
           .contact-notice {
-            grid-template-columns: 1fr;
-          }
-        }
-        @media (max-width: 640px) {
-          .contact-form {
             grid-template-columns: 1fr;
           }
         }
