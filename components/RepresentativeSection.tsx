@@ -51,86 +51,90 @@ export default function RepresentativeSection() {
           position: "relative",
           zIndex: 1,
           display: "grid",
-          gridTemplateColumns: "minmax(0, 1.05fr) minmax(0, 0.95fr)",
-          gap: "clamp(48px, 7vw, 100px)",
+          gridTemplateColumns: "minmax(0, 1.08fr) minmax(0, 0.92fr)",
+          gap: "clamp(34px, 5.5vw, 82px)",
           alignItems: "center",
         }}
         className="representative-v2-grid"
       >
         <ScrollReveal>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              aspectRatio: "16 / 9",
-              maxHeight: "520px",
-              overflow: "hidden",
-              border: "1px solid rgba(201,168,76,0.2)",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.48)",
-              background: "var(--navy-mid)",
-            }}
-          >
-            <Image
-              src="/profile.png"
-              alt="Representative of JUSTHEN CO., LTD."
-              fill
-              sizes="(max-width: 900px) 100vw, 48vw"
-              style={{
-                objectFit: "cover",
-                objectPosition: "center center",
-              }}
-            />
-
+          <div className="representative-photo-column">
             <div
+              className="representative-photo-card"
               style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, rgba(7,17,31,0.08) 0%, rgba(7,17,31,0.18) 54%, rgba(7,17,31,0.42) 100%)",
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                left: "28px",
-                right: "28px",
-                bottom: "28px",
+                position: "relative",
+                width: "100%",
+                aspectRatio: "4 / 3",
+                minHeight: "420px",
+                maxHeight: "560px",
+                overflow: "hidden",
+                border: "1px solid rgba(201,168,76,0.18)",
+                boxShadow: "0 26px 70px rgba(0,0,0,0.32)",
+                background: "var(--navy-mid)",
               }}
             >
-              <div
+              <Image
+                src="/profile.png"
+                alt="Representative of JUSTHEN CO., LTD."
+                fill
+                sizes="(max-width: 900px) 100vw, 48vw"
                 style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.32em",
-                  color: "var(--gold)",
-                  textTransform: "uppercase",
-                  marginBottom: "10px",
+                  objectFit: "cover",
+                  objectPosition: "center center",
                 }}
-              >
-                Leadership
-              </div>
+              />
 
               <div
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "clamp(28px, 4vw, 46px)",
-                  fontWeight: 300,
-                  lineHeight: 1.08,
-                  color: "var(--washi)",
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(7,17,31,0.04) 0%, rgba(7,17,31,0.14) 54%, rgba(7,17,31,0.34) 100%)",
                 }}
-              >
-                YUKIMICHI
-              </div>
+              />
 
               <div
                 style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  color: "var(--washi-dim)",
-                  marginTop: "8px",
+                  position: "absolute",
+                  left: "24px",
+                  right: "24px",
+                  bottom: "24px",
                 }}
               >
-                JUSTHEN CO., LTD.
+                <div
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.32em",
+                    color: "var(--gold)",
+                    textTransform: "uppercase",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Leadership
+                </div>
+
+                <div
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "clamp(24px, 3.4vw, 40px)",
+                    fontWeight: 300,
+                    lineHeight: 1.08,
+                    color: "var(--washi)",
+                  }}
+                >
+                  YUKIMICHI
+                </div>
+
+                <div
+                  style={{
+                    fontSize: "11px",
+                    letterSpacing: "0.2em",
+                    color: "var(--washi-dim)",
+                    marginTop: "8px",
+                  }}
+                >
+                  JUSTHEN CO., LTD.
+                </div>
               </div>
             </div>
           </div>
@@ -268,9 +272,31 @@ export default function RepresentativeSection() {
       </div>
 
       <style>{`
+        .representative-photo-column {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          min-width: 0;
+        }
+
         @media (max-width: 900px) {
           .representative-v2-grid {
             grid-template-columns: 1fr !important;
+          }
+
+          .representative-photo-card {
+            aspect-ratio: 16 / 10 !important;
+            min-height: 360px !important;
+            max-height: 420px !important;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .representative-photo-card {
+            aspect-ratio: 4 / 3 !important;
+            min-height: 300px !important;
+            max-height: 360px !important;
           }
         }
       `}</style>
