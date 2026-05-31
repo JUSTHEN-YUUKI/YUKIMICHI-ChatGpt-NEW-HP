@@ -70,7 +70,7 @@ export default function RepresentativeSection() {
             }}
           >
             <Image
-              src="/representative.jpg"
+              src="/representative.JPG"
               alt="YUKIMICHI representative team"
               fill
               sizes="(max-width: 900px) 100vw, 48vw"
