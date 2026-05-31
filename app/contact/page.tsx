@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: 'Contact | YUKIMICHI - SNOWPATH JAPAN',
@@ -46,7 +45,6 @@ export default function ContactPage() {
   return (
     <>
       <section className="contact-hero">
-        <PageContextLabel trail="YUKIMICHI / Contact" current="お問い合わせ" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Contact</span>

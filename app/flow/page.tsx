@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: 'Export Process | YUKIMICHI - SNOWPATH JAPAN',
@@ -64,7 +63,6 @@ export default function FlowPage() {
   return (
     <>
       <section className="flow-hero">
-        <PageContextLabel trail="YUKIMICHI / Flow" current="取引の流れ" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Export Process</span>

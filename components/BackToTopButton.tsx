@@ -16,35 +16,36 @@ export default function BackToTopButton() {
     <button
       type="button"
       className="back-to-top-button"
-      aria-label="上へ戻る"
+      aria-label="ページ上部へ戻る"
       data-visible={visible}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
-      TOP
+      ↑
       <style>{`
         .back-to-top-button {
           position: fixed;
-          right: clamp(18px, 3vw, 32px);
-          bottom: clamp(18px, 3vw, 32px);
+          right: 24px;
+          bottom: 24px;
           z-index: 900;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 54px;
-          height: 54px;
-          border: 1px solid rgba(201,168,76,0.44);
-          background:
-            linear-gradient(135deg, rgba(139,30,47,0.24), transparent 54%),
-            rgba(7,17,31,0.92);
+          width: 46px;
+          height: 46px;
+          border: 1px solid rgba(201,168,76,0.55);
+          border-radius: 999px;
+          background: rgba(7,17,31,0.88);
           color: var(--washi);
           cursor: pointer;
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 13px;
-          letter-spacing: 0.16em;
+          font-size: 20px;
+          line-height: 1;
+          box-shadow: 0 18px 45px rgba(0,0,0,0.28);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
           opacity: 0;
           pointer-events: none;
           transform: translateY(10px);
-          transition: opacity 0.24s ease, transform 0.24s ease, border-color 0.24s ease;
+          transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         .back-to-top-button[data-visible="true"] {
@@ -56,13 +57,15 @@ export default function BackToTopButton() {
         .back-to-top-button:hover,
         .back-to-top-button:focus-visible {
           border-color: var(--gold);
+          color: var(--gold);
           outline: none;
+          transform: translateY(-3px);
         }
 
         @media (max-width: 640px) {
           .back-to-top-button {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             right: 16px;
             bottom: 16px;
           }

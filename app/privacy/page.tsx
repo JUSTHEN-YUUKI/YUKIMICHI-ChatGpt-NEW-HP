@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー | YUKIMICHI - SNOWPATH JAPAN',
@@ -110,7 +109,6 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <section className="privacy-hero">
-        <PageContextLabel trail="YUKIMICHI / Privacy Policy" current="プライバシーポリシー" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Privacy Policy</span>

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: 'お見積り | YUKIMICHI - SNOWPATH JAPAN',
@@ -94,7 +93,6 @@ export default function QuotePage() {
   return (
     <>
       <section className="quote-hero">
-        <PageContextLabel trail="YUKIMICHI / Quote" current="お見積り" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Export Quotation</span>

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: '取引条件 | YUKIMICHI - SNOWPATH JAPAN',
@@ -143,7 +142,6 @@ export default function TermsPage() {
   return (
     <>
       <section className="terms-hero">
-        <PageContextLabel trail="YUKIMICHI / Terms" current="取引条件" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Terms of Transaction</span>

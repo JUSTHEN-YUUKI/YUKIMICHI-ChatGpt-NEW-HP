@@ -3,7 +3,6 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import BackToTopButton from '@/components/BackToTopButton'
-import { LinkBehaviorProvider } from '@/components/LinkBehaviorProvider'
 
 export const metadata: Metadata = {
   title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
@@ -33,12 +32,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LinkBehaviorProvider>
-          <Navigation />
-          <main>{children}</main>
-          <Footer />
-          <BackToTopButton />
-        </LinkBehaviorProvider>
+        <Navigation />
+        <main>{children}</main>
+        <Footer />
+        <BackToTopButton />
       </body>
     </html>
   )
