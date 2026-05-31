@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/NewTabLink"
 import type { ReactNode } from "react"
 import ScrollReveal from "@/components/ScrollReveal"
 

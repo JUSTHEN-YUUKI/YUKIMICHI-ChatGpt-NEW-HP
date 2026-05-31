@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Link from '@/components/NewTabLink'
+import PageContextLabel from '@/components/PageContextLabel'
 
 export const metadata: Metadata = {
   title: '禁止・制限品目 | YUKIMICHI - SNOWPATH JAPAN',
@@ -83,6 +84,7 @@ export default function RestrictedItemsPage() {
   return (
     <>
       <section className="restricted-hero">
+        <PageContextLabel trail="YUKIMICHI / Restricted Items" current="禁止・制限品目" />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">Restricted Items</span>

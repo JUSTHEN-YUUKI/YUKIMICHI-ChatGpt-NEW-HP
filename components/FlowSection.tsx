@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
 
 function ArrowRight({ size = 14 }: { size?: number }) {

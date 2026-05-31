@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import Link from '@/components/NewTabLink'
+import PageContextLabel from '@/components/PageContextLabel'
 
 export default function HeroSection() {
   return (
@@ -42,6 +43,11 @@ export default function HeroSection() {
           padding: '0 var(--gutter)',
         }}
       >
+        <PageContextLabel
+          label="Brand Entrance"
+          trail="YUKIMICHI / Top"
+          current="Top Page"
+        />
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">
