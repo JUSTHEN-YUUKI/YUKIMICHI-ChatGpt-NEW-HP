@@ -15,7 +15,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage)
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+    let savedLanguage: string | null = null
+
+    try {
+      savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+    } catch {
+      savedLanguage = null
+    }
+
     const nextLanguage = isLanguage(savedLanguage) ? savedLanguage : defaultLanguage
 
     setLanguageState(nextLanguage)
@@ -24,7 +31,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage)
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage)
+
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage)
+    } catch {
+      // Keep language switching available even when browser storage is unavailable.
+    }
+
     document.documentElement.lang = nextLanguage
   }, [])
 
