@@ -7,10 +7,10 @@ export const defaultLanguage: Language = 'ja'
 export const LANGUAGE_STORAGE_KEY = 'yukimichi-language'
 
 export const languageLabels: Record<Language, string> = {
-  ja: '🇯🇵 JP',
-  en: '🇺🇸 EN',
-  zh: '🇨🇳 中文',
-  es: '🇪🇸 ES',
+  ja: 'JP',
+  en: 'EN',
+  zh: '中文',
+  es: 'ES',
 }
 
 export const languageShortLabels: Record<Language, string> = {
@@ -21,10 +21,10 @@ export const languageShortLabels: Record<Language, string> = {
 }
 
 export const languageFlags: Record<Language, string> = {
-  ja: '🇯🇵',
-  en: '🇺🇸',
-  zh: '🇨🇳',
-  es: '🇪🇸',
+  ja: '/flags/jp.svg',
+  en: '/flags/us.svg',
+  zh: '/flags/cn.svg',
+  es: '/flags/es.svg',
 }
 
 export const languageNames: Record<Language, string> = {

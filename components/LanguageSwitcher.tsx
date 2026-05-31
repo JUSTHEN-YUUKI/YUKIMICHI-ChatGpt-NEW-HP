@@ -1,6 +1,6 @@
 'use client'
 
-import { languages, languageLabels, languageNames } from '@/lib/i18n'
+import { languages, languageFlags, languageLabels, languageNames } from '@/lib/i18n'
 import { translations } from '@/lib/translations'
 import { useLanguage } from '@/components/LanguageProvider'
 
@@ -39,16 +39,33 @@ export default function LanguageSwitcher({ className, variant = 'compact' }: Lan
               border: 0,
               color: active ? 'var(--gold)' : 'var(--washi-dim)',
               cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
               fontSize: '10px',
               letterSpacing: '0.08em',
-              minHeight: '30px',
-              minWidth: variant === 'full' ? '86px' : '48px',
+              lineHeight: 1,
+              minHeight: '32px',
+              minWidth: variant === 'full' ? '108px' : '58px',
               padding: '6px 8px',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}
           >
-            {variant === 'full' ? `${languageLabels[item].split(' ')[0]} ${languageNames[item]}` : languageLabels[item]}
+            <img
+              alt=""
+              aria-hidden="true"
+              src={languageFlags[item]}
+              style={{
+                border: '1px solid rgba(248,245,239,0.18)',
+                display: 'block',
+                height: '12px',
+                objectFit: 'cover',
+                width: '18px',
+              }}
+            />
+            <span>{variant === 'full' ? languageNames[item] : languageLabels[item]}</span>
           </button>
         )
       })}
