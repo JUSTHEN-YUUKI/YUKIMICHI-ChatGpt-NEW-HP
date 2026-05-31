@@ -16,12 +16,6 @@ const companyItems = [
 
 const locationAddress = '8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan'
 
-const locationMapSrc =
-  'https://www.google.com/maps?q=%E3%80%92060-0032%20%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%97%E4%BA%8C%E6%9D%A1%E6%9D%B18-5-15&output=embed'
-
-const locationMapLink =
-  'https://www.google.com/maps/search/?api=1&query=%E3%80%92060-0032%20%E5%8C%97%E6%B5%B7%E9%81%93%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8C%97%E4%BA%8C%E6%9D%A1%E6%9D%B18-5-15'
-
 function ArrowRight() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -79,23 +73,6 @@ export default function AboutPage() {
               </strong>
             </div>
           ))}
-
-          <div className="about-map-frame">
-            <iframe
-              title="JUSTHEN CO., LTD. location map"
-              src={locationMapSrc}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <a
-            href={locationMapLink}
-            className="about-map-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            地図が表示されない場合はGoogle Mapsで確認
-          </a>
         </div>
       </section>
 
@@ -155,43 +132,8 @@ export default function AboutPage() {
           font: inherit;
           line-height: 1.75;
         }
-        .about-map-frame {
-          margin-top: 22px;
-          min-height: 190px;
-          overflow: hidden;
-          border: 1px solid rgba(201,168,76,0.26);
-          border-radius: 6px;
-          background: rgba(248,245,239,0.04);
-        }
-        .about-map-frame iframe {
-          display: block;
-          width: 100%;
-          height: 190px;
-          border: 0;
-          filter: saturate(0.82) contrast(0.95);
-        }
-        .about-map-link {
-          display: inline-flex;
-          margin-top: 10px;
-          color: rgba(216,211,199,0.62);
-          font-size: 11px;
-          font-weight: 300;
-          letter-spacing: 0.08em;
-          line-height: 1.6;
-          text-decoration: none;
-          transition: color 0.2s ease;
-        }
-        .about-map-link:hover { color: var(--gold); }
         @media (max-width: 900px) {
           .about-section { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 520px) {
-          .about-map-frame {
-            min-height: 170px;
-          }
-          .about-map-frame iframe {
-            height: 170px;
-          }
         }
       `}</style>
     </>
