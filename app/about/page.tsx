@@ -12,8 +12,6 @@ const companyItems = [
   ['Representative', 'Yuuki Hayashi / 林 祐樹'],
   ['Location', 'Sapporo, Hokkaido, Japan / 北海道札幌市'],
   ['License', '古物商許可証 第305581606050号 東京都公安委員会'],
-  ['Customs Code', '税関輸出入者コード 10000NKS0000'],
-  ['Application ID', '発給申請ID UXEV00000X6Q'],
 ]
 
 function ArrowRight() {

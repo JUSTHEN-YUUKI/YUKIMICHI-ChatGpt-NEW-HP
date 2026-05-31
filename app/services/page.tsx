@@ -165,7 +165,7 @@ export default function ServicesPage() {
         </h1>
         <p className="section-body services-lead">
           YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、
-          取扱可否確認まで、海外のお客様が安心して日本商品を取引できる環境を整えます。
+          取扱可否確認まで、海外のお客様が安心して取扱可能な日本商品を取引できる環境を整えます。
         </p>
         <div className="services-hero-actions">
           <Link href="/quote" className="btn-primary">

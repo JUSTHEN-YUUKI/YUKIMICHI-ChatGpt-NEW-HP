@@ -169,7 +169,7 @@ export default function PricingPage() {
               <h2>{plan.title}</h2>
               <div className="pricing-rate">
                 {plan.fee}
-                <small>of product value</small>
+                <small> of product value</small>
               </div>
               <p className="pricing-minimum">{plan.minimum}</p>
               <div className="pricing-divider" />

@@ -77,7 +77,7 @@ export default function ProductShowcaseSection() {
           </div>
 
           <h2 className="section-title">
-            日本の商品を、
+            取扱可能な日本商品を、
             <br />
             確かな手配で世界へ。
           </h2>
@@ -88,8 +88,8 @@ export default function ProductShowcaseSection() {
 
           <p className="section-body">
             YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、
-            航空貨物、海上輸送まで、海外のお客様が安心して日本商品を
-            取引できる環境を整えます。今後、実際の商品写真、梱包風景、
+            航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して
+            日本商品を取引できる環境を整えます。今後、実際の商品写真、梱包風景、
             札幌・北海道の実写素材、輸送関連の動画を追加し、
             より具体的な取引イメージを伝えていきます。
           </p>

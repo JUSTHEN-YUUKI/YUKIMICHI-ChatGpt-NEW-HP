@@ -74,7 +74,7 @@ export default function HeroSection() {
         >
           北海道・札幌から世界市場へ。
           海上輸送、航空貨物、EMS・DHL・FedEx・UPS・ヤマト国際宅急便を活用し、
-          日本の商品を世界へ届けます。
+          取扱可能な日本商品を、法令遵守と透明性を前提に海外のお客様へ届けます。
         </p>
 
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>

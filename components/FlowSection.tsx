@@ -138,21 +138,6 @@ export default function FlowSection() {
             >
               <div
                 style={{
-                  position: "absolute",
-                  top: "-40px",
-                  right: "-30px",
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "120px",
-                  lineHeight: 1,
-                  color: "rgba(201,168,76,0.045)",
-                  pointerEvents: "none",
-                }}
-              >
-                {step.num}
-              </div>
-
-              <div
-                style={{
                   width: "58px",
                   height: "58px",
                   borderRadius: "50%",

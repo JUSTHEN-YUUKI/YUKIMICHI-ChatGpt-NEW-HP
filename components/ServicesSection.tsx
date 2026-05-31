@@ -118,7 +118,7 @@ const services: Service[] = [
     titleJp: "航空貨物",
     desc: "緊急輸送、高付加価値商品、短納期案件に向けて、航空貨物や国際エクスプレスを活用した輸送をサポートします。",
     points: ["緊急輸送", "短納期", "高付加価値商品", "航空貨物"],
-    accent: "AIR CARGO",
+    accent: "AIR FREIGHT",
   },
   {
     num: "04",

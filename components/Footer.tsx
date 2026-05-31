@@ -8,10 +8,10 @@ const footerLinks = [
   { href: '/flow', label: '取引の流れ' },
   { href: '/quote', label: 'お見積り' },
   { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'お問い合わせ' },
   { href: '/restricted', label: '禁止・制限品目' },
   { href: '/terms', label: '取引条件' },
   { href: '/privacy', label: 'プライバシーポリシー' },
-  { href: '/contact', label: 'お問い合わせ' },
 ]
 
 export default function Footer() {

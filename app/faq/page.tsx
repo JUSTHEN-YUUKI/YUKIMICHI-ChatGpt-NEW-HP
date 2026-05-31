@@ -14,7 +14,7 @@ const faqCategories = [
     en: 'Procurement',
     items: [
       {
-        q: '日本の商品を海外から購入できますか？',
+        q: '取扱可能な日本商品を海外から購入できますか？',
         a: 'YUKIMICHIでは、日本国内の正規流通品を中心に、商品調達や購入代行の相談に対応します。商品URL、数量、配送先国、希望納期をもとに、調達可否、配送方法、見積条件を確認します。',
         links: [{ href: '/services', label: 'サービスを見る' }],
       },
@@ -125,16 +125,16 @@ const faqCategories = [
         links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
       },
       {
-        q: '医薬品、食品、化粧品は送れますか？',
+        q: '医薬品、食品、化粧品は取扱確認が必要ですか？',
         a: '国、成分、用途、数量、販売目的か個人使用かにより規制が異なります。医薬品、食品、化粧品は事前確認が必要であり、商品条件により発送できない場合があります。',
         links: [{ href: '/restricted', label: '規制品の確認事項を見る' }],
       },
       {
-        q: '日焼け止めや香水、スプレー商品は送れますか？',
+        q: '日焼け止めや香水、スプレー商品は事前確認が必要ですか？',
         a: '成分、容量、アルコール含有、スプレー形状、航空危険物判定、配送会社条件により対応可否が変わります。航空輸送では特に事前確認が必要です。',
       },
       {
-        q: '電池や電子機器は送れますか？',
+        q: '電池や電子機器は取扱確認が必要ですか？',
         a: 'リチウム電池、モバイルバッテリー、電子機器は、電池の種類、容量、梱包状態、配送会社条件により制限される場合があります。商品仕様が分かる資料があると確認が進めやすくなります。',
       },
       {
@@ -278,7 +278,7 @@ export default function FAQPage() {
             <a href={`#${category.id}`} className="faq-category-card" key={category.id}>
               <span>{category.en}</span>
               <strong>{category.label}</strong>
-              <small>{category.items.length} questions</small>
+              <small>Questions: {category.items.length}</small>
             </a>
           ))}
         </div>
@@ -478,9 +478,11 @@ export default function FAQPage() {
         }
 
         .faq-category-card small {
+          display: block;
           color: var(--suzu);
           font-size: 11px;
           letter-spacing: 0.12em;
+          line-height: 1.5;
           margin-top: auto;
           text-transform: uppercase;
         }
