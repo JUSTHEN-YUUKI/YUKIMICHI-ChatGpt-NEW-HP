@@ -24,9 +24,26 @@ type InquiryPayload = {
 
 const INQUIRY_TO = 'exporter@justhen.co.jp'
 
+type ResendEmailPayload = {
+  from: string
+  to: string[]
+  bcc?: string[]
+  reply_to: string
+  subject: string
+  text: string
+}
+
 function toText(value: unknown, maxLength = 2000) {
   if (typeof value !== 'string') return ''
   return value.trim().slice(0, maxLength)
+}
+
+function parseBccEmails(value: string | undefined) {
+  if (!value) return []
+  return value
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean)
 }
 
 function normalizeType(value: unknown): InquiryType | null {
@@ -41,6 +58,17 @@ function formatValue(value: string) {
   return value || '未入力'
 }
 
+async function sendResendEmail(resendApiKey: string, payload: ResendEmailPayload) {
+  return fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+}
+
 export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY
   const resendFromEmail = process.env.RESEND_FROM_EMAIL
@@ -51,6 +79,8 @@ export async function POST(request: Request) {
       { status: 500 },
     )
   }
+
+  const bccEmails = parseBccEmails(process.env.INQUIRY_BCC_EMAILS)
 
   let payload: InquiryPayload
 
@@ -89,8 +119,12 @@ export async function POST(request: Request) {
   }
 
   const requester = company || name
-  const subjectPrefix = type === 'quote' ? '【YUKIMICHI 見積依頼】' : '【YUKIMICHI お問い合わせ】'
-  const subject = `${subjectPrefix}${requester}`
+  const adminSubjectPrefix = type === 'quote' ? '【YUKIMICHI 見積依頼】' : '【YUKIMICHI お問い合わせ】'
+  const adminSubject = `${adminSubjectPrefix}${requester}`
+  const autoReplySubject =
+    type === 'quote'
+      ? '【YUKIMICHI】お見積り依頼を受け付けました'
+      : '【YUKIMICHI】お問い合わせを受け付けました'
   const submittedAt = new Date().toLocaleString('ja-JP', {
     timeZone: 'Asia/Tokyo',
     year: 'numeric',
@@ -102,7 +136,7 @@ export async function POST(request: Request) {
   })
   const userAgent = request.headers.get('user-agent') ?? '未取得'
 
-  const text = [
+  const inquirySummary = [
     `送信種別：${type === 'quote' ? 'お見積り' : 'お問い合わせ'}`,
     `会社名：${formatValue(company)}`,
     `ご担当者名：${formatValue(name)}`,
@@ -121,6 +155,10 @@ export async function POST(request: Request) {
     '',
     '相談内容：',
     formatValue(message),
+  ].join('\n')
+
+  const adminText = [
+    inquirySummary,
     '',
     `送信元ページ：${formatValue(sourcePage)}`,
     `送信日時：${submittedAt} JST`,
@@ -128,25 +166,40 @@ export async function POST(request: Request) {
     `返信先：${email}`,
   ].join('\n')
 
+  const autoReplyText = [
+    `${name} 様`,
+    '',
+    'このたびは、YUKIMICHI – SNOWPATH JAPAN へお問い合わせいただきありがとうございます。',
+    '以下の内容でお問い合わせを受け付けました。',
+    '',
+    inquirySummary,
+    '',
+    `内容を確認のうえ、担当者より ${INQUIRY_TO} からご連絡いたします。`,
+    '',
+    'なお、商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。',
+    '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは事前確認が必要です。',
+    '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。',
+    '',
+    'YUKIMICHI – SNOWPATH JAPAN',
+    'JUSTHEN CO., LTD.',
+    INQUIRY_TO,
+    '',
+    '※本メールは自動返信です。',
+  ].join('\n')
+
   try {
-    const resendResponse = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: resendFromEmail,
-        to: [INQUIRY_TO],
-        reply_to: email,
-        subject,
-        text,
-      }),
+    const adminResponse = await sendResendEmail(resendApiKey, {
+      from: resendFromEmail,
+      to: [INQUIRY_TO],
+      ...(bccEmails.length > 0 ? { bcc: bccEmails } : {}),
+      reply_to: email,
+      subject: adminSubject,
+      text: adminText,
     })
 
-    if (!resendResponse.ok) {
-      const errorText = await resendResponse.text()
-      console.error('Resend email send failed:', errorText.slice(0, 1000))
+    if (!adminResponse.ok) {
+      const errorText = await adminResponse.text()
+      console.error('Resend admin email send failed:', errorText.slice(0, 1000))
 
       return NextResponse.json(
         { ok: false, error: '送信に失敗しました。時間をおいて再度お試しください。' },
@@ -154,7 +207,28 @@ export async function POST(request: Request) {
       )
     }
 
-    return NextResponse.json({ ok: true })
+    const autoReplyResponse = await sendResendEmail(resendApiKey, {
+      from: resendFromEmail,
+      to: [email],
+      reply_to: INQUIRY_TO,
+      subject: autoReplySubject,
+      text: autoReplyText,
+    })
+
+    if (!autoReplyResponse.ok) {
+      const errorText = await autoReplyResponse.text()
+      console.error('Resend auto reply email send failed:', errorText.slice(0, 1000))
+
+      return NextResponse.json({
+        ok: true,
+        autoReplyOk: false,
+      })
+    }
+
+    return NextResponse.json({
+      ok: true,
+      autoReplyOk: true,
+    })
   } catch (error) {
     console.error('Inquiry email send failed:', error)
 

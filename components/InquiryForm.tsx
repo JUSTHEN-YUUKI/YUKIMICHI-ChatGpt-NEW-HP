@@ -72,7 +72,10 @@ const contactFields: FieldConfig[] = [
   { name: 'message', label: '相談内容 / Message', placeholder: '商品調達、国際配送、取扱可否確認など', required: true, multiline: true },
 ]
 
-const successMessage =
+const successMessageWithAutoReply =
+  '送信が完了しました。入力いただいたメールアドレス宛に受付確認メールをお送りしました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。'
+
+const successMessageWithoutAutoReply =
   '送信が完了しました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。'
 
 const defaultErrorMessage =
@@ -108,14 +111,14 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }),
       })
 
-      const result = (await response.json()) as { ok?: boolean; error?: string }
+      const result = (await response.json()) as { ok?: boolean; autoReplyOk?: boolean; error?: string }
 
       if (!response.ok || !result.ok) {
         throw new Error(result.error || defaultErrorMessage)
       }
 
       setSubmitState('success')
-      setFeedbackMessage(successMessage)
+      setFeedbackMessage(result.autoReplyOk === false ? successMessageWithoutAutoReply : successMessageWithAutoReply)
       setFormState(initialState)
     } catch (error) {
       setSubmitState('error')
