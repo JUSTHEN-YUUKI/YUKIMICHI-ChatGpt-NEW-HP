@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 import InquiryForm from '@/components/InquiryForm'
+import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
   title: 'Contact | YUKIMICHI - SNOWPATH JAPAN',
@@ -42,20 +43,22 @@ export default function ContactPage() {
           <span className="section-label-text">Contact</span>
         </div>
         <h1 className="contact-title">
-          お問い合わせ
+          <TranslatedText id="pages.contact.heroTitle" fallback="お問い合わせ" />
           <br />
-          <em>Contact YUKIMICHI</em>
+          <em><TranslatedText id="pages.contact.heroSubtitle" fallback="Contact YUKIMICHI" /></em>
         </h1>
         <p className="section-body contact-lead">
-          日本国内の商品調達、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。
-          商品URL・数量・配送先国・希望納期をご記載いただくと、確認がスムーズです。
+          <TranslatedText
+            id="pages.contact.heroLead"
+            fallback="日本国内の商品調達、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。商品URL・数量・配送先国・希望納期をご記載いただくと、確認がスムーズです。"
+          />
         </p>
         <div className="contact-hero-actions">
           <a className="btn-primary" href={inquiryMailto}>
-            exporter@justhen.co.jp へ相談する <ArrowRight />
+            <TranslatedText id="pages.contact.mailCta" fallback="exporter@justhen.co.jp へ相談する" /> <ArrowRight />
           </a>
           <Link href="/quote" className="btn-ghost">
-            お見積りページへ進む <ArrowRight />
+            <TranslatedText id="common.quote" fallback="お見積りページへ進む" /> <ArrowRight />
           </Link>
         </div>
       </section>
@@ -66,10 +69,12 @@ export default function ContactPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Inquiry Details</span>
           </div>
-          <h2>フォームからお問い合わせを送信</h2>
+          <h2><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
           <p className="contact-panel-lead">
-            必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。
-            商品URL・配送先国・相談内容が分かると、確認がスムーズです。
+            <TranslatedText
+              id="pages.contact.formLead"
+              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URL・配送先国・相談内容が分かると、確認がスムーズです。"
+            />
           </p>
 
           <InquiryForm type="contact" mailtoHref={inquiryMailto} />
@@ -78,20 +83,20 @@ export default function ContactPage() {
         <aside className="contact-aside">
           <div>
             <span className="contact-kicker">Before Inquiry</span>
-            <h2>見積・相談時にあるとよい情報</h2>
+            <h2><TranslatedText id="pages.contact.helpfulTitle" fallback="見積・相談時にあるとよい情報" /></h2>
             <ol className="contact-checklist">
-              {helpfulItems.map((item) => (
-                <li key={item}>{item}</li>
+              {helpfulItems.map((item, index) => (
+                <li key={item}><TranslatedText id={`pages.contact.helpfulItems.${index}`} fallback={item} /></li>
               ))}
             </ol>
           </div>
 
           <div>
             <span className="contact-kicker">Quote Request</span>
-            <h2>Request a Quote</h2>
-            <p>費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。</p>
+            <h2><TranslatedText id="pages.contact.quoteTitle" fallback="Request a Quote" /></h2>
+            <p><TranslatedText id="pages.contact.quoteLead" fallback="費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。" /></p>
             <Link href="/quote" className="btn-ghost">
-              お見積りページへ進む <ArrowRight />
+              <TranslatedText id="common.quote" fallback="お見積りページへ進む" /> <ArrowRight />
             </Link>
           </div>
         </aside>
@@ -103,11 +108,11 @@ export default function ContactPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Compliance Notes</span>
           </div>
-          <h2>取扱可否・規制確認について</h2>
+          <h2><TranslatedText id="pages.contact.noticeTitle" fallback="取扱可否・規制確認について" /></h2>
         </div>
         <ul>
-          {noticeItems.map((item) => (
-            <li key={item}>{item}</li>
+          {noticeItems.map((item, index) => (
+            <li key={item}><TranslatedText id={`pages.contact.noticeItems.${index}`} fallback={item} /></li>
           ))}
         </ul>
       </section>

@@ -4,21 +4,26 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "@/components/NewTabLink"
 import { usePathname } from "next/navigation"
+import LanguageSwitcher from "@/components/LanguageSwitcher"
+import { useLanguage } from "@/components/LanguageProvider"
+import { translations } from "@/lib/translations"
 
 const navLinks = [
-  { href: "/", label: "Top" },
-  { href: "/about", label: "会社概要" },
-  { href: "/services", label: "サービス" },
-  { href: "/pricing", label: "料金表" },
-  { href: "/flow", label: "取引の流れ" },
-  { href: "/quote", label: "お見積り" },
-  { href: "/faq", label: "FAQ" },
-]
+  { href: "/", labelKey: "top" },
+  { href: "/about", labelKey: "about" },
+  { href: "/services", labelKey: "services" },
+  { href: "/pricing", labelKey: "pricing" },
+  { href: "/flow", labelKey: "flow" },
+  { href: "/quote", labelKey: "quote" },
+  { href: "/faq", labelKey: "faq" },
+] as const
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { language } = useLanguage()
+  const navigation = translations[language].navigation
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48)
@@ -119,8 +124,9 @@ export default function Navigation() {
             listStyle: "none",
           }}
         >
-          {navLinks.map(({ href, label }) => {
+          {navLinks.map(({ href, labelKey }) => {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
+            const label = navigation[labelKey]
 
             return (
               <li key={href}>
@@ -144,6 +150,9 @@ export default function Navigation() {
               </li>
             )
           })}
+          <li style={{ marginLeft: "10px" }}>
+            <LanguageSwitcher />
+          </li>
           <li style={{ marginLeft: "14px" }}>
             <Link
               href="/contact"
@@ -165,7 +174,7 @@ export default function Navigation() {
                 whiteSpace: "nowrap",
               }}
             >
-              お問い合わせ
+              {navigation.contact}
             </Link>
           </li>
         </ul>
@@ -231,8 +240,11 @@ export default function Navigation() {
               textAlign: "center",
             }}
           >
-            {navLinks.map(({ href, label }) => {
+            <LanguageSwitcher />
+
+            {navLinks.map(({ href, labelKey }) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
+              const label = navigation[labelKey]
 
               return (
                 <Link
@@ -261,7 +273,7 @@ export default function Navigation() {
               className="btn-primary"
               style={{ justifyContent: "center", marginTop: "12px" }}
             >
-              お問い合わせ
+              {navigation.contact}
             </Link>
           </div>
         </div>

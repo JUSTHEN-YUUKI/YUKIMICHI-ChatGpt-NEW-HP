@@ -3,6 +3,8 @@
 import Link from "@/components/NewTabLink"
 import type { ReactNode } from "react"
 import ScrollReveal from "@/components/ScrollReveal"
+import { useLanguage } from "@/components/LanguageProvider"
+import { translations } from "@/lib/translations"
 
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (
@@ -88,9 +90,18 @@ interface Service {
   title: string
   titleJp: string
   desc: string
-  points: string[]
+  points: readonly string[]
   accent: string
 }
+
+const serviceIcons = [
+  <IconCart key="cart" />,
+  <IconGlobe key="globe" />,
+  <IconPlane key="plane" />,
+  <IconShip key="ship" />,
+  <IconShield key="shield" />,
+  <IconBuyer key="buyer" />,
+] as const
 
 const services: Service[] = [
   {
@@ -278,6 +289,14 @@ function ServiceCard({ service }: { service: Service }) {
 }
 
 export default function ServicesSection() {
+  const { language } = useLanguage()
+  const copy = translations[language].home.services
+  const localizedServices = copy.cards.map((service, index) => ({
+    ...service,
+    icon: serviceIcons[index],
+    num: String(index + 1).padStart(2, "0"),
+  }))
+
   return (
     <section
       id="services"
@@ -336,21 +355,19 @@ export default function ServicesSection() {
           <div>
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Export Support Services</span>
+              <span className="section-label-text">{copy.label}</span>
             </div>
 
             <h2 className="section-title">
-              Export Support<br />
-              from Japan<br />
-              <em>to the World.</em>
+              {copy.titleLine1}<br />
+              {copy.titleLine2}<br />
+              <em>{copy.titleLine3}</em>
             </h2>
           </div>
 
           <div>
             <p className="section-body" style={{ marginBottom: "26px" }}>
-              YUKIMICHIは、日本国内の商品調達から国際宅配便、航空貨物、海上輸送、
-              輸出コンプライアンス、海外バイヤー対応まで、海外バイヤーが安心して日本と取引できる
-              実務型の輸出サポートを提供します。
+              {copy.body}
             </p>
 
             <div
@@ -392,7 +409,7 @@ export default function ServicesSection() {
           }}
           className="services-premium-grid"
         >
-          {services.map((service) => (
+          {localizedServices.map((service) => (
             <ServiceCard key={service.num} service={service} />
           ))}
         </div>
@@ -427,7 +444,7 @@ export default function ServicesSection() {
                 marginBottom: "12px",
               }}
             >
-              Logistics Policy
+              {copy.logisticsLabel}
             </div>
             <p
               style={{
@@ -438,14 +455,12 @@ export default function ServicesSection() {
                 margin: 0,
               }}
             >
-              航空貨物・海上輸送・国際宅配便は、それぞれ納期、コスト、通関難易度、貨物特性が異なります。
-              YUKIMICHIでは、単に安い配送方法を選ぶのではなく、到着までの安全性、スピード、
-              コストバランスを踏まえて輸送方法を検討します。
+              {copy.logisticsBody}
             </p>
           </div>
 
           <Link href="/contact" className="btn-primary" style={{ justifyContent: "center" }}>
-            Contact Export Support <ArrowRight />
+            {copy.contactButton} <ArrowRight />
           </Link>
         </div>
       </ScrollReveal>

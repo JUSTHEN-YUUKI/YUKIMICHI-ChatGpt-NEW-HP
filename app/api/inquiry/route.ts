@@ -20,6 +20,7 @@ type InquiryPayload = {
   material?: unknown
   recipientType?: unknown
   sourcePage?: unknown
+  language?: unknown
 }
 
 const INQUIRY_TO = 'exporter@justhen.co.jp'
@@ -110,6 +111,7 @@ export async function POST(request: Request) {
   const material = toText(payload.material, 500)
   const recipientType = toText(payload.recipientType, 200)
   const sourcePage = toText(payload.sourcePage, 300) || (type === 'quote' ? '/quote' : '/contact')
+  const language = toText(payload.language, 20) || 'ja'
 
   if (!type || !name || !email || !isEmail(email) || (!destination && !message)) {
     return NextResponse.json(
@@ -152,6 +154,7 @@ export async function POST(request: Request) {
     `希望納期：${formatValue(deadline)}`,
     `希望配送方法：${formatValue(shippingMethod)}`,
     `法人宛・個人宛：${formatValue(recipientType)}`,
+    `表示言語：${formatValue(language)}`,
     '',
     '相談内容：',
     formatValue(message),

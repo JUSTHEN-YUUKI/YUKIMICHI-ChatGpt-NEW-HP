@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI - SNOWPATH JAPAN',
@@ -132,20 +133,22 @@ export default function PricingPage() {
           <span className="section-label-text">Pricing</span>
         </div>
         <h1 className="pricing-title">
-          料金表
+          <TranslatedText id="pages.pricing.heroTitle" fallback="料金表" />
           <br />
-          <em>Transparent Pricing for Export Support</em>
+          <em><TranslatedText id="pages.pricing.heroSubtitle" fallback="Transparent Pricing for Export Support" /></em>
         </h1>
         <p className="section-body pricing-lead">
-          YUKIMICHIでは、商品調達、国際宅配便、航空貨物、海上輸送の内容に応じて、分かりやすい料金体系を提示します。
-          最終料金は、商品内容・配送先国・数量・サイズ・重量・配送方法により変動します。
+          <TranslatedText
+            id="pages.pricing.heroLead"
+            fallback="YUKIMICHIでは、商品調達、国際宅配便、航空貨物、海上輸送の内容に応じて、分かりやすい料金体系を提示します。最終料金は、商品内容・配送先国・数量・サイズ・重量・配送方法により変動します。"
+          />
         </p>
         <div className="pricing-hero-actions">
           <Link href="/quote" className="btn-primary">
-            お見積りへ進む <ArrowRight />
+            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            お問い合わせ <ArrowRight />
+            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
         </div>
       </section>
@@ -156,25 +159,25 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Handling Fee</span>
           </div>
-          <h2>手配手数料の基本体系</h2>
+          <h2><TranslatedText id="pages.pricing.plansTitle" fallback="手配手数料の基本体系" /></h2>
           <p>
-            以下は手配手数料の基本体系です。商品代金、国際送料、関税・VAT/GST、保険、梱包、規制確認、その他実費は別途となる場合があります。
+            <TranslatedText id="pages.pricing.plansLead" fallback="以下は手配手数料の基本体系です。商品代金、国際送料、関税・VAT/GST、保険、梱包、規制確認、その他実費は別途となる場合があります。" />
           </p>
         </div>
 
         <div className="pricing-grid">
-          {pricingPlans.map((plan) => (
+          {pricingPlans.map((plan, index) => (
             <article className="pricing-card" key={plan.label}>
               <span className="pricing-card__label">{plan.label}</span>
               <h2>{plan.title}</h2>
               <div className="pricing-rate">
                 {plan.fee}
-                <small> of product value</small>
+                <small> <TranslatedText id="pages.pricing.ofProductValue" fallback="of product value" /></small>
               </div>
               <p className="pricing-minimum">{plan.minimum}</p>
               <div className="pricing-divider" />
               <p className="pricing-target">{plan.target}</p>
-              <p className="pricing-use">{plan.use}</p>
+              <p className="pricing-use"><TranslatedText id={`home.pricing.plans.${index}.desc`} fallback={plan.use} /></p>
             </article>
           ))}
         </div>
@@ -183,14 +186,14 @@ export default function PricingPage() {
       <section className="pricing-benefit">
         <div>
           <span>First Month Benefit</span>
-          <h2>初回手配手数料無料</h2>
+          <h2><TranslatedText id="pages.pricing.benefitTitle" fallback="初回手配手数料無料" /></h2>
         </div>
         <div className="pricing-benefit-card">
           <p>
-            新規のお客様は、初月の手配手数料を無料でご案内します。まずは小ロット、サンプル、初回輸出案件からご相談ください。
+            <TranslatedText id="pages.pricing.benefitBody1" fallback="新規のお客様は、初月の手配手数料を無料でご案内します。まずは小ロット、サンプル、初回輸出案件からご相談ください。" />
           </p>
           <p>
-            国際送料、商品代金、梱包費、保険料、関税、VAT/GST、規制確認費用、その他実費は別途となります。
+            <TranslatedText id="pages.pricing.benefitBody2" fallback="国際送料、商品代金、梱包費、保険料、関税、VAT/GST、規制確認費用、その他実費は別途となります。" />
           </p>
         </div>
       </section>
@@ -201,8 +204,8 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Cost Factors</span>
           </div>
-          <h2>料金が変動する主な要素</h2>
-          <p>国際輸出では、商品代金だけでなく、配送先国、重量、通関条件、規制確認の有無などにより総額が変動します。</p>
+          <h2><TranslatedText id="pages.pricing.factorsTitle" fallback="料金が変動する主な要素" /></h2>
+          <p><TranslatedText id="pages.pricing.factorsLead" fallback="国際輸出では、商品代金だけでなく、配送先国、重量、通関条件、規制確認の有無などにより総額が変動します。" /></p>
         </div>
         <div className="pricing-chip-grid">
           {costFactors.map((factor) => (
@@ -217,9 +220,9 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Additional Costs</span>
           </div>
-          <h2>別途費用となる可能性があるもの</h2>
+          <h2><TranslatedText id="pages.pricing.additionalTitle" fallback="別途費用となる可能性があるもの" /></h2>
           <p>
-            案件により発生する費用は異なります。見積時に確認できる範囲で項目を整理し、必要に応じて個別にご案内します。
+            <TranslatedText id="pages.pricing.additionalLead" fallback="案件により発生する費用は異なります。見積時に確認できる範囲で項目を整理し、必要に応じて個別にご案内します。" />
           </p>
         </div>
         <ul className="pricing-additional-list">
@@ -235,8 +238,8 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">How We Select Shipping Methods</span>
           </div>
-          <h2>輸送方法ごとの考え方</h2>
-          <p>納期、費用、サイズ・重量、内容品、配送会社の引受条件を踏まえて、案件ごとに候補を比較します。</p>
+          <h2><TranslatedText id="pages.pricing.shippingTitle" fallback="輸送方法ごとの考え方" /></h2>
+          <p><TranslatedText id="pages.pricing.shippingLead" fallback="納期、費用、サイズ・重量、内容品、配送会社の引受条件を踏まえて、案件ごとに候補を比較します。" /></p>
         </div>
         <div className="shipping-grid">
           {shippingLogic.map((method) => (
@@ -259,9 +262,9 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Sample Estimate</span>
           </div>
-          <h2>見積例</h2>
+          <h2><TranslatedText id="pages.pricing.sampleTitle" fallback="見積例" /></h2>
           <p>
-            これは見積項目の例であり、実際の料金は商品内容・配送先国・配送方法により異なります。
+            <TranslatedText id="pages.pricing.sampleLead" fallback="これは見積項目の例であり、実際の料金は商品内容・配送先国・配送方法により異なります。" />
           </p>
         </div>
         <div className="sample-table" role="table" aria-label="Sample estimate">
@@ -277,27 +280,25 @@ export default function PricingPage() {
       <section className="pricing-notes">
         <article>
           <span className="pricing-note-kicker">Duties & Taxes</span>
-          <h2>関税・VAT/GSTについて</h2>
+          <h2><TranslatedText id="pages.pricing.dutiesTitle" fallback="関税・VAT/GSTについて" /></h2>
           <p>
-            輸入国で発生する関税、VAT、GST、輸入消費税、通関手数料等は、原則として輸入者側の負担となります。
-            税額・税率・課税判断は輸入国の税関判断により異なります。
+            <TranslatedText id="pages.pricing.dutiesBody1" fallback="輸入国で発生する関税、VAT、GST、輸入消費税、通関手数料等は、原則として輸入者側の負担となります。税額・税率・課税判断は輸入国の税関判断により異なります。" />
           </p>
           <p>
-            YUKIMICHIが事前の目安案内を行う場合がありますが、最終金額を保証するものではありません。
+            <TranslatedText id="pages.pricing.dutiesBody2" fallback="YUKIMICHIが事前の目安案内を行う場合がありますが、最終金額を保証するものではありません。" />
           </p>
         </article>
 
         <article>
           <span className="pricing-note-kicker">Compliance Cost</span>
-          <h2>規制確認が必要な商品について</h2>
+          <h2><TranslatedText id="pages.pricing.complianceTitle" fallback="規制確認が必要な商品について" /></h2>
           <p>
-            医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは、
-            商品内容・配送先国により確認が必要になる場合があります。
+            <TranslatedText id="pages.pricing.complianceBody1" fallback="医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは、商品内容・配送先国により確認が必要になる場合があります。" />
           </p>
           <p>
-            必要に応じて、確認作業や追加費用が発生する場合があります。詳細は
-            <Link href="/restricted"> 禁止・制限品目 </Link>
-            をご確認ください。
+            <TranslatedText id="pages.pricing.complianceBody2Prefix" fallback="必要に応じて、確認作業や追加費用が発生する場合があります。詳細は" />
+            <Link href="/restricted"> <TranslatedText id="common.restricted" fallback="禁止・制限品目" /> </Link>
+            <TranslatedText id="pages.pricing.complianceBody2Suffix" fallback="をご確認ください。" />
           </p>
         </article>
       </section>
@@ -308,16 +309,16 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notice</span>
           </div>
-          <h2>Important Notice</h2>
+          <h2><TranslatedText id="pages.pricing.importantTitle" fallback="Important Notice" /></h2>
           <ul>
             {noticeItems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
           <p>
-            詳細な条件は
-            <Link href="/terms"> 取引条件 </Link>
-            をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
+            <TranslatedText id="pages.pricing.termsLeadPrefix" fallback="詳細な条件は" />
+            <Link href="/terms"> <TranslatedText id="common.terms" fallback="取引条件" /> </Link>
+            <TranslatedText id="pages.pricing.termsLeadSuffix" fallback="をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。" />
           </p>
         </div>
       </section>
@@ -328,14 +329,14 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Related Links</span>
           </div>
-          <h2>関連ページ</h2>
-          <p>見積、問い合わせ、取引条件、禁止・制限品目、よくある質問を各ページで確認できます。</p>
+          <h2><TranslatedText id="pages.pricing.relatedTitle" fallback="関連ページ" /></h2>
+          <p><TranslatedText id="pages.pricing.relatedLead" fallback="見積、問い合わせ、取引条件、禁止・制限品目、よくある質問を各ページで確認できます。" /></p>
         </div>
         <div className="pricing-related-grid">
-          {relatedLinks.map((link) => (
+          {relatedLinks.map((link, index) => (
             <Link href={link.href} className="pricing-related-card" key={link.href}>
               <span>{link.en}</span>
-              <strong>{link.label}</strong>
+              <strong><TranslatedText id={`pages.pricing.relatedLabels.${index}`} fallback={link.label} /></strong>
               <ArrowRight />
             </Link>
           ))}
@@ -345,20 +346,20 @@ export default function PricingPage() {
       <section className="pricing-cta">
         <div>
           <span>Estimate Request</span>
-          <h2>料金を確認して相談する</h2>
+          <h2><TranslatedText id="pages.pricing.ctaTitle" fallback="料金を確認して相談する" /></h2>
           <p>
-            商品URL、数量、配送先国、希望配送方法を添えてご相談ください。基本体系をもとに、案件ごとの見積をご案内します。
+            <TranslatedText id="pages.pricing.ctaLead" fallback="商品URL、数量、配送先国、希望配送方法を添えてご相談ください。基本体系をもとに、案件ごとの見積をご案内します。" />
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="pricing-mail">
-            exporter@justhen.co.jp へ相談する
+            <TranslatedText id="pages.pricing.ctaMail" fallback="exporter@justhen.co.jp へ相談する" />
           </a>
         </div>
         <div className="pricing-cta-actions">
           <Link href="/quote" className="btn-primary">
-            お見積りへ進む <ArrowRight />
+            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            お問い合わせ <ArrowRight />
+            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
         </div>
       </section>

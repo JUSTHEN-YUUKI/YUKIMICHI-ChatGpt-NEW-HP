@@ -2,6 +2,8 @@
 
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
+import { useLanguage } from "@/components/LanguageProvider"
+import { translations } from "@/lib/translations"
 
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (
@@ -17,15 +19,10 @@ function ArrowRight({ size = 14 }: { size?: number }) {
   )
 }
 
-const contactPoints = [
-  "商品調達の相談",
-  "国際配送方法の比較",
-  "小ロット・サンプル出荷",
-  "航空貨物・海上輸送",
-  "輸出書類・確認事項の整理",
-]
-
 export default function CTASection() {
+  const { language } = useLanguage()
+  const copy = translations[language].home.cta
+
   return (
     <section
       id="contact-cta"
@@ -81,7 +78,7 @@ export default function CTASection() {
         >
           <div className="section-label" style={{ justifyContent: "center" }}>
             <div className="section-label-line" />
-            <span className="section-label-text">Export Inquiry</span>
+            <span className="section-label-text">{copy.label}</span>
             <div className="section-label-line" />
           </div>
 
@@ -96,9 +93,9 @@ export default function CTASection() {
               marginBottom: "24px",
             }}
           >
-            世界市場への第一歩を。
+            {copy.titleLine1}
             <br />
-            <span style={{ color: "var(--gold)" }}>北海道から、世界へ。</span>
+            <span style={{ color: "var(--gold)" }}>{copy.titleLine2}</span>
           </h2>
 
           <p
@@ -112,8 +109,7 @@ export default function CTASection() {
               letterSpacing: "0.05em",
             }}
           >
-            日本国内の商品調達から、EMS・DHL・FedEx・UPS・ヤマト国際宅急便、
-            航空貨物、海上輸送まで。YUKIMICHIが日本と世界を信頼でつなぎます。
+            {copy.body}
           </p>
 
           <div
@@ -125,7 +121,7 @@ export default function CTASection() {
               marginBottom: "42px",
             }}
           >
-            {contactPoints.map((point) => (
+            {copy.points.map((point) => (
               <span
                 key={point}
                 style={{
@@ -151,11 +147,11 @@ export default function CTASection() {
             }}
           >
             <Link href="/quote" className="btn-primary">
-              Request a Quote <ArrowRight />
+              {copy.quote} <ArrowRight />
             </Link>
 
             <Link href="mailto:exporter@justhen.co.jp" className="btn-ghost">
-              Email Us <ArrowRight size={12} />
+              {copy.email} <ArrowRight size={12} />
             </Link>
           </div>
 
@@ -169,7 +165,7 @@ export default function CTASection() {
               letterSpacing: "0.04em",
             }}
           >
-            Trusted Export Support from Japan.
+            {copy.trusted}
           </div>
         </div>
       </ScrollReveal>

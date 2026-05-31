@@ -2,6 +2,8 @@
 
 import type { FormEvent } from 'react'
 import { useState } from 'react'
+import { useLanguage } from '@/components/LanguageProvider'
+import { translations } from '@/lib/translations'
 
 type InquiryType = 'quote' | 'contact'
 
@@ -18,12 +20,12 @@ type FormState = {
 }
 
 type FieldConfig = {
-  name: keyof FormState
-  label: string
-  placeholder: string
-  required?: boolean
-  type?: 'email' | 'text' | 'url'
-  multiline?: boolean
+  readonly name: keyof FormState
+  readonly label: string
+  readonly placeholder: string
+  readonly required?: boolean
+  readonly type?: 'email' | 'text' | 'url'
+  readonly multiline?: boolean
 }
 
 type InquiryFormProps = {
@@ -45,48 +47,17 @@ const initialState: FormState = {
   message: '',
 }
 
-const complianceNotes = [
-  '商品内容、配送先国、数量、サイズ、重量、用途により対応可否・費用は変動します。',
-  '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは事前確認が必要です。',
-  '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提です。',
-]
-
-const quoteFields: FieldConfig[] = [
-  { name: 'company', label: '会社名 / Company', placeholder: 'Example Trading Co., Ltd.' },
-  { name: 'name', label: 'ご担当者名 / Name', placeholder: 'Your name', required: true },
-  { name: 'email', label: 'メールアドレス / Email', placeholder: 'buyer@example.com', required: true, type: 'email' },
-  { name: 'productUrl', label: '商品URL / Product URL', placeholder: 'https://example.com/product', required: true, type: 'url' },
-  { name: 'quantity', label: '数量 / Quantity', placeholder: '10 units', required: true },
-  { name: 'destination', label: '配送先国・都市 / Destination', placeholder: 'Country / City', required: true },
-  { name: 'deadline', label: '希望納期 / Deadline', placeholder: 'Example: Within 2 weeks', required: true },
-  { name: 'shippingMethod', label: '希望配送方法 / Shipping Method', placeholder: 'EMS / DHL / Air Freight / Sea Freight' },
-  { name: 'message', label: '相談内容 / Message', placeholder: '商品名、用途、梱包条件、確認したい事項など', multiline: true },
-]
-
-const contactFields: FieldConfig[] = [
-  { name: 'company', label: '会社名 / Company', placeholder: 'Example Trading Co., Ltd.' },
-  { name: 'name', label: 'ご担当者名 / Name', placeholder: 'Your name', required: true },
-  { name: 'email', label: 'メールアドレス / Email', placeholder: 'buyer@example.com', required: true, type: 'email' },
-  { name: 'productUrl', label: '商品URL / Product URL', placeholder: 'https://example.com/product', type: 'url' },
-  { name: 'destination', label: '配送先国・都市 / Destination', placeholder: 'Country / City' },
-  { name: 'message', label: '相談内容 / Message', placeholder: '商品調達、国際配送、取扱可否確認など', required: true, multiline: true },
-]
-
-const successMessageWithAutoReply =
-  '送信が完了しました。入力いただいたメールアドレス宛に受付確認メールをお送りしました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。'
-
-const successMessageWithoutAutoReply =
-  '送信が完了しました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。'
-
-const defaultErrorMessage =
-  '送信に失敗しました。お手数ですが、exporter@justhen.co.jp へ直接ご連絡ください。'
-
 export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
+  const { language } = useLanguage()
+  const formCopy = translations[language].forms[type]
+  const formCommon = translations[language].forms
+  const common = translations[language].common
   const [formState, setFormState] = useState<FormState>(initialState)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [feedbackMessage, setFeedbackMessage] = useState('')
-  const fields = type === 'quote' ? quoteFields : contactFields
-  const buttonLabel = type === 'quote' ? '見積内容を送信する' : 'お問い合わせを送信する'
+  const fields = formCopy.fields as readonly FieldConfig[]
+  const complianceNotes = formCommon.complianceNotes
+  const buttonLabel = formCopy.button
   const sourcePage = type === 'quote' ? '/quote' : '/contact'
 
   function updateField(name: keyof FormState, value: string) {
@@ -108,21 +79,22 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           ...formState,
           type,
           sourcePage,
+          language,
         }),
       })
 
       const result = (await response.json()) as { ok?: boolean; autoReplyOk?: boolean; error?: string }
 
       if (!response.ok || !result.ok) {
-        throw new Error(result.error || defaultErrorMessage)
+        throw new Error(result.error || formCommon.defaultError)
       }
 
       setSubmitState('success')
-      setFeedbackMessage(result.autoReplyOk === false ? successMessageWithoutAutoReply : successMessageWithAutoReply)
+      setFeedbackMessage(result.autoReplyOk === false ? formCommon.successNoAutoReply : formCommon.successAutoReply)
       setFormState(initialState)
     } catch (error) {
       setSubmitState('error')
-      setFeedbackMessage(error instanceof Error ? error.message : defaultErrorMessage)
+      setFeedbackMessage(error instanceof Error ? error.message : formCommon.defaultError)
     }
   }
 
@@ -136,7 +108,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           >
             <span>
               {field.label}
-              {field.required && <em>Required</em>}
+              {field.required && <em>{common.required}</em>}
             </span>
             {field.multiline ? (
               <textarea
@@ -174,9 +146,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
       <div className="inquiry-form__actions">
         <button type="submit" disabled={submitState === 'submitting'}>
-          {submitState === 'submitting' ? '送信中...' : buttonLabel}
+          {submitState === 'submitting' ? common.submitting : buttonLabel}
         </button>
-        <a href={mailtoHref}>メールで直接連絡する</a>
+        <a href={mailtoHref}>{common.emailUs}</a>
       </div>
 
       <style>{`

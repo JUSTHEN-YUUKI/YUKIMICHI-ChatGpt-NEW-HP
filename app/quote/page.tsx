@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 import InquiryForm from '@/components/InquiryForm'
+import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
   title: 'お見積り | YUKIMICHI - SNOWPATH JAPAN',
@@ -88,19 +89,22 @@ export default function QuotePage() {
           <span className="section-label-text">Export Quotation</span>
         </div>
         <h1 className="quote-title">
-          お見積り
+          <TranslatedText id="pages.quote.heroTitle" fallback="お見積り" />
           <br />
-          <em>Export Quotation</em>
+          <em><TranslatedText id="pages.quote.heroSubtitle" fallback="Export Quotation" /></em>
         </h1>
         <p className="section-body quote-lead">
-          商品URL・数量・配送先国・希望納期をお知らせいただくと、商品調達、国際配送、航空貨物、海上輸送の確認がスムーズです。
+          <TranslatedText
+            id="pages.quote.heroLead"
+            fallback="商品URL・数量・配送先国・希望納期をお知らせいただくと、商品調達、国際配送、航空貨物、海上輸送の確認がスムーズです。"
+          />
         </p>
         <div className="quote-hero-actions">
           <a href={quoteMailto} className="btn-primary">
-            exporter@justhen.co.jp へ見積相談する <ArrowRight />
+            <TranslatedText id="pages.quote.mailCta" fallback="exporter@justhen.co.jp へ見積相談する" /> <ArrowRight />
           </a>
           <Link href="/contact" className="btn-ghost">
-            お問い合わせ <ArrowRight />
+            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
         </div>
       </section>
@@ -111,15 +115,15 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Quotation Flow</span>
           </div>
-          <h2>見積依頼の流れ</h2>
-          <p>初回相談では、確定料金ではなく確認に必要な条件を整理し、対応可否と配送候補を確認します。</p>
+          <h2><TranslatedText id="pages.quote.flowTitle" fallback="見積依頼の流れ" /></h2>
+          <p><TranslatedText id="pages.quote.flowLead" fallback="初回相談では、確定料金ではなく確認に必要な条件を整理し、対応可否と配送候補を確認します。" /></p>
         </div>
         <div className="quote-flow-grid">
           {quoteFlow.map((item) => (
             <article className="quote-flow-card" key={item.step}>
               <span>{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+              <h3><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.title`} fallback={item.title} /></h3>
+              <p><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.text`} fallback={item.text} /></p>
             </article>
           ))}
         </div>
@@ -131,16 +135,19 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Required Details</span>
           </div>
-          <h2>必要情報カード</h2>
+          <h2><TranslatedText id="pages.quote.requiredTitle" fallback="必要情報カード" /></h2>
           <p>
-            以下の情報が揃っているほど、商品調達、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。
+            <TranslatedText
+              id="pages.quote.requiredLead"
+              fallback="以下の情報が揃っているほど、商品調達、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。"
+            />
           </p>
         </div>
         <div className="quote-detail-grid">
           {requiredItems.map((item, index) => (
             <div className="quote-detail-card" key={item}>
               <span>{String(index + 1).padStart(2, '0')}</span>
-              <strong>{item}</strong>
+              <strong><TranslatedText id={`pages.quote.requiredItems.${index}`} fallback={item} /></strong>
             </div>
           ))}
         </div>
@@ -152,15 +159,15 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Shipping Guide</span>
           </div>
-          <h2>配送方法の目安</h2>
-          <p>配送先国、内容品、数量、納期、サイズ・重量により、候補となる配送方法が変わります。</p>
+          <h2><TranslatedText id="pages.quote.shippingTitle" fallback="配送方法の目安" /></h2>
+          <p><TranslatedText id="pages.quote.shippingLead" fallback="配送先国、内容品、数量、納期、サイズ・重量により、候補となる配送方法が変わります。" /></p>
         </div>
         <div className="quote-shipping-grid">
-          {shippingMethods.map((method) => (
+          {shippingMethods.map((method, index) => (
             <article className="quote-shipping-card" key={method.name}>
               <span>{method.name}</span>
               <h3>{method.detail}</h3>
-              <p>{method.note}</p>
+              <p><TranslatedText id={`pages.quote.shippingNotes.${index}`} fallback={method.note} /></p>
             </article>
           ))}
         </div>
@@ -172,11 +179,11 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notice</span>
           </div>
-          <h2>注意事項</h2>
+          <h2><TranslatedText id="pages.quote.noticeTitle" fallback="注意事項" /></h2>
         </div>
         <ul>
-          {noticeItems.map((item) => (
-            <li key={item}>{item}</li>
+          {noticeItems.map((item, index) => (
+            <li key={item}><TranslatedText id={`pages.quote.noticeItems.${index}`} fallback={item} /></li>
           ))}
         </ul>
       </section>
@@ -184,10 +191,12 @@ export default function QuotePage() {
       <section className="quote-mail">
         <div>
           <span>Official Quotation Email</span>
-          <h2>フォームから見積内容を送信</h2>
+          <h2><TranslatedText id="pages.quote.formTitle" fallback="フォームから見積内容を送信" /></h2>
           <p>
-            必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。
-            メールで直接連絡したい場合は、補助導線としてメールリンクも利用できます。
+            <TranslatedText
+              id="pages.quote.formLead"
+              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。メールで直接連絡したい場合は、補助導線としてメールリンクも利用できます。"
+            />
           </p>
           <a href={quoteMailto} className="quote-mail-address">
             exporter@justhen.co.jp

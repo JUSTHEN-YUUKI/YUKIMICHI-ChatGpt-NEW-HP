@@ -2,6 +2,8 @@
 
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
+import { useLanguage } from "@/components/LanguageProvider"
+import { translations } from "@/lib/translations"
 
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (
@@ -17,54 +19,14 @@ function ArrowRight({ size = 14 }: { size?: number }) {
   )
 }
 
-const visualCards = [
-  {
-    num: "01",
-    title: "Japanese Products",
-    text: "日本国内正規品・小ロット・サンプル対応",
-    label: "Product Media",
-  },
-  {
-    num: "02",
-    title: "Packing & Inspection",
-    text: "梱包・検品・出荷前確認",
-    label: "Packing Visual",
-  },
-  {
-    num: "03",
-    title: "Sapporo / Hokkaido",
-    text: "札幌・北海道発の信頼感あるブランド表現",
-    label: "Brand Visual",
-  },
-  {
-    num: "04",
-    title: "International Express",
-    text: "EMS / DHL / FedEx / UPS / ヤマト国際宅急便",
-    label: "Express Visual",
-  },
-  {
-    num: "05",
-    title: "Air Freight",
-    text: "緊急輸送・高付加価値商品・短納期対応",
-    label: "Air Freight Visual",
-  },
-  {
-    num: "06",
-    title: "Sea Freight",
-    text: "FCL / LCL / コンテナ輸送 / 大型貨物",
-    label: "Sea Freight Visual",
-  },
-]
-
-const visualTags = [
-  "Sapporo",
-  "Hokkaido",
-  "Product Photography",
-  "Packing Visuals",
-  "Export Storytelling",
-]
-
 export default function ProductShowcaseSection() {
+  const { language } = useLanguage()
+  const copy = translations[language].home.productShowcase
+  const visualCards = copy.cards.map((card, index) => ({
+    ...card,
+    num: String(index + 1).padStart(2, "0"),
+  }))
+
   return (
     <section id="product-showcase" className="visual-showcase">
       <div className="visual-showcase-grid-bg" aria-hidden="true" />
@@ -73,25 +35,21 @@ export default function ProductShowcaseSection() {
         <ScrollReveal>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Visual Showcase</span>
+            <span className="section-label-text">{copy.label}</span>
           </div>
 
           <h2 className="section-title">
-            取扱可能な日本商品を、
+            {copy.titleLine1}
             <br />
-            確かな手配で世界へ。
+            {copy.titleLine2}
           </h2>
 
           <p className="visual-subtitle">
-            Product, Packaging, Air Freight and Sea Freight from Japan.
+            {copy.subtitle}
           </p>
 
           <p className="section-body">
-            YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、
-            航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して
-            日本商品を取引できる環境を整えます。今後、実際の商品写真、梱包風景、
-            札幌・北海道の実写素材、輸送関連の動画を追加し、
-            より具体的な取引イメージを伝えていきます。
+            {copy.body}
           </p>
         </ScrollReveal>
 
@@ -105,8 +63,8 @@ export default function ProductShowcaseSection() {
             <div className="visual-film-center">
               <div className="visual-play-mark" aria-hidden="true" />
               <div>
-                <p>YUKIMICHI Product &amp; Logistics Film</p>
-                <strong>Hokkaido / Product / Packing / Air Freight / Sea Freight</strong>
+                <p>{copy.filmTitle}</p>
+                <strong>{copy.filmMeta}</strong>
               </div>
             </div>
 
@@ -140,15 +98,14 @@ export default function ProductShowcaseSection() {
           <div className="visual-local-panel">
             <div>
               <span className="visual-panel-kicker">Local Advantage</span>
-              <h3>札幌から、実写で伝える輸出の信頼感。</h3>
+              <h3>{copy.localTitle}</h3>
             </div>
             <div>
               <p>
-                YUKIMICHIでは、商品紹介、梱包、札幌・北海道の風景、
-                輸送に関わる実写素材を活用し、海外のお客様に日本発の信頼感を伝えます。
+                {copy.localBody}
               </p>
               <ul>
-                {visualTags.map((tag) => (
+                {copy.tags.map((tag) => (
                   <li key={tag}>{tag}</li>
                 ))}
               </ul>
@@ -159,13 +116,13 @@ export default function ProductShowcaseSection() {
         <ScrollReveal>
           <div className="visual-actions">
             <Link href="/services" className="btn-ghost">
-              サービスを見る <ArrowRight size={12} />
+              {translations[language].common.services} <ArrowRight size={12} />
             </Link>
             <Link href="/quote" className="btn-primary">
-              お見積りへ進む <ArrowRight />
+              {translations[language].common.quote} <ArrowRight />
             </Link>
             <Link href="/contact" className="btn-ghost">
-              お問い合わせ <ArrowRight size={12} />
+              {translations[language].common.contact} <ArrowRight size={12} />
             </Link>
           </div>
         </ScrollReveal>

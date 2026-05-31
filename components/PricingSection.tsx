@@ -2,6 +2,8 @@
 
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
+import { useLanguage } from "@/components/LanguageProvider"
+import { translations } from "@/lib/translations"
 
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (
@@ -57,6 +59,13 @@ const notes = [
 ]
 
 export default function PricingSection() {
+  const { language } = useLanguage()
+  const copy = translations[language].home.pricing
+  const localizedPlans = pricePlans.map((plan, index) => ({
+    ...plan,
+    ...copy.plans[index],
+  }))
+
   return (
     <section
       id="pricing"
@@ -99,23 +108,22 @@ export default function PricingSection() {
           <div>
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Handling Fee Structure</span>
+              <span className="section-label-text">{copy.label}</span>
             </div>
 
             <h2 className="section-title">
-              Transparent Pricing<br />
-              for Export<br />
-              <em>Support.</em>
+              {copy.titleLine1}<br />
+              {copy.titleLine2}<br />
+              <em>{copy.titleLine3}</em>
             </h2>
 
             <p className="section-body" style={{ maxWidth: "650px", marginBottom: 0 }}>
-              案件ごとに必要な費用を整理し、できるだけ分かりやすい見積りを提示します。
-              小口発送から航空貨物・海上輸送まで、商品内容と配送先に合わせてご提案します。
+              {copy.body}
             </p>
           </div>
 
           <Link href="/quote" className="btn-ghost">
-            Request a Quote <ArrowRight size={12} />
+            {copy.request} <ArrowRight size={12} />
           </Link>
         </div>
       </ScrollReveal>
@@ -131,7 +139,7 @@ export default function PricingSection() {
           }}
           className="pricing-v2-grid"
         >
-          {pricePlans.map((plan) => (
+          {localizedPlans.map((plan) => (
             <div
               key={plan.label}
               style={{
@@ -172,7 +180,7 @@ export default function PricingSection() {
                   marginBottom: "22px",
                 }}
               >
-                {plan.highlight ? "Priority Option" : plan.label}
+                {plan.highlight ? copy.priority : plan.label}
               </div>
 
               <h3
@@ -285,7 +293,7 @@ export default function PricingSection() {
               marginBottom: "16px",
             }}
           >
-            Important Pricing Notes
+            {copy.notesLabel}
           </div>
 
           <div
@@ -294,7 +302,7 @@ export default function PricingSection() {
               gap: "12px",
             }}
           >
-            {notes.map((note) => (
+            {copy.notes.map((note) => (
               <p
                 key={note}
                 style={{

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
   title: 'サービス | YUKIMICHI - SNOWPATH JAPAN',
@@ -159,20 +160,22 @@ export default function ServicesPage() {
           <span className="section-label-text">Export Support Services</span>
         </div>
         <h1 className="services-title">
-          サービス
+          <TranslatedText id="pages.services.heroTitle" fallback="サービス" />
           <br />
-          <em>Export Support Services</em>
+          <em><TranslatedText id="pages.services.heroSubtitle" fallback="Export Support Services" /></em>
         </h1>
         <p className="section-body services-lead">
-          YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、
-          取扱可否確認まで、海外のお客様が安心して取扱可能な日本商品を取引できる環境を整えます。
+          <TranslatedText
+            id="pages.services.heroLead"
+            fallback="YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、取扱可否確認まで、海外のお客様が安心して取扱可能な日本商品を取引できる環境を整えます。"
+          />
         </p>
         <div className="services-hero-actions">
           <Link href="/quote" className="btn-primary">
-            お見積りへ進む <ArrowRight />
+            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            お問い合わせ <ArrowRight />
+            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
         </div>
       </section>
@@ -183,28 +186,28 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Core Services</span>
           </div>
-          <h2>輸出実務を前提としたサービス領域</h2>
+          <h2><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス領域" /></h2>
           <p>
-            商品調達、配送方法の比較、輸出書類、規制確認まで、問い合わせ前に確認すべき実務項目を整理します。
+            <TranslatedText id="pages.services.coreLead" fallback="商品調達、配送方法の比較、輸出書類、規制確認まで、問い合わせ前に確認すべき実務項目を整理します。" />
           </p>
         </div>
 
         <div className="services-grid">
-          {coreServices.map((service) => (
+          {coreServices.map((service, serviceIndex) => (
             <article className="service-card" key={service.code}>
               <div className="service-card__head">
                 <span>{service.code}</span>
                 <div>
-                  <h2>{service.title}</h2>
-                  <p>{service.en}</p>
+                  <h2><TranslatedText id={`home.services.cards.${serviceIndex}.title`} fallback={service.title} /></h2>
+                  <p><TranslatedText id={`home.services.cards.${serviceIndex}.titleJp`} fallback={service.en} /></p>
                 </div>
               </div>
               <ul>
-                {service.points.map((point) => (
-                  <li key={point}>{point}</li>
+                {service.points.map((point, pointIndex) => (
+                  <li key={point}><TranslatedText id={`home.services.cards.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
                 ))}
               </ul>
-              <p className="service-card__note">{service.note}</p>
+              <p className="service-card__note"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></p>
             </article>
           ))}
         </div>
@@ -213,24 +216,24 @@ export default function ServicesPage() {
       <section className="services-scope">
         <article className="services-list-panel">
           <span className="services-kicker">Support Scope</span>
-          <h2>対応範囲</h2>
-          <p>YUKIMICHIが実務上の整理・確認・手配相談として対応できる主な範囲です。</p>
+          <h2><TranslatedText id="pages.services.supportTitle" fallback="対応範囲" /></h2>
+          <p><TranslatedText id="pages.services.supportLead" fallback="YUKIMICHIが実務上の整理・確認・手配相談として対応できる主な範囲です。" /></p>
           <ul>
-            {supportScope.map((item) => (
-              <li key={item}>{item}</li>
+            {supportScope.map((item, index) => (
+              <li key={item}><TranslatedText id={`pages.services.supportScope.${index}`} fallback={item} /></li>
             ))}
           </ul>
         </article>
 
         <article className="services-list-panel services-list-panel--muted">
           <span className="services-kicker">Limitations</span>
-          <h2>対応範囲外・保証できないこと</h2>
+          <h2><TranslatedText id="pages.services.limitationsTitle" fallback="対応範囲外・保証できないこと" /></h2>
           <p>
-            これらは商品内容・配送先国・最新規制により判断が変わるため、必要に応じて税関・通関業者・配送会社・公的機関等の確認を前提とします。
+            <TranslatedText id="pages.services.limitationsLead" fallback="これらは商品内容・配送先国・最新規制により判断が変わるため、必要に応じて税関・通関業者・配送会社・公的機関等の確認を前提とします。" />
           </p>
           <ul>
-            {limitations.map((item) => (
-              <li key={item}>{item}</li>
+            {limitations.map((item, index) => (
+              <li key={item}><TranslatedText id={`pages.services.limitations.${index}`} fallback={item} /></li>
             ))}
           </ul>
         </article>
@@ -242,19 +245,19 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Shipping Method Selection</span>
           </div>
-          <h2>輸送方法の使い分け</h2>
+          <h2><TranslatedText id="pages.services.shippingTitle" fallback="輸送方法の使い分け" /></h2>
           <p>
-            価格だけでなく、納期、破損リスク、通関難易度、配送会社の引受条件を踏まえて検討します。
+            <TranslatedText id="pages.services.shippingLead" fallback="価格だけでなく、納期、破損リスク、通関難易度、配送会社の引受条件を踏まえて検討します。" />
           </p>
         </div>
 
         <div className="shipping-grid">
-          {shippingMethods.map((method) => (
+          {shippingMethods.map((method, index) => (
             <article className="shipping-card" key={method.name}>
               <span>{method.name}</span>
               <h3>{method.detail}</h3>
-              <p>{method.fit}</p>
-              <small>{method.note}</small>
+              <p><TranslatedText id={`pages.services.shippingMethods.${index}.fit`} fallback={method.fit} /></p>
+              <small><TranslatedText id={`pages.services.shippingMethods.${index}.note`} fallback={method.note} /></small>
             </article>
           ))}
         </div>
@@ -266,16 +269,16 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Required Information</span>
           </div>
-          <h2>見積・確認に必要な情報</h2>
+          <h2><TranslatedText id="pages.services.requiredTitle" fallback="見積・確認に必要な情報" /></h2>
           <p>
-            具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。
+            <TranslatedText id="pages.services.requiredLead" fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。" />
           </p>
         </div>
         <ol className="services-info-list">
           {requiredInfo.map((item, index) => (
             <li key={item}>
               <span>{String(index + 1).padStart(2, '0')}</span>
-              {item}
+              <TranslatedText id={`pages.services.requiredInfo.${index}`} fallback={item} />
             </li>
           ))}
         </ol>
@@ -287,16 +290,15 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Compliance First</span>
           </div>
-          <h2>法令遵守を前提とした輸出支援</h2>
+          <h2><TranslatedText id="pages.services.complianceTitle" fallback="法令遵守を前提とした輸出支援" /></h2>
           <p>
-            YUKIMICHIは、内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
-            商品内容、配送先国、数量、用途により対応可否は変動します。
+            <TranslatedText id="pages.services.complianceBody1" fallback="YUKIMICHIは、内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。商品内容、配送先国、数量、用途により対応可否は変動します。" />
           </p>
           <p>
-            取扱可否に不安がある場合は、禁止・制限品目ページをご確認のうえ、事前にご相談ください。
+            <TranslatedText id="pages.services.complianceBody2" fallback="取扱可否に不安がある場合は、禁止・制限品目ページをご確認のうえ、事前にご相談ください。" />
           </p>
           <Link href="/restricted" className="services-inline-link">
-            禁止・制限品目を確認する <ArrowRight />
+            <TranslatedText id="pages.services.restrictedLink" fallback="禁止・制限品目を確認する" /> <ArrowRight />
           </Link>
         </div>
       </section>
@@ -307,14 +309,14 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Related Links</span>
           </div>
-          <h2>関連ページ</h2>
-          <p>見積、問い合わせ、取扱可否、取引条件、よくある質問を各ページで確認できます。</p>
+          <h2><TranslatedText id="pages.services.relatedTitle" fallback="関連ページ" /></h2>
+          <p><TranslatedText id="pages.services.relatedLead" fallback="見積、問い合わせ、取扱可否、取引条件、よくある質問を各ページで確認できます。" /></p>
         </div>
         <div className="services-related-grid">
-          {relatedLinks.map((link) => (
+          {relatedLinks.map((link, index) => (
             <Link href={link.href} className="services-related-card" key={link.href}>
               <span>{link.en}</span>
-              <strong>{link.label}</strong>
+              <strong><TranslatedText id={`pages.services.relatedLabels.${index}`} fallback={link.label} /></strong>
               <ArrowRight />
             </Link>
           ))}
@@ -324,20 +326,20 @@ export default function ServicesPage() {
       <section className="services-cta">
         <div>
           <span>Export Consultation</span>
-          <h2>商品調達・輸出手配を相談する</h2>
+          <h2><TranslatedText id="pages.services.ctaTitle" fallback="商品調達・輸出手配を相談する" /></h2>
           <p>
-            商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取扱可否と配送方法を確認したうえで見積をご案内します。
+            <TranslatedText id="pages.services.ctaLead" fallback="商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取扱可否と配送方法を確認したうえで見積をご案内します。" />
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="services-mail">
-            exporter@justhen.co.jp へ相談する
+            <TranslatedText id="pages.services.ctaMail" fallback="exporter@justhen.co.jp へ相談する" />
           </a>
         </div>
         <div className="services-cta-actions">
           <Link href="/quote" className="btn-primary">
-            お見積りへ進む <ArrowRight />
+            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            お問い合わせ <ArrowRight />
+            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
         </div>
       </section>

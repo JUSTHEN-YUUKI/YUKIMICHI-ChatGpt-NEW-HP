@@ -3,6 +3,7 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import BackToTopButton from '@/components/BackToTopButton'
+import { LanguageProvider } from '@/components/LanguageProvider'
 
 export const metadata: Metadata = {
   title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -40,10 +41,12 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
       </head>
       <body>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
-        <BackToTopButton />
+        <LanguageProvider>
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+          <BackToTopButton />
+        </LanguageProvider>
       </body>
     </html>
   )

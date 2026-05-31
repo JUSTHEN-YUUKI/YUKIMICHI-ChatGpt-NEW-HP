@@ -2,8 +2,13 @@
 
 import Image from 'next/image'
 import Link from '@/components/NewTabLink'
+import { useLanguage } from '@/components/LanguageProvider'
+import { translations } from '@/lib/translations'
 
 export default function HeroSection() {
+  const { language } = useLanguage()
+  const copy = translations[language].home.hero
+
   return (
     <section
       style={{
@@ -45,7 +50,7 @@ export default function HeroSection() {
         <div className="section-label">
           <div className="section-label-line" />
           <span className="section-label-text">
-            JAPAN EXPORT × HOKKAIDO × GLOBAL LOGISTICS
+            {copy.eyebrow}
           </span>
         </div>
 
@@ -58,9 +63,9 @@ export default function HeroSection() {
             marginBottom: '24px',
           }}
         >
-          日本から、世界へ。<br />
-          <span style={{ color: "var(--gold)" }}>信頼でつなぐ</span><br />
-          輸出の道。
+          {copy.headlineLine1}<br />
+          <span style={{ color: "var(--gold)" }}>{copy.headlineLine2}</span><br />
+          {copy.headlineLine3}
         </h1>
 
         <p
@@ -71,18 +76,16 @@ export default function HeroSection() {
             marginBottom: '40px',
           }}
         >
-          北海道・札幌から世界市場へ。
-          海上輸送、航空貨物、EMS・DHL・FedEx・UPS・ヤマト国際宅急便を活用し、
-          取扱可能な日本商品を、法令遵守と透明性を前提に海外のお客様へ届けます。
+          {copy.body}
         </p>
 
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           <Link href="/contact" className="btn-primary">
-            無料相談
+            {copy.consult}
           </Link>
 
           <Link href="/quote" className="btn-ghost">
-            見積依頼
+            {copy.quote}
           </Link>
         </div>
       </div>
