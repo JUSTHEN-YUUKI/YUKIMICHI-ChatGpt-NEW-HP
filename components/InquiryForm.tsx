@@ -356,16 +356,24 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           width: 100%;
           border: 1px solid rgba(248,245,239,0.16);
           background: rgba(7,17,31,0.84);
+          box-sizing: border-box;
           color: var(--washi);
           font: inherit;
           font-size: 14px;
           letter-spacing: 0.04em;
+          line-height: 1.35;
+          min-height: 52px;
           outline: none;
           padding: 15px 16px;
           transition:
             border-color 0.2s ease,
             background 0.2s ease,
             box-shadow 0.2s ease;
+        }
+
+        .inquiry-form input,
+        .inquiry-form select {
+          height: 52px;
         }
 
         .inquiry-form select {
@@ -392,9 +400,16 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }
 
         .inquiry-form__quantity-row {
+          align-items: stretch;
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(128px, 0.52fr);
+          grid-template-columns: minmax(0, 1fr) minmax(120px, 0.48fr);
           gap: 10px;
+        }
+
+        .inquiry-form__quantity-row input,
+        .inquiry-form__quantity-row select {
+          height: 52px;
+          min-height: 52px;
         }
 
         .inquiry-form__field-note {
@@ -530,7 +545,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           }
 
           .inquiry-form__quantity-row {
-            grid-template-columns: 1fr;
+            gap: 8px;
+            grid-template-columns: minmax(0, 1fr) minmax(104px, 0.42fr);
           }
 
           .inquiry-form__actions {
