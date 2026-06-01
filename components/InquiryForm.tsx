@@ -306,6 +306,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }
 
         .inquiry-form__field {
+          align-content: start;
+          align-self: start;
           display: grid;
           gap: 9px;
           min-width: 0;
@@ -326,6 +328,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           letter-spacing: 0.18em;
           line-height: 1.6;
           max-width: 100%;
+          min-height: 22px;
           text-transform: uppercase;
           width: fit-content;
         }
