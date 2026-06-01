@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { defaultLanguage, isLanguage, LANGUAGE_STORAGE_KEY, type Language } from '@/lib/i18n'
+import { defaultLanguage, isLanguage, LANGUAGE_STORAGE_KEY, multilingualUiEnabled, type Language } from '@/lib/i18n'
 
 type LanguageContextValue = {
   language: Language
@@ -15,6 +15,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage)
 
   useEffect(() => {
+    if (!multilingualUiEnabled) {
+      setLanguageState(defaultLanguage)
+      document.documentElement.lang = defaultLanguage
+
+      try {
+        window.localStorage.removeItem(LANGUAGE_STORAGE_KEY)
+      } catch {
+        // Storage may be unavailable in restricted browser contexts.
+      }
+
+      return
+    }
+
     let savedLanguage: string | null = null
 
     try {
@@ -30,6 +43,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const setLanguage = useCallback((nextLanguage: Language) => {
+    if (!multilingualUiEnabled) {
+      setLanguageState(defaultLanguage)
+      document.documentElement.lang = defaultLanguage
+
+      try {
+        window.localStorage.removeItem(LANGUAGE_STORAGE_KEY)
+      } catch {
+        // Storage may be unavailable in restricted browser contexts.
+      }
+
+      return
+    }
+
     setLanguageState(nextLanguage)
 
     try {

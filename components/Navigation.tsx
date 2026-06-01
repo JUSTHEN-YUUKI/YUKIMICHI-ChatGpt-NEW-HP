@@ -6,6 +6,7 @@ import Link from "@/components/NewTabLink"
 import { usePathname } from "next/navigation"
 import LanguageSwitcher from "@/components/LanguageSwitcher"
 import { useLanguage } from "@/components/LanguageProvider"
+import { multilingualUiEnabled } from "@/lib/i18n"
 import { translations } from "@/lib/translations"
 
 const navLinks = [
@@ -150,9 +151,11 @@ export default function Navigation() {
               </li>
             )
           })}
-          <li style={{ marginLeft: "10px" }}>
-            <LanguageSwitcher />
-          </li>
+          {multilingualUiEnabled && (
+            <li style={{ marginLeft: "10px" }}>
+              <LanguageSwitcher />
+            </li>
+          )}
           <li style={{ marginLeft: "14px" }}>
             <Link
               href="/contact"
@@ -240,7 +243,7 @@ export default function Navigation() {
               textAlign: "center",
             }}
           >
-            <LanguageSwitcher variant="full" />
+            {multilingualUiEnabled && <LanguageSwitcher variant="full" />}
 
             {navLinks.map(({ href, labelKey }) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href)

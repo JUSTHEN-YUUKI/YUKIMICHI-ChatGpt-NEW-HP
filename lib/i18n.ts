@@ -6,6 +6,8 @@ export const defaultLanguage: Language = 'ja'
 
 export const LANGUAGE_STORAGE_KEY = 'yukimichi-language'
 
+export const multilingualUiEnabled = false
+
 export const languageLabels: Record<Language, string> = {
   ja: 'JP',
   en: 'EN',
