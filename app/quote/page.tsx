@@ -405,7 +405,7 @@ export default function QuotePage() {
           grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
         }
 
-        .quote-mail span {
+        .quote-mail > div > span {
           color: var(--gold);
           display: block;
           font-size: 10px;
