@@ -318,24 +318,36 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         .inquiry-form__label {
           align-items: center;
           color: var(--gold);
-          display: inline-flex;
+          display: flex;
+          flex-wrap: nowrap;
           font-size: 11px;
           gap: 8px;
+          justify-content: flex-start;
           letter-spacing: 0.18em;
           line-height: 1.6;
+          max-width: 100%;
           text-transform: uppercase;
+          width: fit-content;
+        }
+
+        .inquiry-form__label > span {
+          min-width: 0;
         }
 
         .inquiry-form__field em {
+          align-items: center;
           border: 1px solid rgba(201,168,76,0.18);
           background: rgba(201,168,76,0.08);
           color: var(--suzu);
+          display: inline-flex;
+          flex: 0 0 auto;
           font-size: 9px;
           font-style: normal;
           letter-spacing: 0.16em;
           line-height: 1;
-          margin-left: 4px;
+          margin-left: 6px;
           padding: 4px 6px;
+          white-space: nowrap;
         }
 
         .inquiry-form input,
