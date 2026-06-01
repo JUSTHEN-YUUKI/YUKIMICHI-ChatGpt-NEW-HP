@@ -5,6 +5,11 @@ import ScrollReveal from "@/components/ScrollReveal"
 import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/lib/translations"
 
+const productShowcaseBodyColumns = [
+  "YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
+  "今後、実際の商品写真、梱包風景、札幌・北海道の実写素材、輸送関連の動画を追加し、より具体的な取引イメージを伝えていきます。",
+]
+
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -48,9 +53,11 @@ export default function ProductShowcaseSection() {
             {copy.subtitle}
           </p>
 
-          <p className="section-body">
-            {copy.body}
-          </p>
+          <div className="visual-body-grid">
+            {productShowcaseBodyColumns.map((body) => (
+              <p key={body}>{body}</p>
+            ))}
+          </div>
         </ScrollReveal>
 
         <ScrollReveal>
@@ -167,6 +174,24 @@ export default function ProductShowcaseSection() {
           font-weight: 300;
           line-height: 1.25;
           margin: -10px 0 24px;
+        }
+
+        .visual-body-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          max-width: 980px;
+        }
+
+        .visual-body-grid p {
+          border: 1px solid rgba(201,168,76,0.14);
+          background: rgba(13,28,53,0.46);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          line-height: 2.05;
+          margin: 0;
+          padding: 18px 20px;
         }
 
         .visual-film-frame {
@@ -420,6 +445,10 @@ export default function ProductShowcaseSection() {
         }
 
         @media (max-width: 640px) {
+          .visual-body-grid {
+            grid-template-columns: 1fr;
+          }
+
           .visual-card-grid {
             grid-template-columns: 1fr;
           }

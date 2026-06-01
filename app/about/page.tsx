@@ -37,10 +37,14 @@ export default function AboutPage() {
           <br />
           from Hokkaido.
         </h1>
-        <p className="section-body about-lead">
-          YUKIMICHI - SNOWPATH JAPAN は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。
-          北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。
-        </p>
+        <div className="about-lead-grid">
+          <p>
+            YUKIMICHI - SNOWPATH JAPAN は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。
+          </p>
+          <p>
+            北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。
+          </p>
+        </div>
       </section>
 
       <section className="about-section">
@@ -93,7 +97,22 @@ export default function AboutPage() {
           color: var(--washi);
           margin-bottom: 28px;
         }
-        .about-lead { max-width: 760px; }
+        .about-lead-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          max-width: 980px;
+        }
+        .about-lead-grid p {
+          border: 1px solid rgba(201,168,76,0.14);
+          background: rgba(13,28,53,0.42);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          line-height: 2.05;
+          margin: 0;
+          padding: 18px 20px;
+        }
         .about-section {
           padding: var(--section-pad) var(--gutter);
           display: grid;
@@ -134,6 +153,11 @@ export default function AboutPage() {
         }
         @media (max-width: 900px) {
           .about-section { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 680px) {
+          .about-lead-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </>

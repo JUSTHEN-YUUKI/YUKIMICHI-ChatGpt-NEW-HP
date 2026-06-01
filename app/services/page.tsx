@@ -164,12 +164,20 @@ export default function ServicesPage() {
           <br />
           <em><TranslatedText id="pages.services.heroSubtitle" fallback="Export Support Services" /></em>
         </h1>
-        <p className="section-body services-lead">
-          <TranslatedText
-            id="pages.services.heroLead"
-            fallback="YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、取扱可否確認まで、海外のお客様が安心して取扱可能な日本商品を取引できる環境を整えます。"
-          />
-        </p>
+        <div className="services-lead-grid">
+          <p>
+            <TranslatedText
+              id="pages.services.heroLeadLeft"
+              fallback="YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、取扱可否確認まで支援します。"
+            />
+          </p>
+          <p>
+            <TranslatedText
+              id="pages.services.heroLeadRight"
+              fallback="海外のお客様が、安心して取扱可能な日本商品を取引できる環境を整えます。"
+            />
+          </p>
+        </div>
         <div className="services-hero-actions">
           <Link href="/quote" className="btn-primary">
             <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
@@ -270,9 +278,17 @@ export default function ServicesPage() {
             <span className="section-label-text">Required Information</span>
           </div>
           <h2 className="services-heading-nowrap"><TranslatedText id="pages.services.requiredTitle" fallback="見積・確認に必要な情報" /></h2>
-          <p>
-            <TranslatedText id="pages.services.requiredLead" fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。" />
-          </p>
+          <div className="services-copy-grid services-copy-grid--compact">
+            <p>
+              <TranslatedText
+                id="pages.services.requiredLeadLeft"
+                fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が"
+              />
+            </p>
+            <p>
+              <TranslatedText id="pages.services.requiredLeadRight" fallback="進めやすくなります。" />
+            </p>
+          </div>
         </div>
         <ol className="services-info-list">
           {requiredInfo.map((item, index) => (
@@ -369,8 +385,28 @@ export default function ServicesPage() {
           font-size: 0.68em;
         }
 
-        .services-lead {
+        .services-lead-grid,
+        .services-copy-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          max-width: 980px;
+        }
+
+        .services-copy-grid--compact {
           max-width: 860px;
+        }
+
+        .services-lead-grid p,
+        .services-copy-grid p {
+          border: 1px solid rgba(201,168,76,0.14);
+          background: rgba(13,28,53,0.42);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          line-height: 2.05;
+          margin: 0;
+          padding: 18px 20px;
         }
 
         .services-hero-actions {
@@ -809,6 +845,11 @@ export default function ServicesPage() {
         @media (max-width: 680px) {
           .services-heading-nowrap {
             font-size: clamp(21px, 5.8vw, 30px) !important;
+          }
+
+          .services-lead-grid,
+          .services-copy-grid {
+            grid-template-columns: 1fr;
           }
 
           .services-grid,

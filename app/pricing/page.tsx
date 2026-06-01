@@ -137,12 +137,20 @@ export default function PricingPage() {
           <br />
           <em><TranslatedText id="pages.pricing.heroSubtitle" fallback="Transparent Pricing for Export Support" /></em>
         </h1>
-        <p className="section-body pricing-lead">
-          <TranslatedText
-            id="pages.pricing.heroLead"
-            fallback="YUKIMICHIでは、商品調達、国際宅配便、航空貨物、海上輸送の内容に応じて、分かりやすい料金体系を提示します。最終料金は、商品内容・配送先国・数量・サイズ・重量・配送方法により変動します。"
-          />
-        </p>
+        <div className="pricing-lead-grid">
+          <p>
+            <TranslatedText
+              id="pages.pricing.heroLeadLeft"
+              fallback="YUKIMICHIでは、商品調達、国際宅配便、航空貨物、海上輸送の内容に応じて、分かりやすい料金体系を提示します。"
+            />
+          </p>
+          <p>
+            <TranslatedText
+              id="pages.pricing.heroLeadRight"
+              fallback="最終料金は、商品内容・配送先国・数量・サイズ・重量・配送方法により変動します。"
+            />
+          </p>
+        </div>
         <div className="pricing-hero-actions">
           <Link href="/quote" className="btn-primary">
             <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
@@ -221,9 +229,17 @@ export default function PricingPage() {
             <span className="section-label-text">Additional Costs</span>
           </div>
           <h2><TranslatedText id="pages.pricing.additionalTitle" fallback="別途費用となる可能性があるもの" /></h2>
-          <p>
-            <TranslatedText id="pages.pricing.additionalLead" fallback="案件により発生する費用は異なります。見積時に確認できる範囲で項目を整理し、必要に応じて個別にご案内します。" />
-          </p>
+          <div className="pricing-copy-grid pricing-copy-grid--compact">
+            <p>
+              <TranslatedText
+                id="pages.pricing.additionalLeadLeft"
+                fallback="案件により発生する費用は異なります。見積時に確認できる範囲で項目を整理し、"
+              />
+            </p>
+            <p>
+              <TranslatedText id="pages.pricing.additionalLeadRight" fallback="必要に応じて個別にご案内します。" />
+            </p>
+          </div>
         </div>
         <ul className="pricing-additional-list">
           {additionalCosts.map((cost) => (
@@ -389,8 +405,28 @@ export default function PricingPage() {
           font-size: 0.68em;
         }
 
-        .pricing-lead {
+        .pricing-lead-grid,
+        .pricing-copy-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          max-width: 980px;
+        }
+
+        .pricing-copy-grid--compact {
           max-width: 860px;
+        }
+
+        .pricing-lead-grid p,
+        .pricing-copy-grid p {
+          border: 1px solid rgba(201,168,76,0.14);
+          background: rgba(13,28,53,0.42);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          line-height: 2.05;
+          margin: 0;
+          padding: 18px 20px;
         }
 
         .pricing-hero-actions {
@@ -852,6 +888,11 @@ export default function PricingPage() {
         @media (max-width: 680px) {
           .pricing-heading-nowrap {
             font-size: clamp(20px, 5.4vw, 28px) !important;
+          }
+
+          .pricing-lead-grid,
+          .pricing-copy-grid {
+            grid-template-columns: 1fr;
           }
 
           .pricing-grid,
