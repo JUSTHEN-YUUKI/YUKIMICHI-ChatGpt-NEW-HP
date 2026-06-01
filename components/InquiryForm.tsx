@@ -13,8 +13,12 @@ type FormState = {
   name: string
   email: string
   productUrl: string
+  productCategory: string
   quantity: string
+  quantityUnit: string
   destination: string
+  destinationCountry: string
+  destinationCity: string
   deadline: string
   shippingMethod: string
   message: string
@@ -25,8 +29,9 @@ type FieldConfig = {
   readonly label: string
   readonly placeholder: string
   readonly required?: boolean
-  readonly type?: 'email' | 'text' | 'url'
+  readonly type?: 'email' | 'text' | 'url' | 'number'
   readonly multiline?: boolean
+  readonly note?: string
 }
 
 type InquiryFormProps = {
@@ -41,11 +46,92 @@ const initialState: FormState = {
   name: '',
   email: '',
   productUrl: '',
+  productCategory: '',
   quantity: '',
+  quantityUnit: '個 / pcs',
   destination: '',
+  destinationCountry: '',
+  destinationCity: '',
   deadline: '',
   shippingMethod: '',
   message: '',
+}
+
+const productCategoryOptions = [
+  '未定・相談したい / Not sure yet',
+  '食品・飲料 / Food & Beverage',
+  '化粧品・美容品 / Cosmetics & Beauty',
+  '日用品 / Daily Goods',
+  '雑貨 / General Goods',
+  'アパレル / Apparel',
+  '電子機器 / Electronics',
+  'ホビー・キャラクター商品 / Hobby & Character Goods',
+  '中古品 / Used Goods',
+  'ブランド品 / Branded Items',
+  '高額商品 / High-value Items',
+  'その他 / Other',
+] as const
+
+const quantityUnitOptions = ['個 / pcs', 'セット / sets', '箱 / boxes', 'ケース / cases', 'kg', 'g', 'L', 'ml', 'その他 / Other'] as const
+
+const destinationCountryOptions = [
+  '未定 / Not decided',
+  'United States',
+  'Canada',
+  'United Kingdom',
+  'Germany',
+  'France',
+  'Spain',
+  'Italy',
+  'Australia',
+  'New Zealand',
+  'Singapore',
+  'Hong Kong',
+  'Taiwan',
+  'China',
+  'South Korea',
+  'Thailand',
+  'Malaysia',
+  'Indonesia',
+  'Philippines',
+  'Vietnam',
+  'United Arab Emirates',
+  'Saudi Arabia',
+  'Mexico',
+  'Brazil',
+  'Other',
+] as const
+
+const deadlineOptions = [
+  '未定 / Not decided',
+  'できるだけ早く / As soon as possible',
+  '1週間以内 / Within 1 week',
+  '2週間以内 / Within 2 weeks',
+  '1か月以内 / Within 1 month',
+  '2〜3か月以内 / Within 2-3 months',
+  '定期出荷を相談したい / Regular shipment consultation',
+  'その他・相談したい / Other / Need consultation',
+] as const
+
+const shippingMethodOptions = [
+  '未定・相談したい / Not sure yet',
+  '国際エクスプレス（EMS / DHL / FedEx / UPS）',
+  'EMS',
+  'DHL',
+  'FedEx',
+  'UPS',
+  'ヤマト国際宅急便',
+  '航空貨物 / Air Freight',
+  '海上輸送 LCL（混載） / Sea Freight LCL',
+  '海上輸送 FCL（コンテナ） / Sea Freight FCL',
+  '最適な方法を提案してほしい / Please recommend the best option',
+] as const
+
+const selectOptions: Partial<Record<keyof FormState, readonly string[]>> = {
+  productCategory: productCategoryOptions,
+  destinationCountry: destinationCountryOptions,
+  deadline: deadlineOptions,
+  shippingMethod: shippingMethodOptions,
 }
 
 export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
@@ -70,6 +156,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     setSubmitState('submitting')
     setFeedbackMessage('')
 
+    const quantityWithUnit = [formState.quantity, formState.quantityUnit].filter(Boolean).join(' ')
+    const destinationText = [formState.destinationCountry, formState.destinationCity].filter(Boolean).join(' / ') || formState.destination
+
     try {
       const response = await fetch('/api/inquiry', {
         method: 'POST',
@@ -78,6 +167,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         },
         body: JSON.stringify({
           ...formState,
+          quantity: quantityWithUnit,
+          destination: destinationText,
           type,
           sourcePage,
           language,
@@ -102,35 +193,84 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   return (
     <form className="inquiry-form" onSubmit={handleSubmit}>
       <div className="inquiry-form__grid">
-        {fields.map((field) => (
-          <label
-            className={field.multiline ? 'inquiry-form__field inquiry-form__field--wide' : 'inquiry-form__field'}
-            key={field.name}
-          >
-            <span>
-              {field.label}
-              {field.required && <em>{common.required}</em>}
-            </span>
-            {field.multiline ? (
-              <textarea
-                name={field.name}
-                value={formState[field.name]}
-                placeholder={field.placeholder}
-                required={field.required}
-                onChange={(event) => updateField(field.name, event.target.value)}
-              />
-            ) : (
-              <input
-                name={field.name}
-                type={field.type ?? 'text'}
-                value={formState[field.name]}
-                placeholder={field.placeholder}
-                required={field.required}
-                onChange={(event) => updateField(field.name, event.target.value)}
-              />
-            )}
-          </label>
-        ))}
+        {fields.map((field) => {
+          const options = selectOptions[field.name]
+
+          return (
+            <label
+              className={field.multiline ? 'inquiry-form__field inquiry-form__field--wide' : 'inquiry-form__field'}
+              key={field.name}
+            >
+              <span className="inquiry-form__label">
+                <span>{field.label}</span>
+                {field.required && <em>{common.required}</em>}
+              </span>
+
+              {field.name === 'quantity' ? (
+                <div className="inquiry-form__quantity-row">
+                  <input
+                    name={field.name}
+                    type="number"
+                    min="0"
+                    step="1"
+                    inputMode="decimal"
+                    value={formState.quantity}
+                    placeholder={field.placeholder}
+                    required={field.required}
+                    onChange={(event) => updateField('quantity', event.target.value)}
+                  />
+                  <select
+                    name="quantityUnit"
+                    value={formState.quantityUnit}
+                    aria-label="数量単位 / Quantity unit"
+                    onChange={(event) => updateField('quantityUnit', event.target.value)}
+                  >
+                    {quantityUnitOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : field.multiline ? (
+                <textarea
+                  name={field.name}
+                  value={formState[field.name]}
+                  placeholder={field.placeholder}
+                  required={field.required}
+                  onChange={(event) => updateField(field.name, event.target.value)}
+                />
+              ) : options ? (
+                <select
+                  name={field.name}
+                  value={formState[field.name]}
+                  required={field.required}
+                  onChange={(event) => updateField(field.name, event.target.value)}
+                >
+                  <option value="" disabled>
+                    {field.placeholder}
+                  </option>
+                  {options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  name={field.name}
+                  type={field.type ?? 'text'}
+                  value={formState[field.name]}
+                  placeholder={field.placeholder}
+                  required={field.required}
+                  onChange={(event) => updateField(field.name, event.target.value)}
+                />
+              )}
+
+              {field.note && <small className="inquiry-form__field-note">{field.note}</small>}
+            </label>
+          )
+        })}
       </div>
 
       <div className="inquiry-form__notice" aria-label="Important notes">
@@ -175,27 +315,31 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           grid-column: 1 / -1;
         }
 
-        .inquiry-form__field span {
+        .inquiry-form__label {
           align-items: center;
           color: var(--gold);
-          display: flex;
-          flex-wrap: wrap;
+          display: inline-flex;
           font-size: 11px;
           gap: 8px;
-          justify-content: space-between;
           letter-spacing: 0.18em;
           line-height: 1.6;
           text-transform: uppercase;
         }
 
         .inquiry-form__field em {
+          border: 1px solid rgba(201,168,76,0.18);
+          background: rgba(201,168,76,0.08);
           color: var(--suzu);
           font-size: 9px;
           font-style: normal;
           letter-spacing: 0.16em;
+          line-height: 1;
+          margin-left: 4px;
+          padding: 4px 6px;
         }
 
         .inquiry-form input,
+        .inquiry-form select,
         .inquiry-form textarea {
           width: 100%;
           border: 1px solid rgba(248,245,239,0.16);
@@ -212,21 +356,75 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
             box-shadow 0.2s ease;
         }
 
+        .inquiry-form select {
+          appearance: none;
+          background:
+            linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+            linear-gradient(135deg, var(--gold) 50%, transparent 50%),
+            rgba(7,17,31,0.84);
+          background-position:
+            calc(100% - 19px) calc(50% - 3px),
+            calc(100% - 14px) calc(50% - 3px),
+            0 0;
+          background-size:
+            5px 5px,
+            5px 5px,
+            100% 100%;
+          background-repeat: no-repeat;
+          padding-right: 42px;
+        }
+
+        .inquiry-form select option {
+          background: var(--navy-deep);
+          color: var(--washi);
+        }
+
+        .inquiry-form__quantity-row {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(128px, 0.52fr);
+          gap: 10px;
+        }
+
+        .inquiry-form__field-note {
+          color: var(--washi-dim);
+          font-size: 11px;
+          letter-spacing: 0.04em;
+          line-height: 1.8;
+        }
+
         .inquiry-form textarea {
           min-height: 140px;
           resize: vertical;
         }
 
         .inquiry-form input::placeholder,
+        .inquiry-form select:invalid,
         .inquiry-form textarea::placeholder {
           color: rgba(216,211,199,0.45);
         }
 
         .inquiry-form input:focus,
+        .inquiry-form select:focus,
         .inquiry-form textarea:focus {
           border-color: rgba(201,168,76,0.55);
           background: rgba(13,28,53,0.92);
           box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+        }
+
+        .inquiry-form select:focus {
+          background:
+            linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+            linear-gradient(135deg, var(--gold) 50%, transparent 50%),
+            rgba(13,28,53,0.92);
+          background-position:
+            calc(100% - 19px) calc(50% - 3px),
+            calc(100% - 14px) calc(50% - 3px),
+            0 0;
+          background-size:
+            5px 5px,
+            5px 5px,
+            100% 100%;
+          background-repeat: no-repeat;
         }
 
         .inquiry-form__notice {
@@ -316,6 +514,10 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
         @media (max-width: 720px) {
           .inquiry-form__grid {
+            grid-template-columns: 1fr;
+          }
+
+          .inquiry-form__quantity-row {
             grid-template-columns: 1fr;
           }
 

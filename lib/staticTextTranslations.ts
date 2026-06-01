@@ -127,10 +127,10 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     zh: '费用如何确定？',
     es: '¿Cómo se determinan los precios?',
   },
-  '初回または初月の手配手数料無料はありますか？': {
-    en: 'Is there a first-order or first-month handling fee benefit?',
-    zh: '是否有首次或首月手配手续费免费？',
-    es: '¿Hay beneficio de comisión de gestión gratis al inicio?',
+  '初回の手配手数料無料はありますか？': {
+    en: 'Is there a first-time handling fee benefit?',
+    zh: '是否有首次手配手续费免费？',
+    es: '¿Hay beneficio de comisión de gestión gratis en el primer pedido?',
   },
   '見積に必要な情報は何ですか？': {
     en: 'What information is needed for a quote?',
@@ -267,10 +267,10 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     zh: '费用会因商品代金、数量、尺寸、重量、容积重量、配送国家、配送方式、包装、保险和法规确认等而变化。最终费用按案件个别报价确认。',
     es: 'El precio varía por costo del producto, cantidad, tamaño, peso, peso volumétrico, destino, método, embalaje, seguro y revisión regulatoria. Se confirma por cotización individual.',
   },
-  '新規のお客様向けに、初回または初月の手配手数料無料の案内を行う場合があります。ただし、商品代金、国際送料、関税、VAT/GST、梱包費、保険料、規制確認費用などの実費は別途となります。': {
-    en: 'For new customers, we may offer a first-order or first-month handling fee benefit. Product cost, international freight, duties, VAT/GST, packing, insurance, and regulatory review costs remain separate.',
-    zh: '针对新客户，可能提供首次或首月手配手续费免费的说明。但商品代金、国际运费、关税、VAT/GST、包装费、保险费和法规确认费等实际费用另计。',
-    es: 'Para nuevos clientes, puede haber beneficio de comisión de gestión gratis al inicio. Producto, flete, aranceles, VAT/GST, embalaje, seguro y revisión regulatoria son costos separados.',
+  '新規のお客様向けに、初回の手配手数料無料の案内を行う場合があります。ただし、商品代金、国際送料、関税、VAT/GST、梱包費、保険料、規制確認費用などの実費は別途となります。': {
+    en: 'For new customers, we may offer a first-time handling fee benefit. Product cost, international freight, duties, VAT/GST, packing, insurance, and regulatory review costs remain separate.',
+    zh: '针对新客户，可能提供首次手配手续费免费的说明。但商品代金、国际运费、关税、VAT/GST、包装费、保险费和法规确认费等实际费用另计。',
+    es: 'Para nuevos clientes, puede haber beneficio de comisión de gestión gratis en el primer pedido. Producto, flete, aranceles, VAT/GST, embalaje, seguro y revisión regulatoria son costos separados.',
   },
   '商品名、商品URL、数量、単価、サイズ、重量、成分・素材、配送先国・都市、希望納期、希望配送方法、法人宛・個人宛などがあると確認がスムーズです。': {
     en: 'Product name, URL, quantity, unit price, size, weight, ingredients/materials, destination country/city, deadline, preferred method, and recipient type help us review smoothly.',

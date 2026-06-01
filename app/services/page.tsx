@@ -269,7 +269,7 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Required Information</span>
           </div>
-          <h2><TranslatedText id="pages.services.requiredTitle" fallback="見積・確認に必要な情報" /></h2>
+          <h2 className="services-heading-nowrap"><TranslatedText id="pages.services.requiredTitle" fallback="見積・確認に必要な情報" /></h2>
           <p>
             <TranslatedText id="pages.services.requiredLead" fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。" />
           </p>
@@ -538,6 +538,12 @@ export default function ServicesPage() {
           margin: 0 0 16px;
         }
 
+        .services-heading-nowrap {
+          font-size: clamp(24px, 3.1vw, 42px) !important;
+          letter-spacing: 0;
+          white-space: nowrap;
+        }
+
         .services-list-panel p {
           color: var(--washi-dim);
           font-size: 13px;
@@ -801,6 +807,10 @@ export default function ServicesPage() {
         }
 
         @media (max-width: 680px) {
+          .services-heading-nowrap {
+            font-size: clamp(21px, 5.8vw, 30px) !important;
+          }
+
           .services-grid,
           .shipping-grid,
           .services-info-list,

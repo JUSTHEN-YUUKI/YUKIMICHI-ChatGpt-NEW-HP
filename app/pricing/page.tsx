@@ -185,12 +185,12 @@ export default function PricingPage() {
 
       <section className="pricing-benefit">
         <div>
-          <span>First Month Benefit</span>
+          <span>First-Time Benefit</span>
           <h2><TranslatedText id="pages.pricing.benefitTitle" fallback="初回手配手数料無料" /></h2>
         </div>
         <div className="pricing-benefit-card">
           <p>
-            <TranslatedText id="pages.pricing.benefitBody1" fallback="新規のお客様は、初月の手配手数料を無料でご案内します。まずは小ロット、サンプル、初回輸出案件からご相談ください。" />
+            <TranslatedText id="pages.pricing.benefitBody1" fallback="新規のお客様は、初回の手配手数料を無料でご案内します。まずは小ロット、サンプル、初回輸出案件からご相談ください。" />
           </p>
           <p>
             <TranslatedText id="pages.pricing.benefitBody2" fallback="国際送料、商品代金、梱包費、保険料、関税、VAT/GST、規制確認費用、その他実費は別途となります。" />
@@ -291,7 +291,7 @@ export default function PricingPage() {
 
         <article>
           <span className="pricing-note-kicker">Compliance Cost</span>
-          <h2><TranslatedText id="pages.pricing.complianceTitle" fallback="規制確認が必要な商品について" /></h2>
+          <h2 className="pricing-heading-nowrap"><TranslatedText id="pages.pricing.complianceTitle" fallback="規制確認が必要な商品について" /></h2>
           <p>
             <TranslatedText id="pages.pricing.complianceBody1" fallback="医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは、商品内容・配送先国により確認が必要になる場合があります。" />
           </p>
@@ -450,7 +450,7 @@ export default function PricingPage() {
           background:
             linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
             rgba(7,17,31,0.84);
-          min-height: 420px;
+          min-height: 360px;
           padding: 30px;
         }
 
@@ -700,6 +700,12 @@ export default function PricingPage() {
           margin: 0 0 16px;
         }
 
+        .pricing-heading-nowrap {
+          font-size: clamp(24px, 2.7vw, 38px) !important;
+          letter-spacing: 0;
+          white-space: nowrap;
+        }
+
         .pricing-notes p {
           color: var(--washi-dim);
           font-size: 13px;
@@ -844,6 +850,10 @@ export default function PricingPage() {
         }
 
         @media (max-width: 680px) {
+          .pricing-heading-nowrap {
+            font-size: clamp(20px, 5.4vw, 28px) !important;
+          }
+
           .pricing-grid,
           .shipping-grid,
           .pricing-chip-grid,

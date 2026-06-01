@@ -8,8 +8,12 @@ type InquiryPayload = {
   name?: unknown
   email?: unknown
   productUrl?: unknown
+  productCategory?: unknown
   quantity?: unknown
+  quantityUnit?: unknown
   destination?: unknown
+  destinationCountry?: unknown
+  destinationCity?: unknown
   deadline?: unknown
   shippingMethod?: unknown
   message?: unknown
@@ -99,8 +103,12 @@ export async function POST(request: Request) {
   const name = toText(payload.name, 200)
   const email = toText(payload.email, 300)
   const productUrl = toText(payload.productUrl, 1000)
+  const productCategory = toText(payload.productCategory, 300)
   const quantity = toText(payload.quantity, 200)
+  const quantityUnit = toText(payload.quantityUnit, 100)
   const destination = toText(payload.destination, 300)
+  const destinationCountry = toText(payload.destinationCountry, 200)
+  const destinationCity = toText(payload.destinationCity, 200)
   const deadline = toText(payload.deadline, 300)
   const shippingMethod = toText(payload.shippingMethod, 300)
   const message = toText(payload.message, 5000)
@@ -113,7 +121,12 @@ export async function POST(request: Request) {
   const sourcePage = toText(payload.sourcePage, 300) || (type === 'quote' ? '/quote' : '/contact')
   const language = toText(payload.language, 20) || 'ja'
 
-  if (!type || !name || !email || !isEmail(email) || (!destination && !message)) {
+  const normalizedDestination = destination || [destinationCountry, destinationCity].filter(Boolean).join(' / ')
+  const quoteMissingRequired =
+    type === 'quote' && (!productUrl || !quantity || !normalizedDestination || !deadline || !shippingMethod || !message)
+  const contactMissingRequired = type === 'contact' && !message
+
+  if (!type || !name || !email || !isEmail(email) || quoteMissingRequired || contactMissingRequired) {
     return NextResponse.json(
       { ok: false, error: '入力内容を確認してください。' },
       { status: 400 },
@@ -146,11 +159,14 @@ export async function POST(request: Request) {
     `電話番号：${formatValue(phone)}`,
     `商品名：${formatValue(productName)}`,
     `商品URL：${formatValue(productUrl)}`,
+    `商品カテゴリ：${formatValue(productCategory)}`,
     `数量：${formatValue(quantity)}`,
+    `単位：${formatValue(quantityUnit)}`,
     `単価：${formatValue(unitPrice)}`,
     `サイズ・重量：${formatValue(sizeWeight)}`,
     `成分・素材：${formatValue(material)}`,
-    `配送先国・都市：${formatValue(destination)}`,
+    `配送先国：${formatValue(destinationCountry || destination)}`,
+    `都市：${formatValue(destinationCity)}`,
     `希望納期：${formatValue(deadline)}`,
     `希望配送方法：${formatValue(shippingMethod)}`,
     `法人宛・個人宛：${formatValue(recipientType)}`,
