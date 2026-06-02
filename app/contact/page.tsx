@@ -64,22 +64,6 @@ export default function ContactPage() {
       </section>
 
       <section className="contact-section">
-        <div className="contact-panel">
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Inquiry Details</span>
-          </div>
-          <h2><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
-          <p className="contact-panel-lead">
-            <TranslatedText
-              id="pages.contact.formLead"
-              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URL・配送先国・相談内容が分かると、確認がスムーズです。"
-            />
-          </p>
-
-          <InquiryForm type="contact" mailtoHref={inquiryMailto} />
-        </div>
-
         <aside className="contact-aside">
           <div>
             <span className="contact-kicker">Before Inquiry</span>
@@ -100,6 +84,22 @@ export default function ContactPage() {
             </Link>
           </div>
         </aside>
+
+        <div className="contact-panel">
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Inquiry Details</span>
+          </div>
+          <h2><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
+          <p className="contact-panel-lead">
+            <TranslatedText
+              id="pages.contact.formLead"
+              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URL・配送先国・相談内容が分かると、確認がスムーズです。"
+            />
+          </p>
+
+          <InquiryForm type="contact" mailtoHref={inquiryMailto} />
+        </div>
       </section>
 
       <section className="contact-notice">
@@ -148,7 +148,7 @@ export default function ContactPage() {
         .contact-section {
           padding: var(--section-pad) var(--gutter);
           display: grid;
-          grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+          grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.15fr);
           gap: clamp(28px, 5vw, 72px);
           background: var(--navy-deep);
         }
