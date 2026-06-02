@@ -218,14 +218,21 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   }
 
   return (
-    <form className="inquiry-form" onSubmit={handleSubmit}>
+    <form className={`inquiry-form inquiry-form--${type}`} onSubmit={handleSubmit}>
       <div className="inquiry-form__grid">
         {fields.map((field) => {
           const options = selectOptions[field.name]
+          const fieldClassName = [
+            'inquiry-form__field',
+            `inquiry-form__field--${field.name}`,
+            field.multiline ? 'inquiry-form__field--wide' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')
 
           return (
             <label
-              className={field.multiline ? 'inquiry-form__field inquiry-form__field--wide' : 'inquiry-form__field'}
+              className={fieldClassName}
               key={field.name}
             >
               <span className="inquiry-form__label">
@@ -362,6 +369,11 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
         .inquiry-form__label > span {
           min-width: 0;
+        }
+
+        .inquiry-form--contact .inquiry-form__field--destinationCountry .inquiry-form__label,
+        .inquiry-form--contact .inquiry-form__field--destinationCity .inquiry-form__label {
+          min-height: 36px;
         }
 
         .inquiry-form__field em {
