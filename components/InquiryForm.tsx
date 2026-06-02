@@ -134,6 +134,32 @@ const selectOptions: Partial<Record<keyof FormState, readonly string[]>> = {
   shippingMethod: shippingMethodOptions,
 }
 
+const contactFieldDisplayOrder: readonly (keyof FormState)[] = [
+  'destinationCountry',
+  'destinationCity',
+  'productCategory',
+]
+
+function orderContactFields(fields: readonly FieldConfig[]) {
+  const fieldByName = new Map(fields.map((field) => [field.name, field]))
+  const orderedContactFields = contactFieldDisplayOrder
+    .map((name) => fieldByName.get(name))
+    .filter((field): field is FieldConfig => Boolean(field))
+
+  if (orderedContactFields.length !== contactFieldDisplayOrder.length) {
+    return fields
+  }
+
+  const contactFieldNames = new Set<keyof FormState>(contactFieldDisplayOrder)
+  const firstContactFieldIndex = fields.findIndex((field) => contactFieldNames.has(field.name))
+
+  return [
+    ...fields.slice(0, firstContactFieldIndex).filter((field) => !contactFieldNames.has(field.name)),
+    ...orderedContactFields,
+    ...fields.slice(firstContactFieldIndex).filter((field) => !contactFieldNames.has(field.name)),
+  ]
+}
+
 export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
@@ -142,7 +168,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const [formState, setFormState] = useState<FormState>(initialState)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [feedbackMessage, setFeedbackMessage] = useState('')
-  const fields = formCopy.fields as readonly FieldConfig[]
+  const formFields = formCopy.fields as readonly FieldConfig[]
+  const fields = type === 'contact' ? orderContactFields(formFields) : formFields
   const complianceNotes = formCommon.complianceNotes
   const buttonLabel = formCopy.button
   const sourcePage = type === 'quote' ? '/quote' : '/contact'
