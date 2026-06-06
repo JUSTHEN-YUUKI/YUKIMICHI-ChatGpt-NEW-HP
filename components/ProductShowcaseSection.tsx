@@ -62,17 +62,14 @@ export default function ProductShowcaseSection() {
 
         <ScrollReveal>
           <div className="visual-film-frame" aria-label="Main visual area for product and logistics film">
+            <video className="visual-film-video" autoPlay muted loop playsInline preload="metadata" aria-label={copy.filmTitle}>
+              <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
+            </video>
+            <div className="visual-film-overlay" aria-hidden="true" />
+
             <div className="visual-film-header">
               <span>Main Visual Area</span>
               <span>Product &amp; Logistics Film</span>
-            </div>
-
-            <div className="visual-film-center">
-              <div className="visual-play-mark" aria-hidden="true" />
-              <div>
-                <p>{copy.filmTitle}</p>
-                <strong>{copy.filmMeta}</strong>
-              </div>
             </div>
 
             <div className="visual-film-footer">
@@ -195,12 +192,10 @@ export default function ProductShowcaseSection() {
         }
 
         .visual-film-frame {
-          min-height: clamp(360px, 48vw, 560px);
+          aspect-ratio: 16 / 9;
+          min-height: clamp(300px, 44vw, 560px);
           border: 1px solid rgba(201,168,76,0.22);
-          background:
-            linear-gradient(125deg, rgba(201,168,76,0.12), transparent 30%),
-            linear-gradient(315deg, rgba(139,30,47,0.22), transparent 38%),
-            linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012));
+          background: rgba(7,17,31,0.92);
           display: grid;
           grid-template-rows: auto 1fr auto;
           overflow: hidden;
@@ -208,23 +203,28 @@ export default function ProductShowcaseSection() {
           position: relative;
         }
 
+        .visual-film-video {
+          display: block;
+          height: 100%;
+          inset: 0;
+          object-fit: cover;
+          position: absolute;
+          width: 100%;
+        }
+
+        .visual-film-overlay {
+          background:
+            linear-gradient(180deg, rgba(7,17,31,0.34), rgba(7,17,31,0.08) 40%, rgba(7,17,31,0.32)),
+            linear-gradient(90deg, rgba(7,17,31,0.2), transparent 18%, transparent 82%, rgba(7,17,31,0.2));
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+        }
+
         .visual-film-frame::before,
         .visual-film-frame::after {
-          content: "";
-          position: absolute;
-          pointer-events: none;
-        }
-
-        .visual-film-frame::before {
-          inset: clamp(18px, 3vw, 34px);
-          border: 1px solid rgba(201,168,76,0.12);
-        }
-
-        .visual-film-frame::after {
           inset: 0;
-          background:
-            linear-gradient(115deg, transparent 0%, transparent 46%, rgba(248,245,239,0.035) 46%, rgba(248,245,239,0.035) 54%, transparent 54%),
-            linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
+          background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
         }
 
         .visual-film-header,
