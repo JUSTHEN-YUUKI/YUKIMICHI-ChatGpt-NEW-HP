@@ -73,7 +73,7 @@ export default function Navigation() {
         >
           <Image
             src="/yukimichi-logo-favicon.png"
-            alt="YUKIMICHI - SNOWPATH JAPAN"
+            alt="YUKIMICHI"
             width={76}
             height={76}
             priority
@@ -100,18 +100,6 @@ export default function Navigation() {
               }}
             >
               YUKIMICHI
-            </span>
-            <span
-              className="nav-subtitle"
-              style={{
-                fontSize: "9px",
-                letterSpacing: "0.28em",
-                color: "var(--washi-faint)",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Snowpath Japan
             </span>
           </span>
         </Link>
