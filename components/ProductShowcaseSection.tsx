@@ -1,5 +1,6 @@
 "use client"
 
+import { useRef, useState } from "react"
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
 import { useLanguage } from "@/components/LanguageProvider"
@@ -26,11 +27,33 @@ function ArrowRight({ size = 14 }: { size?: number }) {
 
 export default function ProductShowcaseSection() {
   const { language } = useLanguage()
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true)
   const copy = translations[language].home.productShowcase
   const visualCards = copy.cards.map((card, index) => ({
     ...card,
     num: String(index + 1).padStart(2, "0"),
   }))
+  const videoControlLabel = isVideoPlaying ? "動画を一時停止" : "動画を再生"
+
+  const toggleVideoPlayback = () => {
+    const video = videoRef.current
+
+    if (!video) {
+      return
+    }
+
+    if (video.paused) {
+      void video
+        .play()
+        .then(() => setIsVideoPlaying(true))
+        .catch(() => setIsVideoPlaying(false))
+      return
+    }
+
+    video.pause()
+    setIsVideoPlaying(false)
+  }
 
   return (
     <section id="product-showcase" className="visual-showcase">
@@ -62,10 +85,38 @@ export default function ProductShowcaseSection() {
 
         <ScrollReveal>
           <div className="visual-film-frame" aria-label="Main visual area for product and logistics film">
-            <video className="visual-film-video" autoPlay muted loop playsInline preload="metadata" aria-label={copy.filmTitle}>
+            <video
+              ref={videoRef}
+              className="visual-film-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={copy.filmTitle}
+              onPlay={() => setIsVideoPlaying(true)}
+              onPause={() => setIsVideoPlaying(false)}
+            >
               <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
             </video>
             <div className="visual-film-overlay" aria-hidden="true" />
+
+            <button
+              type="button"
+              className="visual-film-toggle"
+              onClick={toggleVideoPlayback}
+              aria-label={videoControlLabel}
+              title={videoControlLabel}
+            >
+              {isVideoPlaying ? (
+                <span className="visual-pause-icon" aria-hidden="true">
+                  <span />
+                  <span />
+                </span>
+              ) : (
+                <span className="visual-play-icon-small" aria-hidden="true" />
+              )}
+            </button>
 
             <div className="visual-film-header">
               <span>Main Visual Area</span>
@@ -219,6 +270,54 @@ export default function ProductShowcaseSection() {
           inset: 0;
           pointer-events: none;
           position: absolute;
+        }
+
+        .visual-film-toggle {
+          align-items: center;
+          background: rgba(7,17,31,0.58);
+          border: 1px solid rgba(201,168,76,0.46);
+          border-radius: 999px;
+          bottom: clamp(20px, 3vw, 34px);
+          color: var(--gold);
+          cursor: pointer;
+          display: inline-flex;
+          height: 52px;
+          justify-content: center;
+          position: absolute;
+          right: clamp(20px, 3vw, 34px);
+          transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+          width: 52px;
+          z-index: 3;
+        }
+
+        .visual-film-toggle:hover,
+        .visual-film-toggle:focus-visible {
+          background: rgba(7,17,31,0.76);
+          border-color: rgba(201,168,76,0.72);
+          outline: none;
+          transform: translateY(-1px);
+        }
+
+        .visual-pause-icon {
+          display: inline-flex;
+          gap: 5px;
+        }
+
+        .visual-pause-icon span {
+          background: currentColor;
+          border-radius: 2px;
+          height: 18px;
+          width: 4px;
+        }
+
+        .visual-play-icon-small {
+          border-bottom: 9px solid transparent;
+          border-left: 15px solid currentColor;
+          border-top: 9px solid transparent;
+          display: block;
+          height: 0;
+          margin-left: 3px;
+          width: 0;
         }
 
         .visual-film-frame::before,
