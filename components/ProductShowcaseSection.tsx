@@ -84,7 +84,7 @@ export default function ProductShowcaseSection() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className="visual-film-frame" aria-label="Main visual area for product and logistics film">
+          <div className="visual-film-frame" aria-label="YUKIMICHI promotion video">
             <video
               ref={videoRef}
               className="visual-film-video"
@@ -93,7 +93,7 @@ export default function ProductShowcaseSection() {
               loop
               playsInline
               preload="metadata"
-              aria-label={copy.filmTitle}
+              aria-label="YUKIMICHI promotion video"
               onPlay={() => setIsVideoPlaying(true)}
               onPause={() => setIsVideoPlaying(false)}
             >
@@ -117,17 +117,6 @@ export default function ProductShowcaseSection() {
                 <span className="visual-play-icon-small" aria-hidden="true" />
               )}
             </button>
-
-            <div className="visual-film-header">
-              <span>Main Visual Area</span>
-              <span>Product &amp; Logistics Film</span>
-            </div>
-
-            <div className="visual-film-footer">
-              <span>Brand Visual</span>
-              <span>Logistics Visual</span>
-              <span>Product Media</span>
-            </div>
           </div>
         </ScrollReveal>
 
@@ -277,7 +266,7 @@ export default function ProductShowcaseSection() {
           background: rgba(7,17,31,0.58);
           border: 1px solid rgba(201,168,76,0.46);
           border-radius: 999px;
-          bottom: clamp(20px, 3vw, 34px);
+          bottom: clamp(74px, 6vw, 90px);
           color: var(--gold);
           cursor: pointer;
           display: inline-flex;
@@ -324,25 +313,6 @@ export default function ProductShowcaseSection() {
         .visual-film-frame::after {
           inset: 0;
           background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
-        }
-
-        .visual-film-header,
-        .visual-film-footer {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          justify-content: space-between;
-          gap: 18px;
-          color: var(--gold);
-          font-size: 10px;
-          letter-spacing: 0.26em;
-          text-transform: uppercase;
-        }
-
-        .visual-film-footer {
-          color: var(--washi-faint);
-          justify-content: flex-start;
-          flex-wrap: wrap;
         }
 
         .visual-film-center {
@@ -550,10 +520,6 @@ export default function ProductShowcaseSection() {
 
           .visual-card-grid {
             grid-template-columns: 1fr;
-          }
-
-          .visual-film-header {
-            flex-direction: column;
           }
         }
       `}</style>
