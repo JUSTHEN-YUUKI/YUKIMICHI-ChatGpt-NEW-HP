@@ -3,6 +3,8 @@
 import { useRef, useState } from "react"
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
+import ImportGuideSection from "@/components/ImportGuideSection"
+import ProductPicksSection from "@/components/ProductPicksSection"
 import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/lib/translations"
 
@@ -119,6 +121,9 @@ export default function ProductShowcaseSection() {
             </button>
           </div>
         </ScrollReveal>
+
+        <ProductPicksSection />
+        <ImportGuideSection />
 
         <ScrollReveal stagger>
           <div className="visual-card-grid">
@@ -250,6 +255,7 @@ export default function ProductShowcaseSection() {
           object-fit: cover;
           position: absolute;
           width: 100%;
+          z-index: 0;
         }
 
         .visual-film-overlay {
@@ -259,6 +265,7 @@ export default function ProductShowcaseSection() {
           inset: 0;
           pointer-events: none;
           position: absolute;
+          z-index: 1;
         }
 
         .visual-film-toggle {
@@ -311,57 +318,21 @@ export default function ProductShowcaseSection() {
 
         .visual-film-frame::before,
         .visual-film-frame::after {
-          inset: 0;
-          background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
-        }
-
-        .visual-film-center {
-          position: relative;
-          z-index: 1;
-          display: grid;
-          place-items: center;
-          align-content: center;
-          gap: 22px;
-          text-align: center;
-        }
-
-        .visual-play-mark {
-          width: 82px;
-          height: 82px;
-          border: 1px solid rgba(201,168,76,0.4);
-          border-radius: 50%;
-          position: relative;
-          background: rgba(7,17,31,0.42);
-        }
-
-        .visual-play-mark::after {
           content: "";
           position: absolute;
-          top: 50%;
-          left: 53%;
-          transform: translate(-50%, -50%);
-          border-top: 11px solid transparent;
-          border-bottom: 11px solid transparent;
-          border-left: 17px solid var(--gold);
+          pointer-events: none;
         }
 
-        .visual-film-center p {
-          color: var(--washi);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(32px, 5vw, 58px);
-          font-weight: 300;
-          line-height: 1.06;
-          margin: 0 0 12px;
+        .visual-film-frame::before {
+          inset: clamp(18px, 3vw, 34px);
+          border: 1px solid rgba(201,168,76,0.12);
+          z-index: 2;
         }
 
-        .visual-film-center strong {
-          color: var(--washi-dim);
-          display: block;
-          font-size: 12px;
-          font-weight: 300;
-          letter-spacing: 0.18em;
-          line-height: 1.9;
-          text-transform: uppercase;
+        .visual-film-frame::after {
+          inset: 0;
+          background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
+          z-index: 1;
         }
 
         .visual-card-grid {
