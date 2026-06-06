@@ -37,7 +37,7 @@ export default function HeroSection() {
         loop
         playsInline
         preload="metadata"
-        poster="/yukimichi-hero-product-logistics-poster.jpg"
+        poster="/hero-bg.jpg"
         style={{
           position: 'absolute',
           inset: 0,
@@ -48,7 +48,7 @@ export default function HeroSection() {
           filter: 'saturate(0.82) contrast(0.92)',
         }}
       >
-        <source src="/yukimichi-hero-product-logistics-film.mp4" type="video/mp4" />
+        <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
       </video>
 
       <div
