@@ -1,6 +1,7 @@
 "use client"
 
 import HeroSection from "@/components/HeroSection"
+import HeroVideoSection from "@/components/HeroVideoSection"
 import ProductShowcaseSection from "@/components/ProductShowcaseSection"
 import AboutSection from "@/components/AboutSection"
 import RepresentativeSection from "@/components/RepresentativeSection"
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <HeroVideoSection />
       <ProductShowcaseSection />
       <AboutSection />
       <RepresentativeSection />

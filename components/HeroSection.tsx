@@ -27,34 +27,15 @@ export default function HeroSection() {
         style={{
           objectFit: 'cover',
           opacity: 0.35,
+          zIndex: 0,
         }}
       />
-
-      <video
-        aria-hidden="true"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/hero-bg.jpg"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          opacity: 0.46,
-          filter: 'saturate(0.82) contrast(0.92)',
-        }}
-      >
-        <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
-      </video>
 
       <div
         style={{
           position: 'absolute',
           inset: 0,
+          zIndex: 10,
           background:
             'linear-gradient(to bottom, rgba(7,17,31,.9), rgba(7,17,31,.55), rgba(7,17,31,.9))',
         }}
@@ -63,7 +44,7 @@ export default function HeroSection() {
       <div
         style={{
           position: 'relative',
-          zIndex: 2,
+          zIndex: 20,
           maxWidth: '900px',
           padding: '0 var(--gutter)',
         }}

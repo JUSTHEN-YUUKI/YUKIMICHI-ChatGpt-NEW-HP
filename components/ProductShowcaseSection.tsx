@@ -1,6 +1,5 @@
 "use client"
 
-import { useRef, useState } from "react"
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
 import ImportGuideSection from "@/components/ImportGuideSection"
@@ -29,34 +28,11 @@ function ArrowRight({ size = 14 }: { size?: number }) {
 
 export default function ProductShowcaseSection() {
   const { language } = useLanguage()
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true)
   const copy = translations[language].home.productShowcase
   const visualCards = copy.cards.map((card, index) => ({
     ...card,
     num: String(index + 1).padStart(2, "0"),
   }))
-  const videoControlLabel = isVideoPlaying ? "動画を一時停止" : "動画を再生"
-
-  const toggleVideoPlayback = () => {
-    const video = videoRef.current
-
-    if (!video) {
-      return
-    }
-
-    if (video.paused) {
-      void video
-        .play()
-        .then(() => setIsVideoPlaying(true))
-        .catch(() => setIsVideoPlaying(false))
-      return
-    }
-
-    video.pause()
-    setIsVideoPlaying(false)
-  }
-
   return (
     <section id="product-showcase" className="visual-showcase">
       <div className="visual-showcase-grid-bg" aria-hidden="true" />
@@ -82,43 +58,6 @@ export default function ProductShowcaseSection() {
             {productShowcaseBodyColumns.map((body) => (
               <p key={body}>{body}</p>
             ))}
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <div className="visual-film-frame" aria-label="YUKIMICHI promotion video">
-            <video
-              ref={videoRef}
-              className="visual-film-video"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="YUKIMICHI promotion video"
-              onPlay={() => setIsVideoPlaying(true)}
-              onPause={() => setIsVideoPlaying(false)}
-            >
-              <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
-            </video>
-            <div className="visual-film-overlay" aria-hidden="true" />
-
-            <button
-              type="button"
-              className="visual-film-toggle"
-              onClick={toggleVideoPlayback}
-              aria-label={videoControlLabel}
-              title={videoControlLabel}
-            >
-              {isVideoPlaying ? (
-                <span className="visual-pause-icon" aria-hidden="true">
-                  <span />
-                  <span />
-                </span>
-              ) : (
-                <span className="visual-play-icon-small" aria-hidden="true" />
-              )}
-            </button>
           </div>
         </ScrollReveal>
 
@@ -234,105 +173,6 @@ export default function ProductShowcaseSection() {
           line-height: 2.05;
           margin: 0;
           padding: 18px 20px;
-        }
-
-        .visual-film-frame {
-          aspect-ratio: 16 / 9;
-          min-height: clamp(300px, 44vw, 560px);
-          border: 1px solid rgba(201,168,76,0.22);
-          background: rgba(7,17,31,0.92);
-          display: grid;
-          grid-template-rows: auto 1fr auto;
-          overflow: hidden;
-          padding: clamp(22px, 4vw, 36px);
-          position: relative;
-        }
-
-        .visual-film-video {
-          display: block;
-          height: 100%;
-          inset: 0;
-          object-fit: cover;
-          position: absolute;
-          width: 100%;
-          z-index: 0;
-        }
-
-        .visual-film-overlay {
-          background:
-            linear-gradient(180deg, rgba(7,17,31,0.34), rgba(7,17,31,0.08) 40%, rgba(7,17,31,0.32)),
-            linear-gradient(90deg, rgba(7,17,31,0.2), transparent 18%, transparent 82%, rgba(7,17,31,0.2));
-          inset: 0;
-          pointer-events: none;
-          position: absolute;
-          z-index: 1;
-        }
-
-        .visual-film-toggle {
-          align-items: center;
-          background: rgba(7,17,31,0.58);
-          border: 1px solid rgba(201,168,76,0.46);
-          border-radius: 999px;
-          bottom: clamp(74px, 6vw, 90px);
-          color: var(--gold);
-          cursor: pointer;
-          display: inline-flex;
-          height: 52px;
-          justify-content: center;
-          position: absolute;
-          right: clamp(20px, 3vw, 34px);
-          transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
-          width: 52px;
-          z-index: 3;
-        }
-
-        .visual-film-toggle:hover,
-        .visual-film-toggle:focus-visible {
-          background: rgba(7,17,31,0.76);
-          border-color: rgba(201,168,76,0.72);
-          outline: none;
-          transform: translateY(-1px);
-        }
-
-        .visual-pause-icon {
-          display: inline-flex;
-          gap: 5px;
-        }
-
-        .visual-pause-icon span {
-          background: currentColor;
-          border-radius: 2px;
-          height: 18px;
-          width: 4px;
-        }
-
-        .visual-play-icon-small {
-          border-bottom: 9px solid transparent;
-          border-left: 15px solid currentColor;
-          border-top: 9px solid transparent;
-          display: block;
-          height: 0;
-          margin-left: 3px;
-          width: 0;
-        }
-
-        .visual-film-frame::before,
-        .visual-film-frame::after {
-          content: "";
-          position: absolute;
-          pointer-events: none;
-        }
-
-        .visual-film-frame::before {
-          inset: clamp(18px, 3vw, 34px);
-          border: 1px solid rgba(201,168,76,0.12);
-          z-index: 2;
-        }
-
-        .visual-film-frame::after {
-          inset: 0;
-          background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 22%, transparent 78%, rgba(201,168,76,0.035));
-          z-index: 1;
         }
 
         .visual-card-grid {
