@@ -22,6 +22,7 @@ const crossfadeFrames = 12;
 const odoriTowerFixedScale = 1;
 const audioFadeInFrames = 30;
 const audioFadeOutStartFrame = PROMO_DURATION_FRAMES - 48;
+const audioMaxVolume = 0.36;
 
 const serifStack =
   '"Yu Mincho", "YuMincho", "Noto Serif JP", "Shippori Mincho", "Hiragino Mincho ProN", Georgia, "Times New Roman", serif';
@@ -105,8 +106,8 @@ const FineFrame = () => (
 
 const PromoAudio = () => {
   const frame = useCurrentFrame();
-  const fadeIn = interpolate(frame, [0, audioFadeInFrames], [0, 0.78], clamp);
-  const fadeOut = interpolate(frame, [audioFadeOutStartFrame, PROMO_DURATION_FRAMES], [0.78, 0], clamp);
+  const fadeIn = interpolate(frame, [0, audioFadeInFrames], [0, audioMaxVolume], clamp);
+  const fadeOut = interpolate(frame, [audioFadeOutStartFrame, PROMO_DURATION_FRAMES], [audioMaxVolume, 0], clamp);
 
   return <Audio src={staticFile('source/northbound-horizon-29s.wav')} volume={Math.min(fadeIn, fadeOut)} />;
 };
