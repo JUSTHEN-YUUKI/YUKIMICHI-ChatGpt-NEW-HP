@@ -7,7 +7,7 @@ import { LanguageProvider } from '@/components/LanguageProvider'
 import ContentTranslationBridge from '@/components/ContentTranslationBridge'
 
 export const metadata: Metadata = {
-  title: 'YUKIMICHI – SNOWPATH JAPAN | Trusted Export Support from Japan',
+  title: 'YUKIMICHI – Export Support from Japan',
   description:
     'YUKIMICHI provides legal, transparent, and reliable export support from Japan, including product procurement, international express, air freight, sea freight, and export documentation support.',
   keywords:
