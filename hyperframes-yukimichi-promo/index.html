@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #07111f;
+      }
+
+      @font-face {
+        font-family: "Yukimichi Mincho";
+        src: url("assets/yumin.ttf") format("truetype");
+        font-weight: 300 700;
+        font-style: normal;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(7, 17, 31, 0.12), rgba(7, 17, 31, 0.9)),
+          #07111f;
+        color: #f8f5ef;
+        font-family: "Yukimichi Mincho", serif;
+      }
+
+      .media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.86) contrast(1.05) brightness(0.86);
+        transform-origin: center center;
+        will-change: opacity, transform;
+        z-index: 10;
+      }
+
+      .media-soft {
+        filter: saturate(0.82) contrast(1.04) brightness(0.84);
+      }
+
+      .shade {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+        pointer-events: none;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(5, 11, 22, 0.18) 0%,
+            rgba(5, 11, 22, 0.08) 38%,
+            rgba(5, 11, 22, 0.78) 100%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(5, 11, 22, 0.42) 0%,
+            transparent 30%,
+            transparent 70%,
+            rgba(5, 11, 22, 0.36) 100%
+          );
+      }
+
+      .frame {
+        position: absolute;
+        inset: 54px;
+        z-index: 64;
+        pointer-events: none;
+        border: 1px solid rgba(212, 184, 106, 0.18);
+      }
+
+      .baseline {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        bottom: 74px;
+        z-index: 64;
+        height: 1px;
+        pointer-events: none;
+        background: rgba(212, 184, 106, 0.2);
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 33;
+        pointer-events: none;
+        opacity: 0.16;
+        background-image:
+          linear-gradient(rgba(212, 184, 106, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(212, 184, 106, 0.04) 1px, transparent 1px);
+        background-size: 96px 96px;
+      }
+
+      .caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 152px;
+        z-index: 50;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 250px;
+        color: #f8f5ef;
+        text-align: center;
+        font-family: "Yukimichi Mincho", serif;
+        font-size: 64px;
+        font-weight: 400;
+        line-height: 1.16;
+        letter-spacing: 2.4px;
+        text-shadow:
+          0 12px 38px rgba(0, 0, 0, 0.66),
+          0 2px 8px rgba(0, 0, 0, 0.58);
+        will-change: opacity, transform;
+      }
+
+      .caption span {
+        display: block;
+        max-width: 1140px;
+      }
+
+      .caption.gold {
+        color: #d4b86a;
+      }
+
+      .closing {
+        position: absolute;
+        inset: 0;
+        z-index: 80;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 160px;
+        text-align: center;
+        background:
+          linear-gradient(180deg, rgba(7, 17, 31, 0.12), rgba(7, 17, 31, 0.95)),
+          linear-gradient(
+            90deg,
+            rgba(7, 17, 31, 0.96),
+            rgba(13, 28, 53, 0.8),
+            rgba(7, 17, 31, 0.96)
+          );
+        font-family: "Yukimichi Mincho", serif;
+      }
+
+      .closing-logo {
+        width: 360px;
+        height: 360px;
+        object-fit: contain;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 20px 46px rgba(0, 0, 0, 0.42));
+      }
+
+      .closing-title {
+        color: #d4b86a;
+        font-size: 58px;
+        line-height: 1.14;
+        letter-spacing: 4.2px;
+        text-shadow: 0 14px 42px rgba(0, 0, 0, 0.46);
+      }
+
+      .closing-tagline {
+        margin-top: 22px;
+        color: #f8f5ef;
+        font-size: 38px;
+        line-height: 1.2;
+        letter-spacing: 2.4px;
+      }
+
+      .closing-cta {
+        margin-top: 36px;
+        padding: 18px 34px 20px;
+        border: 1px solid rgba(212, 184, 106, 0.42);
+        color: #d9d0bf;
+        background: rgba(7, 17, 31, 0.36);
+        font-size: 31px;
+        line-height: 1.2;
+        letter-spacing: 2.2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="24.2"
+      data-width="1920"
+      data-height="1080"
+    >
+      <video
+        id="media-01"
+        class="clip media"
+        data-start="0"
+        data-duration="3.1"
+        data-track-index="0"
+        src="assets/odori-tv-tower.mp4"
+        muted
+        playsinline
+      ></video>
+      <video
+        id="media-02"
+        class="clip media"
+        data-start="2.4"
+        data-duration="3.1"
+        data-track-index="1"
+        src="assets/sapporo-station.mp4"
+        muted
+        playsinline
+      ></video>
+      <img
+        id="media-03"
+        class="clip media media-soft"
+        data-start="4.8"
+        data-duration="3.1"
+        data-track-index="0"
+        src="assets/inspection.png"
+        alt=""
+      />
+      <img
+        id="media-04"
+        class="clip media media-soft"
+        data-start="7.2"
+        data-duration="3.1"
+        data-track-index="1"
+        src="assets/documentation.png"
+        alt=""
+      />
+      <img
+        id="media-05"
+        class="clip media media-soft"
+        data-start="9.6"
+        data-duration="3.1"
+        data-track-index="0"
+        src="assets/packing-boxes.jpg"
+        alt=""
+      />
+      <img
+        id="media-06"
+        class="clip media media-soft"
+        data-start="12"
+        data-duration="3.1"
+        data-track-index="1"
+        src="assets/shipping-preparation.png"
+        alt=""
+      />
+      <img
+        id="media-07"
+        class="clip media"
+        data-start="14.4"
+        data-duration="3.1"
+        data-track-index="0"
+        src="assets/air-cargo.png"
+        alt=""
+      />
+      <img
+        id="media-08"
+        class="clip media"
+        data-start="16.8"
+        data-duration="3.1"
+        data-track-index="1"
+        src="assets/sea-container-ship.png"
+        alt=""
+      />
+
+      <div
+        id="caption-01"
+        class="clip caption"
+        data-start="0.28"
+        data-duration="2.05"
+        data-track-index="20"
+      >
+        <span>From Sapporo, Hokkaido.</span>
+      </div>
+      <div
+        id="caption-02"
+        class="clip caption gold"
+        data-start="2.68"
+        data-duration="2.05"
+        data-track-index="21"
+      >
+        <span>Connecting Japan with global buyers.</span>
+      </div>
+      <div
+        id="caption-03"
+        class="clip caption"
+        data-start="5.08"
+        data-duration="2.05"
+        data-track-index="22"
+      >
+        <span>Japanese products, prepared with care.</span>
+      </div>
+      <div
+        id="caption-04"
+        class="clip caption"
+        data-start="7.48"
+        data-duration="2.05"
+        data-track-index="23"
+      >
+        <span>Inspection and documentation for global trade.</span>
+      </div>
+      <div
+        id="caption-05"
+        class="clip caption gold"
+        data-start="9.88"
+        data-duration="2.05"
+        data-track-index="24"
+      >
+        <span>Secure packing for international delivery.</span>
+      </div>
+      <div
+        id="caption-06"
+        class="clip caption"
+        data-start="12.28"
+        data-duration="2.05"
+        data-track-index="25"
+      >
+        <span>Export options by courier, air, and sea.</span>
+      </div>
+      <div
+        id="caption-07"
+        class="clip caption"
+        data-start="14.68"
+        data-duration="2.05"
+        data-track-index="26"
+      >
+        <span>YUKIMICHI — SNOWPATH JAPAN.</span>
+      </div>
+      <div
+        id="caption-08"
+        class="clip caption gold"
+        data-start="17.08"
+        data-duration="2.05"
+        data-track-index="27"
+      >
+        <span>Request a Quote — justhen.co.jp</span>
+      </div>
+
+      <div
+        id="closing"
+        class="clip closing"
+        data-start="19.2"
+        data-duration="5"
+        data-track-index="2"
+      >
+        <img
+          id="closing-logo"
+          class="closing-logo"
+          src="assets/yukimichi-logo.png"
+          alt=""
+        />
+        <div id="closing-title" class="closing-title">
+          YUKIMICHI / SNOWPATH JAPAN
+        </div>
+        <div id="closing-tagline" class="closing-tagline">
+          From Hokkaido to the World
+        </div>
+        <div id="closing-cta" class="closing-cta">
+          Request a Quote — justhen.co.jp
+        </div>
+      </div>
+
+      <div class="shade" data-layout-ignore></div>
+      <div class="grain" data-layout-ignore></div>
+      <div class="frame" data-layout-ignore></div>
+      <div class="baseline" data-layout-ignore></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+
+      const scenes = [
+        { id: "01", start: 0, duration: 3.1, fromScale: 1.02, toScale: 1.065, fromX: 0, toX: 0, fromY: 0, toY: 0 },
+        { id: "02", start: 2.4, duration: 3.1, fromScale: 1.03, toScale: 1.075, fromX: 0, toX: 0, fromY: 0, toY: 0 },
+        { id: "03", start: 4.8, duration: 3.1, fromScale: 1.08, toScale: 1.15, fromX: -24, toX: 16, fromY: 0, toY: 0 },
+        { id: "04", start: 7.2, duration: 3.1, fromScale: 1.1, toScale: 1.16, fromX: 18, toX: -18, fromY: 0, toY: 0 },
+        { id: "05", start: 9.6, duration: 3.1, fromScale: 1.08, toScale: 1.14, fromX: -12, toX: 14, fromY: 0, toY: 0 },
+        { id: "06", start: 12, duration: 3.1, fromScale: 1.08, toScale: 1.14, fromX: 20, toX: -16, fromY: 0, toY: 0 },
+        { id: "07", start: 14.4, duration: 3.1, fromScale: 1.08, toScale: 1.13, fromX: -18, toX: 14, fromY: 0, toY: 0 },
+        { id: "08", start: 16.8, duration: 3.1, fromScale: 1.07, toScale: 1.12, fromX: 18, toX: -14, fromY: 0, toY: 0 },
+      ];
+
+      const captions = [
+        { id: "01", start: 0.28, duration: 2.05 },
+        { id: "02", start: 2.68, duration: 2.05 },
+        { id: "03", start: 5.08, duration: 2.05 },
+        { id: "04", start: 7.48, duration: 2.05 },
+        { id: "05", start: 9.88, duration: 2.05 },
+        { id: "06", start: 12.28, duration: 2.05 },
+        { id: "07", start: 14.68, duration: 2.05 },
+        { id: "08", start: 17.08, duration: 2.05 },
+      ];
+
+      scenes.forEach((scene) => {
+        const media = `#media-${scene.id}`;
+        tl.from(
+          media,
+          { opacity: 0, duration: 0.72, ease: "sine.inOut" },
+          scene.start
+        );
+        tl.fromTo(
+          media,
+          {
+            scale: scene.fromScale,
+            x: scene.fromX,
+            y: scene.fromY,
+          },
+          {
+            scale: scene.toScale,
+            x: scene.toX,
+            y: scene.toY,
+            duration: scene.duration,
+            ease: "none",
+          },
+          scene.start
+        );
+      });
+
+      captions.forEach((caption, index) => {
+        const selector = `#caption-${caption.id}`;
+        const easeIn = index % 3 === 0 ? "power2.out" : index % 3 === 1 ? "sine.out" : "power3.out";
+        const easeOut = index % 2 === 0 ? "sine.in" : "power1.in";
+
+        tl.from(
+          selector,
+          { opacity: 0, y: 18, duration: 0.48, ease: easeIn },
+          caption.start
+        );
+        tl.to(
+          selector,
+          { opacity: 0, y: -10, duration: 0.42, ease: easeOut },
+          caption.start + caption.duration - 0.46
+        );
+      });
+
+      tl.from(
+        "#closing",
+        { opacity: 0, duration: 0.78, ease: "sine.inOut" },
+        19.2
+      );
+      tl.from(
+        "#closing-logo",
+        { opacity: 0, y: 26, scale: 0.94, duration: 0.82, ease: "power3.out" },
+        19.62
+      );
+      tl.from(
+        "#closing-title",
+        { opacity: 0, y: 22, duration: 0.72, ease: "power2.out" },
+        20.02
+      );
+      tl.from(
+        "#closing-tagline",
+        { opacity: 0, y: 18, duration: 0.62, ease: "sine.out" },
+        20.42
+      );
+      tl.from(
+        "#closing-cta",
+        { opacity: 0, y: 16, duration: 0.58, ease: "power1.out" },
+        20.8
+      );
+      tl.to(
+        "#closing",
+        { opacity: 0, duration: 0.55, ease: "sine.in" },
+        23.6
+      );
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

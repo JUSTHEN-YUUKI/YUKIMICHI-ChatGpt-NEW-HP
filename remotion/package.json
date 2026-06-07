@@ -1,0 +1,22 @@
+{
+  "name": "yukimichi-site-promo-remotion",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts",
+    "render": "remotion render src/index.ts YukimichiSitePromo ../public/yukimichi-site-promo-remotion-final.mp4 --codec=h264 --pixel-format=yuv420p"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.470",
+    "@remotion/renderer": "4.0.470",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.470"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}
