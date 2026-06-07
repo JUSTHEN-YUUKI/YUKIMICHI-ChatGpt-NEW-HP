@@ -1,5 +1,6 @@
 import {
   AbsoluteFill,
+  Audio,
   Easing,
   Img,
   OffthreadVideo,
@@ -19,6 +20,8 @@ const washiDim = '#ddd4c3';
 const paleGold = '#d8bd72';
 const crossfadeFrames = 12;
 const odoriTowerFixedScale = 1;
+const audioFadeInFrames = 30;
+const audioFadeOutStartFrame = PROMO_DURATION_FRAMES - 48;
 
 const serifStack =
   '"Yu Mincho", "YuMincho", "Noto Serif JP", "Shippori Mincho", "Hiragino Mincho ProN", Georgia, "Times New Roman", serif';
@@ -99,6 +102,14 @@ const FineFrame = () => (
     />
   </AbsoluteFill>
 );
+
+const PromoAudio = () => {
+  const frame = useCurrentFrame();
+  const fadeIn = interpolate(frame, [0, audioFadeInFrames], [0, 0.78], clamp);
+  const fadeOut = interpolate(frame, [audioFadeOutStartFrame, PROMO_DURATION_FRAMES], [0.78, 0], clamp);
+
+  return <Audio src={staticFile('source/northbound-horizon-29s.wav')} volume={Math.min(fadeIn, fadeOut)} />;
+};
 
 const SceneMedia = ({scene, index}: {scene: MediaScene; index: number}) => {
   const frame = useCurrentFrame();
@@ -287,6 +298,7 @@ const CtaScene = () => {
 export const YukimichiSitePromo = () => {
   return (
     <AbsoluteFill style={{backgroundColor: navyDeep, overflow: 'hidden'}}>
+      <PromoAudio />
       <BaseAtmosphere />
       {mediaScenes.map((scene, index) => (
         <SceneMedia key={scene.id} scene={scene} index={index} />
