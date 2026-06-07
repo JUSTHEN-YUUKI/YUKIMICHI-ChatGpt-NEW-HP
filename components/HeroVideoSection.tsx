@@ -10,7 +10,7 @@ export default function HeroVideoSection() {
 
   return (
     <section className="hero-video-section" aria-labelledby="hero-video-title">
-      <div className="hero-video-inner">
+      <div className="hero-video-inner max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="hero-video-heading">
             <div className="section-label">
@@ -30,9 +30,9 @@ export default function HeroVideoSection() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className="hero-video-card">
+          <div className="hero-video-card max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-video">
             <video
-              className="hero-video"
+              className="hero-video w-full h-full object-cover"
               controls
               muted
               playsInline
