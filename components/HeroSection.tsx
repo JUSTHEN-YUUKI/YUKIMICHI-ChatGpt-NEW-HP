@@ -132,9 +132,9 @@ export default function HeroSection() {
           margin-bottom: 22px;
           color: var(--gold);
           font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(10px, 1.1vw, 13px);
+          font-size: clamp(12px, 1.35vw, 15px);
           font-weight: 300;
-          letter-spacing: 0.32em;
+          letter-spacing: 0.28em;
           line-height: 1.5;
           text-transform: uppercase;
           text-shadow: 0 2px 14px rgba(0,0,0,0.42);
@@ -175,8 +175,8 @@ export default function HeroSection() {
           .hero-kicker {
             gap: 10px;
             margin-bottom: 18px;
-            font-size: 10px;
-            letter-spacing: 0.18em;
+            font-size: 12px;
+            letter-spacing: 0.14em;
           }
 
           .hero-kicker-line {
