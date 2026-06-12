@@ -34,6 +34,7 @@ export default function HeroVideoSection() {
             <video
               className="hero-video w-full h-full object-cover"
               controls
+              muted
               playsInline
               preload="metadata"
               poster="/hero-bg.jpg"
