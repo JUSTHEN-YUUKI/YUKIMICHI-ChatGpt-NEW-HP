@@ -8,7 +8,7 @@ import { translations } from '@/lib/translations'
 export default function HeroSection() {
   const { language } = useLanguage()
   const copy = translations[language].home.hero
-  const heroKicker = 'EXPORT ARRANGEMENT SUPPORT JAPAN × LOGISTICS'
+  const heroKicker = 'EXPORT SUPPORT FROM JAPAN × INTERNATIONAL LOGISTICS'
 
   return (
     <section
