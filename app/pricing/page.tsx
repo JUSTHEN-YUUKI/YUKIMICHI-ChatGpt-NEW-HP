@@ -5,13 +5,13 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI - SNOWPATH JAPAN',
   description:
-    'YUKIMICHIの料金表。Express、Air Freight、Sea Freightの基本体系、手配手数料、最低手数料、国際送料、関税・VAT/GST、保険、梱包、規制確認費用について。',
+    'YUKIMICHIの料金表。International Courier、Air Freight、Sea Freightの基本体系、手配手数料、最低手数料、国際送料、関税・VAT/GST、保険、梱包、規制確認費用について。',
 }
 
 const pricingPlans = [
   {
-    label: 'Express',
-    title: 'International Express',
+    label: 'Courier',
+    title: 'International Courier',
     fee: '15%',
     minimum: 'Minimum 10,000 JPY',
     target: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
@@ -73,7 +73,7 @@ const additionalCosts = [
 
 const shippingLogic = [
   {
-    name: 'Express',
+    name: 'International Courier',
     target: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
     points: ['速い', '小口に向く', 'サイズ・重量制限に注意', '内容品により引受不可の場合あり'],
   },

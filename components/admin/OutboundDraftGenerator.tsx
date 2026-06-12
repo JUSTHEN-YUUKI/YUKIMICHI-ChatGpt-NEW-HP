@@ -110,7 +110,7 @@ function buildDraft(lead: OutboundLead | undefined, form: Record<string, string>
     `Dear ${company} team,`,
     '',
     `We are YUKIMICHI – SNOWPATH JAPAN, operated by JUSTHEN CO., LTD. in Sapporo, Japan.`,
-    `We support eligible Japanese product sourcing for overseas businesses, including international express, air freight, sea freight, packing, inspection, and export documentation coordination.`,
+    `We support eligible Japanese product sourcing for overseas businesses, including International Courier, Air Freight, Sea Freight, packing, inspection, and export documentation coordination.`,
     '',
     `Based on your public business profile in ${country}, we would like to ask whether ${category} may be relevant to your current buying or distribution plans.`,
     'We work with compliance and transparency. Availability depends on the product, destination country, quantity, and intended use. Final import/export availability is subject to confirmation by customs, carriers, brokers, and relevant authorities. Restricted categories require prior confirmation.',
@@ -119,7 +119,7 @@ function buildDraft(lead: OutboundLead | undefined, form: Record<string, string>
     '',
     form.signature,
   ].join('\n')
-  const dmBody = `YUKIMICHI – SNOWPATH JAPAN supports eligible Japanese product sourcing with international express / air freight / sea freight and compliance review. If ${category} is relevant for ${company}, please reply or contact exporter@justhen.co.jp.`
+  const dmBody = `YUKIMICHI – SNOWPATH JAPAN supports eligible Japanese product sourcing with International Courier / Air Freight / Sea Freight and compliance review. If ${category} is relevant for ${company}, please reply or contact exporter@justhen.co.jp.`
 
   return {
     subject,

@@ -62,7 +62,7 @@ export default function HeroSection() {
             fontWeight: 300,
             fontSize: 'clamp(36px,6vw,72px)',
             lineHeight: 1.5,
-            marginBottom: '24px',
+            marginBottom: '14px',
           }}
         >
           {copy.headlineLine1}<br />
@@ -72,25 +72,66 @@ export default function HeroSection() {
 
         <p
           style={{
+            color: '#f4efe6',
+            fontFamily: "'Cormorant Garamond', 'Noto Serif JP', serif",
+            fontSize: 'clamp(18px, 2.2vw, 28px)',
+            fontWeight: 300,
+            letterSpacing: '0.08em',
+            lineHeight: 1.45,
+            marginBottom: '22px',
+            textShadow: '0 2px 16px rgba(0,0,0,0.42)',
+          }}
+        >
+          {copy.headlineSubLine1}<br />
+          <span style={{ color: '#bfa46a' }}>{copy.headlineSubLine2}</span>
+        </p>
+
+        <p
+          style={{
             maxWidth: '700px',
             color: 'var(--washi-dim)',
             lineHeight: 2,
             marginBottom: '40px',
           }}
         >
-          {copy.body}
+          <span className="copy-line-ja">{copy.body}</span>
+          <span className="copy-line-en">{copy.bodySub}</span>
         </p>
 
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           <Link href="/contact" className="btn-primary">
-            {copy.consult}
+            <span className="hero-cta-copy">
+              <span>{copy.consult}</span>
+              <span>{copy.consultSub}</span>
+            </span>
           </Link>
 
           <Link href="/quote" className="btn-ghost">
-            {copy.quote}
+            <span className="hero-cta-copy">
+              <span>{copy.quote}</span>
+              <span>{copy.quoteSub}</span>
+            </span>
           </Link>
         </div>
       </div>
+
+      <style>{`
+        .hero-cta-copy {
+          display: grid;
+          gap: 3px;
+          line-height: 1.2;
+          text-align: center;
+        }
+
+        .hero-cta-copy span:last-child {
+          color: rgba(244, 239, 230, 0.72);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 10px;
+          font-weight: 300;
+          letter-spacing: 0.14em;
+          text-transform: none;
+        }
+      `}</style>
     </section>
   )
 }

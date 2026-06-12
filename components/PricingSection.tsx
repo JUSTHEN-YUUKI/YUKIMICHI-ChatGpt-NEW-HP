@@ -22,7 +22,7 @@ function ArrowRight({ size = 14 }: { size?: number }) {
 const pricePlans = [
   {
     label: "Express",
-    title: "International Express",
+    title: "International Courier",
     titleJp: "国際宅配便",
     fee: "15",
     unit: "% + min ¥10,000",
@@ -118,7 +118,8 @@ export default function PricingSection() {
             </h2>
 
             <p className="section-body" style={{ maxWidth: "650px", marginBottom: 0 }}>
-              {copy.body}
+              <span className="copy-line-ja">{copy.body}</span>
+              <span className="copy-line-en">{copy.bodySub}</span>
             </p>
           </div>
 

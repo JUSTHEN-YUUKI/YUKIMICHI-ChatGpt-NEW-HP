@@ -8,8 +8,14 @@ import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/lib/translations"
 
 const productShowcaseBodyColumns = [
-  "YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
-  "今後、実際の商品写真、梱包風景、札幌・北海道の実写素材、輸送関連の動画を追加し、より具体的な取引イメージを伝えていきます。",
+  {
+    ja: "YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
+    en: "YUKIMICHI organizes Japan procurement, packing, inspection, International Courier, Air Freight, and Sea Freight so Overseas Buyers can review eligible products with greater confidence.",
+  },
+  {
+    ja: "今後、実際の商品写真、梱包風景、札幌・北海道の実写素材、輸送関連の動画を追加し、より具体的な取引イメージを伝えていきます。",
+    en: "Product photography, packing scenes, Hokkaido visuals, and logistics footage can be added later while keeping the current structure and compliance-first presentation.",
+  },
 ]
 
 function ArrowRight({ size = 14 }: { size?: number }) {
@@ -56,7 +62,10 @@ export default function ProductShowcaseSection() {
 
           <div className="visual-body-grid">
             {productShowcaseBodyColumns.map((body) => (
-              <p key={body}>{body}</p>
+              <p key={body.en}>
+                <span className="copy-line-ja">{body.ja}</span>
+                <span className="copy-line-en">{body.en}</span>
+              </p>
             ))}
           </div>
         </ScrollReveal>
@@ -70,7 +79,7 @@ export default function ProductShowcaseSection() {
               <article className="visual-card" key={card.num}>
                 <div className="visual-media-box">
                   <span>{card.label}</span>
-                  <strong>Visual Area</strong>
+                  <strong>Curated Visual</strong>
                 </div>
                 <div className="visual-card-body">
                   <div className="visual-card-number">{card.num}</div>

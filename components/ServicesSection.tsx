@@ -90,6 +90,7 @@ interface Service {
   title: string
   titleJp: string
   desc: string
+  descSub?: string
   points: readonly string[]
   accent: string
 }
@@ -116,7 +117,7 @@ const services: Service[] = [
   {
     num: "02",
     icon: <IconGlobe />,
-    title: "International Express",
+    title: "International Courier",
     titleJp: "国際宅配便",
     desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、商品内容・納期・コストに応じた国際配送方法を比較し、最適な発送手段を検討します。",
     points: ["EMS", "DHL", "FedEx / UPS", "ヤマト国際宅急便"],
@@ -264,6 +265,7 @@ function ServiceCard({ service }: { service: Service }) {
         }}
       >
         {service.desc}
+        {service.descSub && <span className="copy-line-en gold-sub">{service.descSub}</span>}
       </p>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
@@ -367,7 +369,8 @@ export default function ServicesSection() {
 
           <div>
             <p className="section-body" style={{ marginBottom: "26px" }}>
-              {copy.body}
+              <span className="copy-line-ja">{copy.body}</span>
+              <span className="copy-line-en">{copy.bodySub}</span>
             </p>
 
             <div

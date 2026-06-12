@@ -15,7 +15,7 @@ const buyerTypeLabels: Record<ProductPickBuyerType, { ja: string; en: string }> 
 
 const riskLevelLabels: Record<ProductPickRiskLevel, string> = {
   standard: "Standard Review",
-  attention: "Prior Check",
+  attention: "Import Review",
   "restricted-review": "Restricted Item Review",
 }
 
@@ -57,8 +57,8 @@ function PickMedia({ pick }: { pick: ProductPick }) {
   return (
     <div className="pick-media-placeholder" aria-label="Showcase media placeholder">
       <span>YUKIMICHI</span>
-      <strong>Showcase Media</strong>
-      <small>JPG / PNG / WEBP / MP4</small>
+      <strong>Product Visual</strong>
+      <small>Prepared for selected product media</small>
     </div>
   )
 }
@@ -82,8 +82,14 @@ export default function ProductPicksSection() {
             </h2>
           </div>
           <p>
-            北海道・日本商品のピックアップを、輸出実務で確認すべき点とあわせて整理します。
-            価格・在庫・輸入可否を断定せず、問い合わせ前に確認すべき情報を明確にします。
+            <span className="copy-line-ja">
+              北海道・日本商品のピックアップを、輸出実務で確認すべき点とあわせて整理します。
+              価格・在庫・輸入可否を断定せず、問い合わせ前に確認すべき情報を明確にします。
+            </span>
+            <span className="copy-line-en">
+              Curated product categories from Hokkaido and Japan are presented with Import Review points,
+              suitable buyer types, and shipping options for overseas inquiry preparation.
+            </span>
           </p>
         </div>
       </ScrollReveal>
@@ -119,13 +125,13 @@ export default function ProductPicksSection() {
                 </div>
 
                 <div className="pick-check">
-                  <span>Import Check</span>
+                  <span>Import Review</span>
                   <p>{pick.importCheckEn}</p>
                   <p>{pick.importCheckJa}</p>
                 </div>
 
                 <div className="pick-shipping">
-                  <span>Recommended Shipping</span>
+                  <span>Recommended Shipping Method</span>
                   <ul>
                     {pick.shippingOptions.map((option) => (
                       <li key={option}>{option}</li>

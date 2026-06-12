@@ -4,7 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal"
 const individualNotes = [
   {
     ja: "個人輸入では、通関業者の手配ができない、または対応が限定的な場合があります。",
-    en: "For personal imports, customs broker arrangements may not be available or may be limited.",
+    en: "For Personal Import, Customs Broker arrangements may not be available or may be limited.",
   },
   {
     ja: "関税、輸入税、輸入許可、受取国側の手続きは購入者側で確認が必要です。",
@@ -12,14 +12,14 @@ const individualNotes = [
   },
   {
     ja: "小口の相談では、国際宅配便を中心に配送方法を確認します。",
-    en: "Small personal shipments are usually reviewed around international courier options.",
+    en: "Small personal shipments are usually reviewed around International Courier options.",
   },
 ]
 
 const businessNotes = [
   {
     ja: "法人輸入では、条件により通関業者との連携が可能な場合があります。",
-    en: "For business imports, coordination with a customs broker may be possible depending on the conditions.",
+    en: "For Business Import, coordination with a Customs Broker may be possible depending on the conditions.",
   },
   {
     ja: "Invoice、Packing List、商品情報、HS Code確認用情報を整理します。",
@@ -27,7 +27,7 @@ const businessNotes = [
   },
   {
     ja: "国際宅配便、航空貨物、海上輸送を比較し、数量・納期・品目に応じて提案します。",
-    en: "Courier, air freight, and sea freight can be compared based on quantity, timeline, and product category.",
+    en: "International Courier, Air Freight, and Sea Freight can be compared based on quantity, timeline, and product category.",
   },
 ]
 
@@ -69,7 +69,13 @@ export default function ImportGuideSection() {
             <em>for Overseas Buyers</em>
           </h2>
           <p>
-            海外バイヤーが日本商品を購入・輸入する前に、個人輸入と法人輸入で確認すべき事項を分けて整理します。
+            <span className="copy-line-ja">
+              海外バイヤーが日本商品を購入・輸入する前に、個人輸入と法人輸入で確認すべき事項を分けて整理します。
+            </span>
+            <span className="copy-line-en">
+              Before Overseas Buyers request support, this guide separates key Import Review points for
+              Personal Import and Business Import.
+            </span>
           </p>
         </div>
       </ScrollReveal>
@@ -113,7 +119,7 @@ export default function ImportGuideSection() {
       <ScrollReveal>
         <div className="import-check-panel">
           <div>
-            <span className="guide-panel-kicker">Import Check List</span>
+            <span className="guide-panel-kicker">Import Review Checklist</span>
             <h3>Before Requesting Support</h3>
           </div>
           <ol>

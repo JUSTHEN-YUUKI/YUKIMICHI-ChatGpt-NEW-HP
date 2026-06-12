@@ -23,36 +23,42 @@ const flowSteps = [
     title: "Inquiry",
     titleJp: "お問い合わせ",
     desc: "商品名、数量、配送先国、希望納期などをお知らせください。内容が未確定でも、まずは相談ベースで対応します。",
+    descEn: "Share the product name, quantity, destination country, and preferred timing. Early-stage inquiries are welcome.",
   },
   {
     num: "02",
     title: "Product Review",
     titleJp: "内容確認",
     desc: "取扱可否、配送方法、輸出に関する注意点、必要情報を確認します。小ロットやサンプル出荷の相談も可能です。",
+    descEn: "We review handling suitability, shipping options, export notes, and required information before quotation.",
   },
   {
     num: "03",
     title: "Quote Preparation",
     titleJp: "お見積り",
     desc: "商品代金、手配手数料、国際送料、想定される追加費用をできるだけ分かりやすく整理して提示します。",
+    descEn: "Product cost, handling fee, international freight, and possible additional costs are organized as clearly as possible.",
   },
   {
     num: "04",
     title: "Procurement",
     titleJp: "商品調達",
     desc: "日本国内での商品購入、仕入れ、簡易確認、発送準備を進めます。必要に応じて梱包や書類準備も行います。",
+    descEn: "We proceed with Japan procurement, basic checks, packing preparation, and export document organization when required.",
   },
   {
     num: "05",
     title: "International Shipping",
     titleJp: "輸出・国際発送",
     desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便、航空貨物、海上輸送などから案件に合う方法を選定します。",
+    descEn: "International Courier, Air Freight, and Sea Freight options are compared based on product, volume, and destination.",
   },
   {
     num: "06",
     title: "Delivery & Follow-up",
     titleJp: "納品・フォロー",
     desc: "追跡情報を共有し、到着までの流れを確認します。継続取引や次回見積りの相談にも対応します。",
+    descEn: "Tracking information is shared, and follow-up support can continue for repeat transactions or the next Request a Quote.",
   },
 ]
 
@@ -105,9 +111,15 @@ export default function FlowSection() {
           </h2>
 
           <p className="section-body" style={{ marginBottom: 0 }}>
-            初めての海外取引でも不安が少なくなるように、
-            お問い合わせから納品までの流れを明確にし、
-            必要な確認事項を一つずつ整理して進めます。
+            <span className="copy-line-ja">
+              初めての海外取引でも不安が少なくなるように、
+              お問い合わせから納品までの流れを明確にし、
+              必要な確認事項を一つずつ整理して進めます。
+            </span>
+            <span className="copy-line-en">
+              A clear export process helps Overseas Buyers understand what should be reviewed
+              before procurement, shipping, and document preparation.
+            </span>
           </p>
         </div>
       </ScrollReveal>
@@ -191,6 +203,7 @@ export default function FlowSection() {
                 }}
               >
                 {step.desc}
+                <span className="copy-line-en gold-sub">{step.descEn}</span>
               </p>
             </div>
           ))}
@@ -234,8 +247,14 @@ export default function FlowSection() {
                 margin: 0,
               }}
             >
-              商品名や配送先が決まっていない段階でもご相談可能です。
-              まずは状況を整理し、最適な進め方をご提案します。
+              <span className="copy-line-ja">
+                商品名や配送先が決まっていない段階でもご相談可能です。
+                まずは状況を整理し、最適な進め方をご提案します。
+              </span>
+              <span className="copy-line-en">
+                Even when details are still being considered, we can begin with Free Consultation
+                and organize the next practical steps.
+              </span>
             </p>
           </div>
 

@@ -20,27 +20,39 @@ function ArrowRight({ size = 14 }: { size?: number }) {
 const faqs = [
   {
     q: "小ロットやサンプル出荷にも対応できますか？",
+    qEn: "Can you support small lots or sample shipments?",
     a: "はい、1点からの小口発送やサンプル出荷の相談にも対応します。商品内容、配送先国、数量によって最適な配送方法や費用が変わるため、まずは商品情報をお知らせください。",
+    aEn: "Yes. Small-lot and sample shipment inquiries are welcome. Suitable shipping methods and costs vary by product, destination, and quantity.",
   },
   {
     q: "どの配送会社を利用できますか？",
+    qEn: "Which carriers or shipping methods can be reviewed?",
     a: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便などの国際宅配便に加え、案件によっては航空貨物・海上輸送も検討します。納期、コスト、商品特性に応じてご提案します。",
+    aEn: "We review International Courier options such as EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN, and may compare Air Freight or Sea Freight depending on the case.",
   },
   {
     q: "航空貨物と海上輸送のどちらが良いですか？",
+    qEn: "Should I choose Air Freight or Sea Freight?",
     a: "短納期・緊急輸送・高付加価値商品は航空貨物が向いています。大量輸送やコスト重視の継続出荷は海上輸送が向いています。YUKIMICHIでは案件ごとに比較してご案内します。",
+    aEn: "Air Freight is generally considered for urgent or high-value shipments. Sea Freight is often considered for larger volumes or cost-focused repeat shipments.",
   },
   {
     q: "関税やVAT/GSTも事前に分かりますか？",
+    qEn: "Can duties or VAT/GST be confirmed in advance?",
     a: "概算確認や参考情報の整理は可能です。ただし、最終的な関税・VAT/GST・輸入規制の判断は相手国税関や通関業者、公的機関の確認が前提となります。",
+    aEn: "Reference checks may be organized, but final duties, VAT/GST, and import requirements are determined by destination customs, Customs Brokers, or relevant authorities.",
   },
   {
     q: "輸出できない商品はありますか？",
+    qEn: "Are there products that require prior review?",
     a: "はい、医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、規制対象品などは国や商品によって条件が異なります。事前に商品情報を確認し、対応可否を整理します。",
+    aEn: "Yes. Foods, batteries, dangerous goods, blades, branded goods, used goods, cosmetics, and regulated items may require prior review by product and destination.",
   },
   {
     q: "見積りにはどの情報が必要ですか？",
+    qEn: "What information is needed for a Request a Quote?",
     a: "商品名、数量、商品URL、配送先国、希望納期、サイズ・重量、希望配送方法があるとスムーズです。未確定の場合でも、分かる範囲でご相談いただけます。",
+    aEn: "Product name, quantity, product URL, destination country, preferred timing, size, weight, and preferred shipping method help us review the case smoothly.",
   },
 ]
 
@@ -93,12 +105,16 @@ export default function FAQSection() {
           </h2>
 
           <p className="section-body">
-            初めて日本から商品を輸入する海外バイヤーにも分かりやすいように、
-            よくある質問を整理しました。
-            <br />
-            <br />
-            商品内容や配送先国によって条件は変わるため、
-            詳細は個別見積り時に確認します。
+            <span className="copy-line-ja">
+              初めて日本から商品を輸入する海外バイヤーにも分かりやすいように、
+              よくある質問を整理しました。
+              商品内容や配送先国によって条件は変わるため、
+              詳細は個別見積り時に確認します。
+            </span>
+            <span className="copy-line-en">
+              These notes help Overseas Buyers understand key Import Review points before inquiry.
+              Final conditions vary by product, destination, carrier, and local authority review.
+            </span>
           </p>
 
           <Link href="/contact" className="btn-primary">
@@ -172,6 +188,7 @@ export default function FAQSection() {
                       }}
                     >
                       {faq.q}
+                      <span className="copy-line-en gold-sub">{faq.qEn}</span>
                     </h3>
 
                     <p
@@ -185,6 +202,7 @@ export default function FAQSection() {
                       }}
                     >
                       {faq.a}
+                      <span className="copy-line-en">{faq.aEn}</span>
                     </p>
                   </div>
                 </div>

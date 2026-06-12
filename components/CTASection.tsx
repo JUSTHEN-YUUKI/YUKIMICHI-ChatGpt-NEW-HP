@@ -109,7 +109,8 @@ export default function CTASection() {
               letterSpacing: "0.05em",
             }}
           >
-            {copy.body}
+            <span className="copy-line-ja">{copy.body}</span>
+            <span className="copy-line-en">{copy.bodySub}</span>
           </p>
 
           <div

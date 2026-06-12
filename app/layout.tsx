@@ -9,9 +9,9 @@ import ContentTranslationBridge from '@/components/ContentTranslationBridge'
 export const metadata: Metadata = {
   title: 'YUKIMICHI – Export Support from Japan',
   description:
-    'YUKIMICHI provides legal, transparent, and reliable export support from Japan, including product procurement, international express, air freight, sea freight, and export documentation support.',
+    'YUKIMICHI provides legal, transparent, and reliable Export Support from Japan, including product procurement, International Courier, Air Freight, Sea Freight, and export documentation support.',
   keywords:
-    'Japan export, Japanese supplier, small lot export, international express, air freight, sea freight, Japanese trading company',
+    'Japan export, Japanese supplier, small lot export, International Courier, Air Freight, Sea Freight, Japanese trading company',
   icons: {
     icon: [
       {

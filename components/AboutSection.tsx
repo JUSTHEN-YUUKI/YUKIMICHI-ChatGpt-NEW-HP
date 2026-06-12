@@ -22,16 +22,19 @@ const strengths = [
     label: "HOKKAIDO BASED",
     title: "北海道・札幌を拠点に",
     text: "日本国内の商品調達から海外発送まで、北海道・札幌を拠点に丁寧に対応します。",
+    textEn: "Based in Sapporo, Hokkaido, we support Japan procurement and export preparation with careful communication.",
   },
   {
     label: "SEA & AIR",
     title: "海上輸送・航空輸送に対応",
     text: "海上貨物、航空貨物、EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、用途に応じた輸送方法を検討します。",
+    textEn: "We review Sea Freight, Air Freight, EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN according to product details and destination.",
   },
   {
     label: "EXPORT SUPPORT",
     title: "輸出実務をサポート",
     text: "商品調達、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。",
+    textEn: "Our Export Support covers sourcing, document preparation, shipping comparison, and Request a Quote preparation for overseas trade.",
   },
 ]
 
@@ -93,6 +96,11 @@ export default function AboutSection() {
             日本国内の商品調達、国際配送、輸出関連書類の準備、
             配送方法の比較、海外バイヤーとのやり取りまで、
             海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。
+            <span className="copy-line-en">
+              YUKIMICHI is an Export Support brand operated by JUSTHEN CO., LTD.,
+              helping Overseas Buyers review eligible Japanese products, shipping methods,
+              documents, and communication before moving into quotation.
+            </span>
           </p>
 
           <p
@@ -107,6 +115,9 @@ export default function AboutSection() {
           >
             私たちは単なる発送代行ではなく、日本と世界を信頼でつなぐ
             長期的な国際貿易パートナーを目指しています。
+            <span className="copy-line-en">
+              We aim to be a long-term trade partner, not simply a forwarding contact.
+            </span>
           </p>
 
           <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
@@ -220,6 +231,7 @@ export default function AboutSection() {
                     }}
                   >
                     {item.text}
+                    <span className="copy-line-en gold-sub">{item.textEn}</span>
                   </p>
                 </div>
               </div>

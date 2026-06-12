@@ -1,17 +1,17 @@
 import Link from '@/components/NewTabLink'
 
 const footerLinks = [
-  { href: '/', label: 'Top' },
-  { href: '/about', label: '会社概要' },
-  { href: '/services', label: 'サービス' },
-  { href: '/pricing', label: '料金表' },
-  { href: '/flow', label: '取引の流れ' },
-  { href: '/quote', label: 'お見積り' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'お問い合わせ' },
-  { href: '/restricted', label: '禁止・制限品目' },
-  { href: '/terms', label: '取引条件' },
-  { href: '/privacy', label: 'プライバシーポリシー' },
+  { href: '/', label: 'Top', en: 'Home' },
+  { href: '/about', label: '会社概要', en: 'About YUKIMICHI' },
+  { href: '/services', label: 'サービス', en: 'Export Support' },
+  { href: '/pricing', label: '料金表', en: 'Pricing' },
+  { href: '/flow', label: '取引の流れ', en: 'Export Process' },
+  { href: '/quote', label: '見積依頼', en: 'Request a Quote' },
+  { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
+  { href: '/contact', label: 'お問い合わせ', en: 'Free Consultation' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/terms', label: '取引条件', en: 'Terms' },
+  { href: '/privacy', label: 'プライバシーポリシー', en: 'Privacy Policy' },
 ]
 
 export default function Footer() {
@@ -27,10 +27,11 @@ export default function Footer() {
         <nav className="site-footer__nav" aria-label="Footer navigation">
           <p className="site-footer__heading">Navigation</p>
           <ul className="site-footer__links">
-            {footerLinks.map(({ href, label }) => (
+            {footerLinks.map(({ href, label, en }) => (
               <li key={href}>
                 <Link href={href} className="site-footer__link">
-                  {label}
+                  <span>{label}</span>
+                  <small>{en}</small>
                 </Link>
               </li>
             ))}
@@ -134,11 +135,19 @@ export default function Footer() {
         }
 
         .site-footer__link {
-          display: inline-flex;
+          display: inline-grid;
+          gap: 2px;
           font-size: 12px;
           font-weight: 300;
           letter-spacing: 0.08em;
           line-height: 1.5;
+        }
+
+        .site-footer__link small {
+          color: rgba(244, 239, 230, 0.45);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 11px;
+          letter-spacing: 0.08em;
         }
 
         .site-footer__link:hover,

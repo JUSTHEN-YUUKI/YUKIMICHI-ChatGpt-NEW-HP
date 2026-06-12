@@ -34,12 +34,12 @@ export const productPicks: ProductPick[] = [
     descriptionJa:
       "菓子、加工食品、地域限定品など、成分・数量・配送先国を確認しながら輸出相談につなげます。",
     descriptionEn:
-      "Curated food and regional gift categories from Hokkaido, handled with attention to ingredients, quantity, and destination-country requirements.",
+      "Curated Hokkaido food and regional gift categories for inquiry preparation, with ingredients, quantity, and destination-country requirements reviewed before quotation.",
     importCheckJa:
       "食品は国により成分、表示、検疫、輸入許可の確認が必要です。温度管理品や生鮮品は個別確認となります。",
     importCheckEn:
       "Food items may require ingredient, label, quarantine, or permit checks. Temperature-controlled and fresh items require separate review.",
-    shippingOptions: ["International Express", "Air Freight"],
+    shippingOptions: ["International Courier", "Air Freight"],
     riskLevel: "restricted-review",
     mediaType: "none",
     mediaSrc: null,
@@ -60,7 +60,7 @@ export const productPicks: ProductPick[] = [
       "在庫、価格、購入可否は掲載時点で保証しません。ブランド品、中古品、電池付き商品は追加確認が必要です。",
     importCheckEn:
       "Availability, pricing, and purchase eligibility are not guaranteed. Branded, used, or battery-included items require additional checks.",
-    shippingOptions: ["International Express"],
+    shippingOptions: ["International Courier"],
     riskLevel: "attention",
     mediaType: "none",
     mediaSrc: null,
@@ -81,7 +81,7 @@ export const productPicks: ProductPick[] = [
       "木材、皮革、動植物由来素材、割れ物、大型品は、素材情報と仕向国側の規制確認が必要です。",
     importCheckEn:
       "Wood, leather, animal or plant-derived materials, fragile goods, and oversized items may require material and destination-country checks.",
-    shippingOptions: ["International Express", "Air Freight"],
+    shippingOptions: ["International Courier", "Air Freight"],
     riskLevel: "attention",
     mediaType: "none",
     mediaSrc: null,
@@ -97,12 +97,12 @@ export const productPicks: ProductPick[] = [
     descriptionJa:
       "北海道らしいアウトドア用品や冬季関連品を、数量、素材、サイズ、輸送方法の観点から法人向けに整理します。",
     descriptionEn:
-      "Outdoor and winter-use goods can be organized for business buyers by quantity, material, dimensions, and suitable freight options.",
+      "Outdoor and winter-use goods can be organized for Business Buyers by quantity, material, dimensions, and suitable freight options.",
     importCheckJa:
       "燃料、スプレー、電池、刃物、危険品に該当する可能性がある商品は、事前確認なしでは扱いません。",
     importCheckEn:
       "Items that may involve fuel, sprays, batteries, blades, or dangerous-goods rules are not handled without prior review.",
-    shippingOptions: ["International Express", "Air Freight", "Sea Freight"],
+    shippingOptions: ["International Courier", "Air Freight", "Sea Freight"],
     riskLevel: "restricted-review",
     mediaType: "none",
     mediaSrc: null,

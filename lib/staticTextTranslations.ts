@@ -103,7 +103,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: '¿Pueden usar EMS, DHL, FedEx, UPS y Yamato International TA-Q-BIN?',
   },
   '航空貨物と国際宅配便の違いは何ですか？': {
-    en: 'What is the difference between air freight and international express?',
+    en: 'What is the difference between Air Freight and International Courier?',
     zh: '航空货运和国际快递有什么区别？',
     es: '¿Cuál es la diferencia entre carga aérea y courier internacional?',
   },
@@ -1009,7 +1009,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   '不正利用、虚偽申告、規制逃れ等の防止': { en: 'Preventing misuse, false declarations, and regulatory avoidance', zh: '防止不正使用、虚假申报和规避规定等', es: 'Prevenir uso indebido, declaraciones falsas y evasión normativa' },
   '法令または公的機関からの要請への対応': { en: 'Responding to legal or authority requests', zh: '应对法律或公的机构要求', es: 'Responder a solicitudes legales o de autoridades' },
   '配送会社への配送情報提供': { en: 'Providing shipping information to carriers', zh: '向配送公司提供配送信息', es: 'Proporcionar información de envío a transportistas' },
-  '通関業者・物流業者への確認': { en: 'Confirmation with customs brokers or logistics providers', zh: '向报关行・物流公司确认', es: 'Confirmación con agentes aduaneros o logísticos' },
+  '通関業者・物流業者への確認': { en: 'Confirmation with Customs Brokers or logistics providers', zh: '向报关行・物流公司确认', es: 'Confirmación con agentes aduaneros o logísticos' },
   '仕入れ先への在庫・条件確認': { en: 'Checking stock and conditions with suppliers', zh: '向供应商确认库存和条件', es: 'Confirmar stock y condiciones con proveedores' },
   '決済・請求・会計処理に必要な場合': { en: 'When required for payment, billing, or accounting', zh: '支付、请款或会计处理所需时', es: 'Cuando sea necesario para pagos, facturación o contabilidad' },
   '法令に基づく場合': { en: 'When required by law', zh: '基于法律时', es: 'Cuando lo exija la ley' },
@@ -1020,7 +1020,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Como regla general, no proporcionamos información a terceros sin consentimiento. Sin embargo, podemos compartirla en la medida necesaria en los siguientes casos.',
   },
   'YUKIMICHIは海外バイヤー・海外法人との取引相談を扱うため、配送先国、輸入者情報、配送会社、通関業者等に関連する情報を取り扱う場合があります。国際配送・輸出入確認に必要な範囲で、関係事業者に情報を共有する場合があります。': {
-    en: 'Because YUKIMICHI handles trade consultations with overseas buyers and companies, we may handle information related to destination countries, importer details, carriers, and customs brokers. We may share information with relevant parties within the scope needed for international shipping and import/export review.',
+    en: 'Because YUKIMICHI handles trade consultations with overseas buyers and companies, we may handle information related to destination countries, importer details, carriers, and Customs Brokers. We may share information with relevant parties within the scope needed for international shipping and import/export review.',
     zh: '由于YUKIMICHI处理与海外买家及海外法人相关的交易咨询，可能处理配送国家、进口者信息、配送公司和报关行等相关信息。为国际配送和进出口确认所需，可能向相关事业者共享信息。',
     es: 'Como YUKIMICHI atiende consultas con compradores y empresas extranjeras, puede tratar información sobre destino, importador, transportistas y agentes aduaneros. Puede compartir información con partes relacionadas en la medida necesaria.',
   },

@@ -23,7 +23,7 @@ const coreServices = [
   {
     code: 'B',
     title: '国際宅配便',
-    en: 'International Express',
+    en: 'International Courier',
     points: [
       'EMS、DHL、FedEx、UPS、ヤマト国際宅急便などを案件ごとに検討します。',
       '小口、サンプル、短納期、海外バイヤー向け発送に適しています。',
@@ -101,7 +101,7 @@ const limitations = [
 
 const shippingMethods = [
   {
-    name: 'Express',
+    name: 'International Courier',
     detail: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
     fit: '小口、サンプル、短納期向け',
     note: '比較的スピード重視の発送に向きます。',
