@@ -31,7 +31,7 @@ type InquiryPayload = {
   website?: unknown
 }
 
-const USER_SEND_ERROR = '送信に失敗しました。お手数ですが、下記メールアドレスまで直接ご連絡ください。'
+const USER_SEND_ERROR = '送信に失敗しました。お手数ですが、メールで直接ご連絡ください。'
 
 function toText(value: unknown, maxLength = 2000) {
   if (typeof value !== 'string') return ''

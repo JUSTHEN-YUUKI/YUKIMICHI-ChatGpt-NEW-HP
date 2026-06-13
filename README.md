@@ -34,3 +34,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## YUKIMICHI Inquiry Email Setup
+
+The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email delivery uses Nodemailer with SMTP settings stored only in Vercel environment variables.
+
+Do not commit SMTP passwords or real `.env.local` files. Use `.env.example` only as a key list.
+
+Required Vercel Production environment variables:
+
+```text
+CONTACT_TO_EMAIL=exporter@justhen.co.jp
+SMTP_HOST=smtp.office365.com
+SMTP_PORT=587
+SMTP_USER=exporter@justhen.co.jp
+SMTP_PASS=<Outlook or Microsoft 365 SMTP password>
+SMTP_FROM=YUKIMICHI Website <exporter@justhen.co.jp>
+```
+
+Vercel Production setup:
+
+1. Open the Vercel dashboard.
+2. Open the `YUKIMICHI-ChatGpt-NEW-HP` project.
+3. Open `Settings` -> `Environment Variables`.
+4. Add the 6 variables above to the `Production` environment.
+5. After saving, open `Deployments` and redeploy the latest production deployment.
+6. Test sending from `/contact` and `/quote`.
+
+If sending still fails after the variables are set, SMTP AUTH may be disabled on the Microsoft 365 mailbox. Enable SMTP AUTH for `exporter@justhen.co.jp`, then redeploy or retry.
