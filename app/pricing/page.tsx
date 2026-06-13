@@ -102,7 +102,6 @@ const optionalServiceFees = [
 const cosmeticChecks = [
   { item: '成分表示写真', reason: '輸入規制・成分確認に必要' },
   { item: '製造番号・ロット番号', reason: 'トラブル時の追跡に必要' },
-  { item: '使用期限・製造日', reason: '販売可否に関係' },
   { item: '外箱状態', reason: '破損・汚れの確認' },
   { item: 'JANコード', reason: '商品特定に必要' },
   { item: 'アルコール・エアゾール確認', reason: '危険品判定に関係' },
