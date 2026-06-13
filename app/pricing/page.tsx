@@ -87,7 +87,7 @@ const optionalServiceFees = [
   { service: '特殊梱包', type: '有料オプション', guide: '個別見積り' },
   { service: '複数仕入先の商品集約', type: '有料オプション', guide: '個別見積り' },
   { service: '分納・複数配送先対応', type: '有料オプション', guide: '個別見積り' },
-  { service: '価格交渉・条件交渉', type: '有料オプション', guide: '10,000〜30,000円〜' },
+  { service: '価格交渉・条件交渉', type: '有料オプション', guide: '10,000円〜' },
   { service: '長期商談代行', type: '月額または個別', guide: '10,000円〜' },
 ]
 
