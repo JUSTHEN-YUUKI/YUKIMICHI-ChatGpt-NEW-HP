@@ -85,16 +85,15 @@ const optionalServiceFees = [
   { service: 'サンプル購入代行', type: '有料オプション', guide: '商品代金 + 手数料' },
   { service: '小分け・再梱包', type: '有料オプション', guide: '個別見積り' },
   { service: '特殊梱包', type: '有料オプション', guide: '個別見積り' },
-  { service: '倉庫一時保管', type: '有料オプション', guide: '1日または1週間単位' },
   { service: '複数仕入先の商品集約', type: '有料オプション', guide: '個別見積り' },
   { service: '分納・複数配送先対応', type: '有料オプション', guide: '個別見積り' },
   { service: '価格交渉・条件交渉', type: '有料オプション', guide: '10,000〜30,000円〜' },
-  { service: '長期商談代行', type: '月額または個別', guide: '30,000〜100,000円〜' },
+  { service: '長期商談代行', type: '月額または個別', guide: '10,000円〜' },
 ]
 
 const paymentItems = [
   'Payment by bank transfer designated by YUKIMICHI in Japan.',
-  '支払いは、日本のYUKIMICHIが指定する銀行振込（TT）です。',
+  '支払いは、YUKIMICHIが指定する日本の銀行振込（TT）です。',
   '振込手数料は原則としてお客様負担です。',
   '入金確認後に、手配・発注・輸出準備を開始します。',
 ]
