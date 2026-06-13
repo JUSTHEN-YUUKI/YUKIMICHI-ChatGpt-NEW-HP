@@ -231,6 +231,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
       <div className="inquiry-form__grid">
         {fields.map((field) => {
           const options = selectOptions[field.name]
+          const showRequiredBadge = field.required && !(type === 'quote' && field.name === 'productUrl')
           const fieldClassName = [
             'inquiry-form__field',
             `inquiry-form__field--${field.name}`,
@@ -246,7 +247,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
             >
               <span className="inquiry-form__label">
                 <span>{field.label}</span>
-                {field.required && <em>{common.required}</em>}
+                {showRequiredBadge && <em>{common.required}</em>}
               </span>
 
               {field.name === 'quantity' ? (
