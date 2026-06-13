@@ -206,14 +206,6 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <div className="optional-included-box">
-          <span>Included in Basic Handling Fees</span>
-          <p>
-            基本料金とは別の追加オプションです。通常の在庫確認、価格確認、MOQ確認、簡単な条件確認は基本手数料に含まれます。
-            現地確認、写真撮影、検品、資料取得、複数社比較、長期交渉など、作業量や責任範囲が増える場合は追加費用として正式見積りで整理します。
-          </p>
-        </div>
-
         <div className="optional-fee-table" role="table" aria-label="YUKIMICHI optional service fees">
           <div className="optional-fee-row optional-fee-head" role="row">
             <span role="columnheader">サービス</span>
@@ -435,7 +427,6 @@ export default function PricingPage() {
           margin: 0;
         }
 
-        .optional-included-box,
         .optional-service-copy,
         .optional-service-notes {
           border: 1px solid rgba(201,168,76,0.18);
@@ -444,7 +435,6 @@ export default function PricingPage() {
           padding: clamp(22px, 3vw, 32px);
         }
 
-        .optional-included-box span,
         .optional-service-notes span {
           color: var(--gold);
           display: block;
