@@ -80,7 +80,7 @@ const optionalServiceFees = [
   { service: 'ダメージ確認', type: '有料オプション', guide: '1箱 1,000〜3,000円' },
   { service: '賞味期限・使用期限確認', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
   { service: 'SDS/MSDS取得サポート', type: '有料オプション', guide: '1商品 3,000〜10,000円' },
-  { service: 'メーカー資料取得代行', type: '有料オプション', guide: '1社 5,000〜10,000円' },
+  { service: 'メーカー資料取得代行', type: '有料オプション', guide: '1社1,000〜3,000円' },
   { service: '追加メーカー問い合わせ', type: '有料オプション', guide: '1社 5,000〜10,000円' },
   { service: 'サンプル購入代行', type: '有料オプション', guide: '商品代金 + 手数料' },
   { service: '小分け・再梱包', type: '有料オプション', guide: '個別見積り' },
