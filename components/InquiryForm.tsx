@@ -22,6 +22,7 @@ type FormState = {
   deadline: string
   shippingMethod: string
   message: string
+  website: string
 }
 
 type FieldConfig = {
@@ -55,6 +56,7 @@ const initialState: FormState = {
   deadline: '',
   shippingMethod: '',
   message: '',
+  website: '',
 }
 
 const productCategoryOptions = [
@@ -231,6 +233,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
       <div className="inquiry-form__grid">
         {fields.map((field) => {
           const options = selectOptions[field.name]
+          const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
           const showRequiredBadge = field.required && !(type === 'quote' && field.name === 'productUrl')
           const fieldClassName = [
             'inquiry-form__field',
@@ -261,6 +264,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     value={formState.quantity}
                     placeholder={field.placeholder}
                     required={field.required}
+                    autoComplete="on"
                     onChange={(event) => updateField('quantity', event.target.value)}
                   />
                   <select
@@ -282,24 +286,27 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   value={formState[field.name]}
                   placeholder={field.placeholder}
                   required={field.required}
+                  autoComplete="on"
                   onChange={(event) => updateField(field.name, event.target.value)}
                 />
               ) : options ? (
-                <select
-                  name={field.name}
-                  value={formState[field.name]}
-                  required={field.required}
-                  onChange={(event) => updateField(field.name, event.target.value)}
-                >
-                  <option value="" disabled>
-                    {field.placeholder}
-                  </option>
-                  {options.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+                <>
+                  <input
+                    name={field.name}
+                    type="text"
+                    list={listId}
+                    value={formState[field.name]}
+                    placeholder={field.placeholder}
+                    required={field.required}
+                    autoComplete="on"
+                    onChange={(event) => updateField(field.name, event.target.value)}
+                  />
+                  <datalist id={listId}>
+                    {options.map((option) => (
+                      <option key={option} value={option} />
+                    ))}
+                  </datalist>
+                </>
               ) : (
                 <input
                   name={field.name}
@@ -307,6 +314,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   value={formState[field.name]}
                   placeholder={field.placeholder}
                   required={field.required}
+                  autoComplete="on"
                   onChange={(event) => updateField(field.name, event.target.value)}
                 />
               )}
@@ -316,6 +324,18 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           )
         })}
       </div>
+
+      <label className="inquiry-form__honeypot" aria-hidden="true">
+        <span>Website</span>
+        <input
+          name="website"
+          type="text"
+          value={formState.website}
+          autoComplete="off"
+          tabIndex={-1}
+          onChange={(event) => updateField('website', event.target.value)}
+        />
+      </label>
 
       <div className="inquiry-form__notice" aria-label="Important notes">
         {complianceNotes.map((note) => (
@@ -359,6 +379,14 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
         .inquiry-form__field--wide {
           grid-column: 1 / -1;
+        }
+
+        .inquiry-form__honeypot {
+          height: 1px;
+          left: -10000px;
+          overflow: hidden;
+          position: absolute;
+          width: 1px;
         }
 
         .inquiry-form__label {

@@ -511,6 +511,11 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     zh: '发送失败。请稍后再试。',
     es: 'El envío falló. Inténtelo de nuevo más tarde.',
   },
+  '送信に失敗しました。お手数ですが、下記メールアドレスまで直接ご連絡ください。': {
+    en: 'Submission failed. Please contact us directly by email using the address below.',
+    zh: '发送失败。请通过下方邮箱地址直接联系我们。',
+    es: 'No se pudo enviar. Contáctenos directamente por email usando la dirección indicada abajo.',
+  },
   'Representative of JUSTHEN CO., LTD.': {
     en: 'Representative of JUSTHEN CO., LTD.',
     zh: 'JUSTHEN CO., LTD. 代表',

@@ -382,7 +382,7 @@ export const translations = {
       complianceNotes: ['商品内容、配送先国、数量、サイズ、重量、用途により対応可否・費用は変動します。', '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは事前確認が必要です。', '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提です。'],
       successAutoReply: '送信が完了しました。入力いただいたメールアドレス宛に受付確認メールをお送りしました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。',
       successNoAutoReply: '送信が完了しました。内容を確認のうえ、exporter@justhen.co.jp よりご連絡いたします。',
-      defaultError: '送信に失敗しました。お手数ですが、exporter@justhen.co.jp へ直接ご連絡ください。',
+      defaultError: '送信に失敗しました。お手数ですが、下記メールアドレスまで直接ご連絡ください。',
     },
   },
   en: {
@@ -626,7 +626,7 @@ export const translations = {
       ],
       successAutoReply: 'Your message has been sent. A confirmation email has been sent to the address you entered. We will review the details and contact you from exporter@justhen.co.jp.',
       successNoAutoReply: 'Your message has been sent. We will review the details and contact you from exporter@justhen.co.jp.',
-      defaultError: 'Submission failed. Please contact exporter@justhen.co.jp directly.',
+      defaultError: 'Submission failed. Please contact us directly by email using the address below.',
     },
   },
   zh: {
@@ -866,7 +866,7 @@ export const translations = {
       complianceNotes: ['可否处理和费用会因商品内容、配送国家、数量、尺寸、重量和用途而变化。', '医药品、食品、化妆品、电池、危险品、中古品、品牌品、动植物来源材料等需要事前确认。', '最终的出口入可否、关税、VAT/GST和配送公司受理可否，以海关、通关业者、配送公司或公的机构等确认为前提。'],
       successAutoReply: '发送已完成。已向您输入的邮箱发送受理确认邮件。我们确认内容后将通过 exporter@justhen.co.jp 联系您。',
       successNoAutoReply: '发送已完成。我们确认内容后将通过 exporter@justhen.co.jp 联系您。',
-      defaultError: '发送失败。请直接联系 exporter@justhen.co.jp。',
+      defaultError: '发送失败。请通过下方邮箱地址直接联系我们。',
     },
   },
   es: {
@@ -1106,7 +1106,7 @@ export const translations = {
       complianceNotes: ['La elegibilidad y los costos varían por producto, destino, cantidad, tamaño, peso y uso.', 'Medicamentos, alimentos, cosméticos, baterías, mercancías peligrosas, usados, marcas y materiales de origen animal o vegetal requieren revisión previa.', 'La elegibilidad final, aranceles, VAT/GST y aceptación del transportista requieren confirmación por aduanas, agentes, transportistas o autoridades públicas.'],
       successAutoReply: 'El envío se completó. Se ha enviado un email de confirmación a la dirección ingresada. Revisaremos el contenido y le contactaremos desde exporter@justhen.co.jp.',
       successNoAutoReply: 'El envío se completó. Revisaremos el contenido y le contactaremos desde exporter@justhen.co.jp.',
-      defaultError: 'No se pudo enviar. Contacte directamente a exporter@justhen.co.jp.',
+      defaultError: 'No se pudo enviar. Contáctenos directamente por email usando la dirección indicada abajo.',
     },
   },
 } as const satisfies Record<Language, TranslationTree>

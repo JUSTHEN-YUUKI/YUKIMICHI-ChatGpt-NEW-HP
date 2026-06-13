@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server'
+import nodemailer from 'nodemailer'
+
+export const runtime = 'nodejs'
 
 type InquiryType = 'quote' | 'contact'
 
@@ -25,30 +28,14 @@ type InquiryPayload = {
   recipientType?: unknown
   sourcePage?: unknown
   language?: unknown
+  website?: unknown
 }
 
-const INQUIRY_TO = 'exporter@justhen.co.jp'
-
-type ResendEmailPayload = {
-  from: string
-  to: string[]
-  bcc?: string[]
-  reply_to: string
-  subject: string
-  text: string
-}
+const USER_SEND_ERROR = '送信に失敗しました。お手数ですが、下記メールアドレスまで直接ご連絡ください。'
 
 function toText(value: unknown, maxLength = 2000) {
   if (typeof value !== 'string') return ''
   return value.trim().slice(0, maxLength)
-}
-
-function parseBccEmails(value: string | undefined) {
-  if (!value) return []
-  return value
-    .split(',')
-    .map((email) => email.trim())
-    .filter(Boolean)
 }
 
 function normalizeType(value: unknown): InquiryType | null {
@@ -96,30 +83,92 @@ function generateReceiptNumber(date: Date) {
   return `YKM-${getTokyoDatePart(date)}-${generateRandomCode()}`
 }
 
-async function sendResendEmail(resendApiKey: string, payload: ResendEmailPayload) {
-  return fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json',
+function getRequiredEnv(name: string) {
+  const value = process.env[name]?.trim()
+  return value || null
+}
+
+function getSmtpConfig() {
+  const contactToEmail = getRequiredEnv('CONTACT_TO_EMAIL')
+  const smtpHost = getRequiredEnv('SMTP_HOST')
+  const smtpPortValue = getRequiredEnv('SMTP_PORT')
+  const smtpUser = getRequiredEnv('SMTP_USER')
+  const smtpPass = getRequiredEnv('SMTP_PASS')
+  const smtpFrom = getRequiredEnv('SMTP_FROM')
+  const smtpPort = smtpPortValue ? Number(smtpPortValue) : NaN
+  const missing = [
+    ['CONTACT_TO_EMAIL', contactToEmail],
+    ['SMTP_HOST', smtpHost],
+    ['SMTP_PORT', smtpPortValue],
+    ['SMTP_USER', smtpUser],
+    ['SMTP_PASS', smtpPass],
+    ['SMTP_FROM', smtpFrom],
+  ]
+    .filter(([, value]) => !value)
+    .map(([name]) => name)
+
+  if (missing.length > 0 || !Number.isInteger(smtpPort)) {
+    return {
+      ok: false as const,
+      error: `Missing or invalid SMTP env: ${[
+        ...missing,
+        ...(!Number.isInteger(smtpPort) ? ['SMTP_PORT must be an integer'] : []),
+      ].join(', ')}`,
+    }
+  }
+
+  return {
+    ok: true as const,
+    contactToEmail: contactToEmail as string,
+    smtpHost: smtpHost as string,
+    smtpPort,
+    smtpUser: smtpUser as string,
+    smtpPass: smtpPass as string,
+    smtpFrom: smtpFrom as string,
+  }
+}
+
+async function sendSmtpEmail({
+  to,
+  from,
+  replyTo,
+  subject,
+  text,
+  smtpHost,
+  smtpPort,
+  smtpUser,
+  smtpPass,
+}: {
+  to: string
+  from: string
+  replyTo: string
+  subject: string
+  text: string
+  smtpHost: string
+  smtpPort: number
+  smtpUser: string
+  smtpPass: string
+}) {
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpPort === 465,
+    auth: {
+      user: smtpUser,
+      pass: smtpPass,
     },
-    body: JSON.stringify(payload),
+  })
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo,
+    subject,
+    text,
   })
 }
 
 export async function POST(request: Request) {
-  const resendApiKey = process.env.RESEND_API_KEY
-  const resendFromEmail = process.env.RESEND_FROM_EMAIL
-
-  if (!resendApiKey || !resendFromEmail) {
-    return NextResponse.json(
-      { ok: false, error: 'メール送信設定が未完了です。' },
-      { status: 500 },
-    )
-  }
-
-  const bccEmails = parseBccEmails(process.env.INQUIRY_BCC_EMAILS)
-
   let payload: InquiryPayload
 
   try {
@@ -153,11 +202,20 @@ export async function POST(request: Request) {
   const recipientType = toText(payload.recipientType, 200)
   const sourcePage = toText(payload.sourcePage, 300) || (type === 'quote' ? '/quote' : '/contact')
   const language = toText(payload.language, 20) || 'ja'
+  const website = toText(payload.website, 300)
+
+  if (website) {
+    console.error('Inquiry honeypot triggered')
+    return NextResponse.json({
+      ok: true,
+      autoReplyOk: false,
+    })
+  }
 
   const normalizedDestination = destination || [destinationCountry, destinationCity].filter(Boolean).join(' / ')
   const quoteMissingRequired =
     type === 'quote' && (!productUrl || !quantity || !normalizedDestination || !deadline || !shippingMethod || !message)
-  const contactMissingRequired = type === 'contact' && !message
+  const contactMissingRequired = type === 'contact' && (!normalizedDestination || !message)
 
   if (!type || !name || !email || !isEmail(email) || quoteMissingRequired || contactMissingRequired) {
     return NextResponse.json(
@@ -166,15 +224,12 @@ export async function POST(request: Request) {
     )
   }
 
-  const requester = company || name
-  const adminSubjectPrefix = type === 'quote' ? '【YUKIMICHI 見積依頼】' : '【YUKIMICHI お問い合わせ】'
   const submittedDate = new Date()
   const receiptNumber = generateReceiptNumber(submittedDate)
-  const adminSubject = `${adminSubjectPrefix}【${receiptNumber}】${requester}`
-  const autoReplySubject =
+  const adminSubject =
     type === 'quote'
-      ? `【YUKIMICHI】お見積り依頼を受け付けました（受付番号：${receiptNumber}）`
-      : `【YUKIMICHI】お問い合わせを受け付けました（受付番号：${receiptNumber}）`
+      ? `【YUKIMICHI】お見積り依頼が届きました（${receiptNumber}）`
+      : `【YUKIMICHI】お問い合わせが届きました（${receiptNumber}）`
   const submittedAt = submittedDate.toLocaleString('ja-JP', {
     timeZone: 'Asia/Tokyo',
     year: 'numeric',
@@ -189,26 +244,31 @@ export async function POST(request: Request) {
   const inquirySummary = [
     `受付番号：${receiptNumber}`,
     `送信種別：${type === 'quote' ? 'お見積り' : 'お問い合わせ'}`,
+    `送信日時：${submittedAt} JST`,
+    `お名前：${formatValue(name)}`,
     `会社名：${formatValue(company)}`,
-    `ご担当者名：${formatValue(name)}`,
     `メールアドレス：${formatValue(email)}`,
     `電話番号：${formatValue(phone)}`,
+    `国・地域：${formatValue(destinationCountry || destination)}`,
+    `商品名または商品URL：${formatValue(productName || productUrl)}`,
+    `数量：${formatValue(quantity)}`,
+    `希望配送方法：${formatValue(shippingMethod)}`,
+    `仕向地：${formatValue(normalizedDestination)}`,
+    '',
+    '--- 追加情報 ---',
     `商品名：${formatValue(productName)}`,
     `商品URL：${formatValue(productUrl)}`,
     `商品カテゴリ：${formatValue(productCategory)}`,
-    `数量：${formatValue(quantity)}`,
     `単位：${formatValue(quantityUnit)}`,
     `単価：${formatValue(unitPrice)}`,
     `サイズ・重量：${formatValue(sizeWeight)}`,
     `成分・素材：${formatValue(material)}`,
-    `配送先国：${formatValue(destinationCountry || destination)}`,
     `都市：${formatValue(destinationCity)}`,
     `希望納期：${formatValue(deadline)}`,
-    `希望配送方法：${formatValue(shippingMethod)}`,
     `法人宛・個人宛：${formatValue(recipientType)}`,
     `表示言語：${formatValue(language)}`,
     '',
-    '相談内容：',
+    '相談内容・メッセージ：',
     formatValue(message),
   ].join('\n')
 
@@ -219,81 +279,43 @@ export async function POST(request: Request) {
     inquirySummary,
     '',
     `送信元ページ：${formatValue(sourcePage)}`,
-    `送信日時：${submittedAt} JST`,
     `ユーザーエージェント：${userAgent}`,
     `返信先：${email}`,
   ].join('\n')
 
-  const autoReplyText = [
-    `${name} 様`,
-    '',
-    'このたびは、YUKIMICHI – SNOWPATH JAPAN へお問い合わせいただきありがとうございます。',
-    '以下の内容でお問い合わせを受け付けました。',
-    '',
-    inquirySummary,
-    '',
-    `内容を確認のうえ、担当者より ${INQUIRY_TO} からご連絡いたします。`,
-    '',
-    'なお、商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。',
-    '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは事前確認が必要です。',
-    '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。',
-    '',
-    'YUKIMICHI – SNOWPATH JAPAN',
-    'JUSTHEN CO., LTD.',
-    INQUIRY_TO,
-    '',
-    '※本メールは自動返信です。',
-  ].join('\n')
-
   try {
-    const adminResponse = await sendResendEmail(resendApiKey, {
-      from: resendFromEmail,
-      to: [INQUIRY_TO],
-      ...(bccEmails.length > 0 ? { bcc: bccEmails } : {}),
-      reply_to: email,
-      subject: adminSubject,
-      text: adminText,
-    })
+    const smtpConfig = getSmtpConfig()
 
-    if (!adminResponse.ok) {
-      const errorText = await adminResponse.text()
-      console.error('Resend admin email send failed:', errorText.slice(0, 1000))
-
+    if (!smtpConfig.ok) {
+      console.error(smtpConfig.error)
       return NextResponse.json(
-        { ok: false, error: '送信に失敗しました。時間をおいて再度お試しください。' },
-        { status: 502 },
+        { ok: false, error: USER_SEND_ERROR },
+        { status: 500 },
       )
     }
 
-    const autoReplyResponse = await sendResendEmail(resendApiKey, {
-      from: resendFromEmail,
-      to: [email],
-      reply_to: INQUIRY_TO,
-      subject: autoReplySubject,
-      text: autoReplyText,
+    await sendSmtpEmail({
+      from: smtpConfig.smtpFrom,
+      to: smtpConfig.contactToEmail,
+      replyTo: email,
+      subject: adminSubject,
+      text: adminText,
+      smtpHost: smtpConfig.smtpHost,
+      smtpPort: smtpConfig.smtpPort,
+      smtpUser: smtpConfig.smtpUser,
+      smtpPass: smtpConfig.smtpPass,
     })
-
-    if (!autoReplyResponse.ok) {
-      const errorText = await autoReplyResponse.text()
-      console.error('Resend auto reply email send failed:', errorText.slice(0, 1000))
-
-      return NextResponse.json({
-        ok: true,
-        autoReplyOk: false,
-        receiptNumber,
-      })
-    }
 
     return NextResponse.json({
       ok: true,
-      autoReplyOk: true,
+      autoReplyOk: false,
       receiptNumber,
     })
   } catch (error) {
-    console.error('Inquiry email send failed:', error)
+    console.error('SMTP inquiry email send failed:', error)
 
     return NextResponse.json(
-      { ok: false, error: '送信に失敗しました。時間をおいて再度お試しください。' },
+      { ok: false, error: USER_SEND_ERROR },
       { status: 500 },
     )
   }
