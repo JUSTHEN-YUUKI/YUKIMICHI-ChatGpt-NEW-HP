@@ -63,6 +63,39 @@ function formatValue(value: string) {
   return value || '未入力'
 }
 
+function getTokyoDatePart(date: Date) {
+  const parts = new Intl.DateTimeFormat('ja-JP', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date)
+
+  const year = parts.find((part) => part.type === 'year')?.value ?? '0000'
+  const month = parts.find((part) => part.type === 'month')?.value ?? '00'
+  const day = parts.find((part) => part.type === 'day')?.value ?? '00'
+
+  return `${year}${month}${day}`
+}
+
+function generateRandomCode(length = 6) {
+  const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const cryptoSource = globalThis.crypto
+
+  if (cryptoSource?.getRandomValues) {
+    const bytes = new Uint8Array(length)
+    cryptoSource.getRandomValues(bytes)
+
+    return Array.from(bytes, (byte) => alphabet[byte % alphabet.length]).join('')
+  }
+
+  return Array.from({ length }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join('')
+}
+
+function generateReceiptNumber(date: Date) {
+  return `YKM-${getTokyoDatePart(date)}-${generateRandomCode()}`
+}
+
 async function sendResendEmail(resendApiKey: string, payload: ResendEmailPayload) {
   return fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -135,12 +168,14 @@ export async function POST(request: Request) {
 
   const requester = company || name
   const adminSubjectPrefix = type === 'quote' ? '【YUKIMICHI 見積依頼】' : '【YUKIMICHI お問い合わせ】'
-  const adminSubject = `${adminSubjectPrefix}${requester}`
+  const submittedDate = new Date()
+  const receiptNumber = generateReceiptNumber(submittedDate)
+  const adminSubject = `${adminSubjectPrefix}【${receiptNumber}】${requester}`
   const autoReplySubject =
     type === 'quote'
-      ? '【YUKIMICHI】お見積り依頼を受け付けました'
-      : '【YUKIMICHI】お問い合わせを受け付けました'
-  const submittedAt = new Date().toLocaleString('ja-JP', {
+      ? `【YUKIMICHI】お見積り依頼を受け付けました（受付番号：${receiptNumber}）`
+      : `【YUKIMICHI】お問い合わせを受け付けました（受付番号：${receiptNumber}）`
+  const submittedAt = submittedDate.toLocaleString('ja-JP', {
     timeZone: 'Asia/Tokyo',
     year: 'numeric',
     month: '2-digit',
@@ -152,6 +187,7 @@ export async function POST(request: Request) {
   const userAgent = request.headers.get('user-agent') ?? '未取得'
 
   const inquirySummary = [
+    `受付番号：${receiptNumber}`,
     `送信種別：${type === 'quote' ? 'お見積り' : 'お問い合わせ'}`,
     `会社名：${formatValue(company)}`,
     `ご担当者名：${formatValue(name)}`,
@@ -177,6 +213,9 @@ export async function POST(request: Request) {
   ].join('\n')
 
   const adminText = [
+    'Outlook管理用：件名または本文の受付番号で検索・分類してください。',
+    `対応ステータス：未対応`,
+    '',
     inquirySummary,
     '',
     `送信元ページ：${formatValue(sourcePage)}`,
@@ -241,12 +280,14 @@ export async function POST(request: Request) {
       return NextResponse.json({
         ok: true,
         autoReplyOk: false,
+        receiptNumber,
       })
     }
 
     return NextResponse.json({
       ok: true,
       autoReplyOk: true,
+      receiptNumber,
     })
   } catch (error) {
     console.error('Inquiry email send failed:', error)

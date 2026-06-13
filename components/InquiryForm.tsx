@@ -202,14 +202,23 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }),
       })
 
-      const result = (await response.json()) as { ok?: boolean; autoReplyOk?: boolean; error?: string }
+      const result = (await response.json()) as {
+        ok?: boolean
+        autoReplyOk?: boolean
+        receiptNumber?: string
+        error?: string
+      }
 
       if (!response.ok || !result.ok) {
         throw new Error(result.error ? translateStaticText(language, result.error) : formCommon.defaultError)
       }
 
       setSubmitState('success')
-      setFeedbackMessage(result.autoReplyOk === false ? formCommon.successNoAutoReply : formCommon.successAutoReply)
+      setFeedbackMessage(
+        `${result.autoReplyOk === false ? formCommon.successNoAutoReply : formCommon.successAutoReply}${
+          result.receiptNumber ? `\n受付番号 / Reference No.: ${result.receiptNumber}` : ''
+        }`,
+      )
       setFormState(initialState)
     } catch (error) {
       setSubmitState('error')
@@ -519,6 +528,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           letter-spacing: 0.05em;
           line-height: 1.8;
           padding: 15px 18px;
+          white-space: pre-line;
         }
 
         .inquiry-form__feedback--success {
