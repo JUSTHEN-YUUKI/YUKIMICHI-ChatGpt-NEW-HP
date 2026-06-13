@@ -5,7 +5,7 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI - SNOWPATH JAPAN',
   description:
-    'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、銀行振込（T/T）、注意事項について。',
+    'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、銀行振込（TT）、注意事項について。',
 }
 
 const pricingPlans = [
@@ -111,7 +111,7 @@ const cosmeticChecks = [
 
 const paymentItems = [
   'Payment by bank transfer designated by YUKIMICHI in Japan.',
-  '支払いは、日本のYUKIMICHIが指定する銀行振込（T/T）です。',
+  '支払いは、日本のYUKIMICHIが指定する銀行振込（TT）です。',
   '振込手数料は原則としてお客様負担です。',
   '入金確認後に、手配・発注・輸出準備を開始します。',
 ]
@@ -301,7 +301,7 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Fee Basis / 手数料の算出基準</span>
           </div>
-          <h2>費用の考え方を分けて表示します</h2>
+          <h2>費用の考え方をご案内</h2>
           <p>
             正式見積りでは、商品代金、手配手数料、国際送料、保険料、その他費用をできるだけ分けて明示します。
           </p>
@@ -324,9 +324,9 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Payment Method / お支払い方法</span>
           </div>
-          <h2>T/T Bank Transfer</h2>
+          <h2>TT Bank Transfer</h2>
           <p>
-            海外BtoB取引では、入金確認後に手配・発注・輸出準備を進めます。振込先の詳細は正式見積り・請求時に個別にご案内します。
+            入金確認後に手配・発注・輸出準備を進めます。振込先の詳細は正式見積り・請求時に個別にご案内します。
           </p>
         </div>
         <div className="payment-card">
