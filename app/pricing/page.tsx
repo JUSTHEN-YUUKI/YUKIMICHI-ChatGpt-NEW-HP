@@ -40,13 +40,6 @@ const pricingPlans = [
   },
 ]
 
-const feeHighlights = [
-  'Product value basis',
-  'Actual cost',
-  'T/T bank transfer',
-  'Included in basic handling fees',
-]
-
 const feeBasisItems = [
   {
     label: 'Product Value Basis',
@@ -170,12 +163,6 @@ export default function PricingPage() {
           <p>
             表示手数料は、送料・保険・関税等を含めた総額ではなく、原則として商品代金を基準に算出するYUKIMICHIの手配手数料です。
           </p>
-        </div>
-
-        <div className="pricing-highlight-strip" aria-label="Pricing basis highlights">
-          {feeHighlights.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
         </div>
 
         <div className="pricing-grid">
@@ -545,27 +532,6 @@ export default function PricingPage() {
           gap: 14px;
         }
 
-        .pricing-highlight-strip {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 12px;
-          margin-bottom: 22px;
-        }
-
-        .pricing-highlight-strip span {
-          border: 1px solid rgba(201,168,76,0.22);
-          background: rgba(7,17,31,0.68);
-          color: var(--gold);
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          line-height: 1.6;
-          min-height: 58px;
-          padding: 14px 16px;
-          text-transform: uppercase;
-          display: flex;
-          align-items: center;
-        }
-
         .pricing-grid {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -596,10 +562,13 @@ export default function PricingPage() {
         .pricing-card h2 {
           color: var(--washi);
           font-family: 'Cormorant Garamond', serif;
+          display: flex;
+          align-items: flex-start;
           font-size: clamp(28px, 3.4vw, 38px);
           font-weight: 300;
           line-height: 1.08;
           margin-bottom: 26px;
+          min-height: 128px;
           letter-spacing: 0;
         }
 
@@ -824,8 +793,7 @@ export default function PricingPage() {
         }
 
         @media (max-width: 1180px) {
-          .pricing-grid,
-          .pricing-highlight-strip {
+          .pricing-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
@@ -848,7 +816,6 @@ export default function PricingPage() {
         @media (max-width: 680px) {
           .pricing-lead-grid,
           .pricing-grid,
-          .pricing-highlight-strip,
           .fee-basis-grid {
             grid-template-columns: 1fr;
           }
@@ -890,6 +857,10 @@ export default function PricingPage() {
           }
 
           .pricing-card {
+            min-height: auto;
+          }
+
+          .pricing-card h2 {
             min-height: auto;
           }
         }
