@@ -99,15 +99,6 @@ const optionalServiceFees = [
   { service: '長期商談代行', type: '月額または個別', guide: '30,000〜100,000円〜' },
 ]
 
-const cosmeticChecks = [
-  { item: '成分表示写真', reason: '輸入規制・成分確認に必要' },
-  { item: '製造番号・ロット番号', reason: 'トラブル時の追跡に必要' },
-  { item: '外箱状態', reason: '破損・汚れの確認' },
-  { item: 'JANコード', reason: '商品特定に必要' },
-  { item: 'アルコール・エアゾール確認', reason: '危険品判定に関係' },
-  { item: 'SDS/MSDS有無', reason: '国際輸送で必要になる場合あり' },
-]
-
 const paymentItems = [
   'Payment by bank transfer designated by YUKIMICHI in Japan.',
   '支払いは、日本のYUKIMICHIが指定する銀行振込（TT）です。',
@@ -249,24 +240,6 @@ export default function PricingPage() {
               <strong role="cell" data-label="目安">{fee.guide}</strong>
             </div>
           ))}
-        </div>
-
-        <div className="cosmetic-checks-box">
-          <div>
-            <span>Cosmetic Product Checks</span>
-            <h3>化粧品関連の確認項目</h3>
-            <p>
-              化粧品は、成分、表示、使用期限、危険品該当の有無により、輸送方法や輸入時の確認事項が変わるため、以下の確認は有料オプションとして明確に分けて表示します。
-            </p>
-          </div>
-          <div className="cosmetic-check-grid">
-            {cosmeticChecks.map((check) => (
-              <article key={check.item}>
-                <span>{check.item}</span>
-                <p>{check.reason}</p>
-              </article>
-            ))}
-          </div>
         </div>
 
         <div className="optional-service-copy">
@@ -485,7 +458,6 @@ export default function PricingPage() {
         }
 
         .optional-included-box span,
-        .cosmetic-checks-box > div:first-child span,
         .optional-service-notes span {
           color: var(--gold);
           display: block;
@@ -540,54 +512,6 @@ export default function PricingPage() {
           font-size: 10px;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-        }
-
-        .cosmetic-checks-box {
-          border: 1px solid rgba(201,168,76,0.18);
-          background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 52%),
-            rgba(13,28,53,0.72);
-          display: grid;
-          grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-          gap: clamp(24px, 4vw, 48px);
-          margin-bottom: 22px;
-          padding: clamp(26px, 4vw, 42px);
-        }
-
-        .cosmetic-checks-box h3 {
-          color: var(--washi);
-          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(28px, 3.6vw, 44px);
-          font-weight: 300;
-          line-height: 1.35;
-          margin: 0 0 14px;
-        }
-
-        .cosmetic-check-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
-        }
-
-        .cosmetic-check-grid article {
-          border: 1px solid rgba(201,168,76,0.13);
-          background: rgba(7,17,31,0.46);
-          min-height: 118px;
-          padding: 16px;
-        }
-
-        .cosmetic-check-grid span {
-          color: var(--gold);
-          display: block;
-          font-size: 13px;
-          letter-spacing: 0.08em;
-          line-height: 1.6;
-          margin-bottom: 8px;
-        }
-
-        .cosmetic-check-grid p {
-          font-size: 12.5px;
-          line-height: 1.8;
         }
 
         .optional-service-copy {
@@ -907,10 +831,6 @@ export default function PricingPage() {
         }
 
         @media (max-width: 900px) {
-          .cosmetic-checks-box {
-            grid-template-columns: 1fr;
-          }
-
           .pricing-payment {
             grid-template-columns: 1fr;
           }
@@ -929,8 +849,7 @@ export default function PricingPage() {
           .pricing-lead-grid,
           .pricing-grid,
           .pricing-highlight-strip,
-          .fee-basis-grid,
-          .cosmetic-check-grid {
+          .fee-basis-grid {
             grid-template-columns: 1fr;
           }
 
