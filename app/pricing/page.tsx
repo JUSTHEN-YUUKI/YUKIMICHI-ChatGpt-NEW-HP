@@ -5,115 +5,90 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI - SNOWPATH JAPAN',
   description:
-    'YUKIMICHIの料金表。International Courier、Air Freight、Sea Freightの基本体系、手配手数料、最低手数料、国際送料、関税・VAT/GST、保険、梱包、規制確認費用について。',
+    'YUKIMICHIの料金表。商品代金に対する手配手数料率、国際送料・保険・関税・VAT/GST等の実費、銀行振込（T/T）、注意事項について。',
 }
 
 const pricingPlans = [
   {
-    label: 'Courier',
-    title: 'International Courier',
-    fee: '15%',
-    minimum: 'Minimum 10,000 JPY',
-    target: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
-    use: '小口発送、サンプル、短納期、海外バイヤー向けの少量発送',
+    label: 'International Express',
+    title: 'International Express',
+    rate: '15%',
+    minimum: 'JPY 10,000',
+    use: '小口貨物、サンプル、EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
   },
   {
     label: 'Air Freight',
     title: 'Air Freight',
-    fee: '10%',
-    minimum: 'Minimum 30,000 JPY',
-    target: '航空貨物',
-    use: '緊急輸送、高付加価値商品、一定数量以上の航空輸送',
+    rate: '10%',
+    minimum: 'JPY 30,000',
+    use: '航空貨物、急ぎの商業貨物',
   },
   {
-    label: 'Sea Freight',
-    title: 'Sea Freight',
-    fee: '7%',
-    minimum: 'Minimum 30,000 JPY',
-    target: 'FCL / LCL',
-    use: '大型貨物、大量輸送、継続出荷、コスト重視の輸送',
+    label: 'Sea LCL',
+    title: 'Sea LCL',
+    rate: '7%',
+    minimum: 'JPY 30,000',
+    use: '小〜中規模の海上混載貨物',
+  },
+  {
+    label: 'Sea FCL / Large Volume',
+    title: 'Sea FCL / Large Volume',
+    rate: '7%',
+    minimum: 'JPY 50,000',
+    use: 'コンテナ貨物、大口案件、継続取引',
+    note: '高額商品、特殊貨物、長期契約、大量案件については個別見積り',
   },
 ]
 
-const costFactors = [
-  '商品代金',
-  '数量',
-  'サイズ・重量',
-  '容積重量',
-  '配送先国・都市',
-  '希望納期',
-  '配送方法',
-  '梱包難易度',
-  '保険の有無',
-  '規制確認の有無',
-  '危険品・電池・液体・食品・化粧品等の確認',
-  '通関条件',
-  '輸入国側の税金・手数料',
+const feeHighlights = [
+  'Product value basis',
+  'Actual cost',
+  'T/T bank transfer',
+  'Included in basic handling fees',
 ]
 
-const additionalCosts = [
-  '国際送料',
-  '商品代金',
-  '国内送料',
-  '梱包費',
-  '検品費',
-  '保険料',
-  '関税',
-  'VAT / GST',
-  '輸入消費税',
-  '通関手数料',
-  '倉庫料',
-  '保管料',
-  '港湾費用',
-  '規制確認費用',
-  '証明書取得費用',
-  '返品・再発送費用',
-  'キャンセル関連費用',
-]
-
-const shippingLogic = [
+const feeBasisItems = [
   {
-    name: 'International Courier',
-    target: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
-    points: ['速い', '小口に向く', 'サイズ・重量制限に注意', '内容品により引受不可の場合あり'],
+    label: 'Product Value Basis',
+    title: '商品代金基準',
+    body: '当社の手配手数料は、原則として商品代金を基準に算出します。',
   },
   {
-    name: 'Air Freight',
-    target: '航空貨物',
-    points: ['スピード重視', '高付加価値商品に向く', '電池、液体、スプレー、危険品確認が重要'],
+    label: 'Actual Cost Items',
+    title: '実費項目',
+    body: '国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用、特殊梱包費などは、別途実費または個別見積りとなります。',
   },
   {
-    name: 'Sea Freight',
-    target: 'FCL / LCL',
-    points: ['コスト重視', '大型貨物・大量輸送向け', '納期は長め', '港湾費用、通関、梱包条件の確認が必要'],
+    label: 'Included in Basic Handling Fees',
+    title: '基本手数料に含まれるサポート',
+    body: '基本手数料には、メーカー・ブランドとの連絡、条件確認、簡単な交渉、通関業者・フォワーダーとの調整、配送・船積みに関する手配サポートが含まれます。',
+    sub: '最終的にお取引が成立しなかった場合、連絡・交渉サポートの手数料はいただきません。※すでに発生した実費がある場合は、別途ご精算となります。',
+  },
+  {
+    label: 'Additional Options',
+    title: '追加オプション',
+    body: '商品写真撮影、外箱・ラベル撮影、JANコード・成分表示確認、簡易検品、SDS/MSDS取得サポート、メーカー資料取得代行、再梱包、特殊梱包、分納、複数配送先対応などは、作業内容に応じて別途見積りとなります。',
+  },
+  {
+    label: 'Insurance & Customs Notes',
+    title: '保険・税関注意事項',
+    body: '輸送保険は任意加入です。未加入の場合、輸送中の紛失・破損に関する補償は、運送会社または保険約款の範囲に限定されます。税関判断による遅延、検査、没収、追加費用は返金対象外です。',
   },
 ]
 
-const sampleEstimate = [
-  ['商品代金', '100,000円'],
-  ['手配手数料', '15% / 最低10,000円'],
-  ['国際送料', '別途見積'],
-  ['梱包費', '必要に応じて'],
-  ['保険料', '必要に応じて'],
-  ['関税・VAT/GST', '輸入者負担'],
-  ['合計', '案件ごとに見積'],
+const paymentItems = [
+  'Payment by bank transfer designated by YUKIMICHI in Japan.',
+  '支払いは、日本のYUKIMICHIが指定する銀行振込（T/T）です。',
+  '振込手数料は原則としてお客様負担です。',
+  '入金確認後に、手配・発注・輸出準備を開始します。',
 ]
 
 const noticeItems = [
-  '本ページの料金は基本体系・目安です。',
-  '最終料金は個別見積により決定します。',
-  '配送会社料金、為替、商品価格、在庫状況、燃油サーチャージ、規制状況により金額が変動する場合があります。',
-  '見積有効期限を設ける場合があります。',
-  '個別の取引条件は見積書、請求書、メールでの合意内容が優先される場合があります。',
-  '輸出入可否、関税、危険品判定、配送会社の引受可否などの最終判断は、税関・通関業者・配送会社・公的機関等の確認を前提とします。',
-]
-
-const relatedLinks = [
-  { href: '/quote', label: 'お見積り', en: 'Quote Request' },
-  { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
-  { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
-  { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
+  '表示手数料は目安であり、商品内容、数量、仕向地、輸送条件により変動する場合があります。',
+  '国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用は別途実費となります。',
+  '模倣品、海賊版、知的財産権侵害品、輸出入規制品は取り扱いできません。',
+  '化粧品、食品、健康関連商品は、成分、ラベル、SDS/MSDS、輸送条件により追加確認が必要になる場合があります。',
+  '正式見積りでは、商品代金、手配手数料、国際送料、保険料、その他費用をできるだけ分けて明示します。',
 ]
 
 function ArrowRight() {
@@ -139,24 +114,18 @@ export default function PricingPage() {
         </h1>
         <div className="pricing-lead-grid">
           <p>
-            <TranslatedText
-              id="pages.pricing.heroLeadLeft"
-              fallback="YUKIMICHIでは、商品調達、国際宅配便、航空貨物、海上輸送の内容に応じて、分かりやすい料金体系を提示します。"
-            />
+            YUKIMICHIは国際物流会社そのものではなく、日本側の輸出手配支援会社として、商品調達、条件確認、書類・輸送手配の整理をサポートします。
           </p>
           <p>
-            <TranslatedText
-              id="pages.pricing.heroLeadRight"
-              fallback="最終料金は、商品内容・配送先国・数量・サイズ・重量・配送方法により変動します。"
-            />
+            料金は「商品代金に対する手配手数料率」です。国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用は別途実費として分けて確認します。
           </p>
         </div>
         <div className="pricing-hero-actions">
           <Link href="/quote" className="btn-primary">
-            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
+            Request a Quote <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
+            Contact Us <ArrowRight />
           </Link>
         </div>
       </section>
@@ -167,222 +136,130 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Handling Fee</span>
           </div>
-          <h2><TranslatedText id="pages.pricing.plansTitle" fallback="手配手数料の基本体系" /></h2>
+          <h2>手配手数料の基本体系</h2>
           <p>
-            <TranslatedText id="pages.pricing.plansLead" fallback="以下は手配手数料の基本体系です。商品代金、国際送料、関税・VAT/GST、保険、梱包、規制確認、その他実費は別途となる場合があります。" />
+            表示手数料は、送料・保険・関税等を含めた総額ではなく、原則として商品代金を基準に算出するYUKIMICHIの手配手数料です。
           </p>
         </div>
 
+        <div className="pricing-highlight-strip" aria-label="Pricing basis highlights">
+          {feeHighlights.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+
         <div className="pricing-grid">
-          {pricingPlans.map((plan, index) => (
+          {pricingPlans.map((plan) => (
             <article className="pricing-card" key={plan.label}>
               <span className="pricing-card__label">{plan.label}</span>
               <h2>{plan.title}</h2>
               <div className="pricing-rate">
-                {plan.fee}
-                <small> <TranslatedText id="pages.pricing.ofProductValue" fallback="of product value" /></small>
+                {plan.rate}
+                <small>of product value</small>
               </div>
-              <p className="pricing-minimum">{plan.minimum}</p>
-              <div className="pricing-divider" />
-              <p className="pricing-target">{plan.target}</p>
-              <p className="pricing-use"><TranslatedText id={`home.pricing.plans.${index}.desc`} fallback={plan.use} /></p>
+              <div className="pricing-card-info">
+                <p>
+                  <span>Minimum Fee</span>
+                  <strong>{plan.minimum}</strong>
+                </p>
+                <p>
+                  <span>Use Case</span>
+                  <strong>{plan.use}</strong>
+                </p>
+              </div>
+              {plan.note && <p className="pricing-card-note">{plan.note}</p>}
             </article>
           ))}
         </div>
       </section>
 
-      <section className="pricing-benefit">
-        <div>
-          <span>First-Time Benefit</span>
-          <h2><TranslatedText id="pages.pricing.benefitTitle" fallback="初回手配手数料無料" /></h2>
-        </div>
-        <div className="pricing-benefit-card">
-          <p>
-            <TranslatedText id="pages.pricing.benefitBody1" fallback="新規のお客様は、初回の手配手数料を無料でご案内します。まずは小ロット、サンプル、初回輸出案件からご相談ください。" />
-          </p>
-          <p>
-            <TranslatedText id="pages.pricing.benefitBody2" fallback="国際送料、商品代金、梱包費、保険料、関税、VAT/GST、規制確認費用、その他実費は別途となります。" />
-          </p>
-        </div>
-      </section>
-
-      <section className="pricing-factors">
+      <section className="pricing-fee-basis">
         <div className="pricing-section-head">
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Cost Factors</span>
+            <span className="section-label-text">Fee Basis / 手数料の算出基準</span>
           </div>
-          <h2><TranslatedText id="pages.pricing.factorsTitle" fallback="料金が変動する主な要素" /></h2>
-          <p><TranslatedText id="pages.pricing.factorsLead" fallback="国際輸出では、商品代金だけでなく、配送先国、重量、通関条件、規制確認の有無などにより総額が変動します。" /></p>
+          <h2>費用の考え方を分けて表示します</h2>
+          <p>
+            正式見積りでは、商品代金、手配手数料、国際送料、保険料、その他費用をできるだけ分けて明示します。
+          </p>
         </div>
-        <div className="pricing-chip-grid">
-          {costFactors.map((factor) => (
-            <span key={factor}>{factor}</span>
-          ))}
-        </div>
-      </section>
-
-      <section className="pricing-additional">
-        <div>
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Additional Costs</span>
-          </div>
-          <h2><TranslatedText id="pages.pricing.additionalTitle" fallback="別途費用となる可能性があるもの" /></h2>
-          <div className="pricing-copy-grid pricing-copy-grid--compact">
-            <p>
-              <TranslatedText
-                id="pages.pricing.additionalLeadLeft"
-                fallback="案件により発生する費用は異なります。見積時に確認できる範囲で項目を整理し、"
-              />
-            </p>
-            <p>
-              <TranslatedText id="pages.pricing.additionalLeadRight" fallback="必要に応じて個別にご案内します。" />
-            </p>
-          </div>
-        </div>
-        <ul className="pricing-additional-list">
-          {additionalCosts.map((cost) => (
-            <li key={cost}>{cost}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="pricing-shipping">
-        <div className="pricing-section-head">
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">How We Select Shipping Methods</span>
-          </div>
-          <h2><TranslatedText id="pages.pricing.shippingTitle" fallback="輸送方法ごとの考え方" /></h2>
-          <p><TranslatedText id="pages.pricing.shippingLead" fallback="納期、費用、サイズ・重量、内容品、配送会社の引受条件を踏まえて、案件ごとに候補を比較します。" /></p>
-        </div>
-        <div className="shipping-grid">
-          {shippingLogic.map((method) => (
-            <article className="shipping-card" key={method.name}>
-              <span>{method.name}</span>
-              <h3>{method.target}</h3>
-              <ul>
-                {method.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+        <div className="fee-basis-grid">
+          {feeBasisItems.map((item) => (
+            <article className="fee-basis-card" key={item.label}>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              {item.sub && <p className="fee-basis-card__sub">{item.sub}</p>}
             </article>
           ))}
         </div>
       </section>
 
-      <section className="pricing-sample">
+      <section className="pricing-payment">
         <div>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Sample Estimate</span>
+            <span className="section-label-text">Payment Method / お支払い方法</span>
           </div>
-          <h2><TranslatedText id="pages.pricing.sampleTitle" fallback="見積例" /></h2>
+          <h2>T/T Bank Transfer</h2>
           <p>
-            <TranslatedText id="pages.pricing.sampleLead" fallback="これは見積項目の例であり、実際の料金は商品内容・配送先国・配送方法により異なります。" />
+            海外BtoB取引では、入金確認後に手配・発注・輸出準備を進めます。振込先の詳細は正式見積り・請求時に個別にご案内します。
           </p>
         </div>
-        <div className="sample-table" role="table" aria-label="Sample estimate">
-          {sampleEstimate.map(([label, value]) => (
-            <div className="sample-row" role="row" key={label}>
-              <span role="cell">{label}</span>
-              <strong role="cell">{value}</strong>
-            </div>
+        <div className="payment-card">
+          {paymentItems.map((item) => (
+            <p key={item}>{item}</p>
           ))}
         </div>
-      </section>
-
-      <section className="pricing-notes">
-        <article>
-          <span className="pricing-note-kicker">Duties & Taxes</span>
-          <h2><TranslatedText id="pages.pricing.dutiesTitle" fallback="関税・VAT/GSTについて" /></h2>
-          <p>
-            <TranslatedText id="pages.pricing.dutiesBody1" fallback="輸入国で発生する関税、VAT、GST、輸入消費税、通関手数料等は、原則として輸入者側の負担となります。税額・税率・課税判断は輸入国の税関判断により異なります。" />
-          </p>
-          <p>
-            <TranslatedText id="pages.pricing.dutiesBody2" fallback="YUKIMICHIが事前の目安案内を行う場合がありますが、最終金額を保証するものではありません。" />
-          </p>
-        </article>
-
-        <article>
-          <span className="pricing-note-kicker">Compliance Cost</span>
-          <h2 className="pricing-heading-nowrap"><TranslatedText id="pages.pricing.complianceTitle" fallback="規制確認が必要な商品について" /></h2>
-          <p>
-            <TranslatedText id="pages.pricing.complianceBody1" fallback="医薬品、食品、化粧品、電池、危険品、中古品、ブランド品、動植物由来素材などは、商品内容・配送先国により確認が必要になる場合があります。" />
-          </p>
-          <p>
-            <TranslatedText id="pages.pricing.complianceBody2Prefix" fallback="必要に応じて、確認作業や追加費用が発生する場合があります。詳細は" />
-            <Link href="/restricted"> <TranslatedText id="common.restricted" fallback="禁止・制限品目" /> </Link>
-            <TranslatedText id="pages.pricing.complianceBody2Suffix" fallback="をご確認ください。" />
-          </p>
-        </article>
       </section>
 
       <section className="pricing-important">
         <div className="pricing-important-inner">
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Important Notice</span>
+            <span className="section-label-text">Important Notes / 注意事項</span>
           </div>
-          <h2><TranslatedText id="pages.pricing.importantTitle" fallback="Important Notice" /></h2>
+          <h2>正式見積り前に確認すること</h2>
           <ul>
             {noticeItems.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
           <p>
-            <TranslatedText id="pages.pricing.termsLeadPrefix" fallback="詳細な条件は" />
-            <Link href="/terms"> <TranslatedText id="common.terms" fallback="取引条件" /> </Link>
-            <TranslatedText id="pages.pricing.termsLeadSuffix" fallback="をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。" />
+            詳細な条件は
+            <Link href="/terms"> 取引条件 </Link>
+            と
+            <Link href="/restricted"> 禁止・制限品目 </Link>
+            をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
           </p>
-        </div>
-      </section>
-
-      <section className="pricing-related">
-        <div>
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Related Links</span>
-          </div>
-          <h2><TranslatedText id="pages.pricing.relatedTitle" fallback="関連ページ" /></h2>
-          <p><TranslatedText id="pages.pricing.relatedLead" fallback="見積、問い合わせ、取引条件、禁止・制限品目、よくある質問を各ページで確認できます。" /></p>
-        </div>
-        <div className="pricing-related-grid">
-          {relatedLinks.map((link, index) => (
-            <Link href={link.href} className="pricing-related-card" key={link.href}>
-              <span>{link.en}</span>
-              <strong><TranslatedText id={`pages.pricing.relatedLabels.${index}`} fallback={link.label} /></strong>
-              <ArrowRight />
-            </Link>
-          ))}
         </div>
       </section>
 
       <section className="pricing-cta">
         <div>
           <span>Estimate Request</span>
-          <h2><TranslatedText id="pages.pricing.ctaTitle" fallback="料金を確認して相談する" /></h2>
+          <h2>料金を確認して相談する</h2>
           <p>
-            <TranslatedText id="pages.pricing.ctaLead" fallback="商品URL、数量、配送先国、希望配送方法を添えてご相談ください。基本体系をもとに、案件ごとの見積をご案内します。" />
+            商品URL、数量、配送先国、希望配送方法を添えてご相談ください。YUKIMICHIが商品代金・手配手数料・実費項目を分けて整理します。
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="pricing-mail">
-            <TranslatedText id="pages.pricing.ctaMail" fallback="exporter@justhen.co.jp へ相談する" />
+            exporter@justhen.co.jp
           </a>
         </div>
         <div className="pricing-cta-actions">
           <Link href="/quote" className="btn-primary">
-            <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
+            Request a Quote <ArrowRight />
           </Link>
           <Link href="/contact" className="btn-ghost">
-            <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
+            Contact Us <ArrowRight />
           </Link>
         </div>
       </section>
 
       <style>{`
         .pricing-hero {
-          min-height: 70svh;
+          min-height: 66svh;
           padding: calc(var(--nav-h) + 88px) var(--gutter) 76px;
           background:
             radial-gradient(ellipse 70% 46% at 78% 22%, rgba(201,168,76,0.09), transparent 64%),
@@ -397,6 +274,7 @@ export default function PricingPage() {
           line-height: 1.05;
           color: var(--washi);
           margin-bottom: 28px;
+          letter-spacing: 0;
         }
 
         .pricing-title em {
@@ -405,25 +283,20 @@ export default function PricingPage() {
           font-size: 0.68em;
         }
 
-        .pricing-lead-grid,
-        .pricing-copy-grid {
+        .pricing-lead-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 16px;
-          max-width: 980px;
+          max-width: 1040px;
+          margin-bottom: 30px;
         }
 
-        .pricing-copy-grid--compact {
-          max-width: 860px;
-        }
-
-        .pricing-lead-grid p,
-        .pricing-copy-grid p {
+        .pricing-lead-grid p {
           border: 1px solid rgba(201,168,76,0.14);
           background: rgba(13,28,53,0.42);
           color: var(--washi-dim);
           font-size: 13px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.04em;
           line-height: 2.05;
           margin: 0;
           padding: 18px 20px;
@@ -436,23 +309,19 @@ export default function PricingPage() {
         }
 
         .pricing-plans,
-        .pricing-factors,
-        .pricing-shipping {
+        .pricing-fee-basis {
           padding: var(--section-pad) var(--gutter);
-          background:
-            linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
+          background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
         }
 
         .pricing-section-head {
-          max-width: 920px;
-          margin-bottom: 44px;
+          max-width: 960px;
+          margin-bottom: 38px;
         }
 
         .pricing-section-head h2,
-        .pricing-additional h2,
-        .pricing-sample h2,
+        .pricing-payment h2,
         .pricing-important h2,
-        .pricing-related h2,
         .pricing-cta h2 {
           color: var(--washi);
           font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
@@ -460,41 +329,64 @@ export default function PricingPage() {
           font-weight: 300;
           line-height: 1.35;
           margin: 0 0 16px;
+          letter-spacing: 0;
         }
 
         .pricing-section-head p,
-        .pricing-additional p,
-        .pricing-sample p,
+        .pricing-payment p,
         .pricing-important p,
-        .pricing-related p,
         .pricing-cta p {
           color: var(--washi-dim);
           font-size: 13px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.04em;
           line-height: 2.1;
           margin: 0;
         }
 
+        .pricing-highlight-strip {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 12px;
+          margin-bottom: 22px;
+        }
+
+        .pricing-highlight-strip span {
+          border: 1px solid rgba(201,168,76,0.22);
+          background: rgba(7,17,31,0.68);
+          color: var(--gold);
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          line-height: 1.6;
+          min-height: 58px;
+          padding: 14px 16px;
+          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+        }
+
         .pricing-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 18px;
         }
 
         .pricing-card {
           border: 1px solid rgba(201,168,76,0.16);
           background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
+            linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
             rgba(7,17,31,0.84);
-          min-height: 360px;
-          padding: 30px;
+          min-height: 430px;
+          padding: clamp(24px, 3vw, 32px);
+          display: flex;
+          flex-direction: column;
         }
 
         .pricing-card__label {
           display: block;
           color: var(--gold);
           font-size: 10px;
-          letter-spacing: 0.32em;
+          letter-spacing: 0.24em;
+          line-height: 1.5;
           margin-bottom: 18px;
           text-transform: uppercase;
         }
@@ -502,10 +394,11 @@ export default function PricingPage() {
         .pricing-card h2 {
           color: var(--washi);
           font-family: 'Cormorant Garamond', serif;
-          font-size: 34px;
+          font-size: clamp(28px, 3.4vw, 38px);
           font-weight: 300;
-          line-height: 1.1;
+          line-height: 1.08;
           margin-bottom: 26px;
+          letter-spacing: 0;
         }
 
         .pricing-rate {
@@ -514,6 +407,7 @@ export default function PricingPage() {
           font-size: clamp(58px, 6vw, 78px);
           font-weight: 300;
           line-height: 0.95;
+          margin-bottom: 26px;
         }
 
         .pricing-rate small {
@@ -527,241 +421,130 @@ export default function PricingPage() {
           text-transform: uppercase;
         }
 
-        .pricing-minimum,
-        .pricing-target,
-        .pricing-use {
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 1.9;
-          margin: 0;
-        }
-
-        .pricing-minimum {
-          color: var(--washi);
-          margin-top: 22px;
-        }
-
-        .pricing-divider {
-          height: 1px;
-          background: rgba(201,168,76,0.14);
-          margin: 24px 0;
-        }
-
-        .pricing-target {
-          color: var(--gold);
-          margin-bottom: 12px;
-        }
-
-        .pricing-benefit,
-        .pricing-additional,
-        .pricing-sample,
-        .pricing-related {
-          padding: var(--section-pad) var(--gutter);
+        .pricing-card-info {
           display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-          gap: clamp(28px, 5vw, 72px);
-          background: var(--navy-deep);
-          border-bottom: 1px solid rgba(201,168,76,0.08);
+          gap: 14px;
+          margin-top: auto;
         }
 
-        .pricing-benefit > div:first-child span,
-        .pricing-note-kicker,
+        .pricing-card-info p {
+          border-top: 1px solid rgba(201,168,76,0.12);
+          margin: 0;
+          padding-top: 14px;
+        }
+
+        .pricing-card-info span {
+          display: block;
+          color: var(--gold);
+          font-size: 10px;
+          letter-spacing: 0.2em;
+          line-height: 1.6;
+          margin-bottom: 6px;
+          text-transform: uppercase;
+        }
+
+        .pricing-card-info strong,
+        .pricing-card-note {
+          color: var(--washi-dim);
+          display: block;
+          font-size: 13px;
+          font-weight: 300;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+        }
+
+        .pricing-card-note {
+          border: 1px solid rgba(201,168,76,0.18);
+          background: rgba(201,168,76,0.06);
+          margin: 16px 0 0;
+          padding: 12px 14px;
+        }
+
+        .fee-basis-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .fee-basis-card {
+          border: 1px solid rgba(201,168,76,0.16);
+          background: rgba(13,28,53,0.72);
+          padding: clamp(24px, 3vw, 34px);
+          min-height: 240px;
+        }
+
+        .fee-basis-card span,
         .pricing-cta span {
           color: var(--gold);
           display: block;
           font-size: 10px;
-          letter-spacing: 0.32em;
+          letter-spacing: 0.24em;
+          line-height: 1.6;
           margin-bottom: 14px;
           text-transform: uppercase;
         }
 
-        .pricing-benefit h2 {
+        .fee-basis-card h3 {
           color: var(--washi);
-          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(34px, 4.5vw, 58px);
+          font-size: 18px;
           font-weight: 300;
-          line-height: 1.25;
-          margin: 0;
-        }
-
-        .pricing-benefit-card {
-          display: grid;
-          gap: 18px;
-          border: 1px solid rgba(201,168,76,0.18);
-          background:
-            linear-gradient(135deg, rgba(139,30,47,0.24), transparent 48%),
-            rgba(13,28,53,0.72);
-          padding: clamp(26px, 4vw, 42px);
-        }
-
-        .pricing-benefit-card p {
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 2.1;
-          margin: 0;
-        }
-
-        .pricing-chip-grid,
-        .pricing-additional-list {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 12px;
-        }
-
-        .pricing-chip-grid span,
-        .pricing-additional-list li {
-          border: 1px solid rgba(201,168,76,0.14);
-          background: rgba(7,17,31,0.55);
-          color: var(--washi-dim);
-          font-size: 12.5px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           line-height: 1.6;
-          min-height: 58px;
-          padding: 14px 16px;
-          display: flex;
-          align-items: center;
+          margin: 0 0 12px;
         }
 
-        .pricing-additional-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .shipping-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 18px;
-        }
-
-        .shipping-card {
-          border: 1px solid rgba(201,168,76,0.14);
-          background: linear-gradient(180deg, rgba(13,28,53,0.92), rgba(7,17,31,0.82));
-          min-height: 300px;
-          padding: 28px;
-        }
-
-        .shipping-card span {
-          color: var(--gold);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(30px, 4vw, 44px);
-          font-weight: 300;
-          line-height: 1;
-        }
-
-        .shipping-card h3 {
-          color: var(--washi);
-          font-size: 15px;
-          font-weight: 300;
-          letter-spacing: 0.1em;
-          line-height: 1.8;
-          margin: 24px 0 18px;
-        }
-
-        .shipping-card ul,
-        .pricing-important ul {
-          display: grid;
-          gap: 10px;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .shipping-card li,
-        .pricing-important li {
-          border-left: 1px solid rgba(201,168,76,0.34);
-          color: var(--washi-dim);
-          font-size: 12.5px;
-          letter-spacing: 0.04em;
-          line-height: 1.85;
-          padding-left: 12px;
-        }
-
-        .sample-table {
-          border: 1px solid rgba(201,168,76,0.16);
-          background: rgba(13,28,53,0.72);
-        }
-
-        .sample-row {
-          display: grid;
-          grid-template-columns: minmax(160px, 0.75fr) minmax(0, 1.25fr);
-          border-bottom: 1px solid rgba(201,168,76,0.1);
-        }
-
-        .sample-row:last-child {
-          border-bottom: 0;
-        }
-
-        .sample-row span,
-        .sample-row strong {
+        .fee-basis-card p {
           color: var(--washi-dim);
           font-size: 13px;
-          font-weight: 300;
-          letter-spacing: 0.06em;
-          line-height: 1.8;
-          padding: 16px 18px;
+          letter-spacing: 0.04em;
+          line-height: 2;
+          margin: 0;
         }
 
-        .sample-row span {
-          color: var(--gold);
-          border-right: 1px solid rgba(201,168,76,0.1);
+        .fee-basis-card__sub {
+          border-left: 1px solid rgba(201,168,76,0.32);
+          color: var(--washi) !important;
+          margin-top: 14px !important;
+          padding-left: 14px;
         }
 
-        .sample-row strong {
-          color: var(--washi);
-        }
-
-        .pricing-notes {
+        .pricing-payment {
           padding: var(--section-pad) var(--gutter);
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 18px;
-          background: var(--navy-deep);
+          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+          gap: clamp(28px, 5vw, 72px);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 50%),
+            var(--navy-deep);
+          border-top: 1px solid rgba(201,168,76,0.08);
+          border-bottom: 1px solid rgba(201,168,76,0.08);
         }
 
-        .pricing-notes article {
-          border: 1px solid rgba(201,168,76,0.16);
-          background: rgba(13,28,53,0.72);
+        .payment-card {
+          border: 1px solid rgba(201,168,76,0.22);
+          background: rgba(7,17,31,0.68);
           padding: clamp(26px, 4vw, 42px);
         }
 
-        .pricing-notes h2 {
+        .payment-card p {
+          border-bottom: 1px solid rgba(201,168,76,0.1);
           color: var(--washi);
-          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(28px, 3.6vw, 44px);
-          font-weight: 300;
-          line-height: 1.4;
-          margin: 0 0 16px;
+          font-size: 14px;
+          line-height: 1.9;
+          padding: 0 0 14px;
         }
 
-        .pricing-heading-nowrap {
-          font-size: clamp(24px, 2.7vw, 38px) !important;
-          letter-spacing: 0;
-          white-space: nowrap;
-        }
-
-        .pricing-notes p {
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 2.1;
-          margin: 0;
-        }
-
-        .pricing-notes p + p {
+        .payment-card p + p {
           margin-top: 14px;
         }
 
-        .pricing-notes a,
-        .pricing-important a {
-          color: var(--gold);
-          text-decoration: none;
+        .payment-card p:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
         }
 
         .pricing-important {
-          padding: 0 var(--gutter) var(--section-pad);
+          padding: var(--section-pad) var(--gutter);
           background: var(--navy-deep);
         }
 
@@ -775,51 +558,32 @@ export default function PricingPage() {
           padding: clamp(30px, 5vw, 56px);
         }
 
+        .pricing-important ul {
+          display: grid;
+          gap: 12px;
+          list-style: none;
+          margin: 24px 0 0;
+          padding: 0;
+        }
+
+        .pricing-important li {
+          border-left: 1px solid rgba(201,168,76,0.34);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          padding-left: 14px;
+        }
+
         .pricing-important p {
-          margin-top: 22px;
+          border-top: 1px solid rgba(201,168,76,0.12);
+          margin-top: 26px;
+          padding-top: 22px;
         }
 
-        .pricing-related {
-          background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
-            var(--navy-mid);
-        }
-
-        .pricing-related-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 14px;
-        }
-
-        .pricing-related-card {
-          display: grid;
-          gap: 10px;
-          min-height: 132px;
-          border: 1px solid rgba(201,168,76,0.14);
-          background: rgba(7,17,31,0.52);
-          color: var(--washi);
-          padding: 22px;
+        .pricing-important a {
+          color: var(--gold);
           text-decoration: none;
-        }
-
-        .pricing-related-card span {
-          color: var(--gold);
-          font-size: 10px;
-          letter-spacing: 0.24em;
-          text-transform: uppercase;
-        }
-
-        .pricing-related-card strong {
-          color: var(--washi);
-          font-size: 16px;
-          font-weight: 300;
-          letter-spacing: 0.1em;
-          line-height: 1.6;
-        }
-
-        .pricing-related-card svg {
-          color: var(--gold);
-          justify-self: end;
         }
 
         .pricing-cta {
@@ -859,19 +623,13 @@ export default function PricingPage() {
 
         @media (max-width: 1180px) {
           .pricing-grid,
-          .shipping-grid,
-          .pricing-chip-grid,
-          .pricing-additional-list {
+          .pricing-highlight-strip {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
         @media (max-width: 900px) {
-          .pricing-benefit,
-          .pricing-additional,
-          .pricing-sample,
-          .pricing-related,
-          .pricing-notes {
+          .pricing-payment {
             grid-template-columns: 1fr;
           }
 
@@ -886,40 +644,15 @@ export default function PricingPage() {
         }
 
         @media (max-width: 680px) {
-          .pricing-heading-nowrap {
-            font-size: clamp(20px, 5.4vw, 28px) !important;
-          }
-
           .pricing-lead-grid,
-          .pricing-copy-grid {
-            grid-template-columns: 1fr;
-          }
-
           .pricing-grid,
-          .shipping-grid,
-          .pricing-chip-grid,
-          .pricing-additional-list,
-          .pricing-related-grid {
+          .pricing-highlight-strip,
+          .fee-basis-grid {
             grid-template-columns: 1fr;
           }
 
-          .pricing-card,
-          .shipping-card {
+          .pricing-card {
             min-height: auto;
-          }
-
-          .sample-row {
-            grid-template-columns: 1fr;
-          }
-
-          .sample-row span {
-            border-right: 0;
-            border-bottom: 1px solid rgba(201,168,76,0.1);
-            padding-bottom: 8px;
-          }
-
-          .sample-row strong {
-            padding-top: 8px;
           }
         }
       `}</style>
