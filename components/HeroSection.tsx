@@ -9,6 +9,8 @@ export default function HeroSection() {
   const { language } = useLanguage()
   const copy = translations[language].home.hero
   const heroKicker = 'EXPORT SUPPORT FROM JAPAN × INTERNATIONAL LOGISTICS'
+  const heroBodyJa = '北海道・札幌を拠点に、日本商品の調達から輸出手配までをサポートします。\nご希望の商品に応じた日本国内の仕入れ先確認や、候補商品のご提案も可能です。\n小ロットから継続取引まで、日本企業との連絡・書類準備・国際配送を一括で対応します。'
+  const heroBodyEn = 'Based in Sapporo, Japan, we support sourcing and export arrangements for Japanese products.\nWe can also check potential suppliers in Japan and propose suitable product options based on your needs.\nFrom small orders to ongoing business, we coordinate suppliers, export documentation, and international shipping.'
 
   return (
     <section
@@ -102,8 +104,8 @@ export default function HeroSection() {
             textShadow: '0 2px 18px rgba(0,0,0,0.38)',
           }}
         >
-          <span className="copy-line-ja">{copy.body}</span>
-          <span className="copy-line-en">{copy.bodySub}</span>
+          <span className="copy-line-ja">{heroBodyJa}</span>
+          <span className="copy-line-en">{heroBodyEn}</span>
         </p>
 
         <div className="hero-actions" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
