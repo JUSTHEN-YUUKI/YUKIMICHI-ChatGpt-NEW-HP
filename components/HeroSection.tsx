@@ -10,8 +10,8 @@ export default function HeroSection() {
   const { language } = useLanguage()
   const copy = translations[language].home.hero
   const heroKicker = 'EXPORT SUPPORT FROM JAPAN × INTERNATIONAL LOGISTICS'
-  const heroBodyJa = '北海道・札幌を拠点に、日本商品の調達から輸出手配までをサポートします。\nご希望の商品に応じた日本国内の仕入れ先調査や、候補商品のご提案も可能です。\n日本企業との連絡・書類準備・国際配送の手配を一括で対応します。'
-  const heroBodyEn = 'Based in Sapporo, Hokkaido, Japan, we support the sourcing of Japanese products and export arrangements.\nWe can also research potential suppliers in Japan and propose suitable product options based on your requirements.\nWe coordinate supplier communications, export documentation, and international shipping arrangements on your behalf.'
+  const heroBodyJa = '北海道・札幌を拠点に、日本商品の調達から輸出手配までをサポートします。\nご希望の商品に応じた日本国内の仕入れ先調査や、候補商品のご提案も可能です。\n日本企業との連絡・書類準備・国際配送の手配を、海外のお客様に代わって一括で対応します。'
+  const heroBodyEn = 'Based in Sapporo, Hokkaido, Japan, we support the sourcing of Japanese products and export arrangements.\nWe can also research potential suppliers in Japan and propose suitable product options based on your requirements.\nOn behalf of our overseas clients, we coordinate supplier communications, export documentation, and international shipping arrangements.'
 
   return (
     <section
