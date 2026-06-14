@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from '@/components/NewTabLink'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
+import SnowLayer from '@/components/SnowLayer'
 
 export default function HeroSection() {
   const { language } = useLanguage()
@@ -46,6 +47,8 @@ export default function HeroSection() {
             'linear-gradient(90deg, rgba(7,17,31,.96) 0%, rgba(7,17,31,.86) 34%, rgba(7,17,31,.42) 68%, rgba(7,17,31,.72) 100%), linear-gradient(to bottom, rgba(7,17,31,.92), rgba(7,17,31,.58) 48%, rgba(7,17,31,.95))',
         }}
       />
+
+      <SnowLayer />
 
       <div
         style={{
