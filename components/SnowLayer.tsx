@@ -27,12 +27,12 @@ function createFlake(width: number, height: number, spreadAcrossCanvas: boolean)
     x: Math.random() * width,
     y: spreadAcrossCanvas ? Math.random() * height : -Math.random() * 24,
     radius: 0.8 + Math.random() * 1.4,
-    speed: 0.16 + Math.random() * 0.19,
-    opacity: 0.1 + Math.random() * 0.16,
+    speed: 0.28 + Math.random() * 0.34,
+    opacity: 0.11 + Math.random() * 0.17,
     phase: Math.random() * Math.PI * 2,
-    sway: 0.08 + Math.random() * 0.16,
-    swaySpeed: 0.012 + Math.random() * 0.018,
-    baseDrift: (Math.random() - 0.5) * 0.08,
+    sway: 0.16 + Math.random() * 0.22,
+    swaySpeed: 0.014 + Math.random() * 0.022,
+    baseDrift: (Math.random() - 0.5) * 0.12,
   }
 }
 
@@ -48,7 +48,6 @@ export default function SnowLayer() {
 
     const layer = canvas
     const ctx = context
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     let animationFrame = 0
     let width = 0
     let height = 0
@@ -71,14 +70,6 @@ export default function SnowLayer() {
       ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2)
       ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity})`
       ctx.fill()
-    }
-
-    function drawStaticFlakes() {
-      clearCanvas()
-
-      for (const flake of flakes) {
-        drawFlake(flake)
-      }
     }
 
     function resizeCanvas() {
@@ -120,13 +111,6 @@ export default function SnowLayer() {
     }
 
     function startAnimation() {
-      if (motionQuery.matches) {
-        stopAnimation()
-        resizeCanvas()
-        drawStaticFlakes()
-        return
-      }
-
       stopAnimation()
       resizeCanvas()
       lastFrameTime = performance.now()
@@ -134,22 +118,15 @@ export default function SnowLayer() {
     }
 
     function handleResize() {
-      if (motionQuery.matches) return
       resizeCanvas()
-    }
-
-    function handleMotionChange() {
-      startAnimation()
     }
 
     startAnimation()
     window.addEventListener('resize', handleResize)
-    motionQuery.addEventListener('change', handleMotionChange)
 
     return () => {
       stopAnimation()
       window.removeEventListener('resize', handleResize)
-      motionQuery.removeEventListener('change', handleMotionChange)
     }
   }, [])
 
