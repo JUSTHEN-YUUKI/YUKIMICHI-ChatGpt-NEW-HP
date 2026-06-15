@@ -18,6 +18,7 @@ type Flake = {
 }
 
 const flakeColor = '248,245,239'
+const sparkleRate = 0.32
 
 function getFlakeCount(width: number) {
   if (width < 640) return 47
@@ -25,9 +26,22 @@ function getFlakeCount(width: number) {
   return 74
 }
 
-function createFlake(width: number, height: number, spreadAcrossCanvas: boolean): Flake {
+function getBalancedX(width: number, index: number, total: number) {
+  const laneCount = Math.max(1, total)
+  const laneWidth = width / laneCount
+  const laneStart = laneWidth * index
+  return Math.min(width, laneStart + laneWidth * (0.16 + Math.random() * 0.68))
+}
+
+function createFlake(
+  width: number,
+  height: number,
+  spreadAcrossCanvas: boolean,
+  index: number,
+  total: number,
+): Flake {
   return {
-    x: Math.random() * width,
+    x: getBalancedX(width, index, total),
     y: spreadAcrossCanvas ? Math.random() * height : -Math.random() * 24,
     radius: 0.7 + Math.random() * 1.3,
     speed: 0.14 + Math.random() * 0.18,
@@ -35,8 +49,8 @@ function createFlake(width: number, height: number, spreadAcrossCanvas: boolean)
     phase: Math.random() * Math.PI * 2,
     sway: 0.08 + Math.random() * 0.16,
     swaySpeed: 0.012 + Math.random() * 0.018,
-    baseDrift: (Math.random() - 0.5) * 0.08,
-    sparkle: Math.random() < 0.46,
+    baseDrift: (Math.random() - 0.5) * 0.04,
+    sparkle: Math.random() < sparkleRate,
     sparklePhase: Math.random() * Math.PI * 2,
     sparkleSpeed: 0.026 + Math.random() * 0.024,
   }
@@ -83,9 +97,10 @@ export default function SnowLayer() {
       const isHeadlineBand = flake.y > height * 0.22 && flake.y < height * 0.54
       const isCopyOrCtaBand = flake.y > height * 0.55 && flake.y < height * 0.88
 
-      if (isLeftContent && isHeadlineBand) return 0.28
-      if (isLeftContent && isCopyOrCtaBand) return 0.34
-      if (isLeftContent && isHeroTextBand) return 0.46
+      if (isLeftContent && isHeadlineBand) return 0.44
+      if (isLeftContent && isCopyOrCtaBand) return 0.5
+      if (isLeftContent && isHeroTextBand) return 0.62
+      if (flake.x > width * 0.68 && isHeroTextBand) return 0.88
 
       return 1
     }
@@ -133,7 +148,8 @@ export default function SnowLayer() {
       layer.height = Math.floor(height * pixelRatio)
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
 
-      flakes = Array.from({ length: getFlakeCount(width) }, () => createFlake(width, height, true))
+      const flakeCount = getFlakeCount(width)
+      flakes = Array.from({ length: flakeCount }, (_, index) => createFlake(width, height, true, index, flakeCount))
       clearCanvas()
     }
 
@@ -142,14 +158,15 @@ export default function SnowLayer() {
       lastFrameTime = time
       clearCanvas()
 
-      for (const flake of flakes) {
+      for (let index = 0; index < flakes.length; index += 1) {
+        const flake = flakes[index]
         flake.phase += flake.swaySpeed * delta
         flake.sparklePhase += flake.sparkleSpeed * delta
         flake.y += flake.speed * delta
         flake.x += (flake.baseDrift + Math.sin(flake.phase) * flake.sway) * delta
 
         if (flake.y > height + flake.radius + 4) {
-          Object.assign(flake, createFlake(width, height, false))
+          Object.assign(flake, createFlake(width, height, false, index, flakes.length))
           flake.y = -flake.radius - 4
         }
 
