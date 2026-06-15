@@ -178,22 +178,43 @@ export default function ServicesPage() {
             />
           </p>
         </div>
-        <article className="services-domestic-support">
-          <div>
+        <article className="services-domestic-support" aria-labelledby="domestic-support-title">
+          <div className="services-domestic-support__head">
             <span>Japan-side Coordination</span>
-            <h2>
-              <TranslatedText
-                id="pages.services.domesticSupportTitle"
-                fallback="日本国内法人としての取引調整・輸出手配支援"
-              />
-            </h2>
+            <h2 id="domestic-support-title">Japan-side Coordination</h2>
+            <p className="services-domestic-support__subtitle-ja">
+              日本国内法人としての取引調整・輸出手配支援
+            </p>
+            <p className="services-domestic-support__subtitle-en">
+              Japan-side transaction coordination and export arrangement support
+            </p>
           </div>
-          <p>
-            <TranslatedText
-              id="pages.services.domesticSupportBody"
-              fallback="YUKIMICHI Export Supportは、日本国内法人として、海外バイヤー向けに日本商品の商品調達、国内取引調整、輸出手配を行っております。メーカー・卸・店舗などとの確認・調整から、日本国内での仕入れ、納品確認、輸出関連手配まで、案件内容に応じて丁寧にサポートいたします。"
-            />
-          </p>
+          <div className="services-domestic-support__body">
+            <div className="services-domestic-support__copy services-domestic-support__copy--ja">
+              <p>
+                YUKIMICHI Export Supportは、日本国内法人として、海外バイヤー様に代わり、日本商品の調達確認、国内取引調整、輸出関連手配をサポートします。
+              </p>
+              <p>
+                商品の仕入れ確認、納品確認、書類準備、国際配送の手配まで、案件内容に応じて丁寧に対応いたします。
+              </p>
+            </div>
+            <div className="services-domestic-support__copy services-domestic-support__copy--en">
+              <p>
+                As a Japan-based company, YUKIMICHI Export Support assists overseas buyers with sourcing Japanese products, coordinating domestic transactions, and arranging export-related procedures.
+              </p>
+              <p>
+                We carefully support each project, from supplier confirmation, purchasing coordination, delivery confirmation, documentation, and international shipping arrangements.
+              </p>
+            </div>
+          </div>
+          <div className="services-domestic-support__highlight">
+            <p>
+              ご希望の商品に応じて、日本国内のメーカー・卸・店舗などへの確認を行い、候補商品のご提案も可能です。
+            </p>
+            <p lang="en">
+              We can also research potential suppliers in Japan and propose suitable product options based on your requirements.
+            </p>
+          </div>
         </article>
         <div className="services-hero-actions">
           <Link href="/quote" className="btn-primary">
@@ -428,42 +449,112 @@ export default function ServicesPage() {
 
         .services-domestic-support {
           display: grid;
-          grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-          gap: 22px;
-          max-width: 980px;
-          margin: 20px 0 30px;
-          border: 1px solid rgba(201,168,76,0.16);
+          gap: clamp(24px, 3.4vw, 38px);
+          max-width: 1120px;
+          margin: 28px 0 38px;
+          border: 1px solid rgba(201,168,76,0.22);
           background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 52%),
-            rgba(13,28,53,0.56);
-          padding: clamp(22px, 3vw, 32px);
+            linear-gradient(135deg, rgba(139,30,47,0.22), transparent 54%),
+            linear-gradient(180deg, rgba(13,28,53,0.86), rgba(7,17,31,0.72));
+          box-shadow: inset 0 1px 0 rgba(248,245,239,0.04);
+          padding: clamp(28px, 4.8vw, 56px);
         }
 
-        .services-domestic-support span {
+        .services-domestic-support__head {
+          max-width: 920px;
+        }
+
+        .services-domestic-support__head span {
           display: block;
           color: var(--gold);
           font-size: 10px;
-          letter-spacing: 0.28em;
+          letter-spacing: 0.34em;
           line-height: 1.7;
           margin-bottom: 12px;
           text-transform: uppercase;
         }
 
-        .services-domestic-support h2 {
-          color: var(--washi);
+        .services-domestic-support__head h2 {
+          color: var(--gold);
           font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(24px, 3vw, 36px);
+          font-size: clamp(40px, 6vw, 72px);
           font-weight: 300;
-          line-height: 1.45;
+          line-height: 1.02;
+          margin: 0 0 16px;
+        }
+
+        .services-domestic-support__subtitle-ja,
+        .services-domestic-support__subtitle-en {
           margin: 0;
         }
 
-        .services-domestic-support p {
+        .services-domestic-support__subtitle-ja {
+          color: var(--washi);
+          font-size: clamp(19px, 2.4vw, 28px);
+          letter-spacing: 0.06em;
+          line-height: 1.6;
+        }
+
+        .services-domestic-support__subtitle-en {
+          color: rgba(248,245,239,0.78);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(18px, 2.2vw, 25px);
+          letter-spacing: 0.04em;
+          line-height: 1.55;
+          margin-top: 8px;
+        }
+
+        .services-domestic-support__body {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .services-domestic-support__copy {
+          display: grid;
+          gap: 14px;
+          border-top: 1px solid rgba(201,168,76,0.18);
+          padding-top: 20px;
+        }
+
+        .services-domestic-support__copy p {
           color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 2.05;
+          font-size: clamp(15px, 1.18vw, 16.5px);
+          letter-spacing: 0.04em;
+          line-height: 1.95;
           margin: 0;
+        }
+
+        .services-domestic-support__copy--en p {
+          color: rgba(248,245,239,0.76);
+          letter-spacing: 0.03em;
+        }
+
+        .services-domestic-support__highlight {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+          border: 1px solid rgba(201,168,76,0.3);
+          background:
+            linear-gradient(90deg, rgba(201,168,76,0.12), transparent 58%),
+            rgba(7,17,31,0.42);
+          padding: clamp(20px, 2.6vw, 30px);
+        }
+
+        .services-domestic-support__highlight p {
+          color: var(--washi);
+          font-size: clamp(15.5px, 1.22vw, 17px);
+          letter-spacing: 0.04em;
+          line-height: 1.85;
+          margin: 0;
+        }
+
+        .services-domestic-support__highlight p[lang="en"] {
+          color: var(--gold-light);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(17px, 1.45vw, 20px);
+          letter-spacing: 0.03em;
+          line-height: 1.65;
         }
 
         .services-hero-actions {
@@ -898,7 +989,8 @@ export default function ServicesPage() {
             justify-content: flex-start;
           }
 
-          .services-domestic-support {
+          .services-domestic-support__body,
+          .services-domestic-support__highlight {
             grid-template-columns: 1fr;
           }
         }
