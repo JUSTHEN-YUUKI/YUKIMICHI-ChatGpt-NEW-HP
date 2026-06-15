@@ -17,22 +17,22 @@ type Flake = {
 const flakeColor = '248,245,239'
 
 function getFlakeCount(width: number) {
-  if (width < 640) return 20
-  if (width < 1024) return 28
-  return 35
+  if (width < 640) return 22
+  if (width < 1024) return 27
+  return 34
 }
 
 function createFlake(width: number, height: number, spreadAcrossCanvas: boolean): Flake {
   return {
     x: Math.random() * width,
     y: spreadAcrossCanvas ? Math.random() * height : -Math.random() * 24,
-    radius: 0.8 + Math.random() * 1.4,
-    speed: 0.28 + Math.random() * 0.34,
-    opacity: 0.11 + Math.random() * 0.17,
+    radius: 0.7 + Math.random() * 1.3,
+    speed: 0.14 + Math.random() * 0.18,
+    opacity: 0.075 + Math.random() * 0.13,
     phase: Math.random() * Math.PI * 2,
-    sway: 0.16 + Math.random() * 0.22,
-    swaySpeed: 0.014 + Math.random() * 0.022,
-    baseDrift: (Math.random() - 0.5) * 0.12,
+    sway: 0.08 + Math.random() * 0.16,
+    swaySpeed: 0.012 + Math.random() * 0.018,
+    baseDrift: (Math.random() - 0.5) * 0.08,
   }
 }
 
@@ -48,6 +48,7 @@ export default function SnowLayer() {
 
     const layer = canvas
     const ctx = context
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     let animationFrame = 0
     let width = 0
     let height = 0
@@ -65,11 +66,41 @@ export default function SnowLayer() {
       ctx.clearRect(0, 0, width, height)
     }
 
+    function getReadabilityFade(flake: Flake) {
+      if (width < 640) {
+        const nearMobileCopy = flake.x < width * 0.94 && flake.y > height * 0.12 && flake.y < height * 0.78
+        return nearMobileCopy ? 0.42 : 0.82
+      }
+
+      const leftContentWidth = Math.min(840, width * 0.62)
+      const isLeftContent = flake.x < leftContentWidth
+      const isHeroTextBand = flake.y > height * 0.16 && flake.y < height * 0.82
+      const isHeadlineBand = flake.y > height * 0.22 && flake.y < height * 0.54
+      const isCopyOrCtaBand = flake.y > height * 0.55 && flake.y < height * 0.88
+
+      if (isLeftContent && isHeadlineBand) return 0.28
+      if (isLeftContent && isCopyOrCtaBand) return 0.34
+      if (isLeftContent && isHeroTextBand) return 0.46
+
+      return 1
+    }
+
     function drawFlake(flake: Flake) {
+      const visibility = getReadabilityFade(flake)
+      if (visibility <= 0) return
+
       ctx.beginPath()
       ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity})`
+      ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity * visibility})`
       ctx.fill()
+    }
+
+    function drawStaticFlakes() {
+      clearCanvas()
+
+      for (const flake of flakes) {
+        drawFlake(flake)
+      }
     }
 
     function resizeCanvas() {
@@ -111,6 +142,13 @@ export default function SnowLayer() {
     }
 
     function startAnimation() {
+      if (motionQuery.matches) {
+        stopAnimation()
+        resizeCanvas()
+        drawStaticFlakes()
+        return
+      }
+
       stopAnimation()
       resizeCanvas()
       lastFrameTime = performance.now()
@@ -118,15 +156,22 @@ export default function SnowLayer() {
     }
 
     function handleResize() {
+      if (motionQuery.matches) return
       resizeCanvas()
+    }
+
+    function handleMotionChange() {
+      startAnimation()
     }
 
     startAnimation()
     window.addEventListener('resize', handleResize)
+    motionQuery.addEventListener('change', handleMotionChange)
 
     return () => {
       stopAnimation()
       window.removeEventListener('resize', handleResize)
+      motionQuery.removeEventListener('change', handleMotionChange)
     }
   }, [])
 
