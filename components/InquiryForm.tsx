@@ -1,6 +1,6 @@
 'use client'
 
-import type { FormEvent } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import { useState } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
@@ -136,6 +136,25 @@ const selectOptions: Partial<Record<keyof FormState, readonly string[]>> = {
   shippingMethod: shippingMethodOptions,
 }
 
+const fieldAutoComplete: Partial<Record<keyof FormState, string>> = {
+  company: 'organization',
+  name: 'name',
+  email: 'email',
+  productUrl: 'url',
+  productCategory: 'off',
+  quantity: 'off',
+  quantityUnit: 'off',
+  destination: 'country-name',
+  destinationCountry: 'country-name',
+  destinationCity: 'address-level2',
+  deadline: 'off',
+  shippingMethod: 'off',
+  message: 'off',
+  website: 'off',
+}
+
+type FormControlElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+
 const contactFieldDisplayOrder: readonly (keyof FormState)[] = [
   'destinationCountry',
   'destinationCity',
@@ -162,6 +181,34 @@ function orderContactFields(fields: readonly FieldConfig[]) {
   ]
 }
 
+function getFormText(formData: FormData, name: keyof FormState) {
+  const value = formData.get(name)
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function readSubmittedFormState(formData: FormData): FormState {
+  return {
+    company: getFormText(formData, 'company'),
+    name: getFormText(formData, 'name'),
+    email: getFormText(formData, 'email'),
+    productUrl: getFormText(formData, 'productUrl'),
+    productCategory: getFormText(formData, 'productCategory'),
+    quantity: getFormText(formData, 'quantity'),
+    quantityUnit: getFormText(formData, 'quantityUnit') || initialState.quantityUnit,
+    destination: getFormText(formData, 'destination'),
+    destinationCountry: getFormText(formData, 'destinationCountry'),
+    destinationCity: getFormText(formData, 'destinationCity'),
+    deadline: getFormText(formData, 'deadline'),
+    shippingMethod: getFormText(formData, 'shippingMethod'),
+    message: getFormText(formData, 'message'),
+    website: getFormText(formData, 'website'),
+  }
+}
+
+function getAutoComplete(name: keyof FormState) {
+  return fieldAutoComplete[name] ?? 'on'
+}
+
 export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
@@ -180,13 +227,26 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     setFormState((current) => ({ ...current, [name]: value }))
   }
 
+  function syncField(name: keyof FormState) {
+    return (event: ChangeEvent<FormControlElement>) => updateField(name, event.currentTarget.value)
+  }
+
+  function syncInputField(name: keyof FormState) {
+    return (event: FormEvent<FormControlElement>) => updateField(name, event.currentTarget.value)
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setSubmitState('submitting')
     setFeedbackMessage('')
 
-    const quantityWithUnit = [formState.quantity, formState.quantityUnit].filter(Boolean).join(' ')
-    const destinationText = [formState.destinationCountry, formState.destinationCity].filter(Boolean).join(' / ') || formState.destination
+    const submittedFormState = readSubmittedFormState(new FormData(event.currentTarget))
+    const quantityWithUnit = [submittedFormState.quantity, submittedFormState.quantityUnit].filter(Boolean).join(' ')
+    const destinationText =
+      [submittedFormState.destinationCountry, submittedFormState.destinationCity].filter(Boolean).join(' / ') ||
+      submittedFormState.destination
+
+    setFormState(submittedFormState)
 
     try {
       const response = await fetch('/api/inquiry', {
@@ -195,7 +255,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formState,
+          ...submittedFormState,
           quantity: quantityWithUnit,
           destination: destinationText,
           type,
@@ -264,14 +324,17 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     value={formState.quantity}
                     placeholder={field.placeholder}
                     required={field.required}
-                    autoComplete="on"
-                    onChange={(event) => updateField('quantity', event.target.value)}
+                    autoComplete={getAutoComplete('quantity')}
+                    onChange={syncField('quantity')}
+                    onInput={syncInputField('quantity')}
                   />
                   <select
                     name="quantityUnit"
                     value={formState.quantityUnit}
                     aria-label="数量単位 / Quantity unit"
-                    onChange={(event) => updateField('quantityUnit', event.target.value)}
+                    autoComplete={getAutoComplete('quantityUnit')}
+                    onChange={syncField('quantityUnit')}
+                    onInput={syncInputField('quantityUnit')}
                   >
                     {quantityUnitOptions.map((option) => (
                       <option key={option} value={option}>
@@ -286,8 +349,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   value={formState[field.name]}
                   placeholder={field.placeholder}
                   required={field.required}
-                  autoComplete="on"
-                  onChange={(event) => updateField(field.name, event.target.value)}
+                  autoComplete={getAutoComplete(field.name)}
+                  onChange={syncField(field.name)}
+                  onInput={syncInputField(field.name)}
                 />
               ) : options ? (
                 <>
@@ -298,8 +362,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     value={formState[field.name]}
                     placeholder={field.placeholder}
                     required={field.required}
-                    autoComplete="on"
-                    onChange={(event) => updateField(field.name, event.target.value)}
+                    autoComplete={getAutoComplete(field.name)}
+                    onChange={syncField(field.name)}
+                    onInput={syncInputField(field.name)}
                   />
                   <datalist id={listId}>
                     {options.map((option) => (
@@ -314,8 +379,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   value={formState[field.name]}
                   placeholder={field.placeholder}
                   required={field.required}
-                  autoComplete="on"
-                  onChange={(event) => updateField(field.name, event.target.value)}
+                  autoComplete={getAutoComplete(field.name)}
+                  onChange={syncField(field.name)}
+                  onInput={syncInputField(field.name)}
                 />
               )}
 
@@ -333,7 +399,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           value={formState.website}
           autoComplete="off"
           tabIndex={-1}
-          onChange={(event) => updateField('website', event.target.value)}
+          onChange={syncField('website')}
+          onInput={syncInputField('website')}
         />
       </label>
 

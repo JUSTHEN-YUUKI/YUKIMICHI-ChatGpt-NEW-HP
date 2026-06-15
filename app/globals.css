@@ -28,6 +28,35 @@ body {
   overflow-x: hidden;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid rgba(248, 245, 239, 0.16);
+  -webkit-text-fill-color: var(--washi);
+  caret-color: var(--washi);
+  box-shadow: 0 0 0 1000px rgba(7, 17, 31, 0.96) inset;
+  transition:
+    background-color 9999s ease-in-out 0s,
+    color 9999s ease-in-out 0s,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow:
+    0 0 0 1000px rgba(13, 28, 53, 0.96) inset,
+    0 0 0 3px rgba(201, 168, 76, 0.08);
+}
+
 .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .section-label-line { width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; }
 .section-label-text { font-size: 10px; font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }

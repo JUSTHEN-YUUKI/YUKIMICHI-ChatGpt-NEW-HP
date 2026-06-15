@@ -96,24 +96,25 @@ function getSmtpConfig() {
   const smtpPass = getRequiredEnv('SMTP_PASS')
   const smtpFrom = getRequiredEnv('SMTP_FROM')
   const smtpPort = smtpPortValue ? Number(smtpPortValue) : NaN
-  const missing = [
-    ['CONTACT_TO_EMAIL', contactToEmail],
-    ['SMTP_HOST', smtpHost],
-    ['SMTP_PORT', smtpPortValue],
-    ['SMTP_USER', smtpUser],
-    ['SMTP_PASS', smtpPass],
-    ['SMTP_FROM', smtpFrom],
+  const requiredEnv = [
+    { name: 'CONTACT_TO_EMAIL', value: contactToEmail },
+    { name: 'SMTP_HOST', value: smtpHost },
+    { name: 'SMTP_PORT', value: smtpPortValue },
+    { name: 'SMTP_USER', value: smtpUser },
+    { name: 'SMTP_PASS', value: smtpPass },
+    { name: 'SMTP_FROM', value: smtpFrom },
   ]
-    .filter(([, value]) => !value)
-    .map(([name]) => name)
+  const missing = requiredEnv.filter(({ value }) => !value).map(({ name }) => name)
+  const invalid =
+    smtpPortValue && (!Number.isInteger(smtpPort) || smtpPort < 1 || smtpPort > 65535)
+      ? ['SMTP_PORT must be an integer between 1 and 65535']
+      : []
 
-  if (missing.length > 0 || !Number.isInteger(smtpPort)) {
+  if (missing.length > 0 || invalid.length > 0) {
     return {
       ok: false as const,
-      error: `Missing or invalid SMTP env: ${[
-        ...missing,
-        ...(!Number.isInteger(smtpPort) ? ['SMTP_PORT must be an integer'] : []),
-      ].join(', ')}`,
+      missing,
+      invalid,
     }
   }
 
@@ -166,6 +167,28 @@ async function sendSmtpEmail({
     subject,
     text,
   })
+}
+
+function getSafeErrorDetails(error: unknown) {
+  if (error instanceof Error) {
+    const details = error as Error & {
+      code?: unknown
+      command?: unknown
+      responseCode?: unknown
+    }
+
+    return {
+      name: error.name,
+      message: error.message,
+      code: typeof details.code === 'string' ? details.code : undefined,
+      command: typeof details.command === 'string' ? details.command : undefined,
+      responseCode: typeof details.responseCode === 'number' ? details.responseCode : undefined,
+    }
+  }
+
+  return {
+    message: typeof error === 'string' ? error : 'Unknown SMTP error',
+  }
 }
 
 export async function POST(request: Request) {
@@ -287,7 +310,10 @@ export async function POST(request: Request) {
     const smtpConfig = getSmtpConfig()
 
     if (!smtpConfig.ok) {
-      console.error(smtpConfig.error)
+      console.error('[inquiry] SMTP configuration is missing or invalid', {
+        missing: smtpConfig.missing,
+        invalid: smtpConfig.invalid,
+      })
       return NextResponse.json(
         { ok: false, error: USER_SEND_ERROR },
         { status: 500 },
@@ -312,7 +338,7 @@ export async function POST(request: Request) {
       receiptNumber,
     })
   } catch (error) {
-    console.error('SMTP inquiry email send failed:', error)
+    console.error('[inquiry] SMTP inquiry email send failed', getSafeErrorDetails(error))
 
     return NextResponse.json(
       { ok: false, error: USER_SEND_ERROR },

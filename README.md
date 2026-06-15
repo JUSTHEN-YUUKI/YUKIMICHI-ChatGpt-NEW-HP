@@ -52,6 +52,8 @@ SMTP_PASS=<Outlook or Microsoft 365 SMTP password>
 SMTP_FROM=YUKIMICHI Website <exporter@justhen.co.jp>
 ```
 
+`SMTP_PORT=465` uses SMTP secure mode. Other ports, such as `587`, use non-secure transport initialization with provider-supported TLS negotiation. Do not place the real `SMTP_PASS` value in README, logs, or committed files.
+
 Vercel Production setup:
 
 1. Open the Vercel dashboard.
