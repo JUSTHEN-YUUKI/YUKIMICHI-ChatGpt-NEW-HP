@@ -88,19 +88,18 @@ export default function SnowLayer() {
     function getReadabilityFade(flake: Flake) {
       if (width < 640) {
         const nearMobileCopy = flake.x < width * 0.94 && flake.y > height * 0.12 && flake.y < height * 0.78
-        return nearMobileCopy ? 0.42 : 0.82
+        return nearMobileCopy ? 0.68 : 0.88
       }
 
-      const leftContentWidth = Math.min(840, width * 0.62)
+      const leftContentWidth = Math.min(640, width * 0.44)
       const isLeftContent = flake.x < leftContentWidth
       const isHeroTextBand = flake.y > height * 0.16 && flake.y < height * 0.82
       const isHeadlineBand = flake.y > height * 0.22 && flake.y < height * 0.54
       const isCopyOrCtaBand = flake.y > height * 0.55 && flake.y < height * 0.88
 
-      if (isLeftContent && isHeadlineBand) return 0.44
-      if (isLeftContent && isCopyOrCtaBand) return 0.5
-      if (isLeftContent && isHeroTextBand) return 0.62
-      if (flake.x > width * 0.68 && isHeroTextBand) return 0.88
+      if (isLeftContent && isHeadlineBand) return 0.66
+      if (isLeftContent && isCopyOrCtaBand) return 0.72
+      if (isLeftContent && isHeroTextBand) return 0.78
 
       return 1
     }
@@ -170,8 +169,9 @@ export default function SnowLayer() {
           flake.y = -flake.radius - 4
         }
 
-        if (flake.x < -8) flake.x = width + 8
-        if (flake.x > width + 8) flake.x = -8
+        if (flake.x < -8 || flake.x > width + 8) {
+          flake.x = getBalancedX(width, index, flakes.length)
+        }
 
         drawFlake(flake)
       }
