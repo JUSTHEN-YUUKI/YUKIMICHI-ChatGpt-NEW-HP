@@ -27,12 +27,12 @@ function createFlake(width: number, height: number, spreadAcrossCanvas: boolean)
     x: Math.random() * width,
     y: spreadAcrossCanvas ? Math.random() * height : -Math.random() * 24,
     radius: 0.8 + Math.random() * 1.4,
-    speed: 0.08 + Math.random() * 0.27,
+    speed: 0.16 + Math.random() * 0.19,
     opacity: 0.1 + Math.random() * 0.16,
     phase: Math.random() * Math.PI * 2,
-    sway: 0.035 + Math.random() * 0.11,
-    swaySpeed: 0.006 + Math.random() * 0.012,
-    baseDrift: (Math.random() - 0.5) * 0.035,
+    sway: 0.08 + Math.random() * 0.16,
+    swaySpeed: 0.012 + Math.random() * 0.018,
+    baseDrift: (Math.random() - 0.5) * 0.08,
   }
 }
 
