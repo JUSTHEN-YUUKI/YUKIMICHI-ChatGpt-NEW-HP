@@ -1,0 +1,20 @@
+{
+  "name": "outlook-chatgpt-translator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Outlook task pane add-in for translating opened email messages with the OpenAI API.",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "node server/index.js",
+    "server": "node server/index.js",
+    "build": "node --check server/index.js && node --check server/openaiTranslator.js && node --check src/taskpane/taskpane.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "office-addin-dev-certs": "^1.13.5"
+  }
+}
