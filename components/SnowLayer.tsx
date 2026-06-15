@@ -17,17 +17,18 @@ type Flake = {
 const flakeColor = '248,245,239'
 
 function getFlakeCount(width: number) {
-  if (width < 640) return 16
-  return 32
+  if (width < 640) return 20
+  if (width < 1024) return 28
+  return 35
 }
 
 function createFlake(width: number, height: number, spreadAcrossCanvas: boolean): Flake {
   return {
     x: Math.random() * width,
     y: spreadAcrossCanvas ? Math.random() * height : -Math.random() * 24,
-    radius: 0.6 + Math.random() * 1.6,
+    radius: 0.8 + Math.random() * 1.4,
     speed: 0.08 + Math.random() * 0.27,
-    opacity: 0.06 + Math.random() * 0.16,
+    opacity: 0.1 + Math.random() * 0.16,
     phase: Math.random() * Math.PI * 2,
     sway: 0.035 + Math.random() * 0.11,
     swaySpeed: 0.006 + Math.random() * 0.012,
@@ -65,6 +66,21 @@ export default function SnowLayer() {
       ctx.clearRect(0, 0, width, height)
     }
 
+    function drawFlake(flake: Flake) {
+      ctx.beginPath()
+      ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity})`
+      ctx.fill()
+    }
+
+    function drawStaticFlakes() {
+      clearCanvas()
+
+      for (const flake of flakes) {
+        drawFlake(flake)
+      }
+    }
+
     function resizeCanvas() {
       const rect = layer.getBoundingClientRect()
       width = Math.max(1, rect.width)
@@ -97,10 +113,7 @@ export default function SnowLayer() {
         if (flake.x < -8) flake.x = width + 8
         if (flake.x > width + 8) flake.x = -8
 
-        ctx.beginPath()
-        ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity})`
-        ctx.fill()
+        drawFlake(flake)
       }
 
       animationFrame = requestAnimationFrame(drawFrame)
@@ -109,7 +122,8 @@ export default function SnowLayer() {
     function startAnimation() {
       if (motionQuery.matches) {
         stopAnimation()
-        clearCanvas()
+        resizeCanvas()
+        drawStaticFlakes()
         return
       }
 
