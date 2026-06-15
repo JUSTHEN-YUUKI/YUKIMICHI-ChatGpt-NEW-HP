@@ -48,7 +48,6 @@ export default function SnowLayer() {
 
     const layer = canvas
     const ctx = context
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     let animationFrame = 0
     let width = 0
     let height = 0
@@ -95,14 +94,6 @@ export default function SnowLayer() {
       ctx.fill()
     }
 
-    function drawStaticFlakes() {
-      clearCanvas()
-
-      for (const flake of flakes) {
-        drawFlake(flake)
-      }
-    }
-
     function resizeCanvas() {
       const rect = layer.getBoundingClientRect()
       width = Math.max(1, rect.width)
@@ -142,13 +133,6 @@ export default function SnowLayer() {
     }
 
     function startAnimation() {
-      if (motionQuery.matches) {
-        stopAnimation()
-        resizeCanvas()
-        drawStaticFlakes()
-        return
-      }
-
       stopAnimation()
       resizeCanvas()
       lastFrameTime = performance.now()
@@ -156,22 +140,15 @@ export default function SnowLayer() {
     }
 
     function handleResize() {
-      if (motionQuery.matches) return
       resizeCanvas()
-    }
-
-    function handleMotionChange() {
-      startAnimation()
     }
 
     startAnimation()
     window.addEventListener('resize', handleResize)
-    motionQuery.addEventListener('change', handleMotionChange)
 
     return () => {
       stopAnimation()
       window.removeEventListener('resize', handleResize)
-      motionQuery.removeEventListener('change', handleMotionChange)
     }
   }, [])
 
