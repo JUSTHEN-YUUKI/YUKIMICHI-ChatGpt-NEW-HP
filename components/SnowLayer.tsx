@@ -12,14 +12,17 @@ type Flake = {
   sway: number
   swaySpeed: number
   baseDrift: number
+  sparkle: boolean
+  sparklePhase: number
+  sparkleSpeed: number
 }
 
 const flakeColor = '248,245,239'
 
 function getFlakeCount(width: number) {
-  if (width < 640) return 26
-  if (width < 1024) return 32
-  return 41
+  if (width < 640) return 47
+  if (width < 1024) return 58
+  return 74
 }
 
 function createFlake(width: number, height: number, spreadAcrossCanvas: boolean): Flake {
@@ -33,6 +36,9 @@ function createFlake(width: number, height: number, spreadAcrossCanvas: boolean)
     sway: 0.08 + Math.random() * 0.16,
     swaySpeed: 0.012 + Math.random() * 0.018,
     baseDrift: (Math.random() - 0.5) * 0.08,
+    sparkle: Math.random() < 0.46,
+    sparklePhase: Math.random() * Math.PI * 2,
+    sparkleSpeed: 0.026 + Math.random() * 0.024,
   }
 }
 
@@ -87,10 +93,33 @@ export default function SnowLayer() {
     function drawFlake(flake: Flake) {
       const visibility = getReadabilityFade(flake)
       if (visibility <= 0) return
+      const twinkle = flake.sparkle ? 0.65 + Math.sin(flake.sparklePhase) * 0.35 : 1
+      const alpha = flake.opacity * visibility * twinkle
+
+      if (flake.sparkle) {
+        const glowRadius = flake.radius * (2.2 + twinkle * 1.8)
+        const glowAlpha = Math.min(alpha * 0.26, 0.16)
+        const glintSize = flake.radius * (2.4 + twinkle * 1.8)
+        const glintAlpha = Math.min(alpha * 1.35, 0.38)
+
+        ctx.beginPath()
+        ctx.arc(flake.x, flake.y, glowRadius, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${flakeColor}, ${glowAlpha})`
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.moveTo(flake.x - glintSize, flake.y)
+        ctx.lineTo(flake.x + glintSize, flake.y)
+        ctx.moveTo(flake.x, flake.y - glintSize)
+        ctx.lineTo(flake.x, flake.y + glintSize)
+        ctx.strokeStyle = `rgba(${flakeColor}, ${glintAlpha})`
+        ctx.lineWidth = 0.45
+        ctx.stroke()
+      }
 
       ctx.beginPath()
       ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(${flakeColor}, ${flake.opacity * visibility})`
+      ctx.fillStyle = `rgba(${flakeColor}, ${alpha})`
       ctx.fill()
     }
 
@@ -115,6 +144,7 @@ export default function SnowLayer() {
 
       for (const flake of flakes) {
         flake.phase += flake.swaySpeed * delta
+        flake.sparklePhase += flake.sparkleSpeed * delta
         flake.y += flake.speed * delta
         flake.x += (flake.baseDrift + Math.sin(flake.phase) * flake.sway) * delta
 
