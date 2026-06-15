@@ -178,6 +178,23 @@ export default function ServicesPage() {
             />
           </p>
         </div>
+        <article className="services-domestic-support">
+          <div>
+            <span>Japan-side Coordination</span>
+            <h2>
+              <TranslatedText
+                id="pages.services.domesticSupportTitle"
+                fallback="日本国内法人としての取引調整・輸出手配支援"
+              />
+            </h2>
+          </div>
+          <p>
+            <TranslatedText
+              id="pages.services.domesticSupportBody"
+              fallback="YUKIMICHI Export Supportは、日本国内法人として、海外バイヤー向けに日本商品の商品調達、国内取引調整、輸出手配を行っております。メーカー・卸・店舗などとの確認・調整から、日本国内での仕入れ、納品確認、輸出関連手配まで、案件内容に応じて丁寧にサポートいたします。"
+            />
+          </p>
+        </article>
         <div className="services-hero-actions">
           <Link href="/quote" className="btn-primary">
             <TranslatedText id="common.quote" fallback="お見積りへ進む" /> <ArrowRight />
@@ -407,6 +424,46 @@ export default function ServicesPage() {
           line-height: 2.05;
           margin: 0;
           padding: 18px 20px;
+        }
+
+        .services-domestic-support {
+          display: grid;
+          grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+          gap: 22px;
+          max-width: 980px;
+          margin: 20px 0 30px;
+          border: 1px solid rgba(201,168,76,0.16);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 52%),
+            rgba(13,28,53,0.56);
+          padding: clamp(22px, 3vw, 32px);
+        }
+
+        .services-domestic-support span {
+          display: block;
+          color: var(--gold);
+          font-size: 10px;
+          letter-spacing: 0.28em;
+          line-height: 1.7;
+          margin-bottom: 12px;
+          text-transform: uppercase;
+        }
+
+        .services-domestic-support h2 {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(24px, 3vw, 36px);
+          font-weight: 300;
+          line-height: 1.45;
+          margin: 0;
+        }
+
+        .services-domestic-support p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          line-height: 2.05;
+          margin: 0;
         }
 
         .services-hero-actions {
@@ -839,6 +896,10 @@ export default function ServicesPage() {
 
           .services-cta-actions {
             justify-content: flex-start;
+          }
+
+          .services-domestic-support {
+            grid-template-columns: 1fr;
           }
         }
 
