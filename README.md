@@ -41,18 +41,20 @@ The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email del
 
 Do not commit SMTP passwords or real `.env.local` files. Use `.env.example` only as a key list.
 
+YUKIMICHI uses the Onamae.com / GMO mail server for `justhen.co.jp`.
+
 Required Vercel Production environment variables:
 
 ```text
 CONTACT_TO_EMAIL=exporter@justhen.co.jp
-SMTP_HOST=smtp.office365.com
-SMTP_PORT=587
+SMTP_HOST=mail1033.onamae.ne.jp
+SMTP_PORT=465
 SMTP_USER=exporter@justhen.co.jp
-SMTP_PASS=<Outlook or Microsoft 365 SMTP password>
-SMTP_FROM=YUKIMICHI Website <exporter@justhen.co.jp>
+SMTP_PASS=<Onamae.com mail password entered directly in Vercel>
+SMTP_FROM=exporter@justhen.co.jp
 ```
 
-`SMTP_PORT=465` uses SMTP secure mode. Other ports, such as `587`, use non-secure transport initialization with provider-supported TLS negotiation. Do not place the real `SMTP_PASS` value in README, logs, or committed files.
+`SMTP_PORT=465` uses SSL secure mode (`secure: true`). Port `587`, if used by another provider, uses non-secure transport initialization (`secure: false`) with provider-supported STARTTLS negotiation. Do not place the real `SMTP_PASS` value in README, logs, comments, or committed files.
 
 Vercel Production setup:
 
@@ -63,4 +65,4 @@ Vercel Production setup:
 5. After saving, open `Deployments` and redeploy the latest production deployment.
 6. Test sending from `/contact` and `/quote`.
 
-If sending still fails after the variables are set, SMTP AUTH may be disabled on the Microsoft 365 mailbox. Enable SMTP AUTH for `exporter@justhen.co.jp`, then redeploy or retry.
+If sending still fails after the variables are set, confirm the Onamae.com / GMO mailbox password, SMTP server, SSL port, and mailbox sending permissions, then redeploy or retry.

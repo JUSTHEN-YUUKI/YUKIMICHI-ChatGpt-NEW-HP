@@ -296,7 +296,7 @@ export async function POST(request: Request) {
   ].join('\n')
 
   const adminText = [
-    'Outlook管理用：件名または本文の受付番号で検索・分類してください。',
+    '管理用：件名または本文の受付番号で検索・分類してください。',
     `対応ステータス：未対応`,
     '',
     inquirySummary,
