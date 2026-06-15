@@ -17,9 +17,9 @@ type Flake = {
 const flakeColor = '248,245,239'
 
 function getFlakeCount(width: number) {
-  if (width < 640) return 22
-  if (width < 1024) return 27
-  return 34
+  if (width < 640) return 26
+  if (width < 1024) return 32
+  return 41
 }
 
 function createFlake(width: number, height: number, spreadAcrossCanvas: boolean): Flake {
