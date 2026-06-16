@@ -44,28 +44,26 @@ const feeBasisItems = [
   {
     label: 'Product Value Basis',
     title: '商品代金基準',
-    body: '当社の手配手数料は、原則として商品代金を基準に算出します。',
+    body: '商品代金とは、原則として国際送料、関税、輸入税、輸送保険料を除いた商品購入代金を指します。案件内容により、正式見積り時に算出基準を個別に確認します。',
+    sub: 'Product value generally refers to the product purchase price before international shipping, customs duties, taxes, and insurance. The final basis may vary depending on quotation conditions.',
   },
   {
     label: 'Actual Cost Items',
     title: '実費項目',
-    body: '国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用、特殊梱包費などは、別途実費または個別見積りとなります。',
+    body: '国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用、特殊梱包費、検査費用等は、手配手数料とは別に実費または個別見積りとなります。',
+    sub: 'International shipping, insurance, customs duties, import taxes, VAT/GST, customs-related charges, special packaging, and inspection costs are charged separately at actual cost or quoted individually.',
   },
   {
-    label: 'Included in Basic Handling Fees',
-    title: '基本手数料に含まれるサポート',
-    body: '基本手数料には、メーカー・ブランドとの連絡、条件確認、簡単な交渉、通関業者・フォワーダーとの調整、配送・船積みに関する手配サポートが含まれます。',
-    sub: '最終的にお取引が成立しなかった場合、連絡・交渉サポートの手数料はいただきません。※すでに発生した実費がある場合は、別途ご精算となります。',
-  },
-  {
-    label: 'Additional Options',
-    title: '追加オプション',
-    body: '商品写真撮影、外箱・ラベル撮影、JANコード・成分表示確認、簡易検品、SDS/MSDS取得サポート、メーカー資料取得代行、再梱包、特殊梱包、分納、複数配送先対応などは、作業内容に応じて別途見積りとなります。',
+    label: 'Individual Quotation',
+    title: '個別見積り',
+    body: '高額商品、大量貨物、海上コンテナ輸送（FCL）、継続取引、特殊梱包、複数仕入先の商品集約は、案件内容に応じて手配手数料や実費項目を個別に確認します。',
+    sub: 'High-value products, large-volume cargo, FCL shipments, ongoing transactions, special packaging, and multi-supplier consolidation may be quoted individually.',
   },
   {
     label: 'Insurance & Customs Notes',
     title: '保険・税関注意事項',
-    body: '輸送保険は任意加入です。未加入の場合、輸送中の紛失・破損に関する補償は、運送会社または保険約款の範囲に限定されます。税関判断による遅延、検査、没収、追加費用は返金対象外です。',
+    body: '輸送保険は任意加入です。未加入の場合、輸送中の紛失・破損に関する補償は、運送会社または保険約款の範囲に限定されます。税関判断による遅延、検査、没収、追加費用は返金対象外となる場合があります。',
+    sub: 'Shipping insurance is optional but recommended for high-value shipments. Without insurance, compensation is limited to carrier terms or the applicable insurance policy.',
   },
 ]
 
@@ -101,6 +99,8 @@ const paymentItems = [
 const noticeItems = [
   '表示手数料は目安であり、商品内容、数量、仕向地、輸送条件により変動する場合があります。',
   '国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用は別途実費となります。',
+  '輸送保険は任意加入です。未加入時の補償は、運送会社または保険約款の範囲に限定されます。',
+  '税関判断による遅延、検査、没収、追加費用は返金対象外となる場合があります。',
   '模倣品、海賊版、知的財産権侵害品、輸出入規制品は取り扱いできません。',
   '化粧品、食品、健康関連商品は、成分、ラベル、SDS/MSDS、輸送条件により追加確認が必要になる場合があります。',
   '正式見積りでは、商品代金、手配手数料、国際送料、保険料、その他費用をできるだけ分けて明示します。',
@@ -276,7 +276,7 @@ export default function PricingPage() {
           </div>
           <h2>TT Bank Transfer</h2>
           <p>
-            入金確認後に手配・発注・輸出準備を進めます。振込先の詳細は正式見積り・請求時に個別にご案内します。
+            入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
           </p>
         </div>
         <div className="payment-card">

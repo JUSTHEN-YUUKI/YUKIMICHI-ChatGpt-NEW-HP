@@ -76,6 +76,7 @@ const coreServices = [
 const supportScope = [
   '商品情報の整理',
   '商品調達可否の確認',
+  '仕入先への確認・連絡支援',
   '見積作成',
   '国際配送方法の比較',
   'EMS / DHL / FedEx / UPS / ヤマト国際宅急便の検討',
@@ -97,6 +98,34 @@ const limitations = [
   '配送会社の最終引受判断',
   '輸入国での販売可否',
   '配送遅延が発生しないことの保証',
+]
+
+const roleItems = [
+  {
+    actor: 'YUKIMICHI',
+    ja: '日本側の調達確認、国内取引調整、書類整理、配送手配支援',
+    en: 'Japan-side procurement confirmation, domestic transaction coordination, document organization, and shipping arrangement support.',
+  },
+  {
+    actor: 'Supplier',
+    ja: '商品供給、成分表、SDS/MSDS、商品資料の提供',
+    en: 'Product supply, ingredient lists, SDS/MSDS, and product documentation.',
+  },
+  {
+    actor: 'Freight Forwarder / Carrier',
+    ja: '実輸送、引受可否判断、運送約款に基づく輸送',
+    en: 'Actual transportation, acceptance decisions, and carriage under carrier terms.',
+  },
+  {
+    actor: 'Customs Broker',
+    ja: '必要に応じた輸出入申告手続き',
+    en: 'Export or import declaration procedures when required for the transaction.',
+  },
+  {
+    actor: 'Importer / Buyer',
+    ja: '輸入国側の許可、関税・税金、販売可否、現地規制確認',
+    en: 'Destination-side permits, duties and taxes, sales eligibility, and local regulatory checks.',
+  },
 ]
 
 const shippingMethods = [
@@ -164,29 +193,15 @@ export default function ServicesPage() {
           <br />
           <em><TranslatedText id="pages.services.heroSubtitle" fallback="Export Support Services" /></em>
         </h1>
-        <div className="services-lead-grid">
-          <p>
-            <TranslatedText
-              id="pages.services.heroLeadLeft"
-              fallback="YUKIMICHIは、日本国内の商品調達から、国際宅配便、航空貨物、海上輸送、輸出書類の整理、取扱可否確認まで支援します。"
-            />
-          </p>
-          <p>
-            <TranslatedText
-              id="pages.services.heroLeadRight"
-              fallback="海外のお客様が、安心して取扱可能な日本商品を取引できる環境を整えます。"
-            />
-          </p>
-        </div>
         <article className="services-domestic-support" aria-labelledby="domestic-support-title">
           <div className="services-domestic-support__head">
-            <span>Japan-side Coordination</span>
-            <h2 id="domestic-support-title">Japan-side Coordination</h2>
+            <span>Japan Side Coordination</span>
+            <h2 id="domestic-support-title">Japan Side Coordination</h2>
             <p className="services-domestic-support__subtitle-ja">
               日本国内法人としての取引調整・輸出手配支援
             </p>
             <p className="services-domestic-support__subtitle-en">
-              Japan-side transaction coordination and export arrangement support
+              Japan side transaction coordination and export arrangement support
             </p>
           </div>
           <div className="services-domestic-support__body">
@@ -232,7 +247,7 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Core Services</span>
           </div>
-          <h2><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス領域" /></h2>
+          <h2><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス" /></h2>
           <p>
             <TranslatedText id="pages.services.coreLead" fallback="商品調達、配送方法の比較、輸出書類、規制確認まで、問い合わせ前に確認すべき実務項目を整理します。" />
           </p>
@@ -283,6 +298,30 @@ export default function ServicesPage() {
             ))}
           </ul>
         </article>
+      </section>
+
+      <section className="services-role">
+        <div className="services-section-head">
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Role / 役割分担</span>
+          </div>
+          <h2>YUKIMICHIは運送会社そのものではありません</h2>
+          <p>
+            YUKIMICHIは日本側の輸出手配支援会社として、調達確認、仕入先連絡、書類整理、配送手配支援を行います。
+            実輸送、通関判断、輸入国側の許可・税金・販売可否は、関係事業者または輸入者側の確認が前提です。
+          </p>
+        </div>
+
+        <div className="services-role-grid">
+          {roleItems.map((item) => (
+            <article className="services-role-card" key={item.actor}>
+              <span>{item.actor}</span>
+              <p>{item.ja}</p>
+              <small>{item.en}</small>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="services-shipping">
@@ -429,7 +468,6 @@ export default function ServicesPage() {
           font-size: 0.68em;
         }
 
-        .services-lead-grid,
         .services-copy-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -441,7 +479,6 @@ export default function ServicesPage() {
           max-width: 860px;
         }
 
-        .services-lead-grid p,
         .services-copy-grid p {
           border: 1px solid rgba(201,168,76,0.14);
           background: rgba(13,28,53,0.42);
@@ -570,6 +607,7 @@ export default function ServicesPage() {
         }
 
         .services-core,
+        .services-role,
         .services-shipping {
           padding: var(--section-pad) var(--gutter);
           background:
@@ -767,6 +805,54 @@ export default function ServicesPage() {
           width: 6px;
           height: 1px;
           background: var(--gold);
+        }
+
+        .services-role {
+          border-bottom: 1px solid rgba(201,168,76,0.08);
+          border-top: 1px solid rgba(201,168,76,0.08);
+        }
+
+        .services-role-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .services-role-card {
+          border: 1px solid rgba(201,168,76,0.16);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.14), transparent 52%),
+            rgba(7,17,31,0.7);
+          min-height: 220px;
+          padding: clamp(22px, 3vw, 30px);
+        }
+
+        .services-role-card span {
+          color: var(--gold);
+          display: block;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(22px, 2.5vw, 31px);
+          font-weight: 300;
+          line-height: 1.15;
+          margin-bottom: 18px;
+        }
+
+        .services-role-card p {
+          color: var(--washi);
+          font-size: 13.5px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          margin: 0 0 14px;
+        }
+
+        .services-role-card small {
+          border-top: 1px solid rgba(201,168,76,0.14);
+          color: var(--washi-dim);
+          display: block;
+          font-size: 12.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.8;
+          padding-top: 14px;
         }
 
         .shipping-grid {
@@ -973,6 +1059,7 @@ export default function ServicesPage() {
         }
 
         @media (max-width: 1180px) {
+          .services-role-grid,
           .services-grid,
           .shipping-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1006,12 +1093,12 @@ export default function ServicesPage() {
             font-size: clamp(21px, 5.8vw, 30px) !important;
           }
 
-          .services-lead-grid,
           .services-copy-grid {
             grid-template-columns: 1fr;
           }
 
           .services-grid,
+          .services-role-grid,
           .shipping-grid,
           .services-info-list,
           .services-related-grid {

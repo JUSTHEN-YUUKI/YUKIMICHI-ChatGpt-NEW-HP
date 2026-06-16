@@ -419,6 +419,14 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         ))}
       </div>
 
+      <label className="inquiry-form__privacy">
+        <input name="privacyConsent" type="checkbox" required />
+        <span>
+          プライバシーポリシーに同意します。
+          <a href="/privacy">Privacy Policy</a>
+        </span>
+      </label>
+
       {feedbackMessage && (
         <div className={`inquiry-form__feedback inquiry-form__feedback--${submitState}`} role="status">
           {feedbackMessage}
@@ -712,6 +720,53 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           letter-spacing: 0.04em;
           line-height: 1.85;
           margin: 0;
+        }
+
+        .inquiry-form__privacy {
+          align-items: flex-start;
+          display: flex;
+          gap: 12px;
+          color: var(--washi-dim);
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          line-height: 1.85;
+        }
+
+        .inquiry-form__privacy input {
+          appearance: none;
+          border: 1px solid rgba(201,168,76,0.48);
+          background: rgba(7,20,38,0.86);
+          cursor: pointer;
+          flex: 0 0 auto;
+          height: 18px;
+          margin-top: 3px;
+          min-height: 18px;
+          padding: 0;
+          position: relative;
+          width: 18px;
+        }
+
+        .inquiry-form__privacy input:checked {
+          background: var(--gold);
+          border-color: var(--gold);
+        }
+
+        .inquiry-form__privacy input:checked::after {
+          border: solid var(--navy-deep);
+          border-width: 0 2px 2px 0;
+          content: '';
+          height: 9px;
+          left: 6px;
+          position: absolute;
+          top: 2px;
+          transform: rotate(45deg);
+          width: 4px;
+        }
+
+        .inquiry-form__privacy a {
+          color: var(--gold);
+          margin-left: 8px;
+          text-decoration: none;
         }
 
         .inquiry-form__feedback {

@@ -22,6 +22,9 @@ export default function Footer() {
           <p className="site-footer__eyebrow">YUKIMICHI</p>
           <p className="site-footer__tagline">Trusted Export Support from Japan.</p>
           <p className="site-footer__copy">YUKIMICHI | Operated by JUSTHEN Co., Ltd.</p>
+          <p className="site-footer__notice">
+            Import approval, customs duties, VAT/GST, local sales eligibility, and carrier acceptance are confirmed case by case by the relevant authorities, carriers, brokers, or importer.
+          </p>
         </section>
 
         <nav className="site-footer__nav" aria-label="Footer navigation">
@@ -107,6 +110,18 @@ export default function Footer() {
           color: var(--suzu);
           margin: 0;
           text-transform: uppercase;
+        }
+
+        .site-footer__notice {
+          border-left: 1px solid rgba(201, 168, 76, 0.38);
+          color: rgba(244, 239, 230, 0.58);
+          font-size: 12px;
+          font-weight: 300;
+          letter-spacing: 0.04em;
+          line-height: 1.8;
+          margin: 22px 0 0;
+          max-width: 520px;
+          padding-left: 14px;
         }
 
         .site-footer__heading {

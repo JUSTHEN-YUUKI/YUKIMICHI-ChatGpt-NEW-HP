@@ -12,11 +12,12 @@ const inquiryMailto =
   'mailto:exporter@justhen.co.jp?subject=YUKIMICHI%20Inquiry&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0D%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0D%0A%E5%95%86%E5%93%81URL%EF%BC%9A%0D%0A%E6%95%B0%E9%87%8F%EF%BC%9A%0D%0A%E9%85%8D%E9%80%81%E5%85%88%E5%9B%BD%EF%BC%9A%0D%0A%E5%B8%8C%E6%9C%9B%E7%B4%8D%E6%9C%9F%EF%BC%9A%0D%0A%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%EF%BC%9A'
 
 const helpfulItems = [
-  '商品名・商品URL',
+  '商品名・商品URL（任意）',
   '数量',
   '配送先国・都市',
   '希望納期',
   '希望配送方法',
+  '商品調達・国際配送・取扱可否確認・メーカー確認などの相談内容',
   '法人宛・個人宛',
 ]
 
@@ -94,7 +95,7 @@ export default function ContactPage() {
           <p className="contact-panel-lead">
             <TranslatedText
               id="pages.contact.formLead"
-              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URL・配送先国・相談内容が分かると、確認がスムーズです。"
+              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URLは任意です。商品調達、国際配送、取扱可否確認、メーカー確認などの相談内容をMessage欄に記載できます。"
             />
           </p>
 

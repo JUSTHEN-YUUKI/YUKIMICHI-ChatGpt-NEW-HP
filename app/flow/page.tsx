@@ -11,43 +11,67 @@ const steps = [
     number: '01',
     title: 'お問い合わせ',
     en: 'Inquiry',
-    text: '商品名、数量、仕向地、希望納期、用途をお知らせください。法人取引、個人購入、小ロットの相談にも対応します。',
+    text: '商品名、ブランド名、数量、仕向地、用途、希望納期をお知らせください。商品URLがない場合は、写真情報や分かる範囲の説明でも受付できます。',
   },
   {
     number: '02',
-    title: '内容確認',
-    en: 'Product Review',
-    text: '輸出可否、数量、配送条件、必要書類、相手国側の確認事項を整理します。不明点は推測せず追加確認します。',
+    title: '商品・輸入条件の事前確認',
+    en: 'Product and Import Pre-check',
+    text: '商品カテゴリ、数量、配送先国、用途をもとに、輸出入規制、配送会社の引受条件、輸入者側で確認すべき許可・税金・販売可否を整理します。',
   },
   {
     number: '03',
-    title: '見積',
-    en: 'Quote Preparation',
-    text: '商品代、手配手数料、国際送料、保険、想定される追加費用を分けて提示します。関税やVAT/GSTは参考情報として扱います。',
+    title: '仕入先確認',
+    en: 'Supplier Confirmation',
+    text: '日本国内の仕入先へ在庫、価格、MOQ、納期、資料やSDS/MSDSの有無を確認します。仕入先情報は原則として直接開示しません。',
   },
   {
     number: '04',
-    title: '商品調達',
-    en: 'Product Procurement',
-    text: '日本国内の正規流通を前提に調達します。限定品、中古品、サンプル出荷は案件ごとに可否を確認します。',
+    title: '見積提示',
+    en: 'Quotation',
+    text: '商品代金、手配手数料、国際送料、保険、想定される追加費用を分けて提示します。関税やVAT/GSTは参考情報であり、最終判断は輸入国側確認が前提です。',
   },
   {
     number: '05',
-    title: '梱包・書類準備',
-    en: 'Packing & Documents',
-    text: '破損リスクを抑えた梱包、インボイス、パッキングリスト、必要に応じた原産地や規制関連書類を準備します。',
+    title: '前払い',
+    en: 'Advance Payment',
+    text: '正式見積りと条件に合意後、原則として前払い確認後に調達、梱包、配送手配を開始します。支払い条件は案件ごとに書面またはメールで確認します。',
   },
   {
     number: '06',
-    title: '国際発送',
-    en: 'International Shipping',
-    text: 'EMS、DHL、FedEx、UPS、ヤマト国際宅急便、航空貨物、海上輸送から最適な方法を選定します。',
+    title: '調達・書類整理',
+    en: 'Procurement and Documents',
+    text: '日本国内での商品調達、検品・梱包、Commercial Invoice、Packing List、必要に応じた商品資料の整理を進めます。',
   },
   {
     number: '07',
-    title: '納品・フォロー',
-    en: 'Delivery & Follow-up',
-    text: '追跡状況を確認し、通関や受取時の確認事項をフォローします。継続取引では次回改善点も整理します。',
+    title: '配送手配',
+    en: 'Shipping Arrangement',
+    text: '国際宅配便、航空貨物、海上輸送を案件ごとに比較し、配送会社またはフォワーダーの引受条件を確認したうえで手配します。',
+  },
+  {
+    number: '08',
+    title: '引渡し・発送',
+    en: 'Handover',
+    text: '発送後は追跡情報を共有し、通関や受取時の確認事項をフォローします。輸入国側の通関、許可、税金、販売可否は原則として輸入者側の責任です。',
+  },
+]
+
+const incotermsNotes = [
+  {
+    term: 'Case-by-case',
+    ja: 'Incotermsは原則として案件ごとに確認します。',
+    en: 'Incoterms are confirmed case by case for each transaction.',
+  },
+  {
+    term: 'FCA Japan Warehouse',
+    ja: 'BtoB案件では、FCA Japan warehouse 等を個別に設定できる場合があります。',
+    en: 'For BtoB projects, terms such as FCA Japan warehouse may be arranged individually.',
+  },
+  {
+    term: 'EXW / FCA / DAP / DDP',
+    ja: 'EXW、FCA、DAP、DDP等は、対応可否と責任範囲を個別見積り時に確認します。DDPは標準対応ではありません。',
+    en: 'EXW, FCA, DAP, and DDP availability and responsibility scope are confirmed during quotation. DDP is not treated as a standard service unless agreed in writing.',
   },
 ]
 
@@ -88,6 +112,29 @@ export default function FlowPage() {
                 <h2>{step.title}</h2>
                 <p>{step.text}</p>
               </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="flow-incoterms">
+        <div>
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Incoterms / Responsibility Scope</span>
+          </div>
+          <h2 className="section-title">
+            Confirm Terms
+            <br />
+            <em>Per Case.</em>
+          </h2>
+        </div>
+        <div className="flow-incoterms-grid">
+          {incotermsNotes.map((item) => (
+            <article className="flow-incoterms-card" key={item.term}>
+              <span>{item.term}</span>
+              <p>{item.ja}</p>
+              <small>{item.en}</small>
             </article>
           ))}
         </div>
@@ -199,6 +246,49 @@ export default function FlowPage() {
           line-height: 2;
           letter-spacing: 0.04em;
         }
+        .flow-incoterms {
+          padding: var(--section-pad) var(--gutter);
+          display: grid;
+          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+          gap: clamp(28px, 5vw, 72px);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
+            var(--navy-mid);
+          border-top: 1px solid rgba(201,168,76,0.08);
+          border-bottom: 1px solid rgba(201,168,76,0.08);
+        }
+        .flow-incoterms-grid {
+          display: grid;
+          gap: 14px;
+        }
+        .flow-incoterms-card {
+          border: 1px solid rgba(201,168,76,0.16);
+          background: rgba(7,17,31,0.48);
+          padding: 22px;
+        }
+        .flow-incoterms-card span {
+          color: var(--gold);
+          display: block;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(24px, 3vw, 34px);
+          font-weight: 300;
+          line-height: 1.1;
+          margin-bottom: 12px;
+        }
+        .flow-incoterms-card p {
+          color: var(--washi);
+          font-size: 13.5px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          margin: 0 0 10px;
+        }
+        .flow-incoterms-card small {
+          color: var(--washi-dim);
+          display: block;
+          font-size: 12.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.8;
+        }
         .flow-note {
           padding: var(--section-pad) var(--gutter);
           display: grid;
@@ -225,6 +315,7 @@ export default function FlowPage() {
           .flow-timeline::before { left: 27px; }
           .flow-step { grid-template-columns: 56px minmax(0, 1fr); padding: 22px; gap: 18px; }
           .flow-number { width: 56px; height: 56px; font-size: 20px; }
+          .flow-incoterms,
           .flow-note { grid-template-columns: 1fr; }
         }
       `}</style>

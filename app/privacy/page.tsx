@@ -45,6 +45,19 @@ const sharingCases = [
   '税関、公的機関、配送会社等から確認を求められた場合',
 ]
 
+const retentionSummary = [
+  {
+    title: '利用目的',
+    en: 'Purpose of Use',
+    body: 'お問い合わせ回答、見積作成、商品調達可否確認、配送方法・費用確認、輸出入・配送会社条件確認、取引連絡、請求・支払い対応、不正利用や虚偽申告の防止に利用します。',
+  },
+  {
+    title: '保存期間',
+    en: 'Retention Period',
+    body: '問い合わせ、見積、取引対応、法令・会計・税務・紛争防止のために必要な期間保存する場合があります。不要となった情報は、適切な方法で削除または管理します。',
+  },
+]
+
 const policySections = [
   {
     code: '01',
@@ -141,6 +154,28 @@ export default function PrivacyPolicyPage() {
             法令に基づく場合を除き、本人の同意なく目的外利用を行わない方針です。
             個別の法的判断が必要な事項については、必要に応じて専門家確認を前提とします。
           </p>
+        </div>
+      </section>
+
+      <section className="privacy-retention">
+        <div className="privacy-section-head">
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Purpose / Retention</span>
+          </div>
+          <h2>個人情報の利用目的と保存期間</h2>
+          <p>
+            YUKIMICHIは、問い合わせ・見積・取引相談に必要な範囲で情報を取得し、目的外利用を避けて管理します。
+          </p>
+        </div>
+        <div className="privacy-retention-grid">
+          {retentionSummary.map((item) => (
+            <article className="privacy-retention-card" key={item.en}>
+              <span>{item.en}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -316,6 +351,7 @@ export default function PrivacyPolicyPage() {
           margin: 0;
         }
 
+        .privacy-retention,
         .privacy-detail,
         .privacy-cards {
           padding: var(--section-pad) var(--gutter);
@@ -349,6 +385,47 @@ export default function PrivacyPolicyPage() {
           padding: 14px 16px;
           display: flex;
           align-items: center;
+        }
+
+        .privacy-retention-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .privacy-retention-card {
+          border: 1px solid rgba(201,168,76,0.16);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
+            rgba(7,17,31,0.62);
+          padding: clamp(24px, 4vw, 36px);
+        }
+
+        .privacy-retention-card span {
+          color: var(--gold);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.24em;
+          line-height: 1.6;
+          margin-bottom: 12px;
+          text-transform: uppercase;
+        }
+
+        .privacy-retention-card h3 {
+          color: var(--washi);
+          font-size: clamp(22px, 3vw, 34px);
+          font-weight: 300;
+          letter-spacing: 0.08em;
+          line-height: 1.5;
+          margin: 0 0 14px;
+        }
+
+        .privacy-retention-card p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 2;
+          margin: 0;
         }
 
         .privacy-split {
@@ -534,6 +611,7 @@ export default function PrivacyPolicyPage() {
         }
 
         @media (max-width: 640px) {
+          .privacy-retention-grid,
           .privacy-chip-grid,
           .privacy-cards,
           .privacy-related-grid {

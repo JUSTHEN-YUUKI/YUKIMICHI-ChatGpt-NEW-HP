@@ -115,6 +115,48 @@ const faqCategories = [
     ],
   },
   {
+    id: 'trade-responsibility',
+    label: '貿易実務・責任範囲',
+    en: 'Trade Responsibility',
+    items: [
+      {
+        q: 'Can YUKIMICHI guarantee import approval?',
+        a: 'No. Import approval depends on destination country regulations and customs decisions. YUKIMICHI can support Japan-side document organization and pre-checks, but final import eligibility must be confirmed by the importer, customs broker, customs office, carrier, or public authority.',
+        links: [{ href: '/terms', label: '取引条件を確認する' }],
+      },
+      {
+        q: 'Who pays customs duties and import taxes?',
+        a: 'Generally, customs duties, import taxes, VAT/GST, and destination-side customs fees are paid by the importer or buyer, unless otherwise agreed in writing for a specific transaction.',
+        links: [{ href: '/pricing', label: '料金の考え方を見る' }],
+      },
+      {
+        q: 'Is shipping insurance mandatory?',
+        a: 'Shipping insurance is optional, but recommended for high-value shipments. If insurance is not arranged, compensation for loss or damage is limited to the carrier terms or applicable insurance policy.',
+        links: [{ href: '/pricing', label: '料金表を見る' }],
+      },
+      {
+        q: 'Can you handle cosmetics, food, batteries, medical products?',
+        a: 'A pre-check is required. Depending on ingredients, labels, quantity, use, destination country, and carrier rules, some items may be restricted, unavailable, or require additional documents such as SDS/MSDS.',
+        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
+      },
+      {
+        q: 'Can you prepare Commercial Invoice and Packing List?',
+        a: 'Support is available depending on the transaction scope. Required documents may vary by product category, shipping method, Incoterms, destination country, and customs broker requirements.',
+        links: [{ href: '/services', label: 'サービスを見る' }],
+      },
+      {
+        q: 'Do you support FCA / EXW / DAP / DDP?',
+        a: 'Conditions are confirmed individually. EXW, FCA, DAP, and DDP may require different cost, risk, customs, tax, and delivery responsibilities. DDP is not standard unless agreed in writing.',
+        links: [{ href: '/flow', label: '取引の流れを見る' }],
+      },
+      {
+        q: 'Can you guarantee product availability?',
+        a: 'No. Product availability depends on supplier confirmation, stock status, sales conditions, minimum order quantity, price changes, and whether the product can be handled for export.',
+        links: [{ href: '/quote', label: 'お見積りへ進む' }],
+      },
+    ],
+  },
+  {
     id: 'restricted',
     label: '禁止・制限品目',
     en: 'Restricted Items',

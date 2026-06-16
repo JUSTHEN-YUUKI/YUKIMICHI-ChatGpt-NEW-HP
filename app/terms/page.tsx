@@ -123,6 +123,29 @@ const terms = [
   },
 ]
 
+const responsibilityCards = [
+  {
+    title: 'Importer Responsibility',
+    ja: '輸入国側の許可、通関、関税・輸入税・VAT/GST、現地販売可否は、原則として輸入者側の確認・負担となります。',
+    en: 'Destination-side permits, customs clearance, duties, import taxes, VAT/GST, and local sales eligibility are generally the importer\'s responsibility.',
+  },
+  {
+    title: 'Customs Decisions',
+    ja: '税関判断による検査、遅延、没収、追加費用は、返金対象外となる場合があります。',
+    en: 'Inspections, delays, seizure, or additional costs caused by customs decisions may be excluded from refunds.',
+  },
+  {
+    title: 'Insurance / Carrier Terms',
+    ja: '輸送中の破損・紛失・遅延に関する補償は、加入した保険または運送会社約款の範囲に限定されます。',
+    en: 'Compensation for damage, loss, or delay is limited to the applicable insurance coverage or carrier terms.',
+  },
+  {
+    title: 'Restricted / Infringing Goods',
+    ja: '模倣品、知的財産権侵害品、法令違反品、輸出入規制品、虚偽申告を前提とする取引は取り扱いできません。',
+    en: 'Counterfeit goods, intellectual property-infringing goods, illegal products, restricted goods, or transactions based on false declarations cannot be handled.',
+  },
+]
+
 const relatedLinks = [
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
@@ -173,6 +196,29 @@ export default function TermsPage() {
           <p>
             本ページは一般的な取引条件の概要であり、個別契約・見積書・請求書・メールでの合意内容が優先される場合があります。
           </p>
+        </div>
+      </section>
+
+      <section className="terms-responsibility">
+        <div className="terms-section-head">
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Responsibility Scope</span>
+          </div>
+          <h2>輸入者責任と免責範囲</h2>
+          <p>
+            YUKIMICHIは日本側の輸出手配支援を行います。輸入国側の許可、通関、税金、販売可否、配送事故補償は、
+            案件ごとの条件、関係機関、配送会社約款、保険条件により確認します。
+          </p>
+        </div>
+        <div className="terms-responsibility-grid">
+          {responsibilityCards.map((item) => (
+            <article className="terms-responsibility-card" key={item.title}>
+              <span>{item.title}</span>
+              <p>{item.ja}</p>
+              <small>{item.en}</small>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -325,6 +371,7 @@ export default function TermsPage() {
           margin: 0;
         }
 
+        .terms-responsibility,
         .terms-list-section {
           padding: var(--section-pad) var(--gutter);
           background:
@@ -343,6 +390,48 @@ export default function TermsPage() {
           letter-spacing: 0.1em;
           line-height: 1.6;
           margin-bottom: 16px;
+        }
+
+        .terms-responsibility-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .terms-responsibility-card {
+          border: 1px solid rgba(201,168,76,0.16);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
+            rgba(7,17,31,0.64);
+          padding: clamp(22px, 3vw, 30px);
+        }
+
+        .terms-responsibility-card span {
+          color: var(--gold);
+          display: block;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(23px, 3vw, 34px);
+          font-weight: 300;
+          line-height: 1.15;
+          margin-bottom: 14px;
+        }
+
+        .terms-responsibility-card p {
+          color: var(--washi);
+          font-size: 13.5px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          margin: 0 0 12px;
+        }
+
+        .terms-responsibility-card small {
+          border-top: 1px solid rgba(201,168,76,0.14);
+          color: var(--washi-dim);
+          display: block;
+          font-size: 12.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.8;
+          padding-top: 12px;
         }
 
         .terms-grid {
@@ -549,6 +638,7 @@ export default function TermsPage() {
         }
 
         @media (max-width: 640px) {
+          .terms-responsibility-grid,
           .terms-grid,
           .terms-related-grid {
             grid-template-columns: 1fr;

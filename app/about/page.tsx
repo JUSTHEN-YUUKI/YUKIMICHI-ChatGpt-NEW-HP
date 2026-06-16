@@ -10,10 +10,14 @@ const companyItems = [
   ['Service Brand', 'YUKIMICHI'],
   ['Company', 'JUSTHEN Co., Ltd. / 株式会社ジャッセン'],
   ['Representative', 'Yuuki Hayashi / 林 祐樹'],
-  ['Location', 'Sapporo, Hokkaido, Japan'],
+  ['Email', 'exporter@justhen.co.jp'],
+  ['Location', '〒060-0032 北海道札幌市中央区北二条東8-5-15'],
   ['License', '古物商許可証 第305581606050号 東京都公安委員会'],
+  ['Business Hours', '平日 10:00-17:00 JST / Weekdays 10:00-17:00 JST'],
+  ['Languages', '日本語 / English'],
 ]
 
+// TODO: Add the corporate number only after confirming the official registered value.
 const locationAddress = '8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan'
 
 function ArrowRight() {
