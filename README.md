@@ -37,21 +37,21 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## YUKIMICHI Inquiry Email Setup
 
-The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email delivery uses the Resend API with credentials stored only in Vercel environment variables.
+The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email delivery uses the SendGrid Mail Send API with credentials stored only in Vercel environment variables.
 
-Do not commit Resend API keys or real `.env.local` files. Use `.env.example` only as a key list.
+Do not commit SendGrid API keys or real `.env.local` files. Use `.env.example` only as a key list.
 
-Resend is the recommended production delivery path. The previous Nodemailer SMTP path for Onamae.com / GMO is no longer used by `/api/inquiry`.
+SendGrid is the recommended production delivery path. Direct SMTP delivery is no longer used by `/api/inquiry`.
 
 Required Vercel Production environment variables:
 
 ```text
 CONTACT_TO_EMAIL=exporter@justhen.co.jp
-RESEND_API_KEY=<Resend API key entered directly in Vercel>
-RESEND_FROM_EMAIL=<verified Resend sender, for example YUKIMICHI <no-reply@justhen.co.jp>>
+SENDGRID_API_KEY=
+SENDGRID_FROM_EMAIL=
 ```
 
-`RESEND_API_KEY` must never be placed in README, logs, comments, or committed files. `RESEND_FROM_EMAIL` must be a sender address allowed by the Resend account, usually from a verified domain.
+The SendGrid API key must never be placed in logs, comments, or committed files. `SENDGRID_FROM_EMAIL` must be a sender address allowed by the SendGrid account, ideally from an authenticated domain.
 
 Vercel Production setup:
 
@@ -62,4 +62,11 @@ Vercel Production setup:
 5. After saving, open `Deployments` and redeploy the latest production deployment.
 6. Test sending from `/contact` and `/quote`.
 
-If sending still fails after the variables are set, confirm the Resend API key, sender domain verification, sender address, and account sending limits in the Resend dashboard, then redeploy or retry.
+SendGrid setup:
+
+1. Create a restricted API key with Mail Send permission.
+2. Complete Sender Authentication for `justhen.co.jp` in SendGrid. Single Sender Verification can be used for testing, but Domain Authentication is preferred for production.
+3. Set `SENDGRID_FROM_EMAIL` to the authenticated sender address.
+4. Confirm SendGrid account sending limits and suppression settings if delivery fails.
+
+If sending still fails after the variables are set, confirm the SendGrid API key permission, sender authentication, sender address, account sending limits, and Vercel redeployment state.

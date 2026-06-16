@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import sgMail from '@sendgrid/mail'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
@@ -47,10 +47,6 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
-function formatValue(value: string) {
-  return value || '未入力'
-}
-
 function getTokyoDatePart(date: Date) {
   const parts = new Intl.DateTimeFormat('ja-JP', {
     timeZone: 'Asia/Tokyo',
@@ -89,14 +85,14 @@ function getRequiredEnv(name: string) {
   return value || null
 }
 
-function getResendConfig() {
+function getSendGridConfig() {
   const contactToEmail = getRequiredEnv('CONTACT_TO_EMAIL')
-  const resendApiKey = getRequiredEnv('RESEND_API_KEY')
-  const resendFromEmail = getRequiredEnv('RESEND_FROM_EMAIL')
+  const sendGridApiKey = getRequiredEnv('SENDGRID_API_KEY')
+  const sendGridFromEmail = getRequiredEnv('SENDGRID_FROM_EMAIL')
   const requiredEnv = [
     { name: 'CONTACT_TO_EMAIL', value: contactToEmail },
-    { name: 'RESEND_API_KEY', value: resendApiKey },
-    { name: 'RESEND_FROM_EMAIL', value: resendFromEmail },
+    { name: 'SENDGRID_API_KEY', value: sendGridApiKey },
+    { name: 'SENDGRID_FROM_EMAIL', value: sendGridFromEmail },
   ]
   const missing = requiredEnv.filter(({ value }) => !value).map(({ name }) => name)
 
@@ -110,19 +106,19 @@ function getResendConfig() {
   return {
     ok: true as const,
     contactToEmail: contactToEmail as string,
-    resendApiKey: resendApiKey as string,
-    resendFromEmail: resendFromEmail as string,
+    sendGridApiKey: sendGridApiKey as string,
+    sendGridFromEmail: sendGridFromEmail as string,
   }
 }
 
-async function sendResendEmail({
+async function sendSendGridEmail({
   to,
   from,
   replyTo,
   subject,
   text,
   html,
-  resendApiKey,
+  sendGridApiKey,
 }: {
   to: string
   from: string
@@ -130,10 +126,10 @@ async function sendResendEmail({
   subject: string
   text: string
   html: string
-  resendApiKey: string
+  sendGridApiKey: string
 }) {
-  const resend = new Resend(resendApiKey)
-  const { error } = await resend.emails.send({
+  sgMail.setApiKey(sendGridApiKey)
+  await sgMail.send({
     from,
     to,
     replyTo,
@@ -141,10 +137,6 @@ async function sendResendEmail({
     text,
     html,
   })
-
-  if (error) {
-    throw new Error(error.message || 'Resend email send failed')
-  }
 }
 
 function getSafeErrorDetails(error: unknown) {
@@ -153,6 +145,9 @@ function getSafeErrorDetails(error: unknown) {
       code?: unknown
       command?: unknown
       responseCode?: unknown
+      response?: {
+        statusCode?: unknown
+      }
     }
 
     return {
@@ -161,11 +156,12 @@ function getSafeErrorDetails(error: unknown) {
       code: typeof details.code === 'string' ? details.code : undefined,
       command: typeof details.command === 'string' ? details.command : undefined,
       responseCode: typeof details.responseCode === 'number' ? details.responseCode : undefined,
+      responseStatusCode: typeof details.response?.statusCode === 'number' ? details.response.statusCode : undefined,
     }
   }
 
   return {
-    message: typeof error === 'string' ? error : 'Unknown Resend error',
+    message: typeof error === 'string' ? error : 'Unknown SendGrid error',
   }
 }
 
@@ -272,52 +268,7 @@ export async function POST(request: Request) {
     minute: '2-digit',
     second: '2-digit',
   })
-  const userAgent = request.headers.get('user-agent') ?? '未取得'
-
-  const inquirySummary = [
-    `受付番号：${receiptNumber}`,
-    `送信種別：${type === 'quote' ? 'お見積り' : 'お問い合わせ'}`,
-    `送信日時：${submittedAt} JST`,
-    `お名前：${formatValue(name)}`,
-    `会社名：${formatValue(company)}`,
-    `メールアドレス：${formatValue(email)}`,
-    `電話番号：${formatValue(phone)}`,
-    `国・地域：${formatValue(destinationCountry || destination)}`,
-    `商品名または商品URL：${formatValue(productName || productUrl)}`,
-    `数量：${formatValue(quantity)}`,
-    `希望配送方法：${formatValue(shippingMethod)}`,
-    `仕向地：${formatValue(normalizedDestination)}`,
-    '',
-    '--- 追加情報 ---',
-    `商品名：${formatValue(productName)}`,
-    `商品URL：${formatValue(productUrl)}`,
-    `商品カテゴリ：${formatValue(productCategory)}`,
-    `単位：${formatValue(quantityUnit)}`,
-    `単価：${formatValue(unitPrice)}`,
-    `サイズ・重量：${formatValue(sizeWeight)}`,
-    `成分・素材：${formatValue(material)}`,
-    `都市：${formatValue(destinationCity)}`,
-    `希望納期：${formatValue(deadline)}`,
-    `法人宛・個人宛：${formatValue(recipientType)}`,
-    `表示言語：${formatValue(language)}`,
-    '',
-    '相談内容・メッセージ：',
-    formatValue(message),
-  ].join('\n')
-
-  const adminText = [
-    '管理用：件名または本文の受付番号で検索・分類してください。',
-    `対応ステータス：未対応`,
-    '',
-    inquirySummary,
-    '',
-    `送信元ページ：${formatValue(sourcePage)}`,
-    `ユーザーエージェント：${userAgent}`,
-    `返信先：${email}`,
-  ].join('\n')
-
-  const productInfo = [productName, productUrl, productCategory].filter(Boolean).join(' / ')
-  const quantityText = [quantity, quantityUnit].filter(Boolean).join(' ')
+  const quantityText = type === 'quote' && quantity !== quantityUnit ? quantity : ''
   const adminRows = getDisplayRows([
     ['Reference No.', receiptNumber],
     ['Inquiry Type', type],
@@ -326,40 +277,29 @@ export async function POST(request: Request) {
     ['Email', email],
     ['Phone', phone],
     ['Country', destinationCountry || destination],
-    ['Product Information', productInfo],
+    ['Product Name', productName],
+    ['Product URL', productUrl],
+    ['Product Category', productCategory],
     ['Quantity', quantityText],
     ['Destination', normalizedDestination],
     ['Shipping Method', shippingMethod],
     ['Submitted At', `${submittedAt} JST`],
     ['Source Page', sourcePage],
-    ['Product Name', productName],
-    ['Product URL', productUrl],
-    ['Product Category', productCategory],
-    ['Unit Price', unitPrice],
-    ['Size / Weight', sizeWeight],
-    ['Material', material],
-    ['Destination City', destinationCity],
-    ['Deadline', deadline],
-    ['Recipient Type', recipientType],
-    ['Language', language],
-    ['User Agent', userAgent],
   ])
-  const resendAdminText = [
+  const sendGridAdminText = [
     'YUKIMICHI inquiry received.',
     '',
     ...adminRows.map(([label, value]) => `${label}: ${value}`),
-    '',
-    'Message:',
-    message,
+    ...(message ? ['', `Message: ${message}`] : []),
   ].join('\n')
   const adminHtml = renderAdminHtml(adminRows, message)
 
   try {
-    const resendConfig = getResendConfig()
+    const sendGridConfig = getSendGridConfig()
 
-    if (!resendConfig.ok) {
-      console.error('[inquiry] Resend configuration is missing', {
-        missing: resendConfig.missing,
+    if (!sendGridConfig.ok) {
+      console.error('[inquiry] SendGrid configuration is missing', {
+        missing: sendGridConfig.missing,
       })
       return NextResponse.json(
         { ok: false, error: USER_SEND_ERROR },
@@ -367,14 +307,14 @@ export async function POST(request: Request) {
       )
     }
 
-    await sendResendEmail({
-      from: resendConfig.resendFromEmail,
-      to: resendConfig.contactToEmail,
+    await sendSendGridEmail({
+      from: sendGridConfig.sendGridFromEmail,
+      to: sendGridConfig.contactToEmail,
       replyTo: email,
       subject: adminSubject,
-      text: resendAdminText,
+      text: sendGridAdminText,
       html: adminHtml,
-      resendApiKey: resendConfig.resendApiKey,
+      sendGridApiKey: sendGridConfig.sendGridApiKey,
     })
 
     return NextResponse.json({
@@ -383,7 +323,7 @@ export async function POST(request: Request) {
       receiptNumber,
     })
   } catch (error) {
-    console.error('[inquiry] Resend inquiry email send failed', getSafeErrorDetails(error))
+    console.error('[inquiry] SendGrid inquiry email send failed', getSafeErrorDetails(error))
 
     return NextResponse.json(
       { ok: false, error: USER_SEND_ERROR },
