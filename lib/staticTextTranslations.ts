@@ -401,10 +401,10 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   },
   'A Clear Path': { en: 'A Clear Path', zh: '清晰的道路', es: 'Un camino claro' },
   'from Hokkaido.': { en: 'from Hokkaido.', zh: '从北海道出发。', es: 'desde Hokkaido.' },
-  'YUKIMICHI - SNOWPATH JAPAN は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。 北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。': {
-    en: 'YUKIMICHI - SNOWPATH JAPAN is a Japan-based export support brand operated by JUSTHEN CO., LTD. We support long-term transactions with overseas buyers through Hokkaido’s calm trust and sincere Japanese business procedures.',
-    zh: 'YUKIMICHI - SNOWPATH JAPAN 是由 JUSTHEN CO., LTD. 运营的日本出口支持品牌。我们以北海道的静可信赖感和日本企业的诚实流程，支持与海外买家的长期交易。',
-    es: 'YUKIMICHI - SNOWPATH JAPAN es una marca japonesa de soporte de exportación operada por JUSTHEN CO., LTD. Apoyamos relaciones de largo plazo con compradores internacionales mediante confianza tranquila de Hokkaido y procedimientos japoneses serios.',
+  'YUKIMICHI は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。 北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。': {
+    en: 'YUKIMICHI is a Japan-based export support brand operated by JUSTHEN CO., LTD. We support long-term transactions with overseas buyers through Hokkaido’s calm trust and sincere Japanese business procedures.',
+    zh: 'YUKIMICHI 是由 JUSTHEN CO., LTD. 运营的日本出口支持品牌。我们以北海道的静可信赖感和日本企业的诚实流程，支持与海外买家的长期交易。',
+    es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN CO., LTD. Apoyamos relaciones de largo plazo con compradores internacionales mediante confianza tranquila de Hokkaido y procedimientos japoneses serios.',
   },
   '相談する': { en: 'Consult Us', zh: '咨询', es: 'Consultar' },
   'Delivering Trust.': { en: 'Delivering Trust.', zh: '传递信赖。', es: 'Entregando confianza.' },
@@ -973,10 +973,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Disclosure / Correction / Deletion': { en: 'Disclosure / Correction / Deletion', zh: '披露・更正・删除', es: 'Divulgación / corrección / eliminación' },
   'Cookies / Analytics': { en: 'Cookies / Analytics', zh: 'Cookie等 / 分析', es: 'Cookies / analítica' },
   'Revision': { en: 'Revision', zh: '修订', es: 'Revisión' },
-  'YUKIMICHI – SNOWPATH JAPAN を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、 輸出相談、取引対応に関連して取得する情報を適切に取り扱います。': {
-    en: 'JUSTHEN CO., LTD., operator of YUKIMICHI – SNOWPATH JAPAN, appropriately handles information obtained through inquiries, quote requests, export consultations, and transaction support.',
-    zh: '运营 YUKIMICHI – SNOWPATH JAPAN 的 JUSTHEN CO., LTD. 会适当处理通过咨询、报价申请、出口咨询和交易对应取得的信息。',
-    es: 'JUSTHEN CO., LTD., operador de YUKIMICHI – SNOWPATH JAPAN, trata adecuadamente la información obtenida en consultas, cotizaciones, soporte de exportación y operaciones.',
+  'YUKIMICHI を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、 輸出相談、取引対応に関連して取得する情報を適切に取り扱います。': {
+    en: 'JUSTHEN CO., LTD., operator of YUKIMICHI, appropriately handles information obtained through inquiries, quote requests, export consultations, and transaction support.',
+    zh: '运营 YUKIMICHI 的 JUSTHEN CO., LTD. 会适当处理通过咨询、报价申请、出口咨询和交易对应取得的信息。',
+    es: 'JUSTHEN CO., LTD., operador de YUKIMICHI, trata adecuadamente la información obtenida en consultas, cotizaciones, soporte de exportación y operaciones.',
   },
   '当社は、個人情報および取引に関連する情報の重要性を認識し、適切な取得、利用、管理に努めます。 取得した情報は、利用目的の範囲内で取り扱います。': {
     en: 'We recognize the importance of personal and transaction-related information and strive for appropriate acquisition, use, and management. Information is handled within the scope of stated purposes.',

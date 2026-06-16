@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: '禁止・制限品目 | YUKIMICHI - SNOWPATH JAPAN',
+  title: '禁止・制限品目 | YUKIMICHI',
   description:
     'YUKIMICHIの禁止・制限品目ページ。日本側の輸出規制、相手国の輸入規制、配送会社の引受条件、危険品判定、認証・許可確認について。',
 }

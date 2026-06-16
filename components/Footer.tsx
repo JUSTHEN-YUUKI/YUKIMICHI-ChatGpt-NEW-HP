@@ -19,9 +19,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <section className="site-footer__brand" aria-label="YUKIMICHI brand">
-          <p className="site-footer__eyebrow">YUKIMICHI – SNOWPATH JAPAN</p>
+          <p className="site-footer__eyebrow">YUKIMICHI</p>
           <p className="site-footer__tagline">Trusted Export Support from Japan.</p>
-          <p className="site-footer__copy">Operated by JUSTHEN CO., LTD.</p>
+          <p className="site-footer__copy">YUKIMICHI | Operated by JUSTHEN Co., Ltd.</p>
         </section>
 
         <nav className="site-footer__nav" aria-label="Footer navigation">

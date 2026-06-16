@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: 'About | YUKIMICHI - SNOWPATH JAPAN',
-  description: 'YUKIMICHI - SNOWPATH JAPANを運営するJUSTHEN Co., Ltd.の会社概要と輸出支援方針。',
+  title: 'About | YUKIMICHI',
+  description: 'YUKIMICHIを運営するJUSTHEN Co., Ltd.の会社概要と輸出支援方針。',
 }
 
 const companyItems = [
-  ['Service Brand', 'YUKIMICHI - SNOWPATH JAPAN'],
+  ['Service Brand', 'YUKIMICHI'],
   ['Company', 'JUSTHEN Co., Ltd. / 株式会社ジャッセン'],
   ['Representative', 'Yuuki Hayashi / 林 祐樹'],
   ['Location', 'Sapporo, Hokkaido, Japan'],
@@ -39,7 +39,7 @@ export default function AboutPage() {
         </h1>
         <div className="about-lead-grid">
           <p>
-            YUKIMICHI - SNOWPATH JAPAN は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。
+            YUKIMICHI は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。
           </p>
           <p>
             北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。

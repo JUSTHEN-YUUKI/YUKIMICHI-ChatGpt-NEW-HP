@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: 'FAQ | YUKIMICHI - SNOWPATH JAPAN',
+  title: 'FAQ | YUKIMICHI',
   description:
     'YUKIMICHIのFAQ。日本商品の調達、海外発送、EMS・DHL・FedEx・UPS、航空貨物、海上輸送、関税・VAT/GST、禁止・制限品目、見積依頼について。',
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: '取引条件 | YUKIMICHI - SNOWPATH JAPAN',
+  title: '取引条件 | YUKIMICHI',
   description:
     'YUKIMICHIの取引条件ページ。見積、支払い、商品調達、キャンセル、返品、国際配送、関税・VAT/GST、輸入者責任、禁止・制限品目について。',
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: 'プライバシーポリシー | YUKIMICHI - SNOWPATH JAPAN',
+  title: 'プライバシーポリシー | YUKIMICHI',
   description:
     'YUKIMICHI / JUSTHEN CO., LTD. のプライバシーポリシー。お問い合わせ、見積依頼、輸出相談、取引対応に関連して取得する情報の取扱い方針について。',
 }
@@ -119,7 +119,7 @@ export default function PrivacyPolicyPage() {
           <em>Privacy Policy</em>
         </h1>
         <p className="section-body privacy-lead">
-          YUKIMICHI – SNOWPATH JAPAN を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、
+          YUKIMICHI を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、
           輸出相談、取引対応に関連して取得する情報を適切に取り扱います。
         </p>
       </section>
@@ -213,7 +213,7 @@ export default function PrivacyPolicyPage() {
         </div>
         <div className="privacy-contact-card">
           <p>JUSTHEN CO., LTD.</p>
-          <p>YUKIMICHI – SNOWPATH JAPAN</p>
+          <p>YUKIMICHI</p>
           <a href="mailto:exporter@justhen.co.jp?subject=Privacy%20Policy%20Inquiry">
             exporter@justhen.co.jp
           </a>

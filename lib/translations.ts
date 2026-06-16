@@ -52,7 +52,7 @@ export const translations = {
         titleLine1: '取扱可能な日本商品を、',
         titleLine2: '確かな手配で世界へ。',
         subtitle: 'Product, Packaging, Air Freight and Sea Freight from Japan.',
-        body: 'YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。今後、実際の商品写真、梱包風景、札幌・北海道の実写素材、輸送関連の動画を追加し、より具体的な取引イメージを伝えていきます。',
+        body: 'YUKIMICHIは、日本国内の商品調達から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。商品写真、梱包確認、札幌・北海道の実写素材、輸送関連の動画を活用し、日本発の取引イメージを分かりやすくお伝えします。',
         filmTitle: 'YUKIMICHI Product & Logistics Film',
         filmMeta: 'Hokkaido / Product / Packing / Air Freight / Sea Freight',
         localTitle: '札幌から、実写で伝える輸出の信頼感。',

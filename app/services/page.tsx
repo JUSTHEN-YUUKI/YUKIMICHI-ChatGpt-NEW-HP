@@ -3,7 +3,7 @@ import Link from '@/components/NewTabLink'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
-  title: 'サービス | YUKIMICHI - SNOWPATH JAPAN',
+  title: 'サービス | YUKIMICHI',
   description:
     'YUKIMICHIの輸出支援サービス。日本商品の調達、国際宅配便、航空貨物、海上輸送、輸出書類整理、規制確認、取引条件整理まで。',
 }
@@ -350,6 +350,12 @@ export default function ServicesPage() {
           </p>
           <p>
             <TranslatedText id="pages.services.complianceBody2" fallback="取扱可否に不安がある場合は、禁止・制限品目ページをご確認のうえ、事前にご相談ください。" />
+          </p>
+          <p>
+            YUKIMICHIは日本側の輸出手配支援を行います。輸入国側の輸入許可、関税・税金、現地販売可否、通関手続き、各種認証については、個別に書面で合意した場合を除き、原則として輸入者側の責任となります。
+          </p>
+          <p lang="en">
+            YUKIMICHI provides Japan-side export arrangement support. Final import approval, duties, taxes, permits, local sales eligibility, and customs clearance in the destination country remain the responsibility of the importer, unless otherwise agreed in writing.
           </p>
           <Link href="/restricted" className="services-inline-link">
             <TranslatedText id="pages.services.restrictedLink" fallback="禁止・制限品目を確認する" /> <ArrowRight />

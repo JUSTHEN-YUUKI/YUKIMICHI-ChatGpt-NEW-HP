@@ -13,8 +13,8 @@ const productShowcaseBodyColumns = [
     en: "YUKIMICHI organizes Japan procurement, packing, inspection, International Courier, Air Freight, and Sea Freight so Overseas Buyers can review eligible products with greater confidence.",
   },
   {
-    ja: "今後、実際の商品写真、梱包風景、札幌・北海道の実写素材、輸送関連の動画を追加し、より具体的な取引イメージを伝えていきます。",
-    en: "Product photography, packing scenes, Hokkaido visuals, and logistics footage can be added later while keeping the current structure and compliance-first presentation.",
+    ja: "商品写真、梱包確認、札幌・北海道の実写素材、輸送関連の動画を活用し、日本発の取引イメージを分かりやすくお伝えします。",
+    en: "Product photography, packing scenes, Hokkaido visuals, and logistics footage help present a clear Japan-side transaction image while keeping a compliance-first tone.",
   },
 ]
 

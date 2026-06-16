@@ -3,7 +3,7 @@ import Link from '@/components/NewTabLink'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
-  title: '料金表 | YUKIMICHI - SNOWPATH JAPAN',
+  title: '料金表 | YUKIMICHI',
   description:
     'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、銀行振込（TT）、注意事項について。',
 }

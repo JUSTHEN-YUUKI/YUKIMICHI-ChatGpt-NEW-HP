@@ -18,7 +18,7 @@ export default function OutboundDraftGenerator({ lead, onApplyDraft }: Props) {
     language: lead?.language || 'English',
     tone: 'B2B Formal',
     cta: 'Please reply or submit your inquiry through your official contact form.',
-    signature: 'YUKIMICHI – SNOWPATH JAPAN\nJUSTHEN CO., LTD.\nexporter@justhen.co.jp',
+    signature: 'YUKIMICHI\nJUSTHEN CO., LTD.\nexporter@justhen.co.jp',
   })
   const draft = buildDraft(lead, form)
 
@@ -109,7 +109,7 @@ function buildDraft(lead: OutboundLead | undefined, form: Record<string, string>
   const emailBody = [
     `Dear ${company} team,`,
     '',
-    `We are YUKIMICHI – SNOWPATH JAPAN, operated by JUSTHEN CO., LTD. in Sapporo, Japan.`,
+    `We are YUKIMICHI, operated by JUSTHEN CO., LTD. in Sapporo, Japan.`,
     `We support eligible Japanese product sourcing for overseas businesses, including International Courier, Air Freight, Sea Freight, packing, inspection, and export documentation coordination.`,
     '',
     `Based on your public business profile in ${country}, we would like to ask whether ${category} may be relevant to your current buying or distribution plans.`,
@@ -119,7 +119,7 @@ function buildDraft(lead: OutboundLead | undefined, form: Record<string, string>
     '',
     form.signature,
   ].join('\n')
-  const dmBody = `YUKIMICHI – SNOWPATH JAPAN supports eligible Japanese product sourcing with International Courier / Air Freight / Sea Freight and compliance review. If ${category} is relevant for ${company}, please reply or contact exporter@justhen.co.jp.`
+  const dmBody = `YUKIMICHI supports eligible Japanese product sourcing with International Courier / Air Freight / Sea Freight and compliance review. If ${category} is relevant for ${company}, please reply or contact exporter@justhen.co.jp.`
 
   return {
     subject,

@@ -1,6 +1,6 @@
 ## Style Prompt
 
-Create a quiet premium export-brand film for YUKIMICHI - SNOWPATH JAPAN. The visual tone should feel trustworthy, restrained, and Hokkaido-born: deep navy canvas, warm gold accents, soft washi-tinted text, documentary product/logistics imagery, and calm crossfades. Avoid loud promotional motion, pop typography, neon palettes, and generic tech styling.
+Create a quiet premium export-brand film for YUKIMICHI. The visual tone should feel trustworthy, restrained, and Hokkaido-born: deep navy canvas, warm gold accents, soft washi-tinted text, documentary product/logistics imagery, and calm crossfades. Avoid loud promotional motion, pop typography, neon palettes, and generic tech styling.
 
 ## Colors
 

@@ -4,7 +4,7 @@ import InquiryForm from '@/components/InquiryForm'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
-  title: 'Contact | YUKIMICHI - SNOWPATH JAPAN',
+  title: 'Contact | YUKIMICHI',
   description: 'YUKIMICHIへのお問い合わせ。日本商品の調達、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。',
 }
 
