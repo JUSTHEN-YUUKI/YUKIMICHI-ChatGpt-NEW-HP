@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
 export const runtime = 'nodejs'
+export const preferredRegion = 'hnd1'
 
 type InquiryType = 'quote' | 'contact'
 
