@@ -295,7 +295,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           const options = selectOptions[field.name]
           const fieldId = `inquiry-${type}-${field.name}`
           const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
-          const showRequiredBadge = field.required && !(type === 'quote' && field.name === 'productUrl')
+          const isRequired = Boolean(field.required)
+          const showRequiredBadge = isRequired
           const fieldClassName = [
             'inquiry-form__field',
             `inquiry-form__field--${field.name}`,
@@ -326,7 +327,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     inputMode="decimal"
                     value={formState.quantity}
                     placeholder={field.placeholder}
-                    required={field.required}
+                    required={isRequired}
                     autoComplete={getAutoComplete('quantity')}
                     onChange={syncField('quantity')}
                     onInput={syncInputField('quantity')}
@@ -353,7 +354,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   name={field.name}
                   value={formState[field.name]}
                   placeholder={field.placeholder}
-                  required={field.required}
+                  required={isRequired}
                   autoComplete={getAutoComplete(field.name)}
                   onChange={syncField(field.name)}
                   onInput={syncInputField(field.name)}
@@ -367,7 +368,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     list={listId}
                     value={formState[field.name]}
                     placeholder={field.placeholder}
-                    required={field.required}
+                    required={isRequired}
                     autoComplete={getAutoComplete(field.name)}
                     onChange={syncField(field.name)}
                     onInput={syncInputField(field.name)}
@@ -385,7 +386,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                   type={field.type ?? 'text'}
                   value={formState[field.name]}
                   placeholder={field.placeholder}
-                  required={field.required}
+                  required={isRequired}
                   autoComplete={getAutoComplete(field.name)}
                   onChange={syncField(field.name)}
                   onInput={syncInputField(field.name)}

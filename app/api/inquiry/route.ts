@@ -47,6 +47,19 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
+function isOptionalUrl(value: string) {
+  if (!value) {
+    return true
+  }
+
+  try {
+    new URL(value)
+    return true
+  } catch {
+    return false
+  }
+}
+
 function getTokyoDatePart(date: Date) {
   const parts = new Intl.DateTimeFormat('ja-JP', {
     timeZone: 'Asia/Tokyo',
@@ -210,12 +223,12 @@ function renderCustomerHtml(rows: Array<[string, string]>, contactToEmail: strin
 
   return [
     '<div style="font-family: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; line-height: 1.7; color: #111827;">',
-    '<p>このたびは、YUKIMICHI - SNOWPATH JAPAN へお問い合わせいただきありがとうございます。</p>',
+    '<p>このたびは、YUKIMICHI へお問い合わせいただきありがとうございます。</p>',
     '<p>以下の内容でお問い合わせを受け付けました。</p>',
     `<table style="border-collapse: collapse; width: 100%; max-width: 760px;">${tableRows}</table>`,
     `<p>内容を確認のうえ、担当者より ${escapeHtml(contactToEmail)} からご連絡いたします。</p>`,
     '<p>商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。</p>',
-    '<p>YUKIMICHI - SNOWPATH JAPAN<br>JUSTHEN CO., LTD.</p>',
+    '<p>YUKIMICHI<br>JUSTHEN CO., LTD.</p>',
     '<p>※本メールは自動返信です。</p>',
     '</div>',
   ].join('')
@@ -266,11 +279,18 @@ export async function POST(request: Request) {
   }
 
   const normalizedDestination = destination || [destinationCountry, destinationCity].filter(Boolean).join(' / ')
-  const quoteMissingRequired =
-    type === 'quote' && (!productUrl || !quantity || !normalizedDestination || !deadline || !shippingMethod || !message)
+  const quoteMissingRequired = type === 'quote' && (!normalizedDestination || !message)
   const contactMissingRequired = type === 'contact' && (!normalizedDestination || !message)
 
-  if (!type || !name || !email || !isEmail(email) || quoteMissingRequired || contactMissingRequired) {
+  if (
+    !type ||
+    !name ||
+    !email ||
+    !isEmail(email) ||
+    !isOptionalUrl(productUrl) ||
+    quoteMissingRequired ||
+    contactMissingRequired
+  ) {
     return NextResponse.json(
       { ok: false, error: '入力内容を確認してください。' },
       { status: 400 },
@@ -343,7 +363,7 @@ export async function POST(request: Request) {
   const autoReplyText = [
     `${name} 様`,
     '',
-    'このたびは、YUKIMICHI - SNOWPATH JAPAN へお問い合わせいただきありがとうございます。',
+    'このたびは、YUKIMICHI へお問い合わせいただきありがとうございます。',
     '以下の内容でお問い合わせを受け付けました。',
     '',
     renderRowsText(customerRows),
@@ -353,7 +373,7 @@ export async function POST(request: Request) {
     '商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。',
     '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。',
     '',
-    'YUKIMICHI - SNOWPATH JAPAN',
+    'YUKIMICHI',
     'JUSTHEN CO., LTD.',
     '',
     '※本メールは自動返信です。',
