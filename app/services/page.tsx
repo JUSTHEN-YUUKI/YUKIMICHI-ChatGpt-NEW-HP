@@ -11,65 +11,47 @@ export const metadata: Metadata = {
 const coreServices = [
   {
     code: 'A',
-    title: '商品調達・購入代行',
-    en: 'Japan Procurement',
+    title: '仕入先確認',
+    en: 'Supplier Confirmation',
     points: [
-      '日本国内の正規流通品を中心に商品調達を支援します。',
-      '商品URL、数量、希望条件をもとに確認します。',
-      '小ロット、サンプル購入、継続仕入れの相談に対応します。',
+      'メーカー、卸、販売元などへ取引条件を確認します。',
+      '成分表、SDS/MSDS、商品資料の有無を整理します。',
+      '在庫、価格、輸出可否は案件ごとに確認します。',
     ],
-    note: '在庫、価格、販売条件は仕入れ先により変動します。',
+    note: '仕入先名、担当者、直接連絡先、卸条件は原則として開示しません。',
   },
   {
     code: 'B',
-    title: '国際宅配便',
-    en: 'International Courier',
+    title: '国内取引調整',
+    en: 'Purchase Coordination',
     points: [
-      'EMS、DHL、FedEx、UPS、ヤマト国際宅急便などを案件ごとに検討します。',
-      '小口、サンプル、短納期、海外バイヤー向け発送に適しています。',
-      'サイズ、重量、配送先国、内容品により対応可否・送料が変動します。',
+      '日本国内法人として仕入れ、納品確認、支払い条件を整理します。',
+      '海外バイヤーに代わり、国内取引の進行を調整します。',
+      '具体的な取引可否は仕入先確認後に案内します。',
     ],
-    note: '配送会社の引受条件を確認したうえで手配方法を整理します。',
+    note: 'YUKIMICHIは在庫販売サイトではなく、日本側の取引調整窓口です。',
   },
   {
     code: 'C',
-    title: '航空貨物',
-    en: 'Air Freight',
+    title: '輸出手配支援',
+    en: 'Export Arrangement Support',
     points: [
-      '緊急輸送、高付加価値商品、一定数量以上の輸送を検討できます。',
-      '納期優先の案件に向きます。',
-      '危険品、電池、液体、スプレー、アルコール類などは事前確認が必要です。',
+      '商品内容、数量、用途、配送先国をもとに取扱可否を確認します。',
+      '禁止・制限品目、配送会社の引受条件、必要確認事項を整理します。',
+      '最終判断は税関、通関業者、配送会社、公的機関等の確認を前提とします。',
     ],
-    note: '航空便の安全基準・配送会社条件に従って確認します。',
+    note: '輸出可否、輸入許可、通関、関税額は保証しません。',
   },
   {
     code: 'D',
-    title: '海上輸送',
-    en: 'Sea Freight',
+    title: '書類・物流調整',
+    en: 'Documentation and Logistics Coordination',
     points: [
-      'FCL、LCL、コンテナ輸送、大型貨物、継続出荷を検討できます。',
-      'コスト重視、大量輸送、中長期輸送に適しています。',
-      '納期は航空便より長くなる傾向があります。',
+      'Invoice、Packing List、商品情報、配送情報を整理します。',
+      '国際宅配便、航空貨物、海上輸送の候補を案件ごとに比較します。',
+      '保険、梱包、通関関連費用などの実費項目を分けて確認します。',
     ],
-    note: '梱包条件、港湾費用、通関、輸入側手配が関係する場合があります。',
-  },
-  {
-    code: 'E',
-    title: '輸出書類・確認事項整理',
-    en: 'Export Documentation',
-    points: ['Invoice', 'Packing List', '商品情報整理', '配送情報整理', '見積条件整理'],
-    note: '必要書類は商品内容、配送方法、配送先国、取引条件により異なります。',
-  },
-  {
-    code: 'F',
-    title: '規制確認・コンプライアンス',
-    en: 'Compliance Review',
-    points: [
-      '禁止・制限品目の事前確認を行います。',
-      '医薬品、食品、化粧品、電池、危険品、中古品、ブランド品などは個別確認します。',
-      '内容品の虚偽申告や規制逃れは行いません。',
-    ],
-    note: '最終判断は税関・通関業者・配送会社・公的機関確認を前提とします。',
+    note: '配送会社、フォワーダー、通関業者の判断により条件は変動します。',
   },
 ]
 
@@ -77,10 +59,9 @@ const supportScope = [
   '商品情報の整理',
   '商品調達可否の確認',
   '仕入先への確認・連絡支援',
-  '見積作成',
+  '国内取引条件の整理',
+  '見積条件の整理',
   '国際配送方法の比較',
-  'EMS / DHL / FedEx / UPS / ヤマト国際宅急便の検討',
-  '航空貨物・海上輸送の相談',
   'Invoice / Packing List 等の基本書類整理',
   '梱包・検品・出荷前確認の相談',
   '禁止・制限品目の事前確認',
@@ -104,7 +85,7 @@ const roleItems = [
   {
     actor: 'YUKIMICHI',
     ja: '日本側の調達確認、国内取引調整、書類整理、配送手配支援',
-    en: 'Japan-side procurement confirmation, domestic transaction coordination, document organization, and shipping arrangement support.',
+    en: 'Japan side procurement confirmation, domestic transaction coordination, document organization, and shipping arrangement support.',
   },
   {
     actor: 'Supplier',
@@ -224,10 +205,10 @@ export default function ServicesPage() {
           </div>
           <div className="services-domestic-support__highlight">
             <p>
-              ご希望の商品に応じて、日本国内のメーカー・卸・店舗などへの確認を行い、候補商品のご提案も可能です。
+              具体的な商品名、価格、在庫、輸出可否、取引可否は、案件ごとにメーカー・卸・関係機関へ確認します。
             </p>
             <p lang="en">
-              We can also research potential suppliers in Japan and propose suitable product options based on your requirements.
+              Product names, pricing, stock status, export eligibility, and transaction availability are confirmed case by case with suppliers and relevant parties.
             </p>
           </div>
         </article>
@@ -249,7 +230,7 @@ export default function ServicesPage() {
           </div>
           <h2><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス" /></h2>
           <p>
-            <TranslatedText id="pages.services.coreLead" fallback="商品調達、配送方法の比較、輸出書類、規制確認まで、問い合わせ前に確認すべき実務項目を整理します。" />
+            <TranslatedText id="pages.services.coreLead" fallback="仕入先確認、国内取引調整、輸出手配、書類・物流調整まで、問い合わせ前に確認すべき実務項目を整理します。" />
           </p>
         </div>
 
@@ -259,13 +240,13 @@ export default function ServicesPage() {
               <div className="service-card__head">
                 <span>{service.code}</span>
                 <div>
-                  <h2><TranslatedText id={`home.services.cards.${serviceIndex}.title`} fallback={service.title} /></h2>
-                  <p><TranslatedText id={`home.services.cards.${serviceIndex}.titleJp`} fallback={service.en} /></p>
+                  <h2><TranslatedText id={`pages.services.coreItems.${serviceIndex}.title`} fallback={service.title} /></h2>
+                  <p><TranslatedText id={`pages.services.coreItems.${serviceIndex}.en`} fallback={service.en} /></p>
                 </div>
               </div>
               <ul>
                 {service.points.map((point, pointIndex) => (
-                  <li key={point}><TranslatedText id={`home.services.cards.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
+                  <li key={point}><TranslatedText id={`pages.services.coreItems.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
                 ))}
               </ul>
               <p className="service-card__note"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></p>
@@ -425,9 +406,9 @@ export default function ServicesPage() {
       <section className="services-cta">
         <div>
           <span>Export Consultation</span>
-          <h2><TranslatedText id="pages.services.ctaTitle" fallback="商品調達・輸出手配を相談する" /></h2>
+          <h2><TranslatedText id="pages.services.ctaTitle" fallback="日本商品の調達確認・輸出手配について相談する" /></h2>
           <p>
-            <TranslatedText id="pages.services.ctaLead" fallback="商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取扱可否と配送方法を確認したうえで見積をご案内します。" />
+            <TranslatedText id="pages.services.ctaLead" fallback="日本商品の調達確認、国内取引調整、輸出手配についてご相談ください。案件ごとに取扱可否、必要書類、配送方法を確認します。" />
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="services-mail">
             <TranslatedText id="pages.services.ctaMail" fallback="exporter@justhen.co.jp へ相談する" />
@@ -642,7 +623,7 @@ export default function ServicesPage() {
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 18px;
         }
 
@@ -650,7 +631,7 @@ export default function ServicesPage() {
           display: grid;
           align-content: start;
           gap: 18px;
-          min-height: 410px;
+          min-height: 300px;
           border: 1px solid rgba(201,168,76,0.14);
           background: linear-gradient(180deg, rgba(13,28,53,0.92), rgba(7,17,31,0.82));
           padding: 24px;
