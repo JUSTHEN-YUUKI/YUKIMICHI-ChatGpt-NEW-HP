@@ -433,6 +433,12 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
       <style>{`
         .inquiry-form {
+          --field-bg: rgba(7, 20, 38, 0.86);
+          --field-bg-hover: rgba(10, 27, 51, 0.9);
+          --field-bg-focus: rgba(13, 28, 53, 0.94);
+          --field-border: rgba(138, 143, 153, 0.42);
+          --field-text: #f8fafc;
+          --field-placeholder: rgba(203, 213, 225, 0.58);
           display: grid;
           gap: 22px;
           width: 100%;
@@ -509,10 +515,13 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         .inquiry-form select,
         .inquiry-form textarea {
           width: 100%;
-          border: 1px solid rgba(248,245,239,0.16);
-          background: rgba(7,17,31,0.84);
+          border: 1px solid var(--field-border);
+          background: var(--field-bg);
+          background-color: var(--field-bg);
           box-sizing: border-box;
-          color: var(--washi);
+          caret-color: var(--field-text);
+          color: var(--field-text);
+          color-scheme: dark;
           font: inherit;
           font-size: 14px;
           letter-spacing: 0.04em;
@@ -522,7 +531,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           padding: 15px 16px;
           transition:
             border-color 0.2s ease,
-            background 0.2s ease,
+            background-color 0.2s ease,
             box-shadow 0.2s ease;
         }
 
@@ -536,7 +545,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           background:
             linear-gradient(45deg, transparent 50%, var(--gold) 50%),
             linear-gradient(135deg, var(--gold) 50%, transparent 50%),
-            rgba(7,17,31,0.84);
+            var(--field-bg);
           background-position:
             calc(100% - 19px) calc(50% - 3px),
             calc(100% - 14px) calc(50% - 3px),
@@ -550,8 +559,16 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }
 
         .inquiry-form select option {
-          background: var(--navy-deep);
-          color: var(--washi);
+          background: #071426;
+          background-color: #071426;
+          color: var(--field-text);
+        }
+
+        .inquiry-form select option:checked,
+        .inquiry-form select option:hover {
+          background: #0d1c35;
+          background-color: #0d1c35;
+          color: var(--field-text);
         }
 
         .inquiry-form__quantity-row {
@@ -582,22 +599,22 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         .inquiry-form input::placeholder,
         .inquiry-form select:invalid,
         .inquiry-form textarea::placeholder {
-          color: rgba(216,211,199,0.45);
+          color: var(--field-placeholder);
+          opacity: 1;
         }
 
-        .inquiry-form input:focus,
-        .inquiry-form select:focus,
-        .inquiry-form textarea:focus {
-          border-color: rgba(201,168,76,0.55);
-          background: rgba(13,28,53,0.92);
-          box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+        .inquiry-form input:hover:not(:disabled),
+        .inquiry-form textarea:hover:not(:disabled) {
+          border-color: rgba(201,168,76,0.3);
+          background-color: var(--field-bg-hover);
         }
 
-        .inquiry-form select:focus {
+        .inquiry-form select:hover:not(:disabled) {
+          border-color: rgba(201,168,76,0.3);
           background:
             linear-gradient(45deg, transparent 50%, var(--gold) 50%),
             linear-gradient(135deg, var(--gold) 50%, transparent 50%),
-            rgba(13,28,53,0.92);
+            var(--field-bg-hover);
           background-position:
             calc(100% - 19px) calc(50% - 3px),
             calc(100% - 14px) calc(50% - 3px),
@@ -607,6 +624,77 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
             5px 5px,
             100% 100%;
           background-repeat: no-repeat;
+        }
+
+        .inquiry-form input:disabled,
+        .inquiry-form select:disabled,
+        .inquiry-form textarea:disabled {
+          border-color: rgba(138,143,153,0.24);
+          background: rgba(7,20,38,0.58);
+          background-color: rgba(7,20,38,0.58);
+          color: rgba(248,250,252,0.62);
+          cursor: not-allowed;
+          opacity: 1;
+          -webkit-text-fill-color: rgba(248,250,252,0.62);
+        }
+
+        .inquiry-form input:focus,
+        .inquiry-form select:focus,
+        .inquiry-form textarea:focus {
+          border-color: rgba(201,168,76,0.72);
+          background: var(--field-bg-focus);
+          background-color: var(--field-bg-focus);
+          box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+        }
+
+        .inquiry-form select:focus {
+          background:
+            linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+            linear-gradient(135deg, var(--gold) 50%, transparent 50%),
+            var(--field-bg-focus);
+          background-position:
+            calc(100% - 19px) calc(50% - 3px),
+            calc(100% - 14px) calc(50% - 3px),
+            0 0;
+          background-size:
+            5px 5px,
+            5px 5px,
+            100% 100%;
+          background-repeat: no-repeat;
+        }
+
+        .inquiry-form input:-webkit-autofill,
+        .inquiry-form input:-webkit-autofill:hover,
+        .inquiry-form input:-webkit-autofill:focus,
+        .inquiry-form textarea:-webkit-autofill,
+        .inquiry-form textarea:-webkit-autofill:hover,
+        .inquiry-form textarea:-webkit-autofill:focus,
+        .inquiry-form select:-webkit-autofill,
+        .inquiry-form select:-webkit-autofill:hover,
+        .inquiry-form select:-webkit-autofill:focus {
+          border-color: var(--field-border);
+          caret-color: var(--field-text);
+          color: var(--field-text);
+          -webkit-text-fill-color: var(--field-text);
+          box-shadow: 0 0 0 1000px #071426 inset;
+          -webkit-box-shadow: 0 0 0 1000px #071426 inset;
+          transition:
+            background-color 9999s ease-in-out 0s,
+            color 9999s ease-in-out 0s,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .inquiry-form input:-webkit-autofill:focus,
+        .inquiry-form textarea:-webkit-autofill:focus,
+        .inquiry-form select:-webkit-autofill:focus {
+          border-color: rgba(201,168,76,0.72);
+          box-shadow:
+            0 0 0 1000px #0d1c35 inset,
+            0 0 0 3px rgba(201,168,76,0.12);
+          -webkit-box-shadow:
+            0 0 0 1000px #0d1c35 inset,
+            0 0 0 3px rgba(201,168,76,0.12);
         }
 
         .inquiry-form__notice {
