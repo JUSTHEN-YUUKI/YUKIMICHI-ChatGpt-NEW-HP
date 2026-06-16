@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
@@ -89,85 +89,62 @@ function getRequiredEnv(name: string) {
   return value || null
 }
 
-function getSmtpConfig() {
+function getResendConfig() {
   const contactToEmail = getRequiredEnv('CONTACT_TO_EMAIL')
-  const smtpHost = getRequiredEnv('SMTP_HOST')
-  const smtpPortValue = getRequiredEnv('SMTP_PORT')
-  const smtpUser = getRequiredEnv('SMTP_USER')
-  const smtpPass = getRequiredEnv('SMTP_PASS')
-  const smtpFrom = getRequiredEnv('SMTP_FROM')
-  const smtpPort = smtpPortValue ? Number(smtpPortValue) : NaN
+  const resendApiKey = getRequiredEnv('RESEND_API_KEY')
+  const resendFromEmail = getRequiredEnv('RESEND_FROM_EMAIL')
   const requiredEnv = [
     { name: 'CONTACT_TO_EMAIL', value: contactToEmail },
-    { name: 'SMTP_HOST', value: smtpHost },
-    { name: 'SMTP_PORT', value: smtpPortValue },
-    { name: 'SMTP_USER', value: smtpUser },
-    { name: 'SMTP_PASS', value: smtpPass },
-    { name: 'SMTP_FROM', value: smtpFrom },
+    { name: 'RESEND_API_KEY', value: resendApiKey },
+    { name: 'RESEND_FROM_EMAIL', value: resendFromEmail },
   ]
   const missing = requiredEnv.filter(({ value }) => !value).map(({ name }) => name)
-  const invalid =
-    smtpPortValue && (!Number.isInteger(smtpPort) || smtpPort < 1 || smtpPort > 65535)
-      ? ['SMTP_PORT must be an integer between 1 and 65535']
-      : []
 
-  if (missing.length > 0 || invalid.length > 0) {
+  if (missing.length > 0) {
     return {
       ok: false as const,
       missing,
-      invalid,
     }
   }
 
   return {
     ok: true as const,
     contactToEmail: contactToEmail as string,
-    smtpHost: smtpHost as string,
-    smtpPort,
-    smtpUser: smtpUser as string,
-    smtpPass: smtpPass as string,
-    smtpFrom: smtpFrom as string,
+    resendApiKey: resendApiKey as string,
+    resendFromEmail: resendFromEmail as string,
   }
 }
 
-async function sendSmtpEmail({
+async function sendResendEmail({
   to,
   from,
   replyTo,
   subject,
   text,
-  smtpHost,
-  smtpPort,
-  smtpUser,
-  smtpPass,
+  html,
+  resendApiKey,
 }: {
   to: string
   from: string
   replyTo: string
   subject: string
   text: string
-  smtpHost: string
-  smtpPort: number
-  smtpUser: string
-  smtpPass: string
+  html: string
+  resendApiKey: string
 }) {
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpPort === 465,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-  })
-
-  await transporter.sendMail({
+  const resend = new Resend(resendApiKey)
+  const { error } = await resend.emails.send({
     from,
     to,
     replyTo,
     subject,
     text,
+    html,
   })
+
+  if (error) {
+    throw new Error(error.message || 'Resend email send failed')
+  }
 }
 
 function getSafeErrorDetails(error: unknown) {
@@ -188,8 +165,40 @@ function getSafeErrorDetails(error: unknown) {
   }
 
   return {
-    message: typeof error === 'string' ? error : 'Unknown SMTP error',
+    message: typeof error === 'string' ? error : 'Unknown Resend error',
   }
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
+function getDisplayRows(rows: Array<[string, string]>) {
+  return rows.filter(([, value]) => value.trim().length > 0)
+}
+
+function renderAdminHtml(rows: Array<[string, string]>, message: string) {
+  const tableRows = rows
+    .map(
+      ([label, value]) =>
+        `<tr><th style="width: 180px; text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid #e6e0d5; color: #4b5563;">${escapeHtml(label)}</th><td style="padding: 8px 10px; border-bottom: 1px solid #e6e0d5; color: #111827; white-space: pre-wrap;">${escapeHtml(value)}</td></tr>`,
+    )
+    .join('')
+
+  return [
+    '<div style="font-family: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; line-height: 1.7; color: #111827;">',
+    '<h1 style="font-size: 18px; margin: 0 0 16px;">YUKIMICHI Inquiry</h1>',
+    `<table style="border-collapse: collapse; width: 100%; max-width: 760px;">${tableRows}</table>`,
+    message
+      ? `<h2 style="font-size: 15px; margin: 22px 0 8px;">Message</h2><div style="white-space: pre-wrap; border-left: 3px solid #c9a84c; padding: 10px 12px; background: #fbfaf7;">${escapeHtml(message)}</div>`
+      : '',
+    '</div>',
+  ].join('')
 }
 
 export async function POST(request: Request) {
@@ -307,13 +316,50 @@ export async function POST(request: Request) {
     `返信先：${email}`,
   ].join('\n')
 
-  try {
-    const smtpConfig = getSmtpConfig()
+  const productInfo = [productName, productUrl, productCategory].filter(Boolean).join(' / ')
+  const quantityText = [quantity, quantityUnit].filter(Boolean).join(' ')
+  const adminRows = getDisplayRows([
+    ['Reference No.', receiptNumber],
+    ['Inquiry Type', type],
+    ['Name', name],
+    ['Company', company],
+    ['Email', email],
+    ['Phone', phone],
+    ['Country', destinationCountry || destination],
+    ['Product Information', productInfo],
+    ['Quantity', quantityText],
+    ['Destination', normalizedDestination],
+    ['Shipping Method', shippingMethod],
+    ['Submitted At', `${submittedAt} JST`],
+    ['Source Page', sourcePage],
+    ['Product Name', productName],
+    ['Product URL', productUrl],
+    ['Product Category', productCategory],
+    ['Unit Price', unitPrice],
+    ['Size / Weight', sizeWeight],
+    ['Material', material],
+    ['Destination City', destinationCity],
+    ['Deadline', deadline],
+    ['Recipient Type', recipientType],
+    ['Language', language],
+    ['User Agent', userAgent],
+  ])
+  const resendAdminText = [
+    'YUKIMICHI inquiry received.',
+    '',
+    ...adminRows.map(([label, value]) => `${label}: ${value}`),
+    '',
+    'Message:',
+    message,
+  ].join('\n')
+  const adminHtml = renderAdminHtml(adminRows, message)
 
-    if (!smtpConfig.ok) {
-      console.error('[inquiry] SMTP configuration is missing or invalid', {
-        missing: smtpConfig.missing,
-        invalid: smtpConfig.invalid,
+  try {
+    const resendConfig = getResendConfig()
+
+    if (!resendConfig.ok) {
+      console.error('[inquiry] Resend configuration is missing', {
+        missing: resendConfig.missing,
       })
       return NextResponse.json(
         { ok: false, error: USER_SEND_ERROR },
@@ -321,16 +367,14 @@ export async function POST(request: Request) {
       )
     }
 
-    await sendSmtpEmail({
-      from: smtpConfig.smtpFrom,
-      to: smtpConfig.contactToEmail,
+    await sendResendEmail({
+      from: resendConfig.resendFromEmail,
+      to: resendConfig.contactToEmail,
       replyTo: email,
       subject: adminSubject,
-      text: adminText,
-      smtpHost: smtpConfig.smtpHost,
-      smtpPort: smtpConfig.smtpPort,
-      smtpUser: smtpConfig.smtpUser,
-      smtpPass: smtpConfig.smtpPass,
+      text: resendAdminText,
+      html: adminHtml,
+      resendApiKey: resendConfig.resendApiKey,
     })
 
     return NextResponse.json({
@@ -339,7 +383,7 @@ export async function POST(request: Request) {
       receiptNumber,
     })
   } catch (error) {
-    console.error('[inquiry] SMTP inquiry email send failed', getSafeErrorDetails(error))
+    console.error('[inquiry] Resend inquiry email send failed', getSafeErrorDetails(error))
 
     return NextResponse.json(
       { ok: false, error: USER_SEND_ERROR },

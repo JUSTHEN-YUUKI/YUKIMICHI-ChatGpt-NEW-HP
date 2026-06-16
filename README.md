@@ -37,32 +37,29 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## YUKIMICHI Inquiry Email Setup
 
-The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email delivery uses Nodemailer with SMTP settings stored only in Vercel environment variables.
+The `/quote` and `/contact` forms submit to `/api/inquiry`. Production email delivery uses the Resend API with credentials stored only in Vercel environment variables.
 
-Do not commit SMTP passwords or real `.env.local` files. Use `.env.example` only as a key list.
+Do not commit Resend API keys or real `.env.local` files. Use `.env.example` only as a key list.
 
-YUKIMICHI uses the Onamae.com / GMO mail server for `justhen.co.jp`.
+Resend is the recommended production delivery path. The previous Nodemailer SMTP path for Onamae.com / GMO is no longer used by `/api/inquiry`.
 
 Required Vercel Production environment variables:
 
 ```text
 CONTACT_TO_EMAIL=exporter@justhen.co.jp
-SMTP_HOST=mail1033.onamae.ne.jp
-SMTP_PORT=465
-SMTP_USER=exporter@justhen.co.jp
-SMTP_PASS=<Onamae.com mail password entered directly in Vercel>
-SMTP_FROM=exporter@justhen.co.jp
+RESEND_API_KEY=<Resend API key entered directly in Vercel>
+RESEND_FROM_EMAIL=<verified Resend sender, for example YUKIMICHI <no-reply@justhen.co.jp>>
 ```
 
-`SMTP_PORT=465` uses SSL secure mode (`secure: true`). Port `587`, if used by another provider, uses non-secure transport initialization (`secure: false`) with provider-supported STARTTLS negotiation. Do not place the real `SMTP_PASS` value in README, logs, comments, or committed files.
+`RESEND_API_KEY` must never be placed in README, logs, comments, or committed files. `RESEND_FROM_EMAIL` must be a sender address allowed by the Resend account, usually from a verified domain.
 
 Vercel Production setup:
 
 1. Open the Vercel dashboard.
 2. Open the `YUKIMICHI-ChatGpt-NEW-HP` project.
 3. Open `Settings` -> `Environment Variables`.
-4. Add the 6 variables above to the `Production` environment.
+4. Add the 3 variables above to the `Production` environment.
 5. After saving, open `Deployments` and redeploy the latest production deployment.
 6. Test sending from `/contact` and `/quote`.
 
-If sending still fails after the variables are set, confirm the Onamae.com / GMO mailbox password, SMTP server, SSL port, and mailbox sending permissions, then redeploy or retry.
+If sending still fails after the variables are set, confirm the Resend API key, sender domain verification, sender address, and account sending limits in the Resend dashboard, then redeploy or retry.
