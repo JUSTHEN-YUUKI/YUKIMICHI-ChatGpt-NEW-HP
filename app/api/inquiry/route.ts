@@ -178,13 +178,21 @@ function getDisplayRows(rows: Array<[string, string]>) {
   return rows.filter(([, value]) => value.trim().length > 0)
 }
 
-function renderAdminHtml(rows: Array<[string, string]>, message: string) {
-  const tableRows = rows
+function renderRowsText(rows: Array<[string, string]>) {
+  return rows.map(([label, value]) => `${label}: ${value}`).join('\n')
+}
+
+function renderTableHtml(rows: Array<[string, string]>) {
+  return rows
     .map(
       ([label, value]) =>
         `<tr><th style="width: 180px; text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid #e6e0d5; color: #4b5563;">${escapeHtml(label)}</th><td style="padding: 8px 10px; border-bottom: 1px solid #e6e0d5; color: #111827; white-space: pre-wrap;">${escapeHtml(value)}</td></tr>`,
     )
     .join('')
+}
+
+function renderAdminHtml(rows: Array<[string, string]>, message: string) {
+  const tableRows = renderTableHtml(rows)
 
   return [
     '<div style="font-family: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; line-height: 1.7; color: #111827;">',
@@ -193,6 +201,22 @@ function renderAdminHtml(rows: Array<[string, string]>, message: string) {
     message
       ? `<h2 style="font-size: 15px; margin: 22px 0 8px;">Message</h2><div style="white-space: pre-wrap; border-left: 3px solid #c9a84c; padding: 10px 12px; background: #fbfaf7;">${escapeHtml(message)}</div>`
       : '',
+    '</div>',
+  ].join('')
+}
+
+function renderCustomerHtml(rows: Array<[string, string]>, contactToEmail: string) {
+  const tableRows = renderTableHtml(rows)
+
+  return [
+    '<div style="font-family: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; line-height: 1.7; color: #111827;">',
+    '<p>このたびは、YUKIMICHI - SNOWPATH JAPAN へお問い合わせいただきありがとうございます。</p>',
+    '<p>以下の内容でお問い合わせを受け付けました。</p>',
+    `<table style="border-collapse: collapse; width: 100%; max-width: 760px;">${tableRows}</table>`,
+    `<p>内容を確認のうえ、担当者より ${escapeHtml(contactToEmail)} からご連絡いたします。</p>`,
+    '<p>商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。</p>',
+    '<p>YUKIMICHI - SNOWPATH JAPAN<br>JUSTHEN CO., LTD.</p>',
+    '<p>※本メールは自動返信です。</p>',
     '</div>',
   ].join('')
 }
@@ -289,10 +313,51 @@ export async function POST(request: Request) {
   const sendGridAdminText = [
     'YUKIMICHI inquiry received.',
     '',
-    ...adminRows.map(([label, value]) => `${label}: ${value}`),
+    renderRowsText(adminRows),
     ...(message ? ['', `Message: ${message}`] : []),
   ].join('\n')
   const adminHtml = renderAdminHtml(adminRows, message)
+  const customerRows = getDisplayRows([
+    ['受付番号 / Reference No.', receiptNumber],
+    ['送信種別 / Type', type],
+    ['会社名 / Company', company],
+    ['ご担当者名 / Name', name],
+    ['メールアドレス / Email', email],
+    ['電話番号 / Phone', phone],
+    ['国 / Country', destinationCountry || destination],
+    ['商品名 / Product Name', productName],
+    ['商品URL / Product URL', productUrl],
+    ['商品カテゴリ / Product Category', productCategory],
+    ['数量 / Quantity', quantityText],
+    ['配送先 / Destination', normalizedDestination],
+    ['配送方法 / Shipping Method', shippingMethod],
+    ['メッセージ / Message', message],
+    ['送信日時 / Submitted At', `${submittedAt} JST`],
+    ['送信元ページ / Source Page', sourcePage],
+  ])
+  const autoReplySubject =
+    type === 'quote'
+      ? `【YUKIMICHI】お見積り依頼を受け付けました（${receiptNumber}）`
+      : `【YUKIMICHI】お問い合わせを受け付けました（${receiptNumber}）`
+  const contactToEmailPlaceholder = '{{CONTACT_TO_EMAIL}}'
+  const autoReplyText = [
+    `${name} 様`,
+    '',
+    'このたびは、YUKIMICHI - SNOWPATH JAPAN へお問い合わせいただきありがとうございます。',
+    '以下の内容でお問い合わせを受け付けました。',
+    '',
+    renderRowsText(customerRows),
+    '',
+    `内容を確認のうえ、担当者より ${contactToEmailPlaceholder} からご連絡いたします。`,
+    '',
+    '商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。',
+    '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。',
+    '',
+    'YUKIMICHI - SNOWPATH JAPAN',
+    'JUSTHEN CO., LTD.',
+    '',
+    '※本メールは自動返信です。',
+  ].join('\n')
 
   try {
     const sendGridConfig = getSendGridConfig()
@@ -307,19 +372,33 @@ export async function POST(request: Request) {
       )
     }
 
-    await sendSendGridEmail({
-      from: sendGridConfig.sendGridFromEmail,
-      to: sendGridConfig.contactToEmail,
-      replyTo: email,
-      subject: adminSubject,
-      text: sendGridAdminText,
-      html: adminHtml,
-      sendGridApiKey: sendGridConfig.sendGridApiKey,
-    })
+    const customerAutoReplyText = autoReplyText.replace(contactToEmailPlaceholder, sendGridConfig.contactToEmail)
+    const customerAutoReplyHtml = renderCustomerHtml(customerRows, sendGridConfig.contactToEmail)
+
+    await Promise.all([
+      sendSendGridEmail({
+        from: sendGridConfig.sendGridFromEmail,
+        to: sendGridConfig.contactToEmail,
+        replyTo: email,
+        subject: adminSubject,
+        text: sendGridAdminText,
+        html: adminHtml,
+        sendGridApiKey: sendGridConfig.sendGridApiKey,
+      }),
+      sendSendGridEmail({
+        from: sendGridConfig.sendGridFromEmail,
+        to: email,
+        replyTo: sendGridConfig.contactToEmail,
+        subject: autoReplySubject,
+        text: customerAutoReplyText,
+        html: customerAutoReplyHtml,
+        sendGridApiKey: sendGridConfig.sendGridApiKey,
+      }),
+    ])
 
     return NextResponse.json({
       ok: true,
-      autoReplyOk: false,
+      autoReplyOk: true,
       receiptNumber,
     })
   } catch (error) {

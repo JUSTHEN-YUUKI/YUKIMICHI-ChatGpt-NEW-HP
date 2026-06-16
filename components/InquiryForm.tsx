@@ -289,10 +289,11 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   }
 
   return (
-    <form className={`inquiry-form inquiry-form--${type}`} onSubmit={handleSubmit}>
+    <form autoComplete="on" className={`inquiry-form inquiry-form--${type}`} onSubmit={handleSubmit}>
       <div className="inquiry-form__grid">
         {fields.map((field) => {
           const options = selectOptions[field.name]
+          const fieldId = `inquiry-${type}-${field.name}`
           const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
           const showRequiredBadge = field.required && !(type === 'quote' && field.name === 'productUrl')
           const fieldClassName = [
@@ -306,6 +307,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           return (
             <label
               className={fieldClassName}
+              htmlFor={fieldId}
               key={field.name}
             >
               <span className="inquiry-form__label">
@@ -316,6 +318,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
               {field.name === 'quantity' ? (
                 <div className="inquiry-form__quantity-row">
                   <input
+                    id={fieldId}
                     name={field.name}
                     type="number"
                     min="0"
@@ -329,6 +332,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                     onInput={syncInputField('quantity')}
                   />
                   <select
+                    id={`inquiry-${type}-quantityUnit`}
                     name="quantityUnit"
                     value={formState.quantityUnit}
                     aria-label="数量単位 / Quantity unit"
@@ -345,6 +349,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                 </div>
               ) : field.multiline ? (
                 <textarea
+                  id={fieldId}
                   name={field.name}
                   value={formState[field.name]}
                   placeholder={field.placeholder}
@@ -356,6 +361,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
               ) : options ? (
                 <>
                   <input
+                    id={fieldId}
                     name={field.name}
                     type="text"
                     list={listId}
@@ -374,6 +380,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
                 </>
               ) : (
                 <input
+                  id={fieldId}
                   name={field.name}
                   type={field.type ?? 'text'}
                   value={formState[field.name]}
@@ -391,9 +398,10 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         })}
       </div>
 
-      <label className="inquiry-form__honeypot" aria-hidden="true">
+      <label className="inquiry-form__honeypot" htmlFor={`inquiry-${type}-website`} aria-hidden="true">
         <span>Website</span>
         <input
+          id={`inquiry-${type}-website`}
           name="website"
           type="text"
           value={formState.website}
