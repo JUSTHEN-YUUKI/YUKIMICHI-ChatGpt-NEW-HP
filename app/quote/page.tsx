@@ -37,15 +37,18 @@ const quoteFlow = [
 
 const requiredItems = [
   '商品名',
-  '商品URL（任意）',
-  '数量',
-  '単価',
-  'サイズ・重量',
-  '成分・素材',
-  '配送先国・都市',
+  'ブランド名・メーカー名',
+  '商品URLまたは参考画像',
+  '希望数量',
   '希望納期',
+  '仕入希望条件',
+  '日本国内の引取場所または仕入先情報',
+  '輸出先国・都市',
   '希望配送方法',
-  '法人宛・個人宛',
+  '商品サイズ・重量',
+  'SDS、成分表、JANコード、商品ラベル情報の有無',
+  '法人取引か個人利用か',
+  '継続取引か単発取引か',
 ]
 
 const shippingMethods = [
@@ -136,7 +139,7 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Required Details</span>
           </div>
-          <h2><TranslatedText id="pages.quote.requiredTitle" fallback="必要情報カード" /></h2>
+          <h2><TranslatedText id="pages.quote.requiredTitle" fallback="お問い合わせ前にご用意いただきたい情報" /></h2>
           <p>
             <TranslatedText
               id="pages.quote.requiredLead"

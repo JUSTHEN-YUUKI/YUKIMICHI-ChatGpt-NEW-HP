@@ -157,6 +157,38 @@ const faqCategories = [
     ],
   },
   {
+    id: 'compliance-transactions',
+    label: '規制品・対応不可取引',
+    en: 'Compliance',
+    items: [
+      {
+        q: 'どのような商品は事前確認が必要ですか？ / What types of products require prior confirmation?',
+        a: '化粧品、食品、健康関連商品、医薬品・医薬部外品、電池、スプレー、液体、アルコールを含む商品、中古品、ブランド品、動植物由来素材、危険品に該当する可能性がある商品は、輸出可否、配送会社の引受可否、輸入国側の規制確認が必要です。 Cosmetics, food products, health-related products, pharmaceuticals, quasi-drugs, batteries, sprays, liquids, products containing alcohol, secondhand goods, branded goods, plant- or animal-derived materials, and items that may fall under dangerous goods require prior checks for export feasibility, carrier acceptance, and import-country regulations.',
+        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
+      },
+      {
+        q: '対応できない取引はありますか？ / Are there any transactions YUKIMICHI cannot support?',
+        a: '模倣品、知的財産権侵害品、虚偽申告を前提とする取引、法令や税関規則の回避を目的とする取引、輸入国で禁止されている商品の取引には対応できません。 We cannot support transactions involving counterfeit goods, intellectual property infringement, false declarations, attempts to avoid laws or customs regulations, or products prohibited in the importing country.',
+        links: [{ href: '/terms', label: '取引条件を見る' }],
+      },
+      {
+        q: 'YUKIMICHIは通関許可を保証できますか？ / Can YUKIMICHI guarantee customs clearance?',
+        a: 'いいえ。YUKIMICHIは日本側の確認・調整・書類整理を支援しますが、輸入国側の最終的な通関可否、追加検査、関税・輸入税、許認可、配送会社の最終判断を保証するものではありません。 No. YUKIMICHI supports Japan-side coordination, confirmation, and document preparation, but cannot guarantee final customs clearance, additional inspections, duties or import taxes, permits, approvals, or carrier decisions in the importing country.',
+        links: [{ href: '/services', label: 'サービス範囲を見る' }],
+      },
+      {
+        q: 'メーカーや卸の連絡先を教えてもらえますか？ / Can you disclose supplier or wholesaler contact details?',
+        a: '原則として、確認先となるメーカー、卸、販売店、外部パートナーの直接連絡先は開示していません。YUKIMICHIが日本側の窓口として、必要な確認・調整を行います。 In principle, we do not disclose direct contact details of manufacturers, wholesalers, retailers, or external partners. YUKIMICHI acts as the Japan-side contact point and coordinates the necessary confirmations.',
+        links: [{ href: '/about', label: '会社概要を見る' }],
+      },
+      {
+        q: '税関で止まった場合や返送になった場合はどうなりますか？ / What happens if a shipment is held by customs or returned?',
+        a: '税関、配送会社、関係当局の判断により、追加確認、検査、遅延、返送、没収、追加費用が発生する場合があります。YUKIMICHIは可能な範囲で情報整理と対応支援を行いますが、当局や配送会社の最終判断を変更・保証することはできません。 Customs, carriers, or relevant authorities may require additional confirmation, inspection, delay the shipment, return it, seize it, or impose additional costs. YUKIMICHI will support communication and information organization where possible, but cannot change or guarantee decisions made by authorities or carriers.',
+        links: [{ href: '/terms', label: '取引条件を見る' }],
+      },
+    ],
+  },
+  {
     id: 'restricted',
     label: '禁止・制限品目',
     en: 'Restricted Items',

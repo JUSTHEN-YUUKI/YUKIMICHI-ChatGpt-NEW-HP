@@ -67,6 +67,19 @@ const feeBasisItems = [
   },
 ]
 
+const excludedCostItems = [
+  '国際送料',
+  '国内配送費',
+  '保険料',
+  '関税・輸入税・VAT/GST',
+  '通関関連費用',
+  '倉庫費用',
+  '検査費用',
+  '証明書取得費用',
+  'ラベル作成・貼替費用',
+  '梱包資材費・再梱包費用',
+]
+
 const optionalServiceFees = [
   { service: '商品写真撮影', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
   { service: '外箱・ラベル撮影', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
@@ -90,6 +103,8 @@ const optionalServiceFees = [
 ]
 
 const paymentItems = [
+  'お支払い条件は、原則として日本側銀行口座への事前送金となります。',
+  'Payment is generally required in advance by bank transfer to a Japanese bank account.',
   'Payment by bank transfer designated by YUKIMICHI in Japan.',
   '支払いは、YUKIMICHIが指定する日本の銀行振込（TT）です。',
   '振込手数料は原則としてお客様負担です。',
@@ -268,6 +283,39 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <section className="pricing-excluded-costs">
+        <div className="pricing-section-head">
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Costs Not Included</span>
+          </div>
+          <h2>料金に含まれない主な費用</h2>
+          <p>
+            表示されている手数料は、YUKIMICHIによる日本側の輸出調整・手配支援に対するサービス手数料です。
+            以下の費用は、原則として別途実費または個別見積りとなります。
+          </p>
+          <p lang="en">
+            The listed service fees are coordination fees for YUKIMICHI’s Japan-side export arrangement support.
+            The following costs are generally charged separately at actual cost or quoted individually.
+          </p>
+        </div>
+        <div className="excluded-cost-layout">
+          <div className="excluded-cost-copy">
+            <p>
+              案件ごとに商品内容、数量、重量、サイズ、仕入先、配送方法、輸入国の規制、配送会社の引受可否が異なるため、最終金額は個別見積りにより確定します。
+            </p>
+            <p lang="en">
+              Final costs depend on the product, quantity, weight, dimensions, supplier conditions, shipping method, import-country regulations, and carrier acceptance. A final quotation will be provided on a case-by-case basis.
+            </p>
+          </div>
+          <ul className="excluded-cost-list">
+            {excludedCostItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="pricing-payment">
         <div>
           <div className="section-label">
@@ -382,7 +430,8 @@ export default function PricingPage() {
 
         .pricing-plans,
         .pricing-optional-services,
-        .pricing-fee-basis {
+        .pricing-fee-basis,
+        .pricing-excluded-costs {
           padding: var(--section-pad) var(--gutter);
           background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
         }
@@ -668,6 +717,56 @@ export default function PricingPage() {
           padding-left: 14px;
         }
 
+        .pricing-excluded-costs {
+          padding-top: 0;
+        }
+
+        .excluded-cost-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+          gap: 18px;
+        }
+
+        .excluded-cost-copy,
+        .excluded-cost-list {
+          border: 1px solid rgba(201,168,76,0.18);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 52%),
+            rgba(7,17,31,0.68);
+          margin: 0;
+          padding: clamp(24px, 3vw, 34px);
+        }
+
+        .excluded-cost-copy p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 2.05;
+          margin: 0;
+        }
+
+        .excluded-cost-copy p + p {
+          border-top: 1px solid rgba(201,168,76,0.12);
+          margin-top: 16px;
+          padding-top: 16px;
+        }
+
+        .excluded-cost-list {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          list-style: none;
+        }
+
+        .excluded-cost-list li {
+          border-left: 1px solid rgba(201,168,76,0.34);
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 1.8;
+          padding-left: 13px;
+        }
+
         .pricing-payment {
           padding: var(--section-pad) var(--gutter);
           display: grid;
@@ -792,6 +891,10 @@ export default function PricingPage() {
             grid-template-columns: 1fr;
           }
 
+          .excluded-cost-layout {
+            grid-template-columns: 1fr;
+          }
+
           .pricing-cta {
             align-items: flex-start;
             flex-direction: column;
@@ -805,7 +908,8 @@ export default function PricingPage() {
         @media (max-width: 680px) {
           .pricing-lead-grid,
           .pricing-grid,
-          .fee-basis-grid {
+          .fee-basis-grid,
+          .excluded-cost-list {
             grid-template-columns: 1fr;
           }
 
