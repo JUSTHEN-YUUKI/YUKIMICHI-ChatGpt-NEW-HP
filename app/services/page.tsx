@@ -5,53 +5,97 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: 'サービス | YUKIMICHI',
   description:
-    'YUKIMICHIの輸出支援サービス。日本商品の調達、国際宅配便、航空貨物、海上輸送、輸出書類整理、規制確認、取引条件整理まで。',
+    'YUKIMICHIの日本側輸出調整・手配サービス。日本商品の調達確認、国内取引調整、購入調整、輸出関連手配、書類・配送確認まで。',
 }
 
 const coreServices = [
   {
-    code: 'A',
-    title: '仕入先確認',
-    en: 'Supplier Confirmation',
+    code: '01',
+    title: '日本商品の調達確認',
+    en: 'Japan Product Sourcing Confirmation',
     points: [
-      'メーカー、卸、販売元などへ取引条件を確認します。',
-      '成分表、SDS/MSDS、商品資料の有無を整理します。',
-      '在庫、価格、輸出可否は案件ごとに確認します。',
+      '海外バイヤーの希望商品について、日本国内のメーカー・卸・販売元へ確認します。',
+      '商品名、URL、数量、希望条件をもとに確認準備を支援します。',
+      '価格、在庫、輸出可否、取引可否は案件ごとに確認します。',
     ],
-    note: '仕入先名、担当者、直接連絡先、卸条件は原則として開示しません。',
+    note: 'YUKIMICHIが在庫販売を行うことを示すものではありません。',
   },
   {
-    code: 'B',
-    title: '国内取引調整',
-    en: 'Purchase Coordination',
+    code: '02',
+    title: '仕入先・購入条件の調整',
+    en: 'Supplier & Purchase Coordination',
     points: [
-      '日本国内法人として仕入れ、納品確認、支払い条件を整理します。',
-      '海外バイヤーに代わり、国内取引の進行を調整します。',
-      '具体的な取引可否は仕入先確認後に案内します。',
+      '国内取引条件、購入可否、見積、支払条件、納期を確認します。',
+      '海外バイヤーとの取引調整を日本側窓口として支援します。',
+      '仕入先名、担当者、直接連絡先、卸条件は原則として開示しません。',
     ],
-    note: 'YUKIMICHIは在庫販売サイトではなく、日本側の取引調整窓口です。',
+    note: '正式な取引条件は仕入先確認後に個別に整理します。',
   },
   {
-    code: 'C',
-    title: '輸出手配支援',
-    en: 'Export Arrangement Support',
+    code: '03',
+    title: '輸出書類確認・作成支援',
+    en: 'Export Documentation Support',
     points: [
-      '商品内容、数量、用途、配送先国をもとに取扱可否を確認します。',
-      '禁止・制限品目、配送会社の引受条件、必要確認事項を整理します。',
-      '最終判断は税関、通関業者、配送会社、公的機関等の確認を前提とします。',
+      'Commercial Invoice、Packing List の確認・作成支援を行います。',
+      'SDS、成分表、原産地関連書類などの有無を案件ごとに確認します。',
+      '必要書類は商品内容、輸送方法、配送先国、取引条件により異なります。',
     ],
-    note: '輸出可否、輸入許可、通関、関税額は保証しません。',
+    note: '公的証明や認証取得の可否は関係機関の確認が前提です。',
   },
   {
-    code: 'D',
-    title: '書類・物流調整',
-    en: 'Documentation and Logistics Coordination',
+    code: '04',
+    title: '国際宅配便手配',
+    en: 'International Courier Arrangement',
     points: [
-      'Invoice、Packing List、商品情報、配送情報を整理します。',
-      '国際宅配便、航空貨物、海上輸送の候補を案件ごとに比較します。',
-      '保険、梱包、通関関連費用などの実費項目を分けて確認します。',
+      'EMS、DHL、FedEx、UPS、ヤマト国際宅急便などを案件ごとに確認します。',
+      '少量、サンプル、小口貨物向けの配送方法確認を支援します。',
+      '配送会社の引受可否、サイズ、重量、内容品条件を整理します。',
     ],
-    note: '配送会社、フォワーダー、通関業者の判断により条件は変動します。',
+    note: 'YUKIMICHIが国際物流会社として実輸送を保証するものではありません。',
+  },
+  {
+    code: '05',
+    title: '航空貨物手配',
+    en: 'Air Freight Arrangement',
+    points: [
+      '短納期、高付加価値商品、一定数量の商品について航空貨物を確認します。',
+      'フォワーダー、配送会社、通関業者との確認事項を整理します。',
+      '危険品、電池、液体、スプレー等は事前確認が必要です。',
+    ],
+    note: '航空輸送の可否は配送会社・関係機関の判断を前提とします。',
+  },
+  {
+    code: '06',
+    title: '海上輸送手配',
+    en: 'Sea Freight Arrangement',
+    points: [
+      'LCL、FCL、パレット単位、大口貨物の海上輸送条件を確認します。',
+      'フォワーダー、通関業者、港湾関連費用の確認を支援します。',
+      '納期、梱包条件、輸入側手配の有無を整理します。',
+    ],
+    note: '海上輸送の費用・納期は貨物条件と輸送ルートにより変動します。',
+  },
+  {
+    code: '07',
+    title: '規制品・輸出可否確認',
+    en: 'Compliance & Restricted Item Review',
+    points: [
+      '医薬品、食品、化粧品、電池、危険品などは事前確認します。',
+      '中古品、ブランド品、動植物由来素材も必要書類や取扱可否を確認します。',
+      '内容品の虚偽申告や規制逃れを前提とした手配は行いません。',
+    ],
+    note: '最終判断は税関、通関業者、配送会社、公的機関等の確認が前提です。',
+  },
+  {
+    code: '08',
+    title: '海外バイヤー対応支援',
+    en: 'Buyer Communication Support',
+    points: [
+      '日本側の確認結果を整理し、海外バイヤーに分かりやすく共有します。',
+      '必要に応じて英語での確認文面整理も支援します。',
+      '不足情報、確認事項、次の判断材料を明確にします。',
+    ],
+    note: '取引成立、輸入許可、販売可否を保証するものではありません。',
   },
 ]
 
@@ -60,10 +104,11 @@ const supportScope = [
   '商品調達可否の確認',
   '仕入先への確認・連絡支援',
   '国内取引条件の整理',
-  '見積条件の整理',
+  '購入条件・見積条件の整理',
   '国際配送方法の比較',
+  '航空貨物・海上輸送の確認',
   'Invoice / Packing List 等の基本書類整理',
-  '梱包・検品・出荷前確認の相談',
+  'SDS / 成分表等の確認',
   '禁止・制限品目の事前確認',
   '海外バイヤーとの取引条件整理',
 ]
@@ -109,27 +154,6 @@ const roleItems = [
   },
 ]
 
-const shippingMethods = [
-  {
-    name: 'International Courier',
-    detail: 'EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
-    fit: '小口、サンプル、短納期向け',
-    note: '比較的スピード重視の発送に向きます。',
-  },
-  {
-    name: 'Air Freight',
-    detail: '航空貨物',
-    fit: '緊急輸送、高付加価値商品、まとまった数量向け',
-    note: '内容品・危険品判定が重要です。',
-  },
-  {
-    name: 'Sea Freight',
-    detail: 'FCL / LCL',
-    fit: '大型貨物、大量輸送、コスト重視向け',
-    note: '納期は長めですが、継続出荷に向きます。',
-  },
-]
-
 const requiredInfo = [
   '商品名',
   '商品URL',
@@ -141,8 +165,6 @@ const requiredInfo = [
   '配送先国・都市',
   '希望納期',
   '希望配送方法',
-  '法人宛・個人宛',
-  '証明書・SDS等の有無',
 ]
 
 const relatedLinks = [
@@ -167,39 +189,40 @@ export default function ServicesPage() {
       <section className="services-hero">
         <div className="section-label">
           <div className="section-label-line" />
-          <span className="section-label-text">Export Support Services</span>
+          <span className="section-label-text">JAPAN EXPORT COORDINATION</span>
         </div>
         <h1 className="services-title">
-          <TranslatedText id="pages.services.heroTitle" fallback="サービス" />
-          <br />
-          <em><TranslatedText id="pages.services.heroSubtitle" fallback="Export Support Services" /></em>
+          <TranslatedText id="pages.services.heroTitle" fallback="Japan Export Coordination & Arrangement" />
         </h1>
+        <p className="services-hero-subtitle">
+          <TranslatedText id="pages.services.heroSubtitle" fallback="日本側の輸出調整・手配サービス" />
+        </p>
         <article className="services-domestic-support" aria-labelledby="domestic-support-title">
           <div className="services-domestic-support__head">
-            <span>Japan Side Coordination</span>
-            <h2 id="domestic-support-title">Japan Side Coordination</h2>
+            <span>EXPORT COORDINATION SERVICES</span>
+            <h2 id="domestic-support-title">Japan Export Coordination & Arrangement</h2>
             <p className="services-domestic-support__subtitle-ja">
-              日本国内法人としての取引調整・輸出手配支援
+              日本商品の調達確認・国内取引調整・輸出関連手配
             </p>
             <p className="services-domestic-support__subtitle-en">
-              Japan side transaction coordination and export arrangement support
+              Product sourcing confirmation, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
             </p>
           </div>
           <div className="services-domestic-support__body">
             <div className="services-domestic-support__copy services-domestic-support__copy--ja">
               <p>
-                YUKIMICHI Export Supportは、日本国内法人として、海外バイヤー様に代わり、日本商品の調達確認、国内取引調整、輸出関連手配をサポートします。
+                YUKIMICHIは、日本国内法人として、海外バイヤー向けに日本商品の調達確認、国内取引調整、購入調整、輸出関連手配、書類確認、配送方法の確認を支援します。
               </p>
               <p>
-                商品の仕入れ確認、納品確認、書類準備、国際配送の手配まで、案件内容に応じて丁寧に対応いたします。
+                在庫販売会社・国際物流会社ではなく、案件ごとにメーカー・卸・配送会社・関係機関へ確認しながら、日本側の実務調整を行います。
               </p>
             </div>
             <div className="services-domestic-support__copy services-domestic-support__copy--en">
               <p>
-                As a Japan-based company, YUKIMICHI Export Support assists overseas buyers with sourcing Japanese products, coordinating domestic transactions, and arranging export-related procedures.
+                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including product sourcing confirmation, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
               </p>
               <p>
-                We carefully support each project, from supplier confirmation, purchasing coordination, delivery confirmation, documentation, and international shipping arrangements.
+                We are not an inventory sales company or an international carrier. Each case is reviewed with suppliers, carriers, brokers, and relevant parties as needed.
               </p>
             </div>
           </div>
@@ -305,30 +328,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="services-shipping">
-        <div className="services-section-head">
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Shipping Method Selection</span>
-          </div>
-          <h2><TranslatedText id="pages.services.shippingTitle" fallback="輸送方法の使い分け" /></h2>
-          <p>
-            <TranslatedText id="pages.services.shippingLead" fallback="価格だけでなく、納期、破損リスク、通関難易度、配送会社の引受条件を踏まえて検討します。" />
-          </p>
-        </div>
-
-        <div className="shipping-grid">
-          {shippingMethods.map((method, index) => (
-            <article className="shipping-card" key={method.name}>
-              <span>{method.name}</span>
-              <h3>{method.detail}</h3>
-              <p><TranslatedText id={`pages.services.shippingMethods.${index}.fit`} fallback={method.fit} /></p>
-              <small><TranslatedText id={`pages.services.shippingMethods.${index}.note`} fallback={method.note} /></small>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="services-info">
         <div>
           <div className="section-label">
@@ -336,16 +335,19 @@ export default function ServicesPage() {
             <span className="section-label-text">Required Information</span>
           </div>
           <h2 className="services-heading-nowrap"><TranslatedText id="pages.services.requiredTitle" fallback="見積・確認に必要な情報" /></h2>
-          <div className="services-copy-grid services-copy-grid--compact">
+          <div className="services-info-note">
             <p>
               <TranslatedText
-                id="pages.services.requiredLeadLeft"
-                fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が"
+                id="pages.services.requiredLead"
+                fallback="具体的な商品情報があるほど、配送可否、送料、規制確認、リードタイムの確認が進めやすくなります。"
               />
             </p>
-            <p>
-              <TranslatedText id="pages.services.requiredLeadRight" fallback="進めやすくなります。" />
-            </p>
+            <small>
+              <TranslatedText
+                id="pages.services.requiredNote"
+                fallback="具体的な商品情報が未確定の場合でも、ご相談内容に応じて確認項目を整理します。"
+              />
+            </small>
           </div>
         </div>
         <ol className="services-info-list">
@@ -449,26 +451,13 @@ export default function ServicesPage() {
           font-size: 0.68em;
         }
 
-        .services-copy-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
-          max-width: 980px;
-        }
-
-        .services-copy-grid--compact {
-          max-width: 860px;
-        }
-
-        .services-copy-grid p {
-          border: 1px solid rgba(201,168,76,0.14);
-          background: rgba(13,28,53,0.42);
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 2.05;
-          margin: 0;
-          padding: 18px 20px;
+        .services-hero-subtitle {
+          color: var(--washi);
+          font-family: 'Noto Serif JP', serif;
+          font-size: clamp(17px, 2.1vw, 25px);
+          letter-spacing: 0.08em;
+          line-height: 1.7;
+          margin: -10px 0 34px;
         }
 
         .services-domestic-support {
@@ -588,8 +577,7 @@ export default function ServicesPage() {
         }
 
         .services-core,
-        .services-role,
-        .services-shipping {
+        .services-role {
           padding: var(--section-pad) var(--gutter);
           background:
             linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
@@ -836,65 +824,50 @@ export default function ServicesPage() {
           padding-top: 14px;
         }
 
-        .shipping-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 18px;
-        }
-
-        .shipping-card {
-          border: 1px solid rgba(201,168,76,0.14);
-          background: linear-gradient(180deg, rgba(13,28,53,0.92), rgba(7,17,31,0.82));
-          min-height: 260px;
-          padding: 28px;
-        }
-
-        .shipping-card span {
-          color: var(--gold);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(30px, 4vw, 44px);
-          font-weight: 300;
-          line-height: 1;
-        }
-
-        .shipping-card h3 {
-          color: var(--washi);
-          font-size: 15px;
-          font-weight: 300;
-          letter-spacing: 0.1em;
-          line-height: 1.8;
-          margin: 24px 0 12px;
-        }
-
-        .shipping-card p,
-        .shipping-card small {
-          display: block;
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.05em;
-          line-height: 2;
-          margin: 0;
-        }
-
-        .shipping-card small {
-          color: var(--suzu);
-          margin-top: 14px;
-        }
-
         .services-info,
         .services-related {
           padding: var(--section-pad) var(--gutter);
           display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-          gap: clamp(28px, 5vw, 72px);
+          grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+          gap: clamp(28px, 4vw, 56px);
           background: var(--navy-deep);
           border-bottom: 1px solid rgba(201,168,76,0.08);
+        }
+
+        .services-info-note {
+          max-width: 640px;
+          border: 1px solid rgba(201,168,76,0.16);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.12), transparent 56%),
+            rgba(13,28,53,0.58);
+          padding: clamp(20px, 2.4vw, 28px);
+        }
+
+        .services-info-note p {
+          color: var(--washi-dim);
+          font-size: clamp(14px, 1.15vw, 16px);
+          letter-spacing: 0.035em;
+          line-height: 2;
+          margin: 0;
+          overflow-wrap: normal;
+          word-break: keep-all;
+        }
+
+        .services-info-note small {
+          display: block;
+          border-top: 1px solid rgba(201,168,76,0.12);
+          color: var(--suzu);
+          font-size: 12.5px;
+          letter-spacing: 0.035em;
+          line-height: 1.8;
+          margin-top: 16px;
+          padding-top: 14px;
         }
 
         .services-info-list {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
+          gap: 10px;
           list-style: none;
           margin: 0;
           padding: 0;
@@ -904,14 +877,14 @@ export default function ServicesPage() {
           display: grid;
           grid-template-columns: 44px 1fr;
           align-items: center;
-          gap: 14px;
-          min-height: 68px;
+          gap: 12px;
+          min-height: 56px;
           border: 1px solid rgba(201,168,76,0.12);
           background: rgba(13,28,53,0.66);
           color: var(--washi-dim);
           font-size: 13px;
           letter-spacing: 0.06em;
-          padding: 14px 16px;
+          padding: 11px 14px;
         }
 
         .services-info-list span {
@@ -1041,8 +1014,7 @@ export default function ServicesPage() {
 
         @media (max-width: 1180px) {
           .services-role-grid,
-          .services-grid,
-          .shipping-grid {
+          .services-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
@@ -1074,20 +1046,14 @@ export default function ServicesPage() {
             font-size: clamp(21px, 5.8vw, 30px) !important;
           }
 
-          .services-copy-grid {
-            grid-template-columns: 1fr;
-          }
-
           .services-grid,
           .services-role-grid,
-          .shipping-grid,
           .services-info-list,
           .services-related-grid {
             grid-template-columns: 1fr;
           }
 
-          .service-card,
-          .shipping-card {
+          .service-card {
             min-height: auto;
           }
         }
