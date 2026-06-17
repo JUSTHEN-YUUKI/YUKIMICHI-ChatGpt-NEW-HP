@@ -21,8 +21,8 @@ const strengths = [
   {
     label: "HOKKAIDO BASED",
     title: "北海道・札幌を拠点に",
-    text: "日本国内の商品調達から海外発送まで、北海道・札幌を拠点に丁寧に対応します。",
-    textEn: "Based in Sapporo, Hokkaido, we support Japan procurement and export preparation with careful communication.",
+    text: "日本商品の仕入れ可否調査から海外発送まで、北海道・札幌を拠点に丁寧に対応します。",
+    textEn: "Based in Sapporo, Hokkaido, we support sourcing feasibility checks in Japan and export preparation with careful communication.",
   },
   {
     label: "SEA & AIR",
@@ -33,8 +33,8 @@ const strengths = [
   {
     label: "EXPORT SUPPORT",
     title: "輸出実務をサポート",
-    text: "商品調達、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。",
-    textEn: "Our Export Support covers sourcing, document preparation, shipping comparison, and Request a Quote preparation for overseas trade.",
+    text: "仕入れ可否調査、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。",
+    textEn: "Our Export Support covers sourcing feasibility checks, document preparation, shipping comparison, and Request a Quote preparation for overseas trade.",
   },
 ]
 
@@ -93,7 +93,7 @@ export default function AboutSection() {
             日本発の輸出サポートブランドです。
             <br />
             <br />
-            日本国内の商品調達、国際配送、輸出関連書類の準備、
+            日本商品の仕入れ可否調査、国際配送、輸出関連書類の準備、
             配送方法の比較、海外バイヤーとのやり取りまで、
             海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。
             <span className="copy-line-en">

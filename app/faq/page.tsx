@@ -4,18 +4,18 @@ import Link from '@/components/NewTabLink'
 export const metadata: Metadata = {
   title: 'FAQ | YUKIMICHI',
   description:
-    'YUKIMICHIのFAQ。日本商品の調達、海外発送、EMS・DHL・FedEx・UPS、航空貨物、海上輸送、関税・VAT/GST、禁止・制限品目、見積依頼について。',
+    'YUKIMICHIのFAQ。日本商品の仕入れ可否調査、海外発送、EMS・DHL・FedEx・UPS、航空貨物、海上輸送、関税・VAT/GST、禁止・制限品目、見積依頼について。',
 }
 
 const faqCategories = [
   {
     id: 'procurement',
-    label: '商品調達・購入代行',
-    en: 'Procurement',
+    label: '仕入れ可否調査・購入調整',
+    en: 'Sourcing Feasibility',
     items: [
       {
         q: '取扱可能な日本商品を海外から購入できますか？',
-        a: 'YUKIMICHIでは、日本国内の正規流通品を中心に、商品調達や購入代行の相談に対応します。商品URL、数量、配送先国、希望納期をもとに、調達可否、配送方法、見積条件を確認します。',
+        a: 'YUKIMICHIでは、日本国内の正規流通品を中心に、仕入れ可否調査や購入条件の調整に関する相談に対応します。商品URL、数量、配送先国、希望納期をもとに、仕入れ可否、配送方法、見積条件を確認します。',
         links: [{ href: '/services', label: 'サービスを見る' }],
       },
       {
@@ -326,7 +326,7 @@ export default function FAQPage() {
           <em>よくある質問</em>
         </h1>
         <p className="section-body faq-lead">
-          YUKIMICHIへ寄せられる、日本商品の調達、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。
+          YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。
         </p>
         <div className="faq-hero-actions">
           <Link href="/quote" className="btn-primary">
@@ -345,7 +345,7 @@ export default function FAQPage() {
             <span className="section-label-text">Categories</span>
           </div>
           <h2>カテゴリから探す</h2>
-          <p>商品調達、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。</p>
+          <p>仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。</p>
         </div>
         <div className="faq-category-grid">
           {faqCategories.map((category) => (

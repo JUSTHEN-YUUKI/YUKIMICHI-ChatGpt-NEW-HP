@@ -10,8 +10,8 @@ export default function HeroSection() {
   const { language } = useLanguage()
   const copy = translations[language].home.hero
   const heroKicker = 'EXPORT SUPPORT FROM JAPAN × INTERNATIONAL LOGISTICS'
-  const heroBodyJa = 'YUKIMICHIは、海外バイヤー向けの日本側輸出手配支援サービスです。\n日本側の調達確認、仕入先連絡、書類整理、配送手配支援を行い、詳細な規制・責任範囲はサービス・取引の流れで整理しています。'
-  const heroBodyEn = 'YUKIMICHI is a Japan-side export arrangement support service for overseas buyers.\nWe support procurement confirmation in Japan, supplier communication, document organization, and shipping arrangement support, with regulatory notes and responsibility scope explained on the Services and Export Process pages.'
+  const heroBodyJa = 'YUKIMICHIは、海外バイヤー向けの日本側輸出手配支援サービスです。\n日本側の仕入れ可否調査、仕入先連絡、書類整理、配送手配支援を行い、詳細な規制・責任範囲はサービス・取引の流れで整理しています。'
+  const heroBodyEn = 'YUKIMICHI is a Japan-side export arrangement support service for overseas buyers.\nWe support sourcing feasibility checks in Japan, supplier communication, document organization, and shipping arrangement support, with regulatory notes and responsibility scope explained on the Services and Export Process pages.'
 
   return (
     <section

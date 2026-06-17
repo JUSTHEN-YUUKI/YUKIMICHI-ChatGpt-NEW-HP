@@ -5,14 +5,14 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: 'サービス | YUKIMICHI',
   description:
-    'YUKIMICHIの日本側輸出調整・手配サービス。日本商品の調達確認、国内取引調整、購入調整、輸出関連手配、書類・配送確認まで。',
+    'YUKIMICHIの日本側輸出調整・手配サービス。日本商品の仕入れ可否調査、国内取引調整、購入調整、輸出関連手配、書類・配送確認まで。',
 }
 
 const coreServices = [
   {
     code: '01',
-    title: '日本商品の調達確認',
-    en: 'Japan Product Sourcing Confirmation',
+    title: '日本商品の仕入れ可否調査',
+    en: 'Japan Product Sourcing Feasibility Check',
     points: [
       '海外バイヤーの希望商品について、日本国内のメーカー・卸・販売元へ確認します。',
       '商品名、URL、数量、希望条件をもとに確認準備を支援します。',
@@ -101,7 +101,7 @@ const coreServices = [
 
 const supportScope = [
   '商品情報の整理',
-  '商品調達可否の確認',
+  '商品の仕入れ可否調査',
   '仕入先への確認・連絡支援',
   '国内取引条件の整理',
   '購入条件・見積条件の整理',
@@ -129,8 +129,8 @@ const limitations = [
 const roleItems = [
   {
     actor: 'YUKIMICHI',
-    ja: '日本側の調達確認、国内取引調整、書類整理、配送手配支援',
-    en: 'Japan side procurement confirmation, domestic transaction coordination, document organization, and shipping arrangement support.',
+    ja: '日本側の仕入れ可否調査、国内取引調整、書類整理、配送手配支援',
+    en: 'Japan-side sourcing feasibility checks, domestic transaction coordination, document organization, and shipping arrangement support.',
   },
   {
     actor: 'Supplier',
@@ -202,16 +202,16 @@ export default function ServicesPage() {
             <span>EXPORT COORDINATION SERVICES</span>
             <h2 id="domestic-support-title">Japan Export Coordination & Arrangement</h2>
             <p className="services-domestic-support__subtitle-ja">
-              日本商品の調達確認・国内取引調整・輸出関連手配
+              日本商品の仕入れ可否調査・国内取引調整・輸出関連手配
             </p>
             <p className="services-domestic-support__subtitle-en">
-              Product sourcing confirmation, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
+              Product sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
             </p>
           </div>
           <div className="services-domestic-support__body">
             <div className="services-domestic-support__copy services-domestic-support__copy--ja">
               <p>
-                YUKIMICHIは、日本国内法人として、海外バイヤー向けに日本商品の調達確認、国内取引調整、購入調整、輸出関連手配、書類確認、配送方法の確認を支援します。
+                YUKIMICHIは、日本国内法人として、海外バイヤー向けに日本商品の仕入れ可否調査、国内取引調整、購入調整、輸出関連手配、書類確認、配送方法の確認を支援します。
               </p>
               <p>
                 在庫販売会社・国際物流会社ではなく、案件ごとにメーカー・卸・配送会社・関係機関へ確認しながら、日本側の実務調整を行います。
@@ -219,7 +219,7 @@ export default function ServicesPage() {
             </div>
             <div className="services-domestic-support__copy services-domestic-support__copy--en">
               <p>
-                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including product sourcing confirmation, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
+                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including product sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
               </p>
               <p>
                 We are not an inventory sales company or an international carrier. Each case is reviewed with suppliers, carriers, brokers, and relevant parties as needed.
@@ -312,7 +312,7 @@ export default function ServicesPage() {
           </div>
           <h2>YUKIMICHIは運送会社そのものではありません</h2>
           <p>
-            YUKIMICHIは日本側の輸出手配支援会社として、調達確認、仕入先連絡、書類整理、配送手配支援を行います。
+            YUKIMICHIは日本側の輸出手配支援会社として、仕入れ可否調査、仕入先連絡、書類整理、配送手配支援を行います。
             実輸送、通関判断、輸入国側の許可・税金・販売可否は、関係事業者または輸入者側の確認が前提です。
           </p>
         </div>
@@ -408,9 +408,9 @@ export default function ServicesPage() {
       <section className="services-cta">
         <div>
           <span>Export Consultation</span>
-          <h2><TranslatedText id="pages.services.ctaTitle" fallback="日本商品の調達確認・輸出手配について相談する" /></h2>
+          <h2><TranslatedText id="pages.services.ctaTitle" fallback="日本商品の仕入れ可否調査・輸出手配について相談する" /></h2>
           <p>
-            <TranslatedText id="pages.services.ctaLead" fallback="日本商品の調達確認、国内取引調整、輸出手配についてご相談ください。案件ごとに取扱可否、必要書類、配送方法を確認します。" />
+            <TranslatedText id="pages.services.ctaLead" fallback="日本商品の仕入れ可否調査、国内取引調整、輸出手配についてご相談ください。案件ごとに取扱可否、必要書類、配送方法を確認します。" />
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="services-mail">
             <TranslatedText id="pages.services.ctaMail" fallback="exporter@justhen.co.jp へ相談する" />

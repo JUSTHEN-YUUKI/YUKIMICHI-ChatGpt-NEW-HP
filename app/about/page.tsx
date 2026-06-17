@@ -36,7 +36,7 @@ const companyProfile = [
 ]
 
 const supportAreas = [
-  '商品の在庫・価格・取引可否の確認',
+  '商品の在庫・価格・取引可否を含む仕入れ可否調査',
   'メーカー、卸、販売店との連絡・交渉',
   'Invoice、Packing List、SDS、成分表などの書類確認・整理',
   'EMS、DHL、FedEx、UPS、ヤマト国際宅急便、航空貨物、海上輸送の比較',
@@ -55,7 +55,7 @@ const nonGuaranteeItems = [
 ]
 
 const supportAreasEn = [
-  'Product availability, pricing, and transaction feasibility confirmation',
+  'Product availability, pricing, and sourcing feasibility checks',
   'Communication and negotiation with Japanese manufacturers, wholesalers, and retailers',
   'Review and organization of Invoice, Packing List, SDS, ingredient sheets, and related documents',
   'Comparison of EMS, DHL, FedEx, UPS, Yamato International TA-Q-BIN, air freight, and sea freight',
@@ -96,7 +96,7 @@ export default function AboutPage() {
         </h1>
         <div className="about-lead-grid">
           <p>
-            株式会社ジャッセンは、YUKIMICHIブランドを通じて、日本国内のメーカー、卸、販売店などとの確認・調整を行い、海外バイヤー向けに日本側の輸出調整・手配支援を提供しています。
+            株式会社ジャッセンは、YUKIMICHIブランドを通じて、日本国内のメーカー、卸、販売店などに対する仕入れ可否調査と取引調整を行い、海外バイヤー向けに日本側の輸出調整・手配支援を提供しています。
           </p>
           <p lang="en">
             JUSTHEN CO., LTD. operates YUKIMICHI, a Japan-side export coordination service for overseas buyers, with a focus on transparency, compliance, and practical coordination.
@@ -112,10 +112,10 @@ export default function AboutPage() {
           </div>
           <h2>会社概要</h2>
           <p>
-            商品の在庫・価格・取引可否、輸出関連書類、配送方法、規制確認などを案件ごとに整理し、透明性のある取引を重視しています。
+            商品の在庫・価格・取引可否を含む仕入れ可否調査、輸出関連書類、配送方法、規制確認などを案件ごとに整理し、透明性のある取引を重視しています。
           </p>
           <p lang="en">
-            We support product sourcing confirmation, supplier communication, export document preparation, shipping arrangement comparison, and regulatory checks on a case-by-case basis.
+            We support product sourcing feasibility checks, supplier communication, export document preparation, shipping arrangement comparison, and regulatory checks on a case-by-case basis.
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export default function AboutPage() {
             代表の林祐樹は、会社員時代に成田空港、横浜港、品川港に関連する国際物流業務に携わり、輸出入書類、貨物管理、港湾・空港関連の実務を経験してきました。
           </p>
           <p>
-            YUKIMICHIでは、その実務経験をもとに、海外バイヤーが日本商品を安心して検討できるよう、商品確認、仕入先との連絡、輸出書類の整理、配送方法の比較、規制確認を丁寧に支援しています。
+            YUKIMICHIでは、その実務経験をもとに、海外バイヤーが日本商品を安心して検討できるよう、商品の仕入れ可否調査、仕入先との連絡、輸出書類の整理、配送方法の比較、規制確認を丁寧に支援しています。
           </p>
           <p>
             無理な輸出、虚偽申告、規制逃れを前提とした取引は行わず、法令遵守と透明性を重視しています。
@@ -165,7 +165,7 @@ export default function AboutPage() {
               Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD., has practical experience in international logistics operations related to Narita Airport, Yokohama Port, and Shinagawa Port.
             </p>
             <p>
-              Based on this background, YUKIMICHI supports overseas buyers by coordinating product confirmation, supplier communication, export document preparation, shipping method comparison, and regulatory checks from the Japan side.
+              Based on this background, YUKIMICHI supports overseas buyers by coordinating product sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks from the Japan side.
             </p>
             <p>
               We do not support false declarations, regulatory avoidance, or transactions involving counterfeit or infringing goods. Compliance and transparency are central to our service.
@@ -227,7 +227,7 @@ export default function AboutPage() {
           <span>Export Coordination</span>
           <h2>日本側の確認・調整について相談する</h2>
           <p>
-            商品調達確認、仕入先との連絡、輸出関連書類、配送方法の比較、規制確認について、案件ごとに確認します。
+            商品の仕入れ可否調査、仕入先との連絡、輸出関連書類、配送方法の比較、規制確認について、案件ごとに確認します。
           </p>
         </div>
         <Link href="/contact" className="btn-primary">

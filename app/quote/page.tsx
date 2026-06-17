@@ -6,7 +6,7 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: 'お見積り | YUKIMICHI',
   description:
-    'YUKIMICHIのお見積り依頼ページ。商品URL、数量、配送先国、希望納期をもとに、日本商品の調達、国際配送、航空貨物、海上輸送の確認を進めます。',
+    'YUKIMICHIのお見積り依頼ページ。商品URL、数量、配送先国、希望納期をもとに、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送の確認を進めます。',
 }
 
 const quoteMailto =
@@ -100,7 +100,7 @@ export default function QuotePage() {
         <p className="section-body quote-lead">
           <TranslatedText
             id="pages.quote.heroLead"
-            fallback="商品URL・数量・配送先国・希望納期をお知らせいただくと、商品調達、国際配送、航空貨物、海上輸送の確認がスムーズです。"
+            fallback="商品URL・数量・配送先国・希望納期をお知らせいただくと、仕入れ可否調査、国際配送、航空貨物、海上輸送の確認がスムーズです。"
           />
         </p>
         <div className="quote-hero-actions">

@@ -5,7 +5,7 @@ import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
   title: 'Contact | YUKIMICHI',
-  description: 'YUKIMICHIへのお問い合わせ。日本商品の調達、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。',
+  description: 'YUKIMICHIへのお問い合わせ。日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。',
 }
 
 const inquiryMailto =
@@ -57,7 +57,7 @@ export default function ContactPage() {
         <p className="section-body contact-lead">
           <TranslatedText
             id="pages.contact.heroLead"
-            fallback="日本国内の商品調達、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。商品URL・数量・配送先国・希望納期をご記載いただくと、確認がスムーズです。"
+            fallback="日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。商品URL・数量・配送先国・希望納期をご記載いただくと、確認がスムーズです。"
           />
         </p>
         <div className="contact-hero-actions">
@@ -101,7 +101,7 @@ export default function ContactPage() {
           <p className="contact-panel-lead">
             <TranslatedText
               id="pages.contact.formLead"
-              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URLは任意です。商品調達、国際配送、取扱可否確認、メーカー確認などの相談内容をMessage欄に記載できます。"
+              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URLは任意です。仕入れ可否調査、国際配送、取扱可否確認、メーカー確認などの相談内容をMessage欄に記載できます。"
             />
           </p>
 

@@ -48,21 +48,21 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   'Frequently Asked': { en: 'Frequently Asked', zh: '常见', es: 'Preguntas' },
   'Questions.': { en: 'Questions.', zh: '问题。', es: 'frecuentes.' },
   'Contact Us': { en: 'Contact Us', zh: '联系我们', es: 'Contáctenos' },
-  'YUKIMICHIへ寄せられる、日本商品の調達、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
-    en: 'Frequently asked questions about Japanese product sourcing, international shipping, air freight, sea freight, quotations, duties, and restricted items.',
-    zh: '整理了关于日本商品采购、国际配送、空运、海运、报价、关税以及禁止・限制物品的常见问题。',
-    es: 'Preguntas frecuentes sobre abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
+  'YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
+    en: 'Frequently asked questions about Japanese product sourcing feasibility checks, international shipping, air freight, sea freight, quotations, duties, and restricted items.',
+    zh: '整理了关于日本商品采购可行性确认、国际配送、空运、海运、报价、关税以及禁止・限制物品的常见问题。',
+    es: 'Preguntas frecuentes sobre viabilidad de abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
   },
   'カテゴリから探す': { en: 'Browse by Category', zh: '按类别浏览', es: 'Buscar por categoría' },
-  '商品調達、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。': {
-    en: 'Questions are organized by sourcing, shipping methods, pricing, duties, regulatory review, terms, and overseas buyer support.',
-    zh: '按商品采购、配送方式、价格、关税、法规确认、交易条款和海外买家支持进行整理。',
-    es: 'Las preguntas están organizadas por abastecimiento, métodos de envío, precios, aranceles, revisión regulatoria, condiciones y soporte a compradores internacionales.',
+  '仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。': {
+    en: 'Questions are organized by sourcing feasibility checks, shipping methods, pricing, duties, regulatory review, terms, and overseas buyer support.',
+    zh: '按采购可行性确认、配送方式、价格、关税、法规确认、交易条款和海外买家支持进行整理。',
+    es: 'Las preguntas están organizadas por revisión de viabilidad de abastecimiento, métodos de envío, precios, aranceles, revisión regulatoria, condiciones y soporte a compradores internacionales.',
   },
-  '商品調達・購入代行': {
-    en: 'Product Sourcing & Purchasing Support',
-    zh: '商品采购与购买代理',
-    es: 'Abastecimiento de productos y compras',
+  '仕入れ可否調査・購入調整': {
+    en: 'Sourcing Feasibility & Purchase Coordination',
+    zh: '采购可行性确认与购买协调',
+    es: 'Viabilidad de abastecimiento y coordinación de compra',
   },
   '国際配送・輸送方法': {
     en: 'International Shipping & Logistics',
@@ -217,10 +217,10 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     zh: '首先发送什么信息可以开始咨询？',
     es: '¿Qué debo enviar primero para consultar?',
   },
-  'YUKIMICHIでは、日本国内の正規流通品を中心に、商品調達や購入代行の相談に対応します。商品URL、数量、配送先国、希望納期をもとに、調達可否、配送方法、見積条件を確認します。': {
-    en: 'YUKIMICHI supports product sourcing and purchasing consultation mainly for legitimately distributed products in Japan. Based on product URL, quantity, destination country, and deadline, we review sourcing availability, shipping method, and quotation conditions.',
-    zh: 'YUKIMICHI主要针对日本国内正规流通商品，提供商品采购和购买代理咨询。我们会根据商品URL、数量、配送国家和希望交期，确认采购可否、配送方式和报价条件。',
-    es: 'YUKIMICHI ofrece consulta de abastecimiento y compra principalmente para productos distribuidos legítimamente en Japón. Con URL, cantidad, país de destino y plazo, revisamos disponibilidad, método de envío y condiciones de cotización.',
+  'YUKIMICHIでは、日本国内の正規流通品を中心に、仕入れ可否調査や購入条件の調整に関する相談に対応します。商品URL、数量、配送先国、希望納期をもとに、仕入れ可否、配送方法、見積条件を確認します。': {
+    en: 'YUKIMICHI supports sourcing feasibility checks and purchase-condition coordination mainly for legitimately distributed products in Japan. Based on product URL, quantity, destination country, and deadline, we review sourcing feasibility, shipping method, and quotation conditions.',
+    zh: 'YUKIMICHI主要针对日本国内正规流通商品，提供采购可行性确认和购买条件协调咨询。我们会根据商品URL、数量、配送国家和希望交期，确认采购可行性、配送方式和报价条件。',
+    es: 'YUKIMICHI atiende consultas de viabilidad de abastecimiento y coordinación de condiciones de compra principalmente para productos distribuidos legítimamente en Japón. Con URL, cantidad, país de destino y plazo, revisamos viabilidad de abastecimiento, método de envío y condiciones de cotización.',
   },
   '小ロット、サンプル、少量発送の相談も可能です。商品内容や配送先国により対応可否が変わるため、まずは商品URL、数量、配送先国を添えてご相談ください。': {
     en: 'Small lots, samples, and low-volume shipments can be discussed. Availability depends on product details and destination country, so please contact us with the product URL, quantity, and destination.',
@@ -550,10 +550,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     zh: 'YUKIMICHI 是由 JUSTHEN CO., LTD. 运营的日本出口支持品牌。',
     es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN CO., LTD.',
   },
-  '日本国内の商品調達、国際配送、輸出関連書類の準備、 配送方法の比較、海外バイヤーとのやり取りまで、 海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。': {
-    en: 'We support product sourcing in Japan, international shipping, export document preparation, shipping method comparison, and communication with overseas buyers so eligible Japanese products can be traded with confidence.',
-    zh: '我们支持日本国内商品采购、国际配送、出口相关文件准备、配送方式比较以及与海外买家的沟通，帮助海外客户安心交易可处理的日本商品。',
-    es: 'Apoyamos el abastecimiento en Japón, envío internacional, preparación documental, comparación logística y comunicación con compradores extranjeros para que puedan operar productos japoneses elegibles con confianza.',
+  '日本商品の仕入れ可否調査、国際配送、輸出関連書類の準備、 配送方法の比較、海外バイヤーとのやり取りまで、 海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。': {
+    en: 'We support sourcing feasibility checks for Japanese products, international shipping, export document preparation, shipping method comparison, and communication with overseas buyers so eligible Japanese products can be traded with confidence.',
+    zh: '我们支持日本商品采购可行性确认、国际配送、出口相关文件准备、配送方式比较以及与海外买家的沟通，帮助海外客户安心交易可处理的日本商品。',
+    es: 'Apoyamos la revisión de viabilidad de abastecimiento de productos japoneses, envío internacional, preparación documental, comparación logística y comunicación con compradores extranjeros para que puedan operar productos japoneses elegibles con confianza.',
   },
   '私たちは単なる発送代行ではなく、日本と世界を信頼でつなぐ 長期的な国際貿易パートナーを目指しています。': {
     en: 'We aim to be a long-term international trade partner that connects Japan and the world through trust, not merely a shipping agent.',
@@ -566,10 +566,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Desde Hokkaido, cruzando mar y aire, conectamos el valor japonés con el mundo mediante procedimientos serios.',
   },
   '北海道・札幌を拠点に': { en: 'Based in Sapporo, Hokkaido', zh: '以北海道札幌为据点', es: 'Con base en Sapporo, Hokkaido' },
-  '日本国内の商品調達から海外発送まで、北海道・札幌を拠点に丁寧に対応します。': {
-    en: 'From domestic sourcing to overseas shipping, we provide careful support from Sapporo, Hokkaido.',
-    zh: '从日本国内采购到海外发货，我们以北海道札幌为据点细致对应。',
-    es: 'Desde el abastecimiento en Japón hasta el envío internacional, atendemos cuidadosamente desde Sapporo, Hokkaido.',
+  '日本商品の仕入れ可否調査から海外発送まで、北海道・札幌を拠点に丁寧に対応します。': {
+    en: 'From sourcing feasibility checks for Japanese products to overseas shipping, we provide careful support from Sapporo, Hokkaido.',
+    zh: '从日本商品采购可行性确认到海外发货，我们以北海道札幌为据点细致对应。',
+    es: 'Desde la revisión de viabilidad de abastecimiento de productos japoneses hasta el envío internacional, atendemos cuidadosamente desde Sapporo, Hokkaido.',
   },
   '海上輸送・航空輸送に対応': { en: 'Sea and Air Freight Support', zh: '支持海运与空运', es: 'Soporte para transporte marítimo y aéreo' },
   '海上貨物、航空貨物、EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、用途に応じた輸送方法を検討します。': {
@@ -578,10 +578,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Revisamos opciones como transporte marítimo, carga aérea, EMS, DHL, FedEx, UPS y Yamato International TA-Q-BIN según el caso.',
   },
   '輸出実務をサポート': { en: 'Practical Export Support', zh: '出口实务支持', es: 'Soporte práctico de exportación' },
-  '商品調達、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。': {
-    en: 'We support practical work required for overseas trade, including sourcing, document preparation, shipping comparison, and quotation preparation.',
-    zh: '我们支持海外交易所需的商品采购、文件准备、配送方式比较、报价制作等实务。',
-    es: 'Apoyamos tareas prácticas del comercio internacional: abastecimiento, documentos, comparación logística y cotizaciones.',
+  '仕入れ可否調査、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。': {
+    en: 'We support practical work required for overseas trade, including sourcing feasibility checks, document preparation, shipping comparison, and quotation preparation.',
+    zh: '我们支持海外交易所需的采购可行性确认、文件准备、配送方式比较、报价制作等实务。',
+    es: 'Apoyamos tareas prácticas del comercio internacional: viabilidad de abastecimiento, documentos, comparación logística y cotizaciones.',
   },
   '雪道は簡単ではありません。それでも一歩ずつ正しい道を選べば、目的地へ近づけます。 輸出も同じです。商品調達、書類、配送、通関確認を丁寧に積み重ね、海外から見て信頼できる日本の取引体験を整えます。': {
     en: 'A snow path is not easy, but choosing the right path step by step brings you closer to the destination. Export works the same way. We carefully organize sourcing, documents, shipping, and customs checks to create a trustworthy Japanese trade experience for overseas buyers.',
@@ -697,10 +697,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Inquiry Support': { en: 'Inquiry Support', zh: '咨询支持', es: 'Soporte de consultas' },
   'Quote Request': { en: 'Quote Request', zh: '报价申请', es: 'Solicitud de cotización' },
   'Terms of Transaction': { en: 'Terms of Transaction', zh: '交易条款', es: 'Condiciones de transacción' },
-  'YUKIMICHIへ寄せられる、日本商品の調達、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
-    en: 'Frequently asked questions about Japanese product sourcing, international shipping, air freight, sea freight, quotes, duties, and restricted or prohibited items.',
-    zh: '这里整理了关于日本商品采购、国际配送、空运、海运、报价、关税以及限制和禁止物品的常见问题。',
-    es: 'Preguntas frecuentes sobre abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
+  'YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
+    en: 'Frequently asked questions about Japanese product sourcing feasibility checks, international shipping, air freight, sea freight, quotes, duties, and restricted or prohibited items.',
+    zh: '这里整理了关于日本商品采购可行性确认、国际配送、空运、海运、报价、关税以及限制和禁止物品的常见问题。',
+    es: 'Preguntas frecuentes sobre viabilidad de abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
   },
   '配送サービスを見る': { en: 'View Shipping Services', zh: '查看配送服务', es: 'Ver servicios de envío' },
   '輸送方法を確認する': { en: 'Review Shipping Methods', zh: '确认运输方式', es: 'Revisar métodos de transporte' },
@@ -715,10 +715,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   '配送事故の条件を見る': { en: 'View Damage and Loss Terms', zh: '查看运输事故条件', es: 'Ver condiciones por daños o pérdida' },
   'サービス内容を見る': { en: 'View Service Details', zh: '查看服务内容', es: 'Ver detalles del servicio' },
   '見積に必要な情報を見る': { en: 'View Required Quote Information', zh: '查看报价所需信息', es: 'Ver información necesaria para cotizar' },
-  '商品調達、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。': {
-    en: 'Questions are organized by sourcing, shipping methods, pricing, duties, regulatory checks, transaction terms, and overseas buyer support.',
-    zh: '问题按采购、配送方式、费用、关税、法规确认、交易条件和海外买家支持进行整理。',
-    es: 'Las preguntas se organizan por abastecimiento, métodos de envío, precios, aranceles, revisión normativa, condiciones y soporte a compradores internacionales.',
+  '仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。': {
+    en: 'Questions are organized by sourcing feasibility checks, shipping methods, pricing, duties, regulatory checks, transaction terms, and overseas buyer support.',
+    zh: '问题按采购可行性确认、配送方式、费用、关税、法规确认、交易条件和海外买家支持进行整理。',
+    es: 'Las preguntas se organizan por viabilidad de abastecimiento, métodos de envío, precios, aranceles, revisión normativa, condiciones y soporte a compradores internacionales.',
   },
   '見積、問い合わせ、サービス内容、料金、禁止・制限品目、取引条件を各ページで確認できます。': {
     en: 'You can review quote requests, inquiries, services, pricing, restricted items, and transaction terms on each page.',
@@ -1010,7 +1010,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   },
   'お問い合わせへの回答': { en: 'Responding to inquiries', zh: '回答咨询', es: 'Responder consultas' },
   '見積作成': { en: 'Preparing quotations', zh: '制作报价', es: 'Preparar cotizaciones' },
-  '商品調達可否の確認': { en: 'Checking sourcing availability', zh: '确认商品采购可否', es: 'Confirmar disponibilidad de abastecimiento' },
+  '商品の仕入れ可否調査': { en: 'Product sourcing feasibility checks', zh: '商品采购可行性确认', es: 'Revisión de viabilidad de abastecimiento' },
   '配送方法・送料・納期の確認': { en: 'Checking shipping method, freight, and lead time', zh: '确认配送方式、运费和交期', es: 'Confirmar método, costo y plazo de envío' },
   '輸出入・配送会社引受条件の確認': { en: 'Checking import/export and carrier acceptance conditions', zh: '确认进出口及承运商受理条件', es: 'Confirmar condiciones de importación/exportación y transportista' },
   '取引条件の確認': { en: 'Confirming transaction terms', zh: '确认交易条件', es: 'Confirmar condiciones de transacción' },
