@@ -1,4 +1,3 @@
-import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
 
 const individualNotes = [
@@ -30,29 +29,6 @@ const businessNotes = [
     en: "We compare international courier, air freight, and sea freight options and propose a method suited to the quantity, timeline, and product category.",
   },
 ]
-
-const importChecklist = [
-  "Is the product allowed in your country?",
-  "Are import permits or labels required?",
-  "Are duties, VAT, GST, or local taxes expected?",
-  "Is the shipment for personal or business import?",
-  "Which method is suitable: courier, air, or sea?",
-  "Are invoice and packing documents required?",
-]
-
-function ArrowRight({ size = 14 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path
-        d="M2 7h10M8 3l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 export default function ImportGuideSection() {
   return (
@@ -117,37 +93,6 @@ export default function ImportGuideSection() {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <div className="import-check-panel">
-          <div>
-            <span className="guide-panel-kicker">Import Review Checklist</span>
-            <h3>Before Requesting Support</h3>
-          </div>
-          <ol>
-            {importChecklist.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ol>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <div className="import-notice">
-          <p>
-            Import regulations vary by country and product category. YUKIMICHI provides export support
-            from Japan, but final import approval is determined by the destination country&apos;s customs
-            and relevant authorities.
-          </p>
-          <p>
-            輸入規制は国・商品カテゴリにより異なります。YUKIMICHIは日本側の輸出支援を行いますが、
-            最終的な輸入可否は仕向国の税関および関係当局の判断によります。
-          </p>
-          <Link href="/quote" className="btn-primary">
-            Request Import Review <ArrowRight />
-          </Link>
-        </div>
-      </ScrollReveal>
-
       <style>{`
         .import-guide-section {
           display: grid;
@@ -191,8 +136,7 @@ export default function ImportGuideSection() {
           text-transform: uppercase;
         }
 
-        .buyer-guide-panel h3,
-        .import-check-panel h3 {
+        .buyer-guide-panel h3 {
           color: var(--washi);
           font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
           font-size: clamp(28px, 3vw, 40px);
@@ -239,83 +183,9 @@ export default function ImportGuideSection() {
           line-height: 1.8;
         }
 
-        .import-check-panel {
-          border: 1px solid rgba(201,168,76,0.16);
-          background: rgba(7,17,31,0.46);
-          display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-          gap: clamp(24px, 5vw, 64px);
-          padding: clamp(24px, 4vw, 38px);
-        }
-
-        .import-check-panel ol {
-          counter-reset: import-check;
-          display: grid;
-          gap: 12px;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .import-check-panel li {
-          align-items: center;
-          border-bottom: 1px solid rgba(201,168,76,0.1);
-          color: var(--washi-dim);
-          display: grid;
-          font-size: 13px;
-          gap: 12px;
-          grid-template-columns: 34px minmax(0, 1fr);
-          letter-spacing: 0.03em;
-          line-height: 1.6;
-          padding: 0 0 12px;
-        }
-
-        .import-check-panel li::before {
-          color: var(--gold);
-          content: counter(import-check, decimal-leading-zero);
-          counter-increment: import-check;
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 22px;
-          line-height: 1;
-        }
-
-        .import-notice {
-          border-left: 1px solid rgba(201,168,76,0.35);
-          display: grid;
-          gap: 14px;
-          max-width: 980px;
-          padding-left: clamp(18px, 3vw, 28px);
-        }
-
-        .import-notice p {
-          color: var(--washi-dim);
-          font-size: 12.5px;
-          letter-spacing: 0.04em;
-          line-height: 2;
-          margin: 0;
-        }
-
-        .import-notice .btn-primary {
-          justify-self: start;
-          margin-top: 8px;
-        }
-
         @media (max-width: 900px) {
-          .buyer-guide-grid,
-          .import-check-panel {
+          .buyer-guide-grid {
             grid-template-columns: 1fr;
-          }
-        }
-
-        @media (max-width: 520px) {
-          .import-check-panel li {
-            align-items: start;
-            grid-template-columns: 28px minmax(0, 1fr);
-          }
-
-          .import-notice .btn-primary {
-            padding-left: 24px;
-            padding-right: 24px;
           }
         }
       `}</style>
