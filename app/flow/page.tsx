@@ -75,8 +75,8 @@ const responsibilityCards = [
   },
   {
     term: 'Terms Are Confirmed Per Case',
-    ja: '法人取引では、FCA 日本国内指定倉庫渡し（Incoterms® 2020）を個別に設定できる場合があります。指定場所は案件ごとに確認します。DDP条件は、輸入国側の通関・関税・税金対応を含むため、原則として標準対応外です。必要な場合は、案件ごとに対応可否を確認します。',
-    en: 'For B2B projects, FCA designated warehouse in Japan – Incoterms® 2020 may be arranged individually. The named place will be confirmed for each project. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
+    ja: 'DDP条件は、輸入国側の通関・関税・税金対応を含むため、原則として標準対応外です。必要な場合は、案件ごとに対応可否を確認します。',
+    en: 'DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
   },
 ]
 
