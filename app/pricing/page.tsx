@@ -745,37 +745,56 @@ export default function PricingPage() {
           display: grid;
           grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
           gap: clamp(28px, 5vw, 72px);
-          background:
-            linear-gradient(135deg, rgba(201,168,76,0.08), transparent 55%),
-            var(--washi);
-          border-top: 1px solid rgba(201,168,76,0.24);
-          border-bottom: 1px solid rgba(201,168,76,0.24);
+          align-items: start;
+          background: #f3efe4;
+          border-top: 1px solid rgba(185,145,70,0.24);
+          border-bottom: 1px solid rgba(185,145,70,0.24);
+        }
+
+        .pricing-payment > div:first-child {
+          max-width: 460px;
+          padding-top: 8px;
+        }
+
+        .pricing-payment .section-label {
+          margin-bottom: 20px;
+        }
+
+        .pricing-payment .section-label-line {
+          background: rgba(185,145,70,0.72);
+        }
+
+        .pricing-payment .section-label-text {
+          color: #8b6c32;
         }
 
         .pricing-payment h2 {
-          color: var(--navy-deep);
+          color: #162233;
+          margin-bottom: 20px;
         }
 
         .pricing-payment > div:first-child > p {
-          color: rgba(7,17,31,0.74);
+          color: #243447;
           font-size: 14px;
+          letter-spacing: 0.025em;
           line-height: 1.9;
         }
 
         .payment-card {
-          border: 1px solid rgba(201,168,76,0.42);
-          background: rgba(255,255,255,0.78);
-          box-shadow: 0 18px 44px rgba(7,17,31,0.08);
+          border: 1px solid rgba(185,145,70,0.3);
+          border-radius: 2px;
+          background: #fffcf5;
+          box-shadow: 0 20px 60px rgba(15,23,42,0.06);
           padding: clamp(26px, 4vw, 42px);
         }
 
         .payment-card__item {
-          border-bottom: 1px solid rgba(7,17,31,0.1);
-          padding: 0 0 14px;
+          border-bottom: 1px solid rgba(22,34,51,0.1);
+          padding: 0 0 18px;
         }
 
         .payment-card__item + .payment-card__item {
-          margin-top: 18px;
+          margin-top: 20px;
         }
 
         .payment-card__item:last-child {
@@ -784,15 +803,22 @@ export default function PricingPage() {
         }
 
         .payment-card p {
-          color: var(--navy-deep);
-          font-size: 14px;
+          color: #162233;
           line-height: 1.9;
           padding: 0;
         }
 
-        .payment-card p + p {
-          color: rgba(7,17,31,0.68);
-          margin-top: 6px;
+        .payment-card p[lang='ja'] {
+          font-size: 14.5px;
+          font-weight: 500;
+          letter-spacing: 0.025em;
+        }
+
+        .payment-card p[lang='en'] {
+          color: #5f6b78;
+          font-size: 13.5px;
+          letter-spacing: 0.015em;
+          margin-top: 7px;
         }
 
         .pricing-important {
