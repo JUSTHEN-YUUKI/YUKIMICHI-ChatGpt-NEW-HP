@@ -110,6 +110,10 @@ const paymentItems = [
   },
   { ja: '支払方法：T/T送金（電信送金）', en: 'Payment by T/T remittance.' },
   {
+    ja: '海外からのお支払いは、Wise経由の日本円送金を推奨しています。代替方法として、三井住友銀行の当社指定法人口座への直接T/T送金にも対応可能です。正式な送金先情報は、正式見積り・請求時に個別にご案内します。',
+    en: 'For overseas payments, we recommend JPY transfer via Wise. As an alternative, direct T/T remittance to our designated SMBC corporate bank account is also available. Detailed payment instructions will be provided individually at the time of formal quotation and invoice issuance.',
+  },
+  {
     ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
   },
@@ -192,6 +196,27 @@ export default function PricingPage() {
               </div>
               {plan.note && <p className="pricing-card-note">{plan.note}</p>}
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="pricing-payment">
+        <div>
+          <div className="section-label">
+            <div className="section-label-line" />
+            <span className="section-label-text">Payment Method / お支払い方法</span>
+          </div>
+          <h2>Payment by T/T Remittance</h2>
+          <p lang="ja">
+            入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
+          </p>
+        </div>
+        <div className="payment-card">
+          {paymentItems.map((item) => (
+            <div className="payment-card__item" key={item.ja}>
+              <p lang="ja">{item.ja}</p>
+              <p lang="en">{item.en}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -305,27 +330,6 @@ export default function PricingPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="pricing-payment">
-        <div>
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Payment Method / お支払い方法</span>
-          </div>
-          <h2>Payment by T/T Remittance</h2>
-          <p lang="ja">
-            入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
-          </p>
-        </div>
-        <div className="payment-card">
-          {paymentItems.map((item) => (
-            <div className="payment-card__item" key={item.ja}>
-              <p lang="ja">{item.ja}</p>
-              <p lang="en">{item.en}</p>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -742,20 +746,31 @@ export default function PricingPage() {
           grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
           gap: clamp(28px, 5vw, 72px);
           background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 50%),
-            var(--navy-deep);
-          border-top: 1px solid rgba(201,168,76,0.08);
-          border-bottom: 1px solid rgba(201,168,76,0.08);
+            linear-gradient(135deg, rgba(201,168,76,0.08), transparent 55%),
+            var(--washi);
+          border-top: 1px solid rgba(201,168,76,0.24);
+          border-bottom: 1px solid rgba(201,168,76,0.24);
+        }
+
+        .pricing-payment h2 {
+          color: var(--navy-deep);
+        }
+
+        .pricing-payment > div:first-child > p {
+          color: rgba(7,17,31,0.74);
+          font-size: 14px;
+          line-height: 1.9;
         }
 
         .payment-card {
-          border: 1px solid rgba(201,168,76,0.22);
-          background: rgba(7,17,31,0.68);
+          border: 1px solid rgba(201,168,76,0.42);
+          background: rgba(255,255,255,0.78);
+          box-shadow: 0 18px 44px rgba(7,17,31,0.08);
           padding: clamp(26px, 4vw, 42px);
         }
 
         .payment-card__item {
-          border-bottom: 1px solid rgba(201,168,76,0.1);
+          border-bottom: 1px solid rgba(7,17,31,0.1);
           padding: 0 0 14px;
         }
 
@@ -769,14 +784,14 @@ export default function PricingPage() {
         }
 
         .payment-card p {
-          color: var(--washi);
+          color: var(--navy-deep);
           font-size: 14px;
           line-height: 1.9;
           padding: 0;
         }
 
         .payment-card p + p {
-          color: var(--washi-dim);
+          color: rgba(7,17,31,0.68);
           margin-top: 6px;
         }
 
@@ -884,6 +899,16 @@ export default function PricingPage() {
         }
 
         @media (max-width: 680px) {
+          .pricing-payment {
+            gap: 24px;
+            padding-top: 64px;
+            padding-bottom: 64px;
+          }
+
+          .payment-card {
+            padding: 24px 20px;
+          }
+
           .pricing-grid,
           .fee-basis-grid,
           .excluded-cost-list {
