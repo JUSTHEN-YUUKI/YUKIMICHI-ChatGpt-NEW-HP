@@ -110,21 +110,21 @@ const featuredIncoterms = [
   {
     code: 'FCA',
     name: 'Free Carrier',
-    badge: 'Japan-side Arrangement / 日本側手配',
+    badge: '日本側手配 / Japan-side Arrangement',
     en: 'FCA is one practical trade term for Japan-side export arrangements. Based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan, YUKIMICHI can support supplier checks, packing preparation, Invoice and Packing List organization, and coordination with carriers or freight forwarders on a case-by-case basis.',
     ja: 'FCAは、日本側の輸出手配で検討できる取引条件の一つです。日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準に、YUKIMICHIでは仕入先確認、梱包準備、Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
   },
   {
     code: 'EXW',
     name: 'Ex Works',
-    badge: 'Case-by-case / 個別確認',
+    badge: '個別確認 / Case-by-case',
     en: 'EXW means that goods are made available at the supplier’s, manufacturer’s, retailer’s, or warehouse location. YUKIMICHI can support supplier communication, handover schedule confirmation, product condition checks, and domestic pickup coordination on a case-by-case basis. However, for international shipments, export clearance, domestic pickup, international transport arrangements, and destination-side regulatory checks may become complicated for the buyer. Depending on the project, FCA may be a more practical option.',
     ja: 'EXWは、メーカー、卸、販売店、倉庫などで貨物を引き渡す取引条件です。YUKIMICHIでは、仕入先との連絡、引き渡し可能日の確認、商品状態の確認、国内引取の調整を案件ごとに支援します。ただし、海外向け輸出では、輸出通関、国内輸送、国際輸送手配、輸入国側の規制確認などが買主側に集中しやすいため、案件内容によってはFCAの方が実務上適している場合があります。',
   },
   {
     code: 'FOB',
     name: 'Free On Board',
-    badge: 'Sea Freight / 海上輸送向け',
+    badge: '海上輸送向け / Sea Freight',
     en: 'FOB is a trade term used for sea freight. The cost and risk allocation is based on the point at which the goods are loaded on board the vessel at the named port of shipment, such as Tokyo Port, Osaka Port, or Yokohama Port. For sea LCL/FCL projects, YUKIMICHI can support supplier checks, coordination with port warehouses or freight forwarders, and export document organization on a case-by-case basis. For air cargo, EMS, DHL, FedEx, UPS, and other courier shipments, FCA or other suitable terms should be considered instead of FOB.',
     ja: 'FOBは、海上輸送で使用される取引条件です。東京港、大阪港、横浜港などの指定船積港で、本船上に貨物が積み込まれた時点を基準に、費用負担とリスク移転の範囲を整理します。YUKIMICHIでは、海上LCL/FCL案件において、仕入先確認、港湾倉庫・フォワーダーとの確認、輸出書類の整理などを案件ごとに支援します。なお、航空貨物、EMS、DHL、FedEx、UPSなどの国際エクスプレスでは、FOBではなくFCA等の条件を確認します。',
   },
@@ -263,8 +263,8 @@ export default function FlowPage() {
                 <h3>
                   {term.code} <small>/ {term.name}</small>
                 </h3>
-                <p lang="en">{term.en}</p>
                 <p>{term.ja}</p>
+                <p lang="en">{term.en}</p>
               </article>
             ))}
           </div>
@@ -275,11 +275,11 @@ export default function FlowPage() {
               <h3>取引条件は案件ごとに確認</h3>
             </div>
             <div>
-              <p lang="en">
-                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms rule will be confirmed clearly in the quotation, Invoice, Packing List, contract, or related documents before proceeding.
-              </p>
               <p>
                 取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なインコタームズ条件は、見積書、Invoice、Packing List、契約書等で明確に確認したうえで進行します。
+              </p>
+              <p lang="en">
+                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms rule will be confirmed clearly in the quotation, Invoice, Packing List, contract, or related documents before proceeding.
               </p>
             </div>
           </aside>
