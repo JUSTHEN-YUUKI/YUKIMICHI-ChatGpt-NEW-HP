@@ -6,6 +6,7 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: 'Contact | YUKIMICHI',
   description: 'YUKIMICHIへのお問い合わせ。日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。',
+  alternates: { canonical: '/contact' },
 }
 
 const inquiryMailto =
@@ -54,7 +55,7 @@ export default function ContactPage() {
           <br />
           <em><TranslatedText id="pages.contact.heroSubtitle" fallback="Contact YUKIMICHI" /></em>
         </h1>
-        <p className="section-body contact-lead">
+        <p className="section-body contact-lead" lang="ja">
           <TranslatedText
             id="pages.contact.heroLead"
             fallback="まずは分かる範囲でお問い合わせください。すべての情報が揃っていなくても送信できます。商品名または商品URL、配送先国、ご相談内容をお送りいただければ、確認に必要な追加情報は当社よりご案内します。"
@@ -78,7 +79,7 @@ export default function ContactPage() {
               <summary>
                 <TranslatedText id="pages.contact.helpfulTitle" fallback="より正確な確認のために、分かる範囲でご用意いただける情報" />
               </summary>
-              <p>
+              <p lang="ja">
                 <TranslatedText id="pages.contact.helpfulLead" fallback="すべて必須ではありません。現在分かる範囲でご用意ください。" />
               </p>
               <ol className="contact-checklist">
@@ -105,7 +106,7 @@ export default function ContactPage() {
             <span className="section-label-text">Inquiry Details</span>
           </div>
           <h2><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
-          <p className="contact-panel-lead">
+          <p className="contact-panel-lead" lang="ja">
             <TranslatedText
               id="pages.contact.formLead"
               fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URLは任意です。仕入れ可否調査、国際配送、取扱可否確認、メーカー確認などの相談内容をMessage欄に記載できます。"

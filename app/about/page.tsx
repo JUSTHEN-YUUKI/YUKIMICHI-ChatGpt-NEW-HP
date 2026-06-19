@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
   title: '会社概要 | YUKIMICHI',
   description:
     'YUKIMICHIを運営する株式会社ジャッセン / JUSTHEN CO., LTD.の会社概要、代表者情報、本店所在地、札幌営業拠点、輸出調整サービスの責任範囲。',
+  alternates: { canonical: '/about' },
 }
 
 const companyProfile = [
   { ja: '会社名', en: 'Company Name', valueJa: '株式会社ジャッセン', valueEn: 'JUSTHEN CO., LTD.' },
-  { ja: '英文表記', en: 'English Name', valueJa: 'JUSTHEN CO., LTD.', valueEn: 'JUSTHEN CO., LTD.' },
   { ja: 'サービスブランド', en: 'Service Brand', valueJa: 'YUKIMICHI', valueEn: 'YUKIMICHI' },
   { ja: '代表', en: 'Representative Director', valueJa: '林 祐樹', valueEn: 'Yuuki Hayashi' },
   { ja: '設立', en: 'Established', valueJa: '2016年2月', valueEn: 'February 2016' },
@@ -55,7 +56,7 @@ const nonGuaranteeItems = [
 ]
 
 const supportAreasEn = [
-  'Product availability, pricing, and sourcing feasibility checks',
+  'Product availability, pricing, and sourcing checks',
   'Communication and negotiation with Japanese manufacturers, wholesalers, and retailers',
   'Review and organization of Invoice, Packing List, SDS, ingredient sheets, and related documents',
   'Comparison of EMS, DHL, FedEx, UPS, Yamato International TA-Q-BIN, air freight, and sea freight',
@@ -95,7 +96,7 @@ export default function AboutPage() {
           <em>YUKIMICHI.</em>
         </h1>
         <div className="about-lead-grid">
-          <p>
+          <p lang="ja">
             株式会社ジャッセンは、YUKIMICHIブランドを通じて、日本国内のメーカー、卸、販売店などに対する仕入れ可否調査と取引調整を行い、海外バイヤー向けに日本側の輸出調整・手配支援を提供しています。
           </p>
           <p lang="en">
@@ -111,11 +112,11 @@ export default function AboutPage() {
             <span className="section-label-text">Company Overview</span>
           </div>
           <h2>会社概要</h2>
-          <p>
+          <p lang="ja">
             商品の在庫・価格・取引可否を含む仕入れ可否調査、輸出関連書類、配送方法、規制確認などを案件ごとに整理し、透明性のある取引を重視しています。
           </p>
           <p lang="en">
-            We support sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks on a case-by-case basis.
+            We support product availability and sourcing checks, supplier communication, export document preparation, shipping method comparison, and regulatory review on a case-by-case basis.
           </p>
         </div>
 
@@ -139,14 +140,20 @@ export default function AboutPage() {
         </div>
 
         <div className="location-note">
-          <p>YUKIMICHIの輸出調整業務は、札幌営業拠点を中心に対応しています。</p>
+          <p lang="ja">YUKIMICHIの輸出調整業務は、札幌営業拠点を中心に対応しています。</p>
           <p lang="en">YUKIMICHI’s export coordination services are mainly handled through the Sapporo business office.</p>
         </div>
       </section>
 
       <section className="representative-section">
         <div className="representative-photo">
-          <img src="/profile.png" alt="Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD." />
+          <Image
+            src="/profile.png"
+            alt="Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD."
+            width={1377}
+            height={672}
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
         </div>
         <div>
           <div className="section-label">
@@ -154,24 +161,24 @@ export default function AboutPage() {
             <span className="section-label-text">Representative</span>
           </div>
           <h2>代表者について</h2>
-          <p>
+          <p lang="ja">
             代表の林祐樹は、会社員時代に成田空港、横浜港、品川港に関連する国際物流業務に携わり、輸出入書類、貨物管理、港湾・空港関連の実務を経験してきました。
           </p>
-          <p>
+          <p lang="ja">
             YUKIMICHIでは、その実務経験をもとに、海外バイヤーが日本商品を安心して検討できるよう、商品の仕入れ可否調査、仕入先との連絡、輸出書類の整理、配送方法の比較、規制確認を丁寧に支援しています。
           </p>
-          <p>
+          <p lang="ja">
             無理な輸出、虚偽申告、規制逃れを前提とした取引は行わず、法令遵守と透明性を重視しています。
           </p>
           <div className="representative-en">
             <h3>About the Representative</h3>
-            <p>
+            <p lang="en">
               Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD., has practical experience in international logistics operations related to Narita Airport, Yokohama Port, and Shinagawa Port.
             </p>
-            <p>
-              Based on this background, YUKIMICHI supports overseas buyers by coordinating sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks from the Japan side.
+            <p lang="en">
+              Based on this background, YUKIMICHI supports overseas buyers with product availability checks, supplier communication, export document preparation, shipping method comparison, and regulatory review from the Japan side.
             </p>
-            <p>
+            <p lang="en">
               We do not support false declarations, regulatory avoidance, or transactions involving counterfeit or infringing goods. Compliance and transparency are central to our service.
             </p>
           </div>
@@ -185,7 +192,7 @@ export default function AboutPage() {
             <span className="section-label-text">Scope and Responsibility</span>
           </div>
           <h2>YUKIMICHIのサービス範囲</h2>
-          <p>
+          <p lang="ja">
             YUKIMICHIは、国際物流会社・通関業者そのものではありません。日本国内のメーカー、卸、販売店などとの確認・調整、輸出関連書類の整理、配送方法の比較、外部フォワーダー・通関業者との連携を支援する、日本側の輸出調整サービスです。
           </p>
           <p lang="en">

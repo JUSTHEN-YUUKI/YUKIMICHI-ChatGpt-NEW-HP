@@ -9,7 +9,7 @@ const footerLinks = [
   { href: '/quote', label: '見積依頼', en: 'Request a Quote' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
   { href: '/contact', label: 'お問い合わせ', en: 'Free Consultation' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms' },
   { href: '/privacy', label: 'プライバシーポリシー', en: 'Privacy Policy' },
 ]

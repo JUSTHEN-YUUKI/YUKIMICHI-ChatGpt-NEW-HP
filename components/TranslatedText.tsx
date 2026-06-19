@@ -15,7 +15,7 @@ export function TranslatedText({ id, fallback = '', className, style }: Translat
   const { language } = useLanguage()
 
   return (
-    <span className={className} style={style}>
+    <span className={className} lang={language} style={style}>
       {translateText(language, id, fallback)}
     </span>
   )
@@ -34,7 +34,7 @@ export function TranslatedList({ id, fallback = [], className }: TranslatedListP
   return (
     <>
       {items.map((item) => (
-        <li className={className} key={item}>
+        <li className={className} key={item} lang={language}>
           {item}
         </li>
       ))}

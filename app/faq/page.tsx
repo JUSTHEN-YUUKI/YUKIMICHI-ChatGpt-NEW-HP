@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'FAQ | YUKIMICHI',
   description:
     'YUKIMICHIのFAQ。日本商品の仕入れ可否調査、海外発送、EMS・DHL・FedEx・UPS、航空貨物、海上輸送、関税・VAT/GST、禁止・制限品目、見積依頼について。',
+  alternates: { canonical: '/faq' },
 }
 
 const faqCategories = [
@@ -31,7 +32,7 @@ const faqCategories = [
       {
         q: 'どのような商品に対応していますか？',
         a: '日本国内の一般消費財、サンプル品、法人向け商品などを中心に相談可能です。ただし、医薬品、食品、化粧品、電池、危険品、中古品、ブランド品などは、商品内容・配送先国・配送会社条件により事前確認が必要です。',
-        links: [{ href: '/restricted', label: '禁止・制限品目を確認する' }],
+        links: [{ href: '/restricted-items', label: '禁止・制限品目を確認する' }],
       },
     ],
   },
@@ -137,7 +138,7 @@ const faqCategories = [
       {
         q: 'Can you handle cosmetics, food, batteries, medical products?',
         a: 'A pre-check is required. Depending on ingredients, labels, quantity, use, destination country, and carrier rules, some items may be restricted, unavailable, or require additional documents such as SDS/MSDS.',
-        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
+        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
       },
       {
         q: 'Can you prepare Commercial Invoice and Packing List?',
@@ -162,28 +163,38 @@ const faqCategories = [
     en: 'Compliance',
     items: [
       {
-        q: 'どのような商品は事前確認が必要ですか？ / What types of products require prior confirmation?',
-        a: '化粧品、食品、健康関連商品、医薬品・医薬部外品、電池、スプレー、液体、アルコールを含む商品、中古品、ブランド品、動植物由来素材、危険品に該当する可能性がある商品は、輸出可否、配送会社の引受可否、輸入国側の規制確認が必要です。 Cosmetics, food products, health-related products, pharmaceuticals, quasi-drugs, batteries, sprays, liquids, products containing alcohol, secondhand goods, branded goods, plant- or animal-derived materials, and items that may fall under dangerous goods require prior checks for export feasibility, carrier acceptance, and import-country regulations.',
-        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
+        q: 'どのような商品は事前確認が必要ですか？',
+        qEn: 'What types of products require prior confirmation?',
+        a: '化粧品、食品、健康関連商品、医薬品・医薬部外品、電池、スプレー、液体、アルコールを含む商品、中古品、ブランド品、動植物由来素材、危険品に該当する可能性がある商品は、輸出・配送の取扱可否、配送会社の引受可否、輸入国側の規制確認が必要です。',
+        aEn: 'Cosmetics, food and health-related products, pharmaceuticals, quasi-drugs, batteries, sprays, liquids, alcohol-containing products, secondhand or branded goods, animal- or plant-derived materials, and potential dangerous goods require prior review for export and shipping feasibility, carrier acceptance, and destination-country requirements.',
+        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
       },
       {
-        q: '対応できない取引はありますか？ / Are there any transactions YUKIMICHI cannot support?',
-        a: '模倣品、知的財産権侵害品、虚偽申告を前提とする取引、法令や税関規則の回避を目的とする取引、輸入国で禁止されている商品の取引には対応できません。 We cannot support transactions involving counterfeit goods, intellectual property infringement, false declarations, attempts to avoid laws or customs regulations, or products prohibited in the importing country.',
+        q: '対応できない取引はありますか？',
+        qEn: 'Are there any transactions YUKIMICHI cannot support?',
+        a: '模倣品、海賊版、知的財産権侵害品、虚偽申告・過少申告を前提とする取引、法令や税関規則の回避を目的とする取引、輸入国で禁止されている商品の取引には対応できません。',
+        aEn: 'We cannot support transactions involving counterfeit or pirated goods, intellectual property infringement, false or undervalued declarations, attempts to avoid laws or customs rules, or products prohibited in the destination country.',
         links: [{ href: '/terms', label: '取引条件を見る' }],
       },
       {
-        q: 'YUKIMICHIは通関許可を保証できますか？ / Can YUKIMICHI guarantee customs clearance?',
-        a: 'いいえ。YUKIMICHIは日本側の確認・調整・書類整理を支援しますが、輸入国側の最終的な通関可否、追加検査、関税・輸入税、許認可、配送会社の最終判断を保証するものではありません。 No. YUKIMICHI supports Japan-side coordination, confirmation, and document preparation, but cannot guarantee final customs clearance, additional inspections, duties or import taxes, permits, approvals, or carrier decisions in the importing country.',
+        q: 'YUKIMICHIは通関許可を保証できますか？',
+        qEn: 'Can YUKIMICHI guarantee customs clearance?',
+        a: 'いいえ。YUKIMICHIは日本側の確認・調整・書類整理を支援しますが、輸入国側の最終的な通関可否、追加検査、関税・輸入税、許認可、配送会社の最終判断を保証するものではありません。',
+        aEn: 'No. YUKIMICHI supports Japan-side coordination, checks, and document preparation, but does not guarantee final customs clearance, inspections, duties or import taxes, permits, approvals, or carrier decisions in the destination country.',
         links: [{ href: '/services', label: 'サービス範囲を見る' }],
       },
       {
-        q: 'メーカーや卸の連絡先を教えてもらえますか？ / Can you disclose supplier or wholesaler contact details?',
-        a: '原則として、確認先となるメーカー、卸、販売店、外部パートナーの直接連絡先は開示していません。YUKIMICHIが日本側の窓口として、必要な確認・調整を行います。 In principle, we do not disclose direct contact details of manufacturers, wholesalers, retailers, or external partners. YUKIMICHI acts as the Japan-side contact point and coordinates the necessary confirmations.',
+        q: 'メーカーや卸の連絡先を教えてもらえますか？',
+        qEn: 'Can you disclose supplier or wholesaler contact details?',
+        a: '原則として、確認先となるメーカー、卸、販売店、外部パートナーの直接連絡先は開示していません。YUKIMICHIが日本側の窓口として、必要な確認・調整を行います。',
+        aEn: 'In principle, we do not disclose direct contact details for manufacturers, wholesalers, retailers, or external partners. YUKIMICHI acts as the Japan-side contact and coordinates the necessary checks and communication.',
         links: [{ href: '/about', label: '会社概要を見る' }],
       },
       {
-        q: '税関で止まった場合や返送になった場合はどうなりますか？ / What happens if a shipment is held by customs or returned?',
-        a: '税関、配送会社、関係当局の判断により、追加確認、検査、遅延、返送、没収、追加費用が発生する場合があります。YUKIMICHIは可能な範囲で情報整理と対応支援を行いますが、当局や配送会社の最終判断を変更・保証することはできません。 Customs, carriers, or relevant authorities may require additional confirmation, inspection, delay the shipment, return it, seize it, or impose additional costs. YUKIMICHI will support communication and information organization where possible, but cannot change or guarantee decisions made by authorities or carriers.',
+        q: '税関で止まった場合や返送になった場合はどうなりますか？',
+        qEn: 'What happens if a shipment is held by customs or returned?',
+        a: '税関、配送会社、関係当局の判断により、追加確認、検査、遅延、返送、没収、追加費用が発生する場合があります。YUKIMICHIは可能な範囲で情報整理と対応支援を行いますが、当局や配送会社の最終判断を変更・保証することはできません。',
+        aEn: 'Customs, carriers, or relevant authorities may require additional checks or inspections, delay or return a shipment, seize goods, or impose additional costs. YUKIMICHI can support communication and information organization but cannot change or guarantee those decisions.',
         links: [{ href: '/terms', label: '取引条件を見る' }],
       },
     ],
@@ -196,12 +207,12 @@ const faqCategories = [
       {
         q: '輸出できない商品はありますか？',
         a: '商品によっては、日本側の輸出規制、輸入国側の規制、配送会社の引受条件により取り扱いできない場合があります。取扱可否は商品内容、数量、用途、配送先国により確認します。',
-        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
+        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
       },
       {
         q: '医薬品、食品、化粧品は取扱確認が必要ですか？',
         a: '国、成分、用途、数量、販売目的か個人使用かにより規制が異なります。医薬品、食品、化粧品は事前確認が必要であり、商品条件により発送できない場合があります。',
-        links: [{ href: '/restricted', label: '規制品の確認事項を見る' }],
+        links: [{ href: '/restricted-items', label: '規制品の確認事項を見る' }],
       },
       {
         q: '日焼け止めや香水、スプレー商品は事前確認が必要ですか？',
@@ -214,7 +225,7 @@ const faqCategories = [
       {
         q: '中古品やブランド品は扱えますか？',
         a: '商品状態、真贋、証明書、知的財産権、相手国規制の観点から確認が必要です。内容によっては対応できない場合があります。',
-        links: [{ href: '/restricted', label: '中古品・ブランド品の注意点を見る' }],
+        links: [{ href: '/restricted-items', label: '中古品・ブランド品の注意点を見る' }],
       },
     ],
   },
@@ -283,7 +294,7 @@ const relatedLinks = [
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
   { href: '/services', label: 'サービス', en: 'Services' },
   { href: '/pricing', label: '料金表', en: 'Pricing' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
 ]
 
@@ -303,10 +314,10 @@ export default function FAQPage() {
     '@type': 'FAQPage',
     mainEntity: allFaqs.map((faq) => ({
       '@type': 'Question',
-      name: faq.q,
+      name: 'qEn' in faq ? `${faq.q} / ${faq.qEn}` : faq.q,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.a,
+        text: 'aEn' in faq ? `${faq.a} ${faq.aEn}` : faq.a,
       },
     })),
   }
@@ -325,7 +336,7 @@ export default function FAQPage() {
           <br />
           <em>よくある質問</em>
         </h1>
-        <p className="section-body faq-lead">
+        <p className="section-body faq-lead" lang="ja">
           YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。
         </p>
         <div className="faq-hero-actions">
@@ -373,8 +384,10 @@ export default function FAQPage() {
                 <article className="faq-item" key={faq.q}>
                   <div className="faq-number">{String(index + 1).padStart(2, '0')}</div>
                   <div>
-                    <h3>{faq.q}</h3>
-                    <p>{faq.a}</p>
+                    <h3 lang={category.id === 'trade-responsibility' ? 'en' : 'ja'}>{faq.q}</h3>
+                    {'qEn' in faq && <h4 lang="en">{faq.qEn}</h4>}
+                    <p lang={category.id === 'trade-responsibility' ? 'en' : 'ja'}>{faq.a}</p>
+                    {'aEn' in faq && <p className="faq-answer-en" lang="en">{faq.aEn}</p>}
                     {faq.links ? (
                       <div className="faq-item-links">
                         {faq.links.map((link) => (
@@ -641,12 +654,27 @@ export default function FAQPage() {
           margin: 0 0 10px;
         }
 
+        .faq-item h4 {
+          color: var(--gold-light);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-weight: 300;
+          line-height: 1.55;
+          margin: -4px 0 12px;
+        }
+
         .faq-item p {
           color: var(--washi-dim);
           font-size: 13px;
           line-height: 2.05;
           letter-spacing: 0.04em;
           margin: 0;
+        }
+
+        .faq-item .faq-answer-en {
+          border-top: 1px solid rgba(201,168,76,0.12);
+          margin-top: 12px;
+          padding-top: 12px;
         }
 
         .faq-item-links {

@@ -8,7 +8,7 @@ import { translations } from "@/lib/translations"
 const productShowcaseBodyColumns = [
   {
     ja: "YUKIMICHIは、日本商品の仕入れ可否調査から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
-    en: "YUKIMICHI organizes sourcing feasibility checks in Japan, packing, inspection, international courier services, air freight, and sea freight so overseas buyers can review eligible products with greater confidence.",
+    en: "YUKIMICHI coordinates product availability checks, packing, inspection, and shipping arrangements from Japan so overseas buyers can review each project with clear information and practical support.",
   },
 ]
 
@@ -38,10 +38,10 @@ export default function ProductShowcaseSection() {
 
           <div className="visual-body-grid">
             {productShowcaseBodyColumns.map((body) => (
-              <p key={body.en}>
-                <span className="copy-line-ja">{body.ja}</span>
-                <span className="copy-line-en">{body.en}</span>
-              </p>
+              <article key={body.en}>
+                <p className="copy-line-ja" lang="ja">{body.ja}</p>
+                <p className="copy-line-en" lang="en">{body.en}</p>
+              </article>
             ))}
           </div>
         </ScrollReveal>
@@ -97,15 +97,22 @@ export default function ProductShowcaseSection() {
           max-width: 980px;
         }
 
-        .visual-body-grid p {
+        .visual-body-grid article {
           border: 1px solid rgba(201,168,76,0.14);
           background: rgba(13,28,53,0.46);
+          padding: 18px 20px;
+        }
+
+        .visual-body-grid p {
           color: var(--washi-dim);
           font-size: 13px;
           letter-spacing: 0.05em;
           line-height: 2.05;
           margin: 0;
-          padding: 18px 20px;
+        }
+
+        .visual-body-grid p + p {
+          margin-top: 14px;
         }
       `}</style>
     </section>

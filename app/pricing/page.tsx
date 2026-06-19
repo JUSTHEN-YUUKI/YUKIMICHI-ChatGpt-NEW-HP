@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI',
   description:
     'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、T/T送金（電信送金）、注意事項について。',
+  alternates: { canonical: '/pricing' },
 }
 
 const pricingPlans = [
@@ -103,14 +104,19 @@ const optionalServiceFees = [
 ]
 
 const paymentItems = [
-  'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
-  'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
-  '支払方法：T/T送金（電信送金）',
-  'Payment by T/T remittance',
-  '送金手数料・銀行手数料は、原則としてお客様負担となります。',
-  'Bank transfer fees and remittance charges are generally borne by the customer.',
-  '入金確認後、仕入れ・発注・輸出手配を開始します。',
-  'After payment is confirmed, we will begin procurement, ordering, and export arrangement procedures.',
+  {
+    ja: 'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
+    en: 'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
+  },
+  { ja: '支払方法：T/T送金（電信送金）', en: 'Payment by T/T remittance.' },
+  {
+    ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
+    en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
+  },
+  {
+    ja: '入金確認後、仕入れ・発注・輸出手配を開始します。',
+    en: 'After payment is confirmed, we will begin procurement, ordering, and export arrangement procedures.',
+  },
 ]
 
 const noticeItems = [
@@ -160,7 +166,7 @@ export default function PricingPage() {
             <span className="section-label-text">Handling Fee</span>
           </div>
           <h2>手配手数料の基本体系</h2>
-          <p>
+          <p lang="ja">
             表示手数料は、送料・保険・関税等を含めた総額ではなく、原則として商品代金を基準に算出するYUKIMICHIの手配手数料です。
           </p>
         </div>
@@ -170,8 +176,8 @@ export default function PricingPage() {
             <article className="pricing-card" key={plan.label}>
               <span className="pricing-card__label">{plan.label}</span>
               <h2>{plan.title}</h2>
-              <div className="pricing-rate">
-                {plan.rate}{' '}
+              <div className="pricing-rate" aria-label={`${plan.rate} of product value`}>
+                {plan.rate}
                 <small>of product value</small>
               </div>
               <div className="pricing-card-info">
@@ -200,7 +206,7 @@ export default function PricingPage() {
             YUKIMICHI 追加サービス料金表
             <em>Optional Service Fees</em>
           </h2>
-          <p>
+          <p lang="ja">
             写真撮影、検品、資料取得、化粧品確認項目など、通常対応を超える作業については、内容に応じて別途お見積りとなります。
             通常の在庫確認、価格確認、MOQ確認は基本手数料に含め、写真撮影・検品・資料取得・複数社比較・長期交渉などは追加費用として分けて表示します。
           </p>
@@ -262,8 +268,8 @@ export default function PricingPage() {
             <article className="fee-basis-card" key={item.label}>
               <span>{item.label}</span>
               <h3>{item.title}</h3>
-              <p>{item.body}</p>
-              {item.sub && <p className="fee-basis-card__sub">{item.sub}</p>}
+              <p lang="ja">{item.body}</p>
+              {item.sub && <p className="fee-basis-card__sub" lang="en">{item.sub}</p>}
             </article>
           ))}
         </div>
@@ -276,7 +282,7 @@ export default function PricingPage() {
             <span className="section-label-text">Costs Not Included</span>
           </div>
           <h2>料金に含まれない主な費用</h2>
-          <p>
+          <p lang="ja">
             表示されている手数料は、YUKIMICHIによる日本側の輸出調整・手配支援に対するサービス手数料です。
             以下の費用は、原則として別途実費または個別見積りとなります。
           </p>
@@ -287,7 +293,7 @@ export default function PricingPage() {
         </div>
         <div className="excluded-cost-layout">
           <div className="excluded-cost-copy">
-            <p>
+            <p lang="ja">
               案件ごとに商品内容、数量、重量、サイズ、仕入先、配送方法、輸入国の規制、配送会社の引受可否が異なるため、最終金額は個別見積りにより確定します。
             </p>
             <p lang="en">
@@ -309,13 +315,16 @@ export default function PricingPage() {
             <span className="section-label-text">Payment Method / お支払い方法</span>
           </div>
           <h2>Payment by T/T Remittance</h2>
-          <p>
+          <p lang="ja">
             入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
           </p>
         </div>
         <div className="payment-card">
           {paymentItems.map((item) => (
-            <p key={item}>{item}</p>
+            <div className="payment-card__item" key={item.ja}>
+              <p lang="ja">{item.ja}</p>
+              <p lang="en">{item.en}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -336,7 +345,7 @@ export default function PricingPage() {
             詳細な条件は
             <Link href="/terms"> 取引条件 </Link>
             と
-            <Link href="/restricted"> 禁止・制限品目 </Link>
+            <Link href="/restricted-items"> 禁止・制限品目 </Link>
             をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
           </p>
         </div>
@@ -346,7 +355,7 @@ export default function PricingPage() {
         <div>
           <span>Estimate Request</span>
           <h2>料金を確認して相談する</h2>
-          <p>
+          <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。YUKIMICHIが商品代金・手配手数料・実費項目を分けて整理します。
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="pricing-mail">
@@ -745,21 +754,30 @@ export default function PricingPage() {
           padding: clamp(26px, 4vw, 42px);
         }
 
-        .payment-card p {
+        .payment-card__item {
           border-bottom: 1px solid rgba(201,168,76,0.1);
-          color: var(--washi);
-          font-size: 14px;
-          line-height: 1.9;
           padding: 0 0 14px;
         }
 
-        .payment-card p + p {
-          margin-top: 14px;
+        .payment-card__item + .payment-card__item {
+          margin-top: 18px;
         }
 
-        .payment-card p:last-child {
+        .payment-card__item:last-child {
           border-bottom: 0;
           padding-bottom: 0;
+        }
+
+        .payment-card p {
+          color: var(--washi);
+          font-size: 14px;
+          line-height: 1.9;
+          padding: 0;
+        }
+
+        .payment-card p + p {
+          color: var(--washi-dim);
+          margin-top: 6px;
         }
 
         .pricing-important {

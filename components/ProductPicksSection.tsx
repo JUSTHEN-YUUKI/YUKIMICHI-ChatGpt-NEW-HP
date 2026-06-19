@@ -15,7 +15,7 @@ const buyerTypeLabels: Record<ProductPickBuyerType, { ja: string; en: string }> 
 
 const riskLevelLabels: Record<ProductPickRiskLevel, string> = {
   standard: "Standard Review",
-  attention: "Import Review",
+  attention: "Import Requirements Review",
   "restricted-review": "Restricted Item Review",
 }
 
@@ -87,7 +87,7 @@ export default function ProductPicksSection() {
               価格・在庫・輸入可否を断定せず、問い合わせ前に確認すべき情報を明確にします。
             </span>
             <span className="copy-line-en">
-              Curated product categories from Hokkaido and Japan are presented with Import Review points,
+              Curated product categories from Hokkaido and Japan are presented with import requirements to check,
               suitable buyer types, and shipping options for overseas inquiry preparation.
             </span>
           </p>
@@ -125,7 +125,7 @@ export default function ProductPicksSection() {
                 </div>
 
                 <div className="pick-check">
-                  <span>Import Review</span>
+                  <span>Import Requirements Review</span>
                   <p>{pick.importCheckEn}</p>
                   <p>{pick.importCheckJa}</p>
                 </div>

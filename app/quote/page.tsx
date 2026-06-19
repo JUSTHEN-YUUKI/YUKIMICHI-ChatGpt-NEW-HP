@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'お見積り | YUKIMICHI',
   description:
     'YUKIMICHIのお見積り依頼ページ。商品URL、数量、配送先国、希望納期をもとに、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送の確認を進めます。',
+  alternates: { canonical: '/quote' },
 }
 
 const quoteMailto =
@@ -93,7 +94,7 @@ export default function QuotePage() {
           <br />
           <em><TranslatedText id="pages.quote.heroSubtitle" fallback="Request a Quote" /></em>
         </h1>
-        <p className="section-body quote-lead">
+        <p className="section-body quote-lead" lang="ja">
           <TranslatedText
             id="pages.quote.heroLead"
             fallback="まずは分かる範囲でご相談ください。商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
@@ -113,7 +114,7 @@ export default function QuotePage() {
         <div className="quote-mail-copy">
           <span>Official Quotation Email</span>
           <h2><TranslatedText id="pages.quote.formTitle" fallback="見積依頼" /></h2>
-          <p>
+          <p lang="ja">
             <TranslatedText
               id="pages.quote.formLead"
               fallback="商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
@@ -132,7 +133,7 @@ export default function QuotePage() {
                 fallback="より正確なお見積りのために、分かる範囲でご用意いただける情報"
               />
             </summary>
-            <p>
+            <p lang="ja">
               <TranslatedText
                 id="pages.quote.requiredLead"
                 fallback="すべて必須ではありません。現在分かる範囲でご記載ください。"

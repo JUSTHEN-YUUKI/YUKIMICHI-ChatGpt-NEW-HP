@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: '取引条件 | YUKIMICHI',
   description:
     'YUKIMICHIの取引条件ページ。見積、支払い、商品調達、キャンセル、返品、国際配送、関税・VAT/GST、輸入者責任、禁止・制限品目について。',
+  alternates: { canonical: '/terms' },
 }
 
 const terms = [
@@ -99,7 +100,7 @@ const terms = [
       '詳細は「禁止・制限品目」ページをご確認ください。',
       '内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。',
     ],
-    href: '/restricted',
+    href: '/restricted-items',
   },
   {
     code: 'J',
@@ -149,7 +150,7 @@ const responsibilityCards = [
 const relatedLinks = [
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
 
@@ -174,7 +175,7 @@ export default function TermsPage() {
           <br />
           <em>Terms of Transaction</em>
         </h1>
-        <p className="section-body terms-lead">
+        <p className="section-body terms-lead" lang="ja">
           YUKIMICHIでは、日本商品の調達、輸出手配、国際配送において、透明性のある取引条件を重視しています。
           お見積り前に、支払い、キャンセル、関税、配送事故、規制確認などの基本条件をご確認ください。
         </p>
@@ -215,8 +216,8 @@ export default function TermsPage() {
           {responsibilityCards.map((item) => (
             <article className="terms-responsibility-card" key={item.title}>
               <span>{item.title}</span>
-              <p>{item.ja}</p>
-              <small>{item.en}</small>
+              <p lang="ja">{item.ja}</p>
+              <small lang="en">{item.en}</small>
             </article>
           ))}
         </div>

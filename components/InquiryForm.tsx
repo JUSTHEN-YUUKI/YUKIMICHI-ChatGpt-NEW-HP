@@ -234,6 +234,14 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const complianceNotes = formCommon.complianceNotes
   const buttonLabel = formCopy.button
   const sourcePage = type === 'quote' ? '/quote' : '/contact'
+  const requiredFields = fields.filter((field) => field.required)
+  const optionalFields = fields.filter((field) => !field.required)
+  const optionalDetailsLabel = {
+    ja: '任意項目（より正確なお見積りのために）',
+    en: 'Optional details for a more accurate quote',
+    zh: '可选信息（用于更准确的报价）',
+    es: 'Datos opcionales para una cotización más precisa',
+  }[language]
 
   function updateField(name: keyof FormState, value: string) {
     setFormState((current) => ({ ...current, [name]: value }))
@@ -300,118 +308,122 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     }
   }
 
+  function renderField(field: FieldConfig) {
+    const options = selectOptions[field.name]
+    const fieldId = `inquiry-${type}-${field.name}`
+    const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
+    const isRequired = Boolean(field.required)
+    const fieldClassName = [
+      'inquiry-form__field',
+      `inquiry-form__field--${field.name}`,
+      field.multiline ? 'inquiry-form__field--wide' : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
+    return (
+      <label className={fieldClassName} htmlFor={fieldId} key={field.name}>
+        <span className="inquiry-form__label">
+          <span>{field.label}</span>
+          {isRequired && <em>{common.required}</em>}
+        </span>
+
+        {field.name === 'quantity' ? (
+          <div className="inquiry-form__quantity-row">
+            <input
+              id={fieldId}
+              name={field.name}
+              type="number"
+              min="0"
+              step="1"
+              inputMode="decimal"
+              value={formState.quantity}
+              placeholder={field.placeholder}
+              required={isRequired}
+              autoComplete={getAutoComplete('quantity')}
+              onChange={syncField('quantity')}
+              onInput={syncInputField('quantity')}
+            />
+            <select
+              id={`inquiry-${type}-quantityUnit`}
+              name="quantityUnit"
+              value={formState.quantityUnit}
+              aria-label="数量単位 / Quantity unit"
+              autoComplete={getAutoComplete('quantityUnit')}
+              onChange={syncField('quantityUnit')}
+              onInput={syncInputField('quantityUnit')}
+            >
+              {quantityUnitOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : field.multiline ? (
+          <textarea
+            id={fieldId}
+            name={field.name}
+            value={formState[field.name]}
+            placeholder={field.placeholder}
+            required={isRequired}
+            autoComplete={getAutoComplete(field.name)}
+            onChange={syncField(field.name)}
+            onInput={syncInputField(field.name)}
+          />
+        ) : options ? (
+          <>
+            <input
+              id={fieldId}
+              name={field.name}
+              type="text"
+              list={listId}
+              value={formState[field.name]}
+              placeholder={field.placeholder}
+              required={isRequired}
+              autoComplete={getAutoComplete(field.name)}
+              onChange={syncField(field.name)}
+              onInput={syncInputField(field.name)}
+            />
+            <datalist id={listId}>
+              {options.map((option) => (
+                <option key={option} value={option} />
+              ))}
+            </datalist>
+          </>
+        ) : (
+          <input
+            id={fieldId}
+            name={field.name}
+            type={field.type ?? 'text'}
+            value={formState[field.name]}
+            placeholder={field.placeholder}
+            required={isRequired}
+            autoComplete={getAutoComplete(field.name)}
+            onChange={syncField(field.name)}
+            onInput={syncInputField(field.name)}
+          />
+        )}
+
+        {field.note && <small className="inquiry-form__field-note">{field.note}</small>}
+      </label>
+    )
+  }
+
   return (
     <form autoComplete="on" className={`inquiry-form inquiry-form--${type}`} onSubmit={handleSubmit}>
       <p className="inquiry-form__intro">{formCopy.intro}</p>
 
       <div className="inquiry-form__grid">
-        {fields.map((field) => {
-          const options = selectOptions[field.name]
-          const fieldId = `inquiry-${type}-${field.name}`
-          const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
-          const isRequired = Boolean(field.required)
-          const showRequiredBadge = isRequired
-          const fieldClassName = [
-            'inquiry-form__field',
-            `inquiry-form__field--${field.name}`,
-            field.multiline ? 'inquiry-form__field--wide' : '',
-          ]
-            .filter(Boolean)
-            .join(' ')
-
-          return (
-            <label
-              className={fieldClassName}
-              htmlFor={fieldId}
-              key={field.name}
-            >
-              <span className="inquiry-form__label">
-                <span>{field.label}</span>
-                {showRequiredBadge && <em>{common.required}</em>}
-              </span>
-
-              {field.name === 'quantity' ? (
-                <div className="inquiry-form__quantity-row">
-                  <input
-                    id={fieldId}
-                    name={field.name}
-                    type="number"
-                    min="0"
-                    step="1"
-                    inputMode="decimal"
-                    value={formState.quantity}
-                    placeholder={field.placeholder}
-                    required={isRequired}
-                    autoComplete={getAutoComplete('quantity')}
-                    onChange={syncField('quantity')}
-                    onInput={syncInputField('quantity')}
-                  />
-                  <select
-                    id={`inquiry-${type}-quantityUnit`}
-                    name="quantityUnit"
-                    value={formState.quantityUnit}
-                    aria-label="数量単位 / Quantity unit"
-                    autoComplete={getAutoComplete('quantityUnit')}
-                    onChange={syncField('quantityUnit')}
-                    onInput={syncInputField('quantityUnit')}
-                  >
-                    {quantityUnitOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ) : field.multiline ? (
-                <textarea
-                  id={fieldId}
-                  name={field.name}
-                  value={formState[field.name]}
-                  placeholder={field.placeholder}
-                  required={isRequired}
-                  autoComplete={getAutoComplete(field.name)}
-                  onChange={syncField(field.name)}
-                  onInput={syncInputField(field.name)}
-                />
-              ) : options ? (
-                <>
-                  <input
-                    id={fieldId}
-                    name={field.name}
-                    type="text"
-                    list={listId}
-                    value={formState[field.name]}
-                    placeholder={field.placeholder}
-                    required={isRequired}
-                    autoComplete={getAutoComplete(field.name)}
-                    onChange={syncField(field.name)}
-                    onInput={syncInputField(field.name)}
-                  />
-                  <datalist id={listId}>
-                    {options.map((option) => (
-                      <option key={option} value={option} />
-                    ))}
-                  </datalist>
-                </>
-              ) : (
-                <input
-                  id={fieldId}
-                  name={field.name}
-                  type={field.type ?? 'text'}
-                  value={formState[field.name]}
-                  placeholder={field.placeholder}
-                  required={isRequired}
-                  autoComplete={getAutoComplete(field.name)}
-                  onChange={syncField(field.name)}
-                  onInput={syncInputField(field.name)}
-                />
-              )}
-
-              {field.note && <small className="inquiry-form__field-note">{field.note}</small>}
-            </label>
-          )
-        })}
+        {requiredFields.map(renderField)}
       </div>
+
+      {optionalFields.length > 0 && (
+        <details className="inquiry-form__optional">
+          <summary>{optionalDetailsLabel}</summary>
+          <div className="inquiry-form__grid">{optionalFields.map(renderField)}</div>
+        </details>
+      )}
 
       <div className="inquiry-form__honeypot" aria-hidden="true" hidden>
         <input
@@ -436,8 +448,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
       <label className="inquiry-form__privacy">
         <input name="privacyConsent" type="checkbox" required />
         <span>
-          プライバシーポリシーに同意します。
-          <a href="/privacy">Privacy Policy</a>
+          <span lang="ja">プライバシーポリシーに同意します。</span>
+          <a href="/privacy" lang="en">Privacy Policy</a>
         </span>
       </label>
 
@@ -483,6 +495,21 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
         .inquiry-form__field--wide {
           grid-column: 1 / -1;
+        }
+
+        .inquiry-form__optional {
+          border: 1px solid rgba(201,168,76,0.18);
+          background: rgba(201,168,76,0.04);
+          padding: 0 18px 18px;
+        }
+
+        .inquiry-form__optional summary {
+          color: var(--gold);
+          cursor: pointer;
+          font-size: 12px;
+          letter-spacing: 0.08em;
+          line-height: 1.7;
+          padding: 16px 0;
         }
 
         .inquiry-form__intro {

@@ -106,7 +106,7 @@ const policySections = [
 const relatedLinks = [
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
 ]
 

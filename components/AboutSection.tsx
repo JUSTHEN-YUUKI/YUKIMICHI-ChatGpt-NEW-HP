@@ -22,7 +22,7 @@ const strengths = [
     label: "HOKKAIDO BASED",
     title: "北海道・札幌を拠点に",
     text: "日本商品の仕入れ可否調査から海外発送まで、北海道・札幌を拠点に丁寧に対応します。",
-    textEn: "Based in Sapporo, Hokkaido, we support sourcing feasibility checks in Japan and export preparation with careful communication.",
+    textEn: "Based in Sapporo, Hokkaido, we support product availability checks and export preparation with careful communication.",
   },
   {
     label: "SEA & AIR",
@@ -34,7 +34,7 @@ const strengths = [
     label: "EXPORT SUPPORT",
     title: "輸出実務をサポート",
     text: "仕入れ可否調査、書類準備、配送方法の比較、見積作成など、海外取引に必要な実務を支援します。",
-    textEn: "Our Export Support covers sourcing feasibility checks, document preparation, shipping comparison, and Request a Quote preparation for overseas trade.",
+    textEn: "Our export coordination support covers product availability checks, document preparation, shipping comparison, and quotation preparation for overseas trade.",
   },
 ]
 

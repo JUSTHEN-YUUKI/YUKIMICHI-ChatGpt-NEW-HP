@@ -6,13 +6,14 @@ export const metadata: Metadata = {
   title: 'サービス | YUKIMICHI',
   description:
     'YUKIMICHIの日本側輸出調整・手配サービス。日本商品の仕入れ可否調査、国内取引調整、購入調整、輸出関連手配、書類・配送確認まで。',
+  alternates: { canonical: '/services' },
 }
 
 const coreServices = [
   {
     code: '01',
     title: '日本商品の仕入れ可否調査',
-    en: 'Sourcing Feasibility Checks',
+    en: 'Product Availability & Sourcing Checks',
     points: [
       '海外バイヤーの希望商品について、日本国内のメーカー・卸・販売元へ確認します。',
       '商品名、URL、数量、希望条件をもとに確認準備を支援します。',
@@ -45,7 +46,7 @@ const coreServices = [
   {
     code: '04',
     title: '国際宅配便・クーリエ手配',
-    en: 'International Courier Service Coordination',
+    en: 'International Courier Coordination',
     points: [
       'EMS、DHL、FedEx、UPS、ヤマト国際宅急便などを案件ごとに確認します。',
       '少量、サンプル、小口貨物向けの配送方法確認を支援します。',
@@ -130,7 +131,7 @@ const roleItems = [
   {
     actor: 'YUKIMICHI',
     ja: '日本側の仕入れ可否調査、国内取引調整、書類整理、配送手配支援',
-    en: 'Japan-side sourcing feasibility checks, domestic transaction coordination, document organization, and shipping coordination support.',
+    en: 'Japan-side product availability checks, domestic transaction coordination, document organization, and shipping arrangement support.',
   },
   {
     actor: 'Supplier',
@@ -170,7 +171,7 @@ const requiredInfo = [
 const relatedLinks = [
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
-  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
@@ -205,33 +206,33 @@ export default function ServicesPage() {
               日本商品の仕入れ可否調査・国内取引調整・輸出関連手配
             </p>
             <p className="services-domestic-support__subtitle-en">
-              Sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping coordination support from Japan.
+              Product availability checks, supplier communication, purchase coordination, document review, and shipping arrangement support from Japan.
             </p>
           </div>
           <div className="services-domestic-support__body">
             <div className="services-domestic-support__copy services-domestic-support__copy--ja">
-              <p>
+              <p lang="ja">
                 YUKIMICHIは、日本国内法人として、海外バイヤー向けに日本商品の仕入れ可否調査、国内取引調整、購入調整、輸出関連手配、書類確認、配送方法の確認を支援します。
               </p>
-              <p>
+              <p lang="ja">
                 在庫販売会社・国際物流会社ではなく、案件ごとにメーカー・卸・配送会社・関係機関へ確認しながら、日本側の実務調整を行います。
               </p>
             </div>
             <div className="services-domestic-support__copy services-domestic-support__copy--en">
-              <p>
-                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping coordination support from Japan.
+              <p lang="en">
+                YUKIMICHI provides Japan-side export coordination services for overseas buyers, including product availability checks, supplier communication, purchase coordination, document review, and shipping arrangement support.
               </p>
-              <p>
+              <p lang="en">
                 We are not an inventory sales company or an international carrier. Each case is reviewed with suppliers, carriers, brokers, and relevant parties as needed.
               </p>
             </div>
           </div>
           <div className="services-domestic-support__highlight">
-            <p>
-              具体的な商品名、価格、在庫、輸出可否、取引可否は、案件ごとにメーカー・卸・関係機関へ確認します。
+            <p lang="ja">
+              日本国内のメーカー、卸、販売店などの情報をもとに、海外バイヤーの希望に合う商品を整理し、取引可否、価格、在庫、輸出・配送の取扱可否を案件ごとに確認します。
             </p>
             <p lang="en">
-              Product names, pricing, stock status, export eligibility, and transaction availability are confirmed case by case with suppliers and relevant parties.
+              Product availability, pricing, stock status, transaction terms, and export or shipping feasibility are reviewed case by case with suppliers and relevant parties.
             </p>
           </div>
         </article>
@@ -379,7 +380,7 @@ export default function ServicesPage() {
           <p lang="en">
             YUKIMICHI provides Japan-side export arrangement support. Final import approval, duties, taxes, permits, local sales eligibility, and customs clearance in the destination country remain the responsibility of the importer, unless otherwise agreed in writing.
           </p>
-          <Link href="/restricted" className="services-inline-link">
+          <Link href="/restricted-items" className="services-inline-link">
             <TranslatedText id="pages.services.restrictedLink" fallback="禁止・制限品目を確認する" /> <ArrowRight />
           </Link>
         </div>

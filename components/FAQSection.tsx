@@ -112,7 +112,7 @@ export default function FAQSection() {
               詳細は個別見積り時に確認します。
             </span>
             <span className="copy-line-en">
-              These notes help overseas buyers understand key Import Review points before inquiry.
+              These notes help overseas buyers understand destination-country import requirements before inquiry.
               Final conditions vary by product, destination, carrier, and local authority review.
             </span>
           </p>

@@ -7,11 +7,32 @@ import { LanguageProvider } from '@/components/LanguageProvider'
 import ContentTranslationBridge from '@/components/ContentTranslationBridge'
 
 export const metadata: Metadata = {
-  title: 'YUKIMICHI – Export Support from Japan',
+  metadataBase: new URL('https://justhen.co.jp'),
+  title: {
+    default: 'YUKIMICHI | Japan Export Coordination',
+    template: '%s',
+  },
   description:
-    'YUKIMICHI provides legal, transparent, and reliable Export Support from Japan, including sourcing feasibility checks, international courier services, air freight, sea freight, and export documentation support.',
+    'YUKIMICHI provides transparent Japan-side export coordination for overseas buyers, including product availability checks, supplier communication, document review, and shipping arrangement support.',
   keywords:
-    'Japan export, Japanese supplier, small lot export, International Courier, Air Freight, Sea Freight, Japanese trading company',
+    'Japan export coordination, Japanese product sourcing, small lot export, international courier services, air freight, sea freight',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'YUKIMICHI – SNOWPATH JAPAN',
+    title: 'YUKIMICHI | Japan Export Coordination',
+    description:
+      'Japan-side product sourcing, export document review, and shipping arrangement support for overseas buyers.',
+    locale: 'ja_JP',
+    images: [
+      {
+        url: '/hero-bg.jpg',
+        alt: 'YUKIMICHI – Japan-side export coordination from Hokkaido',
+      },
+    ],
+  },
   icons: {
     icon: [
       {
@@ -29,6 +50,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'JUSTHEN CO., LTD.',
+    alternateName: 'YUKIMICHI – SNOWPATH JAPAN',
+    url: 'https://justhen.co.jp/',
+    email: 'exporter@justhen.co.jp',
+    address: {
+      '@type': 'PostalAddress',
+      postalCode: '060-0032',
+      addressRegion: 'Hokkaido',
+      addressLocality: 'Sapporo, Chuo-ku',
+      streetAddress: '8-5-15 Kita 2-jo Higashi',
+      addressCountry: 'JP',
+    },
+  }
+
   return (
     <html lang="ja">
       <head>
@@ -42,6 +80,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <LanguageProvider>
           <Navigation />
           <main>{children}</main>
