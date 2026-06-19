@@ -151,22 +151,6 @@ export default function PricingPage() {
           <br />
           <em><TranslatedText id="pages.pricing.heroSubtitle" fallback="Transparent Pricing for Export Support" /></em>
         </h1>
-        <div className="pricing-lead-grid">
-          <p>
-            YUKIMICHIは国際物流会社そのものではなく、日本側の輸出手配支援会社として、仕入れ可否調査、条件確認、書類・輸送手配の整理をサポートします。
-          </p>
-          <p>
-            料金は「商品代金に対する手配手数料率」です。国際送料、輸送保険、関税、輸入税、VAT/GST、通関関連費用は別途実費として分けて確認します。
-          </p>
-        </div>
-        <div className="pricing-hero-actions">
-          <Link href="/quote" className="btn-primary">
-            Request a Quote <ArrowRight />
-          </Link>
-          <Link href="/contact" className="btn-ghost">
-            Contact Us <ArrowRight />
-          </Link>
-        </div>
       </section>
 
       <section className="pricing-plans">
@@ -381,8 +365,7 @@ export default function PricingPage() {
 
       <style>{`
         .pricing-hero {
-          min-height: 66svh;
-          padding: calc(var(--nav-h) + 88px) var(--gutter) 76px;
+          padding: calc(var(--nav-h) + 88px) var(--gutter) clamp(52px, 7vw, 76px);
           background:
             radial-gradient(ellipse 70% 46% at 78% 22%, rgba(201,168,76,0.09), transparent 64%),
             linear-gradient(160deg, var(--navy-deep) 0%, var(--navy-mid) 58%, var(--navy-deep) 100%);
@@ -395,7 +378,7 @@ export default function PricingPage() {
           font-size: clamp(42px, 7.3vw, 92px);
           line-height: 1.05;
           color: var(--washi);
-          margin-bottom: 28px;
+          margin-bottom: 0;
           letter-spacing: 0;
         }
 
@@ -403,31 +386,6 @@ export default function PricingPage() {
           color: var(--gold);
           font-style: italic;
           font-size: 0.68em;
-        }
-
-        .pricing-lead-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
-          max-width: 1040px;
-          margin-bottom: 30px;
-        }
-
-        .pricing-lead-grid p {
-          border: 1px solid rgba(201,168,76,0.14);
-          background: rgba(13,28,53,0.42);
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.04em;
-          line-height: 2.05;
-          margin: 0;
-          padding: 18px 20px;
-        }
-
-        .pricing-hero-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 14px;
         }
 
         .pricing-plans,
@@ -908,7 +866,6 @@ export default function PricingPage() {
         }
 
         @media (max-width: 680px) {
-          .pricing-lead-grid,
           .pricing-grid,
           .fee-basis-grid,
           .excluded-cost-list {
