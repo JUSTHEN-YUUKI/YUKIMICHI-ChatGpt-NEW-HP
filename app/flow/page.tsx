@@ -3,7 +3,7 @@ import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
   title: 'Export Process | YUKIMICHI',
-  description: 'YUKIMICHIの取引の流れ。問い合わせから内容確認、見積、商品調達、梱包・書類準備、国際発送、納品後フォローまで。',
+  description: 'YUKIMICHIの取引の流れ。お問い合わせ、商品確認、見積、前払い、調達、書類整理、国際配送、発送後フォローまで。',
 }
 
 const steps = [
@@ -11,67 +11,67 @@ const steps = [
     number: '01',
     title: 'お問い合わせ',
     en: 'Inquiry',
-    text: '商品名、ブランド名、数量、仕向地、用途、希望納期をお知らせください。商品URLがない場合は、写真情報や分かる範囲の説明でも受付できます。',
+    text: '商品名、ブランド名、数量、配送先国、用途、希望納期をお知らせください。商品URLがない場合は、写真や分かる範囲の情報だけでも確認を開始できます。',
   },
   {
     number: '02',
-    title: '商品・輸入条件の事前確認',
-    en: 'Product and Import Pre-check',
-    text: '商品カテゴリ、数量、配送先国、用途をもとに、輸出入規制、配送会社の引受条件、輸入者側で確認すべき許可・税金・販売可否を整理します。',
+    title: '商品・輸入条件の確認',
+    en: 'Product / Import Requirements Review',
+    text: '商品カテゴリ、数量、配送先国、用途をもとに、輸出入規制、配送会社の引受条件、輸入者側で確認すべき許可・税金・販売条件を整理します。',
   },
   {
     number: '03',
-    title: '仕入先確認',
-    en: 'Supplier Confirmation',
-    text: '日本国内の仕入先へ在庫、価格、MOQ、納期、資料やSDS/MSDSの有無を確認します。仕入先情報は原則として直接開示しません。',
+    title: '仕入先への確認',
+    en: 'Supplier Check',
+    text: '日本国内の仕入先へ、在庫、価格、MOQ、納期、商品資料、SDS/MSDSの有無などを確認します。仕入先情報の開示可否は案件ごとに確認します。',
   },
   {
     number: '04',
     title: '見積提示',
     en: 'Quotation',
-    text: '商品代金、手配手数料、国際送料、保険、想定される追加費用を分けて提示します。関税やVAT/GSTは参考情報であり、最終判断は輸入国側確認が前提です。',
+    text: '商品代金、手配手数料、国際送料、保険料、想定される追加費用を分けて提示します。関税やVAT/GSTは参考確認となり、最終判断は輸入国側での確認が前提です。',
   },
   {
     number: '05',
-    title: '前払い',
+    title: '前払い確認',
     en: 'Advance Payment',
-    text: '正式見積りと条件に合意後、原則として前払い確認後に調達、梱包、配送手配を開始します。支払い条件は案件ごとに書面またはメールで確認します。',
+    text: '正式見積りと条件に合意後、原則としてご入金確認後に商品調達、梱包、配送手配を開始します。支払条件は案件ごとにメールまたは書面で確認します。',
   },
   {
     number: '06',
-    title: '調達・書類整理',
-    en: 'Procurement and Documents',
-    text: '日本国内での商品調達、検品・梱包、Commercial Invoice、Packing List、必要に応じた商品資料の整理を進めます。',
+    title: '調達・検品・書類整理',
+    en: 'Procurement & Documents',
+    text: '日本国内での商品調達、数量確認、簡易検品、梱包準備を行い、Commercial Invoice、Packing List、必要に応じた商品資料を整理します。',
   },
   {
     number: '07',
-    title: '配送手配',
+    title: '配送方法の確定・手配',
     en: 'Shipping Arrangement',
-    text: '国際宅配便、航空貨物、海上輸送を案件ごとに比較し、配送会社またはフォワーダーの引受条件を確認したうえで手配します。',
+    text: 'EMS・DHL・FedEx・UPSなどの国際宅配便、航空貨物、海上輸送を比較し、貨物内容と配送先に合う方法を確認したうえで手配します。',
   },
   {
     number: '08',
-    title: '引渡し・発送',
-    en: 'Handover',
-    text: '発送後は追跡情報を共有し、通関や受取時の確認事項をフォローします。輸入国側の通関、許可、税金、販売可否は原則として輸入者側の責任です。',
+    title: '発送・追跡共有・フォロー',
+    en: 'Shipment & Follow-up',
+    text: '発送後は追跡情報を共有し、到着までの確認事項をフォローします。輸入国側の通関、許可、税金、販売可否は原則として輸入者側での確認事項です。',
   },
 ]
 
 const incotermsNotes = [
   {
     term: 'Case-by-case',
-    ja: 'Incotermsは原則として案件ごとに確認します。',
-    en: 'Incoterms are confirmed case by case for each transaction.',
+    ja: '取引条件は、商品内容・数量・配送先・責任範囲に応じて案件ごとに確認します。',
+    en: 'Trade terms are confirmed case by case based on the product, volume, destination, and responsibility scope.',
   },
   {
     term: 'FCA Japan Warehouse',
-    ja: 'BtoB案件では、FCA Japan warehouse 等を個別に設定できる場合があります。',
+    ja: '法人取引では、FCA Japan warehouse などの条件を個別に設定できる場合があります。',
     en: 'For BtoB projects, terms such as FCA Japan warehouse may be arranged individually.',
   },
   {
     term: 'EXW / FCA / DAP / DDP',
-    ja: 'EXW、FCA、DAP、DDP等は、対応可否と責任範囲を個別見積り時に確認します。DDPは標準対応ではありません。',
-    en: 'EXW, FCA, DAP, and DDP availability and responsibility scope are confirmed during quotation. DDP is not treated as a standard service unless agreed in writing.',
+    ja: 'EXW、FCA、DAP、DDPなどは、対応可否と責任範囲を見積時に確認します。DDPは標準対応ではなく、書面合意がある場合のみ検討します。',
+    en: 'EXW, FCA, DAP, and DDP availability and responsibility scope are confirmed during quotation. DDP is not a standard service unless agreed in writing.',
   },
 ]
 
@@ -97,8 +97,8 @@ export default function FlowPage() {
           to <em>Delivery.</em>
         </h1>
         <p className="section-body flow-lead">
-          北海道発の輸出ブランドとして、問い合わせから納品後フォローまで、国際貿易の不安を一つずつ整理しながら進行します。
-          迅速さだけでなく、通関リスクを避ける透明な手順を重視します。
+          お問い合わせから見積、前払い、商品調達、書類整理、国際配送、発送後フォローまで、必要な確認事項を順番に整理して進めます。
+          早さだけでなく、輸出入規制・通関・費用項目を事前に確認し、できるだけ分かりやすい手順でご案内します。
         </p>
       </section>
 
@@ -153,8 +153,8 @@ export default function FlowPage() {
           </h2>
         </div>
         <p>
-          商品URL、商品名、希望数量、仕向地、希望配送方法、希望納期、法人または個人利用の区分があると、
-          見積と規制確認がスムーズです。輸出入規制や認証の要否は国や商品により異なるため、最終判断は税関、通関業者、公的機関の確認を前提に進めます。
+          見積依頼時には、商品URL、商品名、希望数量、配送先国、希望配送方法、希望納期、法人利用または個人利用の区分をお知らせください。
+          情報がそろっているほど、見積、配送方法、輸出入規制の確認をスムーズに進められます。輸出入規制や認証の要否は国や商品により異なるため、最終判断は税関、通関業者、公的機関の確認を前提に進めます。
         </p>
       </section>
 
@@ -185,7 +185,7 @@ export default function FlowPage() {
           margin-bottom: 28px;
         }
         .flow-title em { color: var(--gold); font-style: italic; }
-        .flow-lead { max-width: 720px; }
+        .flow-lead { max-width: 760px; }
         .flow-section { padding: var(--section-pad) var(--gutter); }
         .flow-timeline {
           position: relative;
