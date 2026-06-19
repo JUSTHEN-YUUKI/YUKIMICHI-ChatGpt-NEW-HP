@@ -3,7 +3,6 @@
 import Link from "@/components/NewTabLink"
 import ScrollReveal from "@/components/ScrollReveal"
 import ImportGuideSection from "@/components/ImportGuideSection"
-import ProductPicksSection from "@/components/ProductPicksSection"
 import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/lib/translations"
 
@@ -66,7 +65,6 @@ export default function ProductShowcaseSection() {
           </div>
         </ScrollReveal>
 
-        <ProductPicksSection />
         <ImportGuideSection />
 
         <ScrollReveal stagger>
