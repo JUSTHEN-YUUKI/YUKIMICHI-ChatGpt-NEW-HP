@@ -12,7 +12,10 @@ type FormState = {
   company: string
   name: string
   email: string
+  productName: string
   productUrl: string
+  sdsAvailability: string
+  documentUrl: string
   productCategory: string
   quantity: string
   quantityUnit: string
@@ -46,7 +49,10 @@ const initialState: FormState = {
   company: '',
   name: '',
   email: '',
+  productName: '',
   productUrl: '',
+  sdsAvailability: '',
+  documentUrl: '',
   productCategory: '',
   quantity: '',
   quantityUnit: '個 / pcs',
@@ -140,7 +146,10 @@ const fieldAutoComplete: Partial<Record<keyof FormState, string>> = {
   company: 'organization',
   name: 'name',
   email: 'email',
+  productName: 'off',
   productUrl: 'url',
+  sdsAvailability: 'off',
+  documentUrl: 'url',
   productCategory: 'off',
   quantity: 'off',
   quantityUnit: 'off',
@@ -191,7 +200,10 @@ function readSubmittedFormState(formData: FormData): FormState {
     company: getFormText(formData, 'company'),
     name: getFormText(formData, 'name'),
     email: getFormText(formData, 'email'),
+    productName: getFormText(formData, 'productName'),
     productUrl: getFormText(formData, 'productUrl'),
+    sdsAvailability: getFormText(formData, 'sdsAvailability'),
+    documentUrl: getFormText(formData, 'documentUrl'),
     productCategory: getFormText(formData, 'productCategory'),
     quantity: getFormText(formData, 'quantity'),
     quantityUnit: getFormText(formData, 'quantityUnit') || initialState.quantityUnit,
@@ -290,6 +302,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
   return (
     <form autoComplete="on" className={`inquiry-form inquiry-form--${type}`} onSubmit={handleSubmit}>
+      <p className="inquiry-form__intro">{formCopy.intro}</p>
+
       <div className="inquiry-form__grid">
         {fields.map((field) => {
           const options = selectOptions[field.name]
@@ -399,8 +413,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         })}
       </div>
 
-      <label className="inquiry-form__honeypot" htmlFor={`inquiry-${type}-website`} aria-hidden="true">
-        <span>Website</span>
+      <div className="inquiry-form__honeypot" aria-hidden="true" hidden>
         <input
           id={`inquiry-${type}-website`}
           name="website"
@@ -408,10 +421,11 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           value={formState.website}
           autoComplete="off"
           tabIndex={-1}
+          aria-hidden="true"
           onChange={syncField('website')}
           onInput={syncInputField('website')}
         />
-      </label>
+      </div>
 
       <div className="inquiry-form__notice" aria-label="Important notes">
         {complianceNotes.map((note) => (
@@ -471,12 +485,18 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           grid-column: 1 / -1;
         }
 
+        .inquiry-form__intro {
+          border-left: 1px solid rgba(201,168,76,0.5);
+          color: var(--washi-dim);
+          font-size: 12.5px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          margin: 0;
+          padding: 10px 0 10px 14px;
+        }
+
         .inquiry-form__honeypot {
-          height: 1px;
-          left: -10000px;
-          overflow: hidden;
-          position: absolute;
-          width: 1px;
+          display: none !important;
         }
 
         .inquiry-form__label {

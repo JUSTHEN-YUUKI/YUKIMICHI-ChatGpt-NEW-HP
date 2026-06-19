@@ -12,6 +12,8 @@ type InquiryPayload = {
   name?: unknown
   email?: unknown
   productUrl?: unknown
+  sdsAvailability?: unknown
+  documentUrl?: unknown
   productCategory?: unknown
   quantity?: unknown
   quantityUnit?: unknown
@@ -251,6 +253,8 @@ export async function POST(request: Request) {
   const name = toText(payload.name, 200)
   const email = toText(payload.email, 300)
   const productUrl = toText(payload.productUrl, 1000)
+  const sdsAvailability = toText(payload.sdsAvailability, 500)
+  const documentUrl = toText(payload.documentUrl, 1000)
   const productCategory = toText(payload.productCategory, 300)
   const quantity = toText(payload.quantity, 200)
   const quantityUnit = toText(payload.quantityUnit, 100)
@@ -279,7 +283,8 @@ export async function POST(request: Request) {
   }
 
   const normalizedDestination = destination || [destinationCountry, destinationCity].filter(Boolean).join(' / ')
-  const quoteMissingRequired = type === 'quote' && (!normalizedDestination || !message)
+  const missingProductReference = !productName && !productUrl
+  const quoteMissingRequired = type === 'quote' && (!normalizedDestination || !message || missingProductReference)
   const contactMissingRequired = type === 'contact' && (!normalizedDestination || !message)
 
   if (
@@ -288,6 +293,7 @@ export async function POST(request: Request) {
     !email ||
     !isEmail(email) ||
     !isOptionalUrl(productUrl) ||
+    !isOptionalUrl(documentUrl) ||
     quoteMissingRequired ||
     contactMissingRequired
   ) {
@@ -323,9 +329,12 @@ export async function POST(request: Request) {
     ['Country', destinationCountry || destination],
     ['Product Name', productName],
     ['Product URL', productUrl],
+    ['SDS / Ingredient List Availability', sdsAvailability],
+    ['Product Photo / Document URL', documentUrl],
     ['Product Category', productCategory],
     ['Quantity', quantityText],
     ['Destination', normalizedDestination],
+    ['Desired Timing', deadline],
     ['Shipping Method', shippingMethod],
     ['Submitted At', `${submittedAt} JST`],
     ['Source Page', sourcePage],
@@ -347,9 +356,12 @@ export async function POST(request: Request) {
     ['国 / Country', destinationCountry || destination],
     ['商品名 / Product Name', productName],
     ['商品URL / Product URL', productUrl],
+    ['SDS・成分表の有無 / SDS or Ingredient List', sdsAvailability],
+    ['写真・資料URL / Product Photo or Document URL', documentUrl],
     ['商品カテゴリ / Product Category', productCategory],
     ['数量 / Quantity', quantityText],
     ['配送先 / Destination', normalizedDestination],
+    ['希望納期 / Desired Timing', deadline],
     ['配送方法 / Shipping Method', shippingMethod],
     ['メッセージ / Message', message],
     ['送信日時 / Submitted At', `${submittedAt} JST`],

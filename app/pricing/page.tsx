@@ -171,7 +171,7 @@ export default function PricingPage() {
               <span className="pricing-card__label">{plan.label}</span>
               <h2>{plan.title}</h2>
               <div className="pricing-rate">
-                {plan.rate}
+                {plan.rate}{' '}
                 <small>of product value</small>
               </div>
               <div className="pricing-card-info">

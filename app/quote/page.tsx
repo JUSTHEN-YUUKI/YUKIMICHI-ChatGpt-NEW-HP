@@ -36,19 +36,15 @@ const quoteFlow = [
 ]
 
 const requiredItems = [
-  '商品名',
-  'ブランド名・メーカー名',
-  '商品URLまたは参考画像',
+  '商品名またはブランド名',
+  '商品URL',
   '希望数量',
-  '希望納期',
-  '仕入希望条件',
-  '日本国内の引取場所または仕入先情報',
-  '輸出先国・都市',
+  '配送先国・地域',
   '希望配送方法',
+  '希望納期',
+  'SDS・成分表・商品資料',
   '商品サイズ・重量',
-  'SDS、成分表、JANコード、商品ラベル情報の有無',
-  '法人取引か個人利用か',
-  '継続取引か単発取引か',
+  '法人利用または個人利用',
 ]
 
 const shippingMethods = [
@@ -93,14 +89,14 @@ export default function QuotePage() {
           <span className="section-label-text">Export Quotation</span>
         </div>
         <h1 className="quote-title">
-          <TranslatedText id="pages.quote.heroTitle" fallback="お見積り" />
+          <TranslatedText id="pages.quote.heroTitle" fallback="見積依頼" />
           <br />
-          <em><TranslatedText id="pages.quote.heroSubtitle" fallback="Export Quotation" /></em>
+          <em><TranslatedText id="pages.quote.heroSubtitle" fallback="Request a Quote" /></em>
         </h1>
         <p className="section-body quote-lead">
           <TranslatedText
             id="pages.quote.heroLead"
-            fallback="商品URL・数量・配送先国・希望納期をお知らせいただくと、仕入れ可否調査、国際配送、航空貨物、海上輸送の確認がスムーズです。"
+            fallback="まずは分かる範囲でご相談ください。商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
           />
         </p>
         <div className="quote-hero-actions">
@@ -110,6 +106,46 @@ export default function QuotePage() {
           <Link href="/contact" className="btn-ghost">
             <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
           </Link>
+        </div>
+      </section>
+
+      <section className="quote-mail">
+        <div className="quote-mail-copy">
+          <span>Official Quotation Email</span>
+          <h2><TranslatedText id="pages.quote.formTitle" fallback="見積依頼" /></h2>
+          <p>
+            <TranslatedText
+              id="pages.quote.formLead"
+              fallback="商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
+            />
+          </p>
+          <a href={quoteMailto} className="quote-mail-address">
+            exporter@justhen.co.jp
+          </a>
+        </div>
+        <div className="quote-form-column">
+          <InquiryForm type="quote" mailtoHref={quoteMailto} />
+          <details className="quote-optional-details">
+            <summary>
+              <TranslatedText
+                id="pages.quote.requiredTitle"
+                fallback="より正確なお見積りのために、分かる範囲でご用意いただける情報"
+              />
+            </summary>
+            <p>
+              <TranslatedText
+                id="pages.quote.requiredLead"
+                fallback="すべて必須ではありません。現在分かる範囲でご記載ください。"
+              />
+            </p>
+            <ul>
+              {requiredItems.map((item, index) => (
+                <li key={item}>
+                  <TranslatedText id={`pages.quote.requiredItems.${index}`} fallback={item} />
+                </li>
+              ))}
+            </ul>
+          </details>
         </div>
       </section>
 
@@ -129,30 +165,6 @@ export default function QuotePage() {
               <h3><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.title`} fallback={item.title} /></h3>
               <p><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.text`} fallback={item.text} /></p>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="quote-details">
-        <div>
-          <div className="section-label">
-            <div className="section-label-line" />
-            <span className="section-label-text">Required Details</span>
-          </div>
-          <h2><TranslatedText id="pages.quote.requiredTitle" fallback="お問い合わせ前にご用意いただきたい情報" /></h2>
-          <p>
-            <TranslatedText
-              id="pages.quote.requiredLead"
-              fallback="商品URLは任意です。URLがない場合は、商品名、ブランド名、数量、写真情報、用途、確認したい内容をMessage欄に記載してください。"
-            />
-          </p>
-        </div>
-        <div className="quote-detail-grid">
-          {requiredItems.map((item, index) => (
-            <div className="quote-detail-card" key={item}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <strong><TranslatedText id={`pages.quote.requiredItems.${index}`} fallback={item} /></strong>
-            </div>
           ))}
         </div>
       </section>
@@ -190,23 +202,6 @@ export default function QuotePage() {
             <li key={item}><TranslatedText id={`pages.quote.noticeItems.${index}`} fallback={item} /></li>
           ))}
         </ul>
-      </section>
-
-      <section className="quote-mail">
-        <div>
-          <span>Official Quotation Email</span>
-          <h2><TranslatedText id="pages.quote.formTitle" fallback="フォームから見積内容を送信" /></h2>
-          <p>
-            <TranslatedText
-              id="pages.quote.formLead"
-              fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。メールで直接連絡したい場合は、補助導線としてメールリンクも利用できます。"
-            />
-          </p>
-          <a href={quoteMailto} className="quote-mail-address">
-            exporter@justhen.co.jp
-          </a>
-        </div>
-        <InquiryForm type="quote" mailtoHref={quoteMailto} />
       </section>
 
       <style>{`
@@ -257,7 +252,6 @@ export default function QuotePage() {
         }
 
         .quote-section-head h2,
-        .quote-details h2,
         .quote-notice h2,
         .quote-mail h2 {
           color: var(--washi);
@@ -269,7 +263,6 @@ export default function QuotePage() {
         }
 
         .quote-section-head p,
-        .quote-details p,
         .quote-mail p {
           color: var(--washi-dim);
           font-size: 13px;
@@ -286,8 +279,7 @@ export default function QuotePage() {
         }
 
         .quote-flow-card,
-        .quote-shipping-card,
-        .quote-detail-card {
+        .quote-shipping-card {
           border: 1px solid rgba(201,168,76,0.14);
           background: linear-gradient(180deg, rgba(13,28,53,0.92), rgba(7,17,31,0.82));
         }
@@ -297,8 +289,7 @@ export default function QuotePage() {
           padding: 24px;
         }
 
-        .quote-flow-card span,
-        .quote-detail-card span {
+        .quote-flow-card span {
           color: var(--gold);
           font-family: 'Cormorant Garamond', serif;
           font-size: 30px;
@@ -326,7 +317,6 @@ export default function QuotePage() {
           margin: 0;
         }
 
-        .quote-details,
         .quote-notice,
         .quote-mail {
           padding: var(--section-pad) var(--gutter);
@@ -335,33 +325,6 @@ export default function QuotePage() {
           gap: clamp(28px, 5vw, 72px);
           background: var(--navy-deep);
           border-bottom: 1px solid rgba(201,168,76,0.08);
-        }
-
-        .quote-detail-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
-        }
-
-        .quote-detail-card {
-          display: grid;
-          grid-template-columns: 48px 1fr;
-          align-items: center;
-          gap: 14px;
-          min-height: 72px;
-          padding: 15px 18px;
-        }
-
-        .quote-detail-card span {
-          font-size: 22px;
-        }
-
-        .quote-detail-card strong {
-          color: var(--washi-dim);
-          font-size: 13px;
-          font-weight: 300;
-          letter-spacing: 0.06em;
-          line-height: 1.7;
         }
 
         .quote-shipping-grid {
@@ -409,13 +372,79 @@ export default function QuotePage() {
           grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
         }
 
-        .quote-mail > div > span {
+        .quote-mail-copy > span {
           color: var(--gold);
           display: block;
           font-size: 10px;
           letter-spacing: 0.32em;
           margin-bottom: 14px;
           text-transform: uppercase;
+        }
+
+        .quote-form-column {
+          display: grid;
+          gap: 18px;
+          min-width: 0;
+        }
+
+        .quote-optional-details {
+          border: 1px solid rgba(201,168,76,0.18);
+          background: rgba(7,17,31,0.42);
+          padding: 0 18px;
+        }
+
+        .quote-optional-details summary {
+          align-items: center;
+          color: var(--gold);
+          cursor: pointer;
+          display: flex;
+          font-size: 12px;
+          gap: 16px;
+          justify-content: space-between;
+          letter-spacing: 0.08em;
+          line-height: 1.8;
+          list-style: none;
+          padding: 16px 0;
+        }
+
+        .quote-optional-details summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .quote-optional-details summary::after {
+          content: '+';
+          flex: 0 0 auto;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 24px;
+          font-weight: 300;
+          line-height: 1;
+        }
+
+        .quote-optional-details[open] summary::after {
+          content: '−';
+        }
+
+        .quote-optional-details > p {
+          border-top: 1px solid rgba(201,168,76,0.1);
+          padding-top: 14px;
+        }
+
+        .quote-optional-details ul {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px 18px;
+          list-style: none;
+          margin: 14px 0 18px;
+          padding: 0;
+        }
+
+        .quote-optional-details li {
+          border-left: 1px solid rgba(201,168,76,0.35);
+          color: var(--washi-dim);
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          line-height: 1.7;
+          padding-left: 10px;
         }
 
         .quote-mail-address {
@@ -437,7 +466,6 @@ export default function QuotePage() {
         }
 
         @media (max-width: 900px) {
-          .quote-details,
           .quote-notice,
           .quote-mail {
             grid-template-columns: 1fr;
@@ -450,7 +478,7 @@ export default function QuotePage() {
 
         @media (max-width: 640px) {
           .quote-flow-grid,
-          .quote-detail-grid {
+          .quote-optional-details ul {
             grid-template-columns: 1fr;
           }
 
