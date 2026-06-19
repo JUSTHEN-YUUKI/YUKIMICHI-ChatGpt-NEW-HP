@@ -5,7 +5,7 @@ import { TranslatedText } from '@/components/TranslatedText'
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI',
   description:
-    'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、T/T国際送金、注意事項について。',
+    'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、T/T送金（電信送金）、注意事項について。',
 }
 
 const pricingPlans = [
@@ -103,10 +103,10 @@ const optionalServiceFees = [
 ]
 
 const paymentItems = [
-  'お支払い条件は、原則として日本の当社指定銀行口座へのT/T国際送金による前払いとなります。',
-  'Payment is generally required in advance by T/T bank transfer to YUKIMICHI’s designated bank account in Japan.',
-  '支払方法：銀行によるT/T国際送金',
-  'Payment by T/T bank transfer',
+  'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
+  'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
+  '支払方法：T/T送金（電信送金）',
+  'Payment by T/T remittance',
   '送金手数料・銀行手数料は、原則としてお客様負担となります。',
   'Bank transfer fees and remittance charges are generally borne by the customer.',
   '入金確認後、仕入れ・発注・輸出手配を開始します。',
@@ -308,7 +308,7 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Payment Method / お支払い方法</span>
           </div>
-          <h2>T/T Bank Transfer</h2>
+          <h2>Payment by T/T Remittance</h2>
           <p>
             入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
           </p>

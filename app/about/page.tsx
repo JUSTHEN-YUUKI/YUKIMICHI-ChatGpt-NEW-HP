@@ -115,23 +115,27 @@ export default function AboutPage() {
             商品の在庫・価格・取引可否を含む仕入れ可否調査、輸出関連書類、配送方法、規制確認などを案件ごとに整理し、透明性のある取引を重視しています。
           </p>
           <p lang="en">
-            We support product sourcing feasibility checks, supplier communication, export document preparation, shipping arrangement comparison, and regulatory checks on a case-by-case basis.
+            We support sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks on a case-by-case basis.
           </p>
         </div>
 
         <div className="company-profile-table" role="table" aria-label="Company profile">
-          {companyProfile.map((item) => (
-            <div className="company-profile-row" role="row" key={`${item.en}-${item.valueEn}`}>
-              <div role="cell">
-                <span>{item.ja}</span>
-                <small>{item.en}</small>
+          {companyProfile.map((item) => {
+            const hasDistinctEnglishValue = item.valueEn !== item.valueJa
+
+            return (
+              <div className="company-profile-row" role="row" key={`${item.en}-${item.valueEn}`}>
+                <div role="cell">
+                  <span>{item.ja}</span>
+                  <small>{item.en}</small>
+                </div>
+                <strong role="cell">
+                  {item.href ? <a href={item.href}>{item.valueJa}</a> : item.valueJa}
+                  {hasDistinctEnglishValue && <small>{item.valueEn}</small>}
+                </strong>
               </div>
-              <strong role="cell">
-                {item.href ? <a href={item.href}>{item.valueJa}</a> : item.valueJa}
-                <small>{item.valueEn}</small>
-              </strong>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div className="location-note">
@@ -165,7 +169,7 @@ export default function AboutPage() {
               Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD., has practical experience in international logistics operations related to Narita Airport, Yokohama Port, and Shinagawa Port.
             </p>
             <p>
-              Based on this background, YUKIMICHI supports overseas buyers by coordinating product sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks from the Japan side.
+              Based on this background, YUKIMICHI supports overseas buyers by coordinating sourcing feasibility checks, supplier communication, export document preparation, shipping method comparison, and regulatory checks from the Japan side.
             </p>
             <p>
               We do not support false declarations, regulatory avoidance, or transactions involving counterfeit or infringing goods. Compliance and transparency are central to our service.

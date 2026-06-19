@@ -28,7 +28,7 @@ const strengths = [
     label: "SEA & AIR",
     title: "海上輸送・航空輸送に対応",
     text: "海上貨物、航空貨物、EMS・DHL・FedEx・UPS・ヤマト国際宅急便など、用途に応じた輸送方法を検討します。",
-    textEn: "We review Sea Freight, Air Freight, EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN according to product details and destination.",
+    textEn: "We review sea freight, air freight, EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN according to product details and destination.",
   },
   {
     label: "EXPORT SUPPORT",
@@ -98,7 +98,7 @@ export default function AboutSection() {
             海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。
             <span className="copy-line-en">
               YUKIMICHI is an Export Support brand operated by JUSTHEN CO., LTD.,
-              helping Overseas Buyers review eligible Japanese products, shipping methods,
+              helping overseas buyers review eligible Japanese products, shipping methods,
               documents, and communication before moving into quotation.
             </span>
           </p>

@@ -57,7 +57,7 @@ export default function ContactPage() {
         <p className="section-body contact-lead">
           <TranslatedText
             id="pages.contact.heroLead"
-            fallback="日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。商品URL・数量・配送先国・希望納期をご記載いただくと、確認がスムーズです。"
+            fallback="まずは分かる範囲でお問い合わせください。すべての情報が揃っていなくても送信できます。商品名または商品URL、配送先国、ご相談内容をお送りいただければ、確認に必要な追加情報は当社よりご案内します。"
           />
         </p>
         <div className="contact-hero-actions">
@@ -74,12 +74,19 @@ export default function ContactPage() {
         <aside className="contact-aside">
           <div>
             <span className="contact-kicker">Before Inquiry</span>
-            <h2><TranslatedText id="pages.contact.helpfulTitle" fallback="お問い合わせ前にご用意いただきたい情報" /></h2>
-            <ol className="contact-checklist">
-              {helpfulItems.map((item, index) => (
-                <li key={item}><TranslatedText id={`pages.contact.helpfulItems.${index}`} fallback={item} /></li>
-              ))}
-            </ol>
+            <details className="contact-optional-details">
+              <summary>
+                <TranslatedText id="pages.contact.helpfulTitle" fallback="より正確な確認のために、分かる範囲でご用意いただける情報" />
+              </summary>
+              <p>
+                <TranslatedText id="pages.contact.helpfulLead" fallback="すべて必須ではありません。現在分かる範囲でご用意ください。" />
+              </p>
+              <ol className="contact-checklist">
+                {helpfulItems.map((item, index) => (
+                  <li key={item}><TranslatedText id={`pages.contact.helpfulItems.${index}`} fallback={item} /></li>
+                ))}
+              </ol>
+            </details>
           </div>
 
           <div>
@@ -206,6 +213,32 @@ export default function ContactPage() {
           font-size: 30px;
           line-height: 1.3;
           margin-bottom: 14px;
+        }
+        .contact-optional-details summary {
+          position: relative;
+          cursor: pointer;
+          list-style: none;
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(22px, 2.5vw, 30px);
+          font-weight: 300;
+          line-height: 1.45;
+          padding-right: 34px;
+        }
+        .contact-optional-details summary::-webkit-details-marker { display: none; }
+        .contact-optional-details summary::after {
+          content: '+';
+          position: absolute;
+          top: 0;
+          right: 0;
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 28px;
+          line-height: 1;
+        }
+        .contact-optional-details[open] summary::after { content: '−'; }
+        .contact-optional-details > p {
+          margin: 16px 0 20px;
         }
         .contact-aside p {
           color: var(--washi-dim);

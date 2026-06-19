@@ -28,7 +28,7 @@ const faqs = [
     q: "どの配送会社を利用できますか？",
     qEn: "Which carriers or shipping methods can be reviewed?",
     a: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便などの国際宅配便に加え、案件によっては航空貨物・海上輸送も検討します。納期、コスト、商品特性に応じてご提案します。",
-    aEn: "We review International Courier options such as EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN, and may compare Air Freight or Sea Freight depending on the case.",
+    aEn: "We review international courier services such as EMS, DHL, FedEx, UPS, and Yamato International TA-Q-BIN, and may compare air freight or sea freight depending on the case.",
   },
   {
     q: "航空貨物と海上輸送のどちらが良いですか？",
@@ -112,7 +112,7 @@ export default function FAQSection() {
               詳細は個別見積り時に確認します。
             </span>
             <span className="copy-line-en">
-              These notes help Overseas Buyers understand key Import Review points before inquiry.
+              These notes help overseas buyers understand key Import Review points before inquiry.
               Final conditions vary by product, destination, carrier, and local authority review.
             </span>
           </p>

@@ -49,7 +49,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   'Questions.': { en: 'Questions.', zh: '问题。', es: 'frecuentes.' },
   'Contact Us': { en: 'Contact Us', zh: '联系我们', es: 'Contáctenos' },
   'YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
-    en: 'Frequently asked questions about Japanese product sourcing feasibility checks, international shipping, air freight, sea freight, quotations, duties, and restricted items.',
+    en: 'Frequently asked questions about sourcing feasibility checks for Japanese products, international shipping, air freight, sea freight, quotations, duties, and restricted items.',
     zh: '整理了关于日本商品采购可行性确认、国际配送、空运、海运、报价、关税以及禁止・限制物品的常见问题。',
     es: 'Preguntas frecuentes sobre viabilidad de abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
   },
@@ -103,7 +103,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: '¿Pueden usar EMS, DHL, FedEx, UPS y Yamato International TA-Q-BIN?',
   },
   '航空貨物と国際宅配便の違いは何ですか？': {
-    en: 'What is the difference between Air Freight and International Courier?',
+    en: 'What is the difference between air freight and international courier services?',
     zh: '航空货运和国际快递有什么区别？',
     es: '¿Cuál es la diferencia entre carga aérea y courier internacional?',
   },
@@ -698,7 +698,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Quote Request': { en: 'Quote Request', zh: '报价申请', es: 'Solicitud de cotización' },
   'Terms of Transaction': { en: 'Terms of Transaction', zh: '交易条款', es: 'Condiciones de transacción' },
   'YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。': {
-    en: 'Frequently asked questions about Japanese product sourcing feasibility checks, international shipping, air freight, sea freight, quotes, duties, and restricted or prohibited items.',
+    en: 'Frequently asked questions about sourcing feasibility checks for Japanese products, international shipping, air freight, sea freight, quotes, duties, and restricted or prohibited items.',
     zh: '这里整理了关于日本商品采购可行性确认、国际配送、空运、海运、报价、关税以及限制和禁止物品的常见问题。',
     es: 'Preguntas frecuentes sobre viabilidad de abastecimiento de productos japoneses, envíos internacionales, carga aérea, transporte marítimo, cotizaciones, aranceles y artículos restringidos.',
   },
@@ -1010,7 +1010,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   },
   'お問い合わせへの回答': { en: 'Responding to inquiries', zh: '回答咨询', es: 'Responder consultas' },
   '見積作成': { en: 'Preparing quotations', zh: '制作报价', es: 'Preparar cotizaciones' },
-  '商品の仕入れ可否調査': { en: 'Product sourcing feasibility checks', zh: '商品采购可行性确认', es: 'Revisión de viabilidad de abastecimiento' },
+  '商品の仕入れ可否調査': { en: 'Sourcing feasibility checks', zh: '商品采购可行性确认', es: 'Revisión de viabilidad de abastecimiento' },
   '配送方法・送料・納期の確認': { en: 'Checking shipping method, freight, and lead time', zh: '确认配送方式、运费和交期', es: 'Confirmar método, costo y plazo de envío' },
   '輸出入・配送会社引受条件の確認': { en: 'Checking import/export and carrier acceptance conditions', zh: '确认进出口及承运商受理条件', es: 'Confirmar condiciones de importación/exportación y transportista' },
   '取引条件の確認': { en: 'Confirming transaction terms', zh: '确认交易条件', es: 'Confirmar condiciones de transacción' },

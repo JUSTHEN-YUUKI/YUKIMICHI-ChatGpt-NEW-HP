@@ -12,7 +12,7 @@ const coreServices = [
   {
     code: '01',
     title: '日本商品の仕入れ可否調査',
-    en: 'Japan Product Sourcing Feasibility Check',
+    en: 'Sourcing Feasibility Checks',
     points: [
       '海外バイヤーの希望商品について、日本国内のメーカー・卸・販売元へ確認します。',
       '商品名、URL、数量、希望条件をもとに確認準備を支援します。',
@@ -44,8 +44,8 @@ const coreServices = [
   },
   {
     code: '04',
-    title: '国際宅配便手配',
-    en: 'International Courier Arrangement',
+    title: '国際宅配便・クーリエ手配',
+    en: 'International Courier Service Coordination',
     points: [
       'EMS、DHL、FedEx、UPS、ヤマト国際宅急便などを案件ごとに確認します。',
       '少量、サンプル、小口貨物向けの配送方法確認を支援します。',
@@ -55,8 +55,8 @@ const coreServices = [
   },
   {
     code: '05',
-    title: '航空貨物手配',
-    en: 'Air Freight Arrangement',
+    title: '航空貨物手配・フォワーダー調整',
+    en: 'Air Freight Coordination',
     points: [
       '短納期、高付加価値商品、一定数量の商品について航空貨物を確認します。',
       'フォワーダー、配送会社、通関業者との確認事項を整理します。',
@@ -66,8 +66,8 @@ const coreServices = [
   },
   {
     code: '06',
-    title: '海上輸送手配',
-    en: 'Sea Freight Arrangement',
+    title: '海上輸送手配・LCL/FCL調整',
+    en: 'Sea Freight Coordination',
     points: [
       'LCL、FCL、パレット単位、大口貨物の海上輸送条件を確認します。',
       'フォワーダー、通関業者、港湾関連費用の確認を支援します。',
@@ -130,7 +130,7 @@ const roleItems = [
   {
     actor: 'YUKIMICHI',
     ja: '日本側の仕入れ可否調査、国内取引調整、書類整理、配送手配支援',
-    en: 'Japan-side sourcing feasibility checks, domestic transaction coordination, document organization, and shipping arrangement support.',
+    en: 'Japan-side sourcing feasibility checks, domestic transaction coordination, document organization, and shipping coordination support.',
   },
   {
     actor: 'Supplier',
@@ -205,7 +205,7 @@ export default function ServicesPage() {
               日本商品の仕入れ可否調査・国内取引調整・輸出関連手配
             </p>
             <p className="services-domestic-support__subtitle-en">
-              Product sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
+              Sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping coordination support from Japan.
             </p>
           </div>
           <div className="services-domestic-support__body">
@@ -219,7 +219,7 @@ export default function ServicesPage() {
             </div>
             <div className="services-domestic-support__copy services-domestic-support__copy--en">
               <p>
-                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including product sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping arrangement support from Japan.
+                YUKIMICHI provides Japan-side export coordination and arrangement services for overseas buyers, including sourcing feasibility checks, supplier communication, purchase coordination, documentation checks, and shipping coordination support from Japan.
               </p>
               <p>
                 We are not an inventory sales company or an international carrier. Each case is reviewed with suppliers, carriers, brokers, and relevant parties as needed.

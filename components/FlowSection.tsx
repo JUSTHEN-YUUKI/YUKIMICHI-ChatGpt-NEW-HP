@@ -51,7 +51,7 @@ const flowSteps = [
     title: "International Shipping",
     titleJp: "輸出・国際発送",
     desc: "EMS・DHL・FedEx・UPS・ヤマト国際宅急便、航空貨物、海上輸送などから案件に合う方法を選定します。",
-    descEn: "International Courier, Air Freight, and Sea Freight options are compared based on product, volume, and destination.",
+    descEn: "International courier services, air freight, and sea freight options are compared based on product, volume, and destination.",
   },
   {
     num: "06",
@@ -117,7 +117,7 @@ export default function FlowSection() {
               必要な確認事項を一つずつ整理して進めます。
             </span>
             <span className="copy-line-en">
-              A clear export process helps Overseas Buyers understand what should be reviewed
+              A clear export process helps overseas buyers understand what should be reviewed
               before procurement, shipping, and document preparation.
             </span>
           </p>

@@ -8,7 +8,7 @@ import { translations } from "@/lib/translations"
 const productShowcaseBodyColumns = [
   {
     ja: "YUKIMICHIは、日本商品の仕入れ可否調査から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
-    en: "YUKIMICHI organizes sourcing feasibility checks in Japan, packing, inspection, International Courier, Air Freight, and Sea Freight so Overseas Buyers can review eligible products with greater confidence.",
+    en: "YUKIMICHI organizes sourcing feasibility checks in Japan, packing, inspection, international courier services, air freight, and sea freight so overseas buyers can review eligible products with greater confidence.",
   },
 ]
 

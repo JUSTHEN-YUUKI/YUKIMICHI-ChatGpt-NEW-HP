@@ -146,7 +146,7 @@ const faqCategories = [
       },
       {
         q: 'Do you support FCA / EXW / DAP / DDP?',
-        a: 'Conditions are confirmed individually. EXW, FCA, DAP, and DDP may require different cost, risk, customs, tax, and delivery responsibilities. DDP is not standard unless agreed in writing.',
+        a: 'Conditions are confirmed individually because EXW, FCA, DAP, and DDP assign costs, risk, customs, tax, and delivery responsibilities differently. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
         links: [{ href: '/flow', label: '取引の流れを見る' }],
       },
       {

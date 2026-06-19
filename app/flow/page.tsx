@@ -16,7 +16,7 @@ const steps = [
   {
     number: '02',
     title: '商品・輸入条件の確認',
-    en: 'Product / Import Requirements Review',
+    en: 'Product & Import Requirements Review',
     text: '商品カテゴリ、数量、配送先国、用途をもとに、輸出入規制、配送会社の引受条件、輸入者側で確認すべき許可・税金・販売条件を整理します。',
   },
   {
@@ -46,7 +46,7 @@ const steps = [
   {
     number: '07',
     title: '配送方法の確定・手配',
-    en: 'Shipping Arrangement',
+    en: 'Shipping Coordination',
     text: 'EMS・DHL・FedEx・UPSなどの国際宅配便、航空貨物、海上輸送を比較し、貨物内容と配送先に合う方法を確認したうえで手配します。',
   },
   {
@@ -75,8 +75,8 @@ const responsibilityCards = [
   },
   {
     term: 'Terms Are Confirmed Per Case',
-    ja: '法人取引では FCA Japan warehouse などの条件を設定できる場合があります。ただし DDP のように輸入国側の税金・通関責任まで含む条件は標準対応ではありません。',
-    en: 'For BtoB projects, terms such as FCA Japan warehouse may be arranged individually. However, DDP, which may include destination-side duties, taxes, and customs responsibility, is not a standard service.',
+    ja: '法人取引では、FCA 日本国内指定倉庫渡し（Incoterms® 2020）を個別に設定できる場合があります。指定場所は案件ごとに確認します。DDP条件は、輸入国側の通関・関税・税金対応を含むため、原則として標準対応外です。必要な場合は、案件ごとに対応可否を確認します。',
+    en: 'For B2B projects, FCA designated warehouse in Japan – Incoterms® 2020 may be arranged individually. The named place will be confirmed for each project. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
   },
 ]
 
