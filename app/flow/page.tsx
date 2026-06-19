@@ -57,21 +57,26 @@ const steps = [
   },
 ]
 
-const incotermsNotes = [
+const responsibilityCards = [
   {
-    term: 'Case-by-case',
-    ja: '取引条件は、商品内容・数量・配送先・責任範囲に応じて案件ごとに確認します。',
-    en: 'Trade terms are confirmed case by case based on the product, volume, destination, and responsibility scope.',
+    term: 'What Incoterms Decide',
+    ja: 'インコタームズでは、商品の引渡し場所、輸送費の負担、保険、通関、リスクの移転時点などを確認します。',
+    en: 'Incoterms help clarify the delivery point, freight cost responsibility, insurance, customs-related scope, and when risk transfers between seller and buyer.',
   },
   {
-    term: 'FCA Japan Warehouse',
-    ja: '法人取引では、FCA Japan warehouse などの条件を個別に設定できる場合があります。',
-    en: 'For BtoB projects, terms such as FCA Japan warehouse may be arranged individually.',
+    term: 'Japan-side Support',
+    ja: 'YUKIMICHIは、日本国内での商品調達、仕入先確認、簡易検品、梱包準備、Invoice・Packing Listの整理、配送会社・フォワーダーとの確認を支援します。',
+    en: 'YUKIMICHI supports Japan-side procurement, supplier checks, basic inspection, packing preparation, Invoice and Packing List organization, and coordination with carriers or freight forwarders.',
   },
   {
-    term: 'EXW / FCA / DAP / DDP',
-    ja: 'EXW、FCA、DAP、DDPなどは、対応可否と責任範囲を見積時に確認します。DDPは標準対応ではなく、書面合意がある場合のみ検討します。',
-    en: 'EXW, FCA, DAP, and DDP availability and responsibility scope are confirmed during quotation. DDP is not a standard service unless agreed in writing.',
+    term: 'Importer-side Checks',
+    ja: '輸入国側の通関、関税、VAT/GST、輸入許可、販売可否、ラベル規制、現地法令への適合は、原則として輸入者側で確認が必要です。',
+    en: 'Destination-side customs clearance, duties, VAT/GST, import permits, sales eligibility, labeling rules, and local regulatory compliance generally need to be confirmed by the importer.',
+  },
+  {
+    term: 'Terms Are Confirmed Per Case',
+    ja: '法人取引では FCA Japan warehouse などの条件を設定できる場合があります。ただし DDP のように輸入国側の税金・通関責任まで含む条件は標準対応ではありません。',
+    en: 'For BtoB projects, terms such as FCA Japan warehouse may be arranged individually. However, DDP, which may include destination-side duties, taxes, and customs responsibility, is not a standard service.',
   },
 ]
 
@@ -118,25 +123,43 @@ export default function FlowPage() {
       </section>
 
       <section className="flow-incoterms">
-        <div>
+        <div className="flow-incoterms-copy">
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Incoterms / Responsibility Scope</span>
+            <span className="section-label-text">Trade Terms / Responsibility Scope</span>
           </div>
           <h2 className="section-title">
-            Confirm Terms
+            What Are
             <br />
-            <em>Per Case.</em>
+            <em>Incoterms?</em>
           </h2>
+          <div className="flow-incoterms-lead">
+            <p>
+              インコタームズとは、国際取引で「売主と買主のどちらが、どこまで費用・手配・責任を負うか」を整理するための取引条件です。YUKIMICHIでは、案件ごとに日本側で対応する範囲と、輸入者側で確認が必要な範囲を分けてご案内します。
+            </p>
+            <p lang="en">
+              Incoterms are trade terms used to clarify which party is responsible for costs, arrangements, and risk in international transactions. YUKIMICHI explains the Japan-side support scope and the importer-side responsibilities case by case.
+            </p>
+          </div>
         </div>
-        <div className="flow-incoterms-grid">
-          {incotermsNotes.map((item) => (
-            <article className="flow-incoterms-card" key={item.term}>
-              <span>{item.term}</span>
-              <p>{item.ja}</p>
-              <small>{item.en}</small>
-            </article>
-          ))}
+        <div className="flow-incoterms-content">
+          <div className="flow-incoterms-grid">
+            {responsibilityCards.map((item) => (
+              <article className="flow-incoterms-card" key={item.term}>
+                <h3>{item.term}</h3>
+                <p>{item.ja}</p>
+                <small>{item.en}</small>
+              </article>
+            ))}
+          </div>
+          <aside className="flow-incoterms-notice">
+            <p>
+              最終的な輸入可否、税額、通関判断は、輸入国の税関・通関業者・関係当局の判断に従います。YUKIMICHIは日本側の確認と手配を支援しますが、輸入国側の許認可や販売可否を保証するものではありません。
+            </p>
+            <small>
+              Final import approval, tax amounts, and customs decisions follow the judgment of the destination country’s customs, customs broker, and relevant authorities. YUKIMICHI supports Japan-side checks and arrangements, but does not guarantee destination-side permits or sales eligibility.
+            </small>
+          </aside>
         </div>
       </section>
 
@@ -249,16 +272,38 @@ export default function FlowPage() {
         .flow-incoterms {
           padding: var(--section-pad) var(--gutter);
           display: grid;
-          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+          grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
           gap: clamp(28px, 5vw, 72px);
+          align-items: start;
           background:
             linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
             var(--navy-mid);
           border-top: 1px solid rgba(201,168,76,0.08);
           border-bottom: 1px solid rgba(201,168,76,0.08);
         }
+        .flow-incoterms-lead,
+        .flow-incoterms-content {
+          display: grid;
+          gap: 14px;
+        }
+        .flow-incoterms-lead {
+          max-width: 590px;
+          margin-top: 24px;
+        }
+        .flow-incoterms-lead p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 2;
+          margin: 0;
+        }
+        .flow-incoterms-lead p + p {
+          border-top: 1px solid rgba(201,168,76,0.12);
+          padding-top: 14px;
+        }
         .flow-incoterms-grid {
           display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 14px;
         }
         .flow-incoterms-card {
@@ -266,28 +311,47 @@ export default function FlowPage() {
           background: rgba(7,17,31,0.48);
           padding: 22px;
         }
-        .flow-incoterms-card span {
+        .flow-incoterms-card h3 {
           color: var(--gold);
-          display: block;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(24px, 3vw, 34px);
+          font-size: clamp(22px, 2.5vw, 30px);
           font-weight: 300;
-          line-height: 1.1;
-          margin-bottom: 12px;
+          line-height: 1.15;
+          margin: 0 0 12px;
         }
         .flow-incoterms-card p {
           color: var(--washi);
-          font-size: 13.5px;
+          font-size: 13px;
           letter-spacing: 0.04em;
-          line-height: 1.9;
+          line-height: 1.85;
           margin: 0 0 10px;
         }
         .flow-incoterms-card small {
           color: var(--washi-dim);
           display: block;
-          font-size: 12.5px;
+          font-size: 12px;
           letter-spacing: 0.03em;
-          line-height: 1.8;
+          line-height: 1.75;
+        }
+        .flow-incoterms-notice {
+          border: 1px solid rgba(201,168,76,0.16);
+          border-left-color: rgba(201,168,76,0.5);
+          background: rgba(201,168,76,0.05);
+          padding: 20px 22px;
+        }
+        .flow-incoterms-notice p,
+        .flow-incoterms-notice small {
+          color: var(--washi-dim);
+          display: block;
+          font-size: 12px;
+          letter-spacing: 0.03em;
+          line-height: 1.85;
+          margin: 0;
+        }
+        .flow-incoterms-notice small {
+          border-top: 1px solid rgba(201,168,76,0.1);
+          margin-top: 12px;
+          padding-top: 12px;
         }
         .flow-note {
           padding: var(--section-pad) var(--gutter);
@@ -311,12 +375,17 @@ export default function FlowPage() {
           background: var(--navy-deep);
           border-top: 1px solid rgba(201,168,76,0.08);
         }
+        @media (max-width: 980px) {
+          .flow-incoterms { grid-template-columns: 1fr; }
+        }
         @media (max-width: 760px) {
           .flow-timeline::before { left: 27px; }
           .flow-step { grid-template-columns: 56px minmax(0, 1fr); padding: 22px; gap: 18px; }
           .flow-number { width: 56px; height: 56px; font-size: 20px; }
-          .flow-incoterms,
           .flow-note { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 680px) {
+          .flow-incoterms-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </>
