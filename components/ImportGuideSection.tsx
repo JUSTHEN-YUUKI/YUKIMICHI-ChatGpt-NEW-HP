@@ -3,31 +3,31 @@ import ScrollReveal from "@/components/ScrollReveal"
 
 const individualNotes = [
   {
-    ja: "個人輸入では、通関業者の手配ができない、または対応が限定的な場合があります。",
-    en: "For Personal Import, Customs Broker arrangements may not be available or may be limited.",
+    ja: "個人輸入は、少量・個人利用を前提とするため、通関業者の手配ができない場合や、対応範囲が限られる場合があります。",
+    en: "Personal imports are usually small shipments for private use, so customs broker support may be unavailable or limited.",
   },
   {
-    ja: "関税、輸入税、輸入許可、受取国側の手続きは購入者側で確認が必要です。",
-    en: "Duties, import taxes, permits, and destination-side procedures should be checked by the buyer.",
+    ja: "関税、輸入税、輸入許可、受取国側の規制は、お客様側で事前確認が必要です。",
+    en: "Buyers should check duties, import taxes, permits, and destination-country regulations in advance.",
   },
   {
-    ja: "小口の相談では、国際宅配便を中心に配送方法を確認します。",
-    en: "Small personal shipments are usually reviewed around International Courier options.",
+    ja: "小口貨物は、EMS・DHL・FedEx・UPSなどの国際宅配便を中心に配送方法を確認します。",
+    en: "For small shipments, we mainly review international courier options such as EMS, DHL, FedEx, and UPS.",
   },
 ]
 
 const businessNotes = [
   {
-    ja: "法人輸入では、条件により通関業者との連携が可能な場合があります。",
-    en: "For Business Import, coordination with a Customs Broker may be possible depending on the conditions.",
+    ja: "法人輸入は、貨物内容・数量・取引条件に応じて、通関業者やフォワーダーとの連携を検討できます。",
+    en: "For business imports, coordination with customs brokers or freight forwarders can be reviewed based on the cargo, volume, and trade terms.",
   },
   {
-    ja: "Invoice、Packing List、商品情報、HS Code確認用情報を整理します。",
-    en: "Invoice, packing list, product information, and details for HS Code review should be prepared.",
+    ja: "Invoice、Packing List、商品情報、HS Code確認用資料など、見積・輸出手配に必要な情報を整理します。",
+    en: "We organize the information needed for quotation and export arrangements, including invoices, packing lists, product details, and HS Code review materials.",
   },
   {
-    ja: "国際宅配便、航空貨物、海上輸送を比較し、数量・納期・品目に応じて提案します。",
-    en: "International Courier, Air Freight, and Sea Freight can be compared based on quantity, timeline, and product category.",
+    ja: "国際宅配便、航空貨物、海上輸送を比較し、数量・納期・品目に合う方法を提案します。",
+    en: "We compare international courier, air freight, and sea freight options and propose a method suited to the quantity, timeline, and product category.",
   },
 ]
 
@@ -70,11 +70,12 @@ export default function ImportGuideSection() {
           </h2>
           <p>
             <span className="copy-line-ja">
-              海外バイヤーが日本商品を購入・輸入する前に、個人輸入と法人輸入で確認すべき事項を分けて整理します。
+              海外のお客様が日本商品を購入・輸入する前に、個人利用の小口輸入と法人取引の輸入で、確認すべき手続き・書類・配送方法を分けてご案内します。
             </span>
             <span className="copy-line-en">
-              Before Overseas Buyers request support, this guide separates key Import Review points for
-              Personal Import and Business Import.
+              Before purchasing or importing Japanese products, overseas buyers can review the key
+              differences between small personal imports and business imports, including procedures,
+              documents, and shipping options.
             </span>
           </p>
         </div>
@@ -86,7 +87,7 @@ export default function ImportGuideSection() {
             <span className="guide-panel-kicker">Individual Buyers</span>
             <h3>
               個人のお客様
-              <span>Personal Import Review</span>
+              <span>Personal Import / Small Shipment Review</span>
             </h3>
             <ul>
               {individualNotes.map((note) => (
@@ -102,7 +103,7 @@ export default function ImportGuideSection() {
             <span className="guide-panel-kicker">Business Buyers</span>
             <h3>
               法人のお客様
-              <span>Commercial Import Review</span>
+              <span>Business Import / Commercial Shipment Review</span>
             </h3>
             <ul>
               {businessNotes.map((note) => (
