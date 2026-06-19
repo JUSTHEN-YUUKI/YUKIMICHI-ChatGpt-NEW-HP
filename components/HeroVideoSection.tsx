@@ -1,13 +1,8 @@
 "use client"
 
 import ScrollReveal from "@/components/ScrollReveal"
-import { useLanguage } from "@/components/LanguageProvider"
-import { translations } from "@/lib/translations"
 
 export default function HeroVideoSection() {
-  const { language } = useLanguage()
-  const copy = translations[language].home.productShowcase
-
   return (
     <section className="hero-video-section" aria-labelledby="hero-video-title">
       <div className="hero-video-inner max-w-6xl mx-auto">
@@ -15,16 +10,16 @@ export default function HeroVideoSection() {
           <div className="hero-video-heading">
             <div className="section-label">
               <div className="section-label-line" />
-              <span className="section-label-text">Product &amp; Logistics Media</span>
+              <span className="section-label-text">YUKIMICHI FIELD VISUALS</span>
             </div>
 
             <h2 id="hero-video-title">
-              Real Export Visuals
-              <span>from Hokkaido</span>
+              Export Scenes
+              <span>from Japan</span>
             </h2>
 
             <p>
-              {copy.filmTitle} / {copy.filmMeta}
+              YUKIMICHI / Product Sourcing / Packing / Documentation / Air Freight / Sea Freight
             </p>
           </div>
         </ScrollReveal>
