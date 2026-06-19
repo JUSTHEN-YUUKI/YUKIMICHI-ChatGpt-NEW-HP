@@ -12,10 +12,6 @@ const productShowcaseBodyColumns = [
     ja: "YUKIMICHIは、日本商品の仕入れ可否調査から、梱包・検品、国際宅配便、航空貨物、海上輸送まで、取扱可否を確認したうえで海外のお客様が安心して日本商品を取引できる環境を整えます。",
     en: "YUKIMICHI organizes sourcing feasibility checks in Japan, packing, inspection, International Courier, Air Freight, and Sea Freight so Overseas Buyers can review eligible products with greater confidence.",
   },
-  {
-    ja: "商品写真、梱包確認、札幌・北海道の実写素材、輸送関連の動画を活用し、日本発の取引イメージを分かりやすくお伝えします。",
-    en: "Product photography, packing scenes, Hokkaido visuals, and logistics footage help present a clear Japan-side transaction image while keeping a compliance-first tone.",
-  },
 ]
 
 function ArrowRight({ size = 14 }: { size?: number }) {
@@ -168,7 +164,7 @@ export default function ProductShowcaseSection() {
 
         .visual-body-grid {
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: minmax(0, 1fr);
           gap: 16px;
           max-width: 980px;
         }
