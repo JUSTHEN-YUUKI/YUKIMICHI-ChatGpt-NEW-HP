@@ -137,7 +137,7 @@ export default function HeroSection() {
           margin-bottom: 22px;
           color: var(--gold);
           font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(14px, 1.55vw, 17px);
+          font-size: clamp(16px, 1.85vw, 21px);
           font-weight: 300;
           letter-spacing: 0.24em;
           line-height: 1.5;
@@ -180,7 +180,7 @@ export default function HeroSection() {
           .hero-kicker {
             gap: 10px;
             margin-bottom: 18px;
-            font-size: 13px;
+            font-size: 15px;
             letter-spacing: 0.1em;
           }
 
