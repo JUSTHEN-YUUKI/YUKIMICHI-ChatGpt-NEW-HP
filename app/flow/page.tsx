@@ -57,33 +57,62 @@ const steps = [
   },
 ]
 
-const responsibilityCards = [
+const beginnerCards = [
   {
-    term: 'What Incoterms® Rules Clarify',
-    ja: 'Incoterms® rulesでは、商品の引渡し場所、輸送手配の担当範囲、費用負担、売主から買主へリスクが移転するタイミングを整理します。',
-    en: 'Incoterms® rules help define the delivery point, transportation arrangements, cost allocation, and the timing of risk transfer from the seller to the buyer.',
+    step: '01',
+    title: 'まず、誰がどこまで負担するかを決めます',
+    enTitle: 'Clarify who handles each responsibility',
+    text: 'Incoterms® rulesは、売主と買主の間で「費用・手配・リスク」をどこで分けるかを整理するための国際的な貿易条件です。',
+    en: 'Incoterms® rules clarify how costs, arrangements, and risks are allocated between sellers and buyers.',
   },
   {
-    term: 'Japan-side Support',
-    ja: 'YUKIMICHIは、日本国内での商品調達、仕入先確認、簡易検品、梱包準備、Commercial Invoice・Packing Listを含む輸出書類の作成・確認、配送会社・フォワーダーとの確認を支援します。',
-    en: 'YUKIMICHI supports Japan-side procurement, supplier checks, basic inspection, packing preparation, export document preparation and review including Commercial Invoice and Packing List, and coordination with carriers or freight forwarders.',
+    step: '02',
+    title: '次に、日本側で対応できる範囲を確認します',
+    enTitle: 'Confirm Japan-side support scope',
+    text: 'YUKIMICHIは、仕入先確認、商品調達、梱包準備、輸出書類の作成・確認、配送会社やフォワーダーとの調整を支援します。',
+    en: 'YUKIMICHI supports supplier checks, procurement, packing preparation, export document preparation and review, and coordination with carriers or forwarders.',
   },
   {
-    term: 'Importer-side Checks',
-    ja: '輸入国側の通関、関税、VAT/GST、輸入許可、販売可否、ラベル規制、現地法令への適合は、原則として輸入者側で確認が必要です。',
-    en: 'Destination-side customs clearance, duties, VAT/GST, import permits, sales eligibility, labeling rules, and local regulatory compliance generally need to be confirmed by the importer.',
+    step: '03',
+    title: '輸入国側の確認事項は買主側で確認します',
+    enTitle: 'Importer-side matters must be checked locally',
+    text: '輸入許可、通関可否、関税・VAT/GST、現地販売可否、ラベル規制などは、原則として輸入者側で確認が必要です。',
+    en: 'Import permits, customs clearance, duties, VAT/GST, local sales eligibility, and labeling rules generally need to be checked by the importer.',
   },
   {
-    term: 'Terms Are Confirmed Per Case',
-    ja: 'DDP条件は、輸入国側の通関・関税・税金対応を含むため、原則として標準対応外です。必要な場合は、案件ごとに対応可否を確認します。',
-    en: 'DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
+    step: '04',
+    title: '最後に、案件ごとに取引条件を確定します',
+    enTitle: 'Confirm the final terms case by case',
+    text: '最終的な取引条件は、商品内容、輸送方法、仕向国、買主側フォワーダーの有無、保険条件などを確認したうえで決定します。',
+    en: 'Final trade terms are confirmed based on the product, shipping method, destination, buyer-side forwarder arrangement, and insurance conditions.',
+  },
+]
+
+const documentCards = [
+  {
+    title: 'Commercial Invoice（コマーシャルインボイス）',
+    enTitle: 'Commercial Invoice',
+    text: '商品名、数量、単価、合計金額、通貨、売主、買主、原産国、取引条件などを記載する基本書類です。',
+    en: 'A basic export document showing product description, quantity, unit price, total amount, currency, seller, buyer, country of origin, and shipping terms.',
+  },
+  {
+    title: 'Packing List（パッキングリスト）',
+    enTitle: 'Packing List',
+    text: '箱数、重量、サイズ、梱包内容など、貨物の梱包情報を整理する書類です。',
+    en: 'A document that summarizes packing details such as carton count, weight, dimensions, and package contents.',
+  },
+  {
+    title: '輸出書類の作成・確認サポート',
+    enTitle: 'Export Document Preparation and Review',
+    text: '買主、仕入先、フォワーダー、関係者から提供された情報をもとに、輸出書類の作成・確認を支援します。必要書類は商品・配送方法・仕向国により異なります。',
+    en: 'YUKIMICHI assists with Japan-side export document preparation and review based on information from the buyer, supplier, forwarder, and relevant parties.',
   },
 ]
 
 const incotermsGroups = [
   {
-    title: 'All Transport Modes',
-    ja: '全輸送モード対応',
+    title: '全輸送モードで使われる条件',
+    enTitle: 'All Transport Modes',
     terms: [
       ['EXW', 'Ex Works', '工場渡し'],
       ['FCA', 'Free Carrier', '運送人渡し'],
@@ -95,8 +124,8 @@ const incotermsGroups = [
     ],
   },
   {
-    title: 'Sea and Inland Waterway Only',
-    ja: '海上・内水路輸送専用',
+    title: '海上・内水路輸送専用の条件',
+    enTitle: 'Sea and Inland Waterway Only',
     terms: [
       ['FAS', 'Free Alongside Ship', '船側渡し'],
       ['FOB', 'Free On Board', '本船渡し'],
@@ -110,23 +139,26 @@ const featuredIncoterms = [
   {
     code: 'FCA',
     name: 'Free Carrier',
-    badge: '日本側手配 / Japan-side Arrangement',
-    en: 'FCA is one practical trade term for Japan-side export arrangements. Based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan, YUKIMICHI can support supplier checks, packing preparation, Commercial Invoice and Packing List organization, and coordination with carriers or freight forwarders on a case-by-case basis.',
-    ja: 'FCAは、日本側の輸出手配で検討できる取引条件の一つです。日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準に、YUKIMICHIでは仕入先確認、梱包準備、Commercial Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
+    badge: '日本側手配で使いやすい条件',
+    enBadge: 'Practical for Japan-side arrangement',
+    ja: '日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準にする条件です。YUKIMICHIでは、仕入先確認、梱包準備、Commercial Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
+    en: 'FCA is practical for Japan-side export arrangements based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan.',
   },
   {
     code: 'EXW',
     name: 'Ex Works',
-    badge: '個別確認 / Case-by-case',
-    en: 'EXW means that goods are made available at the supplier’s, manufacturer’s, retailer’s, or warehouse location. YUKIMICHI can support supplier communication, handover schedule confirmation, product condition checks, and domestic pickup coordination on a case-by-case basis. However, for international shipments, export clearance, domestic pickup, international transport arrangements, and destination-side regulatory checks may become complicated for the buyer. Depending on the project, FCA may be a more practical option.',
-    ja: 'EXWは、メーカー、卸、販売店、倉庫などで貨物を引き渡す取引条件です。YUKIMICHIでは、仕入先との連絡、引き渡し可能日の確認、商品状態の確認、国内引取の調整を案件ごとに支援します。ただし、海外向け輸出では、輸出通関、国内輸送、国際輸送手配、輸入国側の規制確認などが買主側に集中しやすいため、案件内容によってはFCAの方が実務上適している場合があります。',
+    badge: '個別確認が必要な条件',
+    enBadge: 'Case-by-case review required',
+    ja: 'メーカー、卸、販売店、倉庫などで貨物を引き渡す条件です。ただし、海外向け輸出では、輸出通関、国内輸送、国際輸送手配などが買主側に集中しやすいため、FCAの方が実務上適している場合があります。',
+    en: 'EXW means goods are made available at the supplier or warehouse location. For international shipments, FCA may be more practical depending on the project.',
   },
   {
     code: 'FOB',
     name: 'Free On Board',
-    badge: '海上輸送向け / Sea Freight',
-    en: 'FOB is a trade term used for sea freight. The cost and risk allocation is based on the point at which the goods are loaded on board the vessel at the named port of shipment, such as Tokyo Port, Osaka Port, or Yokohama Port. For sea LCL/FCL projects, YUKIMICHI can support supplier checks, coordination with port warehouses or freight forwarders, and export document preparation and review on a case-by-case basis. For air cargo, EMS, DHL, FedEx, UPS, and other courier shipments, FCA or other suitable terms should be considered instead of FOB.',
-    ja: 'FOBは、海上輸送で使用される取引条件です。東京港、大阪港、横浜港などの指定船積港で、本船上に貨物が積み込まれた時点を基準に、費用負担とリスク移転の範囲を整理します。YUKIMICHIでは、海上LCL/FCL案件において、仕入先確認、港湾倉庫・フォワーダーとの確認、輸出書類の作成・確認などを案件ごとに支援します。なお、航空貨物、EMS、DHL、FedEx、UPSなどの国際エクスプレスでは、FOBではなくFCA等の条件を確認します。',
+    badge: '海上輸送向けの条件',
+    enBadge: 'For sea freight',
+    ja: '東京港、大阪港、横浜港などの指定船積港で、本船上に貨物が積み込まれた時点を基準に、費用負担とリスク移転を整理する条件です。航空貨物、EMS、DHL、FedEx、UPSなどでは、FOBではなくFCA等を確認します。',
+    en: 'FOB is used for sea freight. For air cargo and courier shipments such as EMS, DHL, FedEx, and UPS, FCA or other suitable terms should be considered instead.',
   },
 ]
 
@@ -179,164 +211,117 @@ export default function FlowPage() {
             <span className="section-label-text">Trade Terms / Responsibility Scope</span>
           </div>
           <h2 className="section-title">
-            What Are
+            取引条件と
             <br />
-            <em>Incoterms® Rules?</em>
+            <em>責任範囲。</em>
           </h2>
-          <p className="flow-incoterms-heading-ja">Incoterms® rules（インコタームズ）とは</p>
-          <div className="flow-incoterms-lead">
-            <p lang="en">
-              Incoterms® rules are internationally recognized trade terms used to clarify the allocation of responsibilities, costs, and risks between sellers and buyers in international transactions.
-            </p>
+          <p className="flow-subtitle-en">Incoterms® Rules and Export Document Basics</p>
+          <div className="flow-main-lead">
             <p>
-              Incoterms® rules（インコタームズ）とは、国際取引において、売主と買主の間で、費用・手配・リスクの負担範囲を明確にするために使用される国際的な貿易条件です。
+              輸出取引では、「誰が、どこまで、費用・手配・リスクを負担するか」を先に整理することが重要です。
+              YUKIMICHIでは、専門用語をそのまま並べるのではなく、日本側で支援できる範囲と、輸入者側で確認が必要な範囲を分けてご案内します。
             </p>
             <p lang="en">
-              For example, terms such as FCA, FOB, CIF, and DAP help define the delivery point, transportation arrangements, cost allocation, and the timing of risk transfer from the seller to the buyer.
-            </p>
-            <p>
-              例えば、FCA、FOB、CIF、DAPなどの条件により、商品の引渡し場所、輸送手配の担当範囲、費用負担、売主から買主へリスクが移転するタイミングを整理できます。
-            </p>
-            <p lang="en">
-              YUKIMICHI uses Incoterms® rules as a reference when confirming shipping arrangements, cost responsibilities, and the scope of Japan-side export coordination. Final trade terms should be confirmed for each transaction between the buyer, seller, freight forwarder, and other relevant parties.
-            </p>
-            <p>
-              YUKIMICHIでは、配送手配、費用負担、日本側の輸出調整範囲を確認する際の参考として、Incoterms® rulesを確認します。最終的な取引条件は、案件ごとに買主、売主、フォワーダー、その他関係者の間で確認する必要があります。
+              In export transactions, it is important to clarify who is responsible for each cost, arrangement, and risk. YUKIMICHI explains the Japan-side support scope and importer-side responsibilities in a practical way.
             </p>
           </div>
         </div>
+
         <div className="flow-incoterms-content">
-          <div className="flow-incoterms-grid">
-            {responsibilityCards.map((item) => (
-              <article className="flow-incoterms-card" key={item.term}>
-                <h3>{item.term}</h3>
-                <p>{item.ja}</p>
-                <small>{item.en}</small>
+          <div className="flow-simple-grid">
+            {beginnerCards.map((item) => (
+              <article className="flow-simple-card" key={item.step}>
+                <span className="flow-simple-step">{item.step}</span>
+                <h3>{item.title}</h3>
+                <small>{item.enTitle}</small>
+                <p>{item.text}</p>
+                <p lang="en">{item.en}</p>
               </article>
             ))}
           </div>
           <aside className="flow-incoterms-notice">
+            <strong>重要な確認事項</strong>
             <p>
-              最終的な輸入可否、税額、通関判断は、輸入国の税関・通関業者・関係当局の判断に従います。YUKIMICHIは日本側の確認と手配を支援しますが、輸入国側の許認可や販売可否を保証するものではありません。
+              最終的な輸入可否、税額、通関判断、輸入許可、現地販売可否は、輸入国の税関・通関業者・関係当局・配送会社の判断に従います。YUKIMICHIは日本側の確認と手配を支援しますが、輸入国側の許認可や販売可否を保証するものではありません。
             </p>
             <small>
-              Final import approval, tax amounts, and customs decisions follow the judgment of the destination country’s customs, customs broker, and relevant authorities. YUKIMICHI supports Japan-side checks and arrangements, but does not guarantee destination-side permits or sales eligibility.
+              Final import approval, tax amounts, customs decisions, import permits, and local sales eligibility are subject to the decisions of customs authorities, customs brokers, regulatory agencies, and carriers in the destination country.
             </small>
           </aside>
         </div>
 
         <div className="flow-incoterms-expanded">
-          <div className="flow-document-info" aria-label="Export document preparation and review">
-            <article className="flow-document-card">
-              <span className="flow-incoterms-kicker">Commercial Invoice / Packing List</span>
-              <h2>Commercial Invoice（コマーシャルインボイス）・Packing List（パッキングリスト）</h2>
-              <div className="flow-document-copy">
-                <p lang="en">
-                  For international shipments, a Commercial Invoice and Packing List are commonly required as basic export documents.
-                </p>
-                <p>
-                  国際輸送では、基本的な輸出書類として、Commercial Invoice（コマーシャルインボイス）およびPacking List（パッキングリスト）が必要となる場合があります。
-                </p>
-                <p lang="en">
-                  A Commercial Invoice generally includes information such as product description, quantity, unit price, total amount, currency, seller, buyer, country of origin, and shipping terms.
-                </p>
-                <p>
-                  Commercial Invoiceには、通常、商品名、数量、単価、合計金額、通貨、売主、買主、原産国、取引条件などの情報を記載します。
-                </p>
-                <p lang="en">
-                  A Packing List generally includes packing details such as the number of cartons, weight, dimensions, and package contents.
-                </p>
-                <p>
-                  Packing Listには、通常、箱数、重量、サイズ、梱包内容などの梱包情報を記載します。
-                </p>
-                <p lang="en">
-                  YUKIMICHI supports the preparation and review of export documents, including Commercial Invoice and Packing List, based on information provided by the buyer, supplier, freight forwarder, and other relevant parties.
-                </p>
-                <p>
-                  YUKIMICHIでは、買主、仕入先、フォワーダー、その他関係者から提供された情報をもとに、Commercial InvoiceおよびPacking Listを含む輸出書類の作成・確認をサポートします。
-                </p>
-              </div>
-            </article>
-
-            <article className="flow-document-card flow-document-card--accent">
-              <span className="flow-incoterms-kicker">Export Document Preparation and Review</span>
-              <h2>輸出書類の作成・確認サポート</h2>
-              <div className="flow-document-copy">
-                <p lang="en">
-                  YUKIMICHI assists with Japan-side export document preparation and review for international shipments. The required documents may vary depending on the product, shipping method, destination country, carrier, customs broker, and applicable regulations.
-                </p>
-                <p>
-                  YUKIMICHIでは、国際輸送に必要となる日本側の輸出書類の作成・確認をサポートします。必要書類は、商品内容、配送方法、仕向国、配送会社、通関業者、関連規制により異なります。
-                </p>
-                <p lang="en">
-                  Please note that final acceptance, customs clearance, import approval, and local sales eligibility are subject to the decisions of carriers, customs authorities, regulatory agencies, and other relevant parties.
-                </p>
-                <p>
-                  なお、最終的な引受可否、通関可否、輸入許可、現地販売可否については、配送会社、税関、関係機関、その他関係者の判断に基づきます。
-                </p>
-              </div>
-            </article>
-          </div>
-
-          <header className="flow-incoterms-expanded-header">
-            <div>
-              <span className="flow-incoterms-kicker">Supported Trade Terms</span>
-              <h2>対応可能な取引条件</h2>
+          <section className="flow-explain-section">
+            <header className="flow-explain-header">
+              <span>Export Documents</span>
+              <h2>国際輸送でよく使う基本書類</h2>
+              <p lang="en">Basic documents commonly used for international shipments.</p>
+            </header>
+            <div className="flow-document-info" aria-label="Export document preparation and review">
+              {documentCards.map((item) => (
+                <article className="flow-document-card" key={item.title}>
+                  <span>{item.enTitle}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <p lang="en">{item.en}</p>
+                </article>
+              ))}
             </div>
-            <div className="flow-incoterms-summary">
-              <p>
-                Incoterms® rulesは、貨物の引渡し場所、費用負担、輸送手配、保険、通関、リスク移転の範囲を整理するための国際取引条件です。YUKIMICHIでは、案件ごとに商品内容、輸送方法、仕向地、買主側フォワーダーの有無を確認し、適切な取引条件を整理します。
-              </p>
-              <p lang="en">
-                Incoterms® rules clarify the delivery point, cost allocation, transport arrangement, insurance, customs clearance, and transfer of risk between seller and buyer. YUKIMICHI reviews each project based on the product, shipping method, destination, and buyer-side forwarder arrangement, and supports the selection of suitable trade terms.
-              </p>
+          </section>
+
+          <section className="flow-explain-section">
+            <header className="flow-explain-header">
+              <span>Incoterms® 2020 Rules</span>
+              <h2>Incoterms® 2020 の種類</h2>
+              <p lang="en">A simplified list of Incoterms® 2020 rules.</p>
+            </header>
+            <div className="flow-incoterms-types" aria-label="Incoterms 2020 types">
+              {incotermsGroups.map((group) => (
+                <article className="flow-incoterms-type-card" key={group.title}>
+                  <h3>{group.title}</h3>
+                  <span>{group.enTitle}</span>
+                  <dl>
+                    {group.terms.map(([code, name, ja]) => (
+                      <div key={code}>
+                        <dt>{code}</dt>
+                        <dd>
+                          <strong>{ja}</strong>
+                          <small>{name}</small>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </article>
+              ))}
             </div>
-          </header>
+          </section>
 
-          <div className="flow-incoterms-list-heading">
-            <span>Incoterms® 2020 Rules</span>
-            <h3>Incoterms® 2020 の種類一覧</h3>
-          </div>
-
-          <div className="flow-incoterms-types" aria-label="Incoterms 2020 types">
-            {incotermsGroups.map((group) => (
-              <article className="flow-incoterms-type-card" key={group.title}>
-                <h3>{group.title}</h3>
-                <span>{group.ja}</span>
-                <dl>
-                  {group.terms.map(([code, name, ja]) => (
-                    <div key={code}>
-                      <dt>{code}</dt>
-                      <dd>
-                        <strong>{name}</strong>
-                        <small>{ja}</small>
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </article>
-            ))}
-          </div>
-
-          <div className="flow-incoterms-featured">
-            {featuredIncoterms.map((term) => (
-              <article
-                className="flow-incoterms-featured-card"
-                key={term.code}
-              >
-                <span className="flow-incoterms-badge">{term.badge}</span>
-                <h3>
-                  {term.code} <small>/ {term.name}</small>
-                </h3>
-                <p>{term.ja}</p>
-                <p lang="en">{term.en}</p>
-              </article>
-            ))}
-          </div>
+          <section className="flow-explain-section">
+            <header className="flow-explain-header">
+              <span>Common Examples</span>
+              <h2>実務上よく確認する条件</h2>
+              <p lang="en">Common examples reviewed in Japan-side export coordination.</p>
+            </header>
+            <div className="flow-incoterms-featured">
+              {featuredIncoterms.map((term) => (
+                <article className="flow-incoterms-featured-card" key={term.code}>
+                  <span className="flow-incoterms-badge">
+                    {term.badge}
+                    <small>{term.enBadge}</small>
+                  </span>
+                  <h3>
+                    {term.code} <small>/ {term.name}</small>
+                  </h3>
+                  <p>{term.ja}</p>
+                  <p lang="en">{term.en}</p>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <aside className="flow-incoterms-case-notice">
             <div>
-              <span>Terms Are Confirmed Per Case</span>
+              <span>Case-by-case Confirmation</span>
               <h3>取引条件は案件ごとに確認</h3>
             </div>
             <div>
@@ -344,7 +329,7 @@ export default function FlowPage() {
                 取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なIncoterms® ruleは、見積書、Commercial Invoice、Packing List、契約書等で明確に確認したうえで進行します。
               </p>
               <p lang="en">
-                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms® rule will be confirmed clearly in the quotation, Commercial Invoice, Packing List, contract, or related documents before proceeding.
+                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms® rule will be confirmed in the quotation, Commercial Invoice, Packing List, contract, or related documents before proceeding.
               </p>
             </div>
           </aside>
@@ -460,90 +445,122 @@ export default function FlowPage() {
         .flow-incoterms {
           padding: var(--section-pad) var(--gutter);
           display: grid;
-          grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+          grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
           gap: clamp(28px, 5vw, 72px);
           align-items: start;
           background:
-            linear-gradient(135deg, rgba(139,30,47,0.18), transparent 48%),
+            linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
             var(--navy-mid);
           border-top: 1px solid rgba(201,168,76,0.08);
           border-bottom: 1px solid rgba(201,168,76,0.08);
         }
-        .flow-incoterms-heading-ja {
+        .flow-subtitle-en {
           color: var(--gold-light);
-          font-size: 13px;
-          letter-spacing: 0.12em;
+          font-size: 12px;
+          letter-spacing: 0.16em;
           line-height: 1.8;
+          text-transform: uppercase;
           margin: 18px 0 0;
         }
-        .flow-incoterms-lead,
-        .flow-incoterms-content {
+        .flow-main-lead {
           display: grid;
           gap: 14px;
-        }
-        .flow-incoterms-lead {
-          max-width: 590px;
+          max-width: 620px;
           margin-top: 24px;
         }
-        .flow-incoterms-lead p {
-          color: var(--washi-dim);
-          font-size: 13px;
+        .flow-main-lead p {
+          color: var(--washi);
+          font-size: 14px;
           letter-spacing: 0.04em;
-          line-height: 2;
+          line-height: 2.1;
           margin: 0;
         }
-        .flow-incoterms-lead p[lang='en'] {
-          color: var(--washi);
-        }
-        .flow-incoterms-lead p + p {
+        .flow-main-lead p[lang='en'] {
+          color: var(--washi-dim);
+          font-size: 12.5px;
           border-top: 1px solid rgba(201,168,76,0.12);
           padding-top: 14px;
         }
-        .flow-incoterms-grid {
+        .flow-incoterms-content {
+          display: grid;
+          gap: 16px;
+        }
+        .flow-simple-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 14px;
         }
-        .flow-incoterms-card {
-          border: 1px solid rgba(201,168,76,0.16);
-          background: rgba(7,17,31,0.48);
-          padding: 22px;
+        .flow-simple-card {
+          position: relative;
+          border: 1px solid rgba(201,168,76,0.17);
+          background: linear-gradient(145deg, rgba(7,17,31,0.76), rgba(13,28,53,0.58));
+          padding: 24px;
+          min-width: 0;
         }
-        .flow-incoterms-card h3 {
-          color: var(--gold);
+        .flow-simple-step {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border: 1px solid rgba(201,168,76,0.36);
+          border-radius: 50%;
+          color: var(--gold-light);
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(22px, 2.5vw, 30px);
-          font-weight: 300;
-          line-height: 1.15;
-          margin: 0 0 12px;
+          font-size: 18px;
+          margin-bottom: 16px;
         }
-        .flow-incoterms-card p {
+        .flow-simple-card h3 {
+          color: var(--washi);
+          font-size: 18px;
+          font-weight: 400;
+          letter-spacing: 0.08em;
+          line-height: 1.6;
+          margin: 0 0 5px;
+        }
+        .flow-simple-card small {
+          display: block;
+          color: var(--gold);
+          font-size: 10px;
+          letter-spacing: 0.14em;
+          line-height: 1.6;
+          text-transform: uppercase;
+          margin-bottom: 14px;
+        }
+        .flow-simple-card p {
           color: var(--washi);
           font-size: 13px;
           letter-spacing: 0.04em;
-          line-height: 1.85;
-          margin: 0 0 10px;
+          line-height: 1.9;
+          margin: 0;
         }
-        .flow-incoterms-card small {
+        .flow-simple-card p[lang='en'] {
           color: var(--washi-dim);
-          display: block;
           font-size: 12px;
-          letter-spacing: 0.03em;
-          line-height: 1.75;
+          border-top: 1px solid rgba(201,168,76,0.1);
+          margin-top: 12px;
+          padding-top: 12px;
         }
         .flow-incoterms-notice {
-          border: 1px solid rgba(201,168,76,0.16);
-          border-left-color: rgba(201,168,76,0.5);
-          background: rgba(201,168,76,0.05);
+          border: 1px solid rgba(201,168,76,0.2);
+          border-left: 3px solid var(--gold);
+          background: rgba(201,168,76,0.06);
           padding: 20px 22px;
+        }
+        .flow-incoterms-notice strong {
+          display: block;
+          color: var(--gold-light);
+          font-size: 13px;
+          letter-spacing: 0.12em;
+          margin-bottom: 10px;
         }
         .flow-incoterms-notice p,
         .flow-incoterms-notice small {
           color: var(--washi-dim);
           display: block;
-          font-size: 12px;
+          font-size: 12.5px;
           letter-spacing: 0.03em;
-          line-height: 1.85;
+          line-height: 1.9;
           margin: 0;
         }
         .flow-incoterms-notice small {
@@ -554,62 +571,22 @@ export default function FlowPage() {
         .flow-incoterms-expanded {
           grid-column: 1 / -1;
           display: grid;
-          gap: 28px;
+          gap: clamp(28px, 4vw, 48px);
           margin-top: clamp(22px, 3vw, 42px);
           padding-top: clamp(28px, 4vw, 52px);
           border-top: 1px solid rgba(201,168,76,0.18);
           min-width: 0;
         }
-        .flow-document-info {
+        .flow-explain-section {
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
+          gap: 18px;
         }
-        .flow-document-card {
-          border: 1px solid rgba(201,168,76,0.2);
-          background: linear-gradient(145deg, rgba(7,17,31,0.72), rgba(13,28,53,0.58));
-          padding: clamp(22px, 3vw, 34px);
-          min-width: 0;
-        }
-        .flow-document-card--accent {
-          border-left: 3px solid var(--gold);
-          background: rgba(201,168,76,0.06);
-        }
-        .flow-document-card h2 {
-          color: var(--washi);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(26px, 3.4vw, 42px);
-          font-weight: 300;
-          line-height: 1.16;
-          margin: 10px 0 22px;
-        }
-        .flow-document-copy {
+        .flow-explain-header {
           display: grid;
-          gap: 0;
+          gap: 6px;
+          max-width: 820px;
         }
-        .flow-document-copy p {
-          color: var(--washi-dim);
-          font-size: 12.5px;
-          letter-spacing: 0.03em;
-          line-height: 1.95;
-          margin: 0;
-          overflow-wrap: anywhere;
-        }
-        .flow-document-copy p[lang='en'] {
-          color: var(--washi);
-        }
-        .flow-document-copy p + p {
-          border-top: 1px solid rgba(201,168,76,0.1);
-          margin-top: 12px;
-          padding-top: 12px;
-        }
-        .flow-incoterms-expanded-header {
-          display: grid;
-          grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-          gap: clamp(28px, 5vw, 72px);
-          align-items: start;
-        }
-        .flow-incoterms-kicker,
+        .flow-explain-header span,
         .flow-incoterms-case-notice span {
           display: block;
           color: var(--gold);
@@ -618,54 +595,68 @@ export default function FlowPage() {
           line-height: 1.6;
           text-transform: uppercase;
         }
-        .flow-incoterms-expanded-header h2,
+        .flow-explain-header h2,
         .flow-incoterms-case-notice h3 {
           color: var(--washi);
           font-family: 'Cormorant Garamond', serif;
           font-size: clamp(30px, 4vw, 48px);
           font-weight: 300;
           line-height: 1.12;
-          margin: 8px 0 0;
+          margin: 0;
         }
-        .flow-incoterms-summary {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 22px;
-        }
-        .flow-incoterms-summary p,
-        .flow-incoterms-featured-card p,
-        .flow-incoterms-case-notice p {
+        .flow-explain-header p {
           color: var(--washi-dim);
           font-size: 12.5px;
-          letter-spacing: 0.03em;
+          letter-spacing: 0.08em;
+          line-height: 1.7;
+          margin: 0;
+        }
+        .flow-document-info {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 16px;
+        }
+        .flow-document-card {
+          border: 1px solid rgba(201,168,76,0.2);
+          background: linear-gradient(145deg, rgba(7,17,31,0.72), rgba(13,28,53,0.58));
+          padding: clamp(22px, 3vw, 30px);
+          min-width: 0;
+        }
+        .flow-document-card > span {
+          display: block;
+          color: var(--gold);
+          font-size: 10px;
+          letter-spacing: 0.18em;
+          line-height: 1.6;
+          text-transform: uppercase;
+          margin-bottom: 10px;
+        }
+        .flow-document-card h3 {
+          color: var(--washi);
+          font-size: 18px;
+          font-weight: 400;
+          letter-spacing: 0.08em;
+          line-height: 1.6;
+          margin: 0 0 14px;
+        }
+        .flow-document-card p {
+          color: var(--washi);
+          font-size: 13px;
+          letter-spacing: 0.04em;
           line-height: 1.9;
           margin: 0;
-          overflow-wrap: anywhere;
         }
-        .flow-incoterms-summary p[lang='en'] {
-          border-left: 1px solid rgba(201,168,76,0.14);
-          padding-left: 22px;
+        .flow-document-card p[lang='en'] {
+          color: var(--washi-dim);
+          font-size: 12px;
+          border-top: 1px solid rgba(201,168,76,0.1);
+          margin-top: 12px;
+          padding-top: 12px;
         }
         .flow-incoterms-types {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 16px;
-        }
-        .flow-incoterms-list-heading span {
-          display: block;
-          color: var(--gold);
-          font-size: 10px;
-          letter-spacing: 0.28em;
-          line-height: 1.6;
-          text-transform: uppercase;
-        }
-        .flow-incoterms-list-heading h3 {
-          color: var(--washi);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(25px, 3vw, 34px);
-          font-weight: 300;
-          line-height: 1.15;
-          margin: 6px 0 0;
         }
         .flow-incoterms-type-card {
           border: 1px solid rgba(201,168,76,0.18);
@@ -674,18 +665,19 @@ export default function FlowPage() {
           min-width: 0;
         }
         .flow-incoterms-type-card h3 {
-          color: var(--gold);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(24px, 3vw, 32px);
-          font-weight: 300;
-          line-height: 1.15;
+          color: var(--washi);
+          font-size: 20px;
+          font-weight: 400;
+          letter-spacing: 0.08em;
+          line-height: 1.5;
           margin: 0;
         }
         .flow-incoterms-type-card > span {
           display: block;
-          color: var(--washi-dim);
-          font-size: 12px;
-          letter-spacing: 0.08em;
+          color: var(--gold);
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
           margin-top: 6px;
         }
         .flow-incoterms-type-card dl {
@@ -695,7 +687,7 @@ export default function FlowPage() {
         }
         .flow-incoterms-type-card dl > div {
           display: grid;
-          grid-template-columns: 48px minmax(0, 1fr);
+          grid-template-columns: 54px minmax(0, 1fr);
           gap: 14px;
           align-items: baseline;
           padding: 10px 0;
@@ -704,7 +696,7 @@ export default function FlowPage() {
         .flow-incoterms-type-card dt {
           color: var(--gold-light);
           font-family: 'Cormorant Garamond', serif;
-          font-size: 19px;
+          font-size: 21px;
         }
         .flow-incoterms-type-card dd {
           display: flex;
@@ -715,7 +707,7 @@ export default function FlowPage() {
         }
         .flow-incoterms-type-card dd strong {
           color: var(--washi);
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 400;
         }
         .flow-incoterms-type-card dd small {
@@ -738,14 +730,21 @@ export default function FlowPage() {
         }
         .flow-incoterms-badge {
           align-self: flex-start;
+          color: var(--washi);
+          border: 1px solid rgba(201,168,76,0.28);
+          background: rgba(201,168,76,0.06);
+          padding: 8px 10px;
+          font-size: 11px;
+          letter-spacing: 0.08em;
+          line-height: 1.5;
+        }
+        .flow-incoterms-badge small {
+          display: block;
           color: var(--washi-dim);
-          border: 1px solid rgba(207,207,198,0.22);
-          background: rgba(207,207,198,0.04);
-          padding: 6px 9px;
           font-size: 9px;
           letter-spacing: 0.12em;
-          line-height: 1.4;
           text-transform: uppercase;
+          margin-top: 2px;
         }
         .flow-incoterms-featured-card h3 {
           color: var(--gold);
@@ -759,7 +758,16 @@ export default function FlowPage() {
           color: var(--washi);
           font-size: 0.58em;
         }
-        .flow-incoterms-featured-card p + p {
+        .flow-incoterms-featured-card p {
+          color: var(--washi);
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          line-height: 1.9;
+          margin: 0;
+        }
+        .flow-incoterms-featured-card p[lang='en'] {
+          color: var(--washi-dim);
+          font-size: 12px;
           border-top: 1px solid rgba(201,168,76,0.1);
           margin-top: 16px;
           padding-top: 16px;
@@ -775,11 +783,20 @@ export default function FlowPage() {
         }
         .flow-incoterms-case-notice h3 {
           font-size: clamp(26px, 3vw, 36px);
+          margin-top: 8px;
         }
         .flow-incoterms-case-notice > div:last-child {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 22px;
+        }
+        .flow-incoterms-case-notice p {
+          color: var(--washi-dim);
+          font-size: 12.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.9;
+          margin: 0;
+          overflow-wrap: anywhere;
         }
         .flow-incoterms-case-notice p + p {
           border-left: 1px solid rgba(201,168,76,0.14);
@@ -807,31 +824,28 @@ export default function FlowPage() {
           background: var(--navy-deep);
           border-top: 1px solid rgba(201,168,76,0.08);
         }
-        @media (max-width: 980px) {
-          .flow-incoterms { grid-template-columns: 1fr; }
-          .flow-incoterms-expanded-header,
-          .flow-incoterms-case-notice { grid-template-columns: 1fr; }
+        @media (max-width: 1100px) {
           .flow-document-info,
           .flow-incoterms-featured { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 980px) {
+          .flow-incoterms { grid-template-columns: 1fr; }
+          .flow-incoterms-case-notice { grid-template-columns: 1fr; }
         }
         @media (max-width: 760px) {
           .flow-timeline::before { left: 27px; }
           .flow-step { grid-template-columns: 56px minmax(0, 1fr); padding: 22px; gap: 18px; }
           .flow-number { width: 56px; height: 56px; font-size: 20px; }
           .flow-note { grid-template-columns: 1fr; }
-          .flow-incoterms-summary,
+          .flow-simple-grid,
           .flow-incoterms-types,
           .flow-incoterms-case-notice > div:last-child { grid-template-columns: 1fr; }
-          .flow-incoterms-summary p[lang='en'],
           .flow-incoterms-case-notice p + p {
             border-left: 0;
             border-top: 1px solid rgba(201,168,76,0.14);
             padding-left: 0;
             padding-top: 18px;
           }
-        }
-        @media (max-width: 680px) {
-          .flow-incoterms-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </>
