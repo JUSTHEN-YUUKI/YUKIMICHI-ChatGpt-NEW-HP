@@ -14,12 +14,12 @@ function shouldSkipElement(element: Element) {
 
 const paymentCopy = [
   {
-    ja: '海外からのお支払いは、Wise経由で当社指定の日本国内法人口座へ日本円送金いただく方法を推奨しています。',
-    en: 'For overseas payments, we recommend sending JPY via Wise to our designated Japanese corporate account.',
+    ja: '海外からのお支払いは、Wiseを利用して、三井住友銀行の当社指定法人口座へ日本円でご送金いただく方法を推奨しています。',
+    en: 'For overseas payments, we recommend using Wise to send Japanese yen (JPY) to our designated corporate account at Sumitomo Mitsui Banking Corporation (SMBC).',
   },
   {
-    ja: 'Wiseをご利用できない場合は、当社指定の法人口座への直接T/T送金（電信送金）にも対応可能です。',
-    en: 'If Wise is not available, direct T/T remittance to our designated corporate account is also available.',
+    ja: 'Wiseをご利用できない場合は、三井住友銀行の当社指定法人口座への直接T/T送金（電信送金）にも対応可能です。',
+    en: 'If Wise is not available, direct T/T remittance to our designated SMBC corporate account is also available.',
   },
   {
     ja: '正式な送金先情報は、正式見積書・請求書の発行時に個別にご案内します。',
