@@ -351,12 +351,12 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
             <input
               id={fieldId}
               name={field.name}
-              type="number"
-              min="0"
-              step="1"
+              type="text"
               inputMode="decimal"
               value={formState.quantity}
               placeholder={field.placeholder}
+              required={false}
+              aria-required="false"
               autoComplete={getAutoComplete('quantity')}
               onChange={syncField('quantity')}
               onInput={syncInputField('quantity')}
@@ -365,6 +365,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
               id={`inquiry-${type}-quantityUnit`}
               name="quantityUnit"
               value={formState.quantityUnit}
+              required={false}
+              aria-required="false"
               aria-label="数量単位 / Quantity unit"
               autoComplete={getAutoComplete('quantityUnit')}
               onChange={syncField('quantityUnit')}
