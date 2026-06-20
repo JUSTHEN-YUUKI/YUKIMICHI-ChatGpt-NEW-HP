@@ -185,6 +185,10 @@ const alwaysOptionalFieldNames = new Set<keyof FormState>([
   'website',
 ])
 
+function isFieldRequired(field: FieldConfig) {
+  return Boolean(field.required) && !alwaysOptionalFieldNames.has(field.name)
+}
+
 function orderContactFields(fields: readonly FieldConfig[]) {
   const fieldByName = new Map(fields.map((field) => [field.name, field]))
   const orderedContactFields = contactFieldDisplayOrder
@@ -249,8 +253,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const complianceNotes = formCommon.complianceNotes
   const buttonLabel = formCopy.button
   const sourcePage = type === 'quote' ? '/quote' : '/contact'
-  const requiredFields = fields.filter((field) => field.required)
-  const optionalFields = fields.filter((field) => !field.required)
+  const requiredFields = fields.filter(isFieldRequired)
+  const optionalFields = fields.filter((field) => !isFieldRequired(field))
   const optionalDetailsLabel = {
     ja: '任意項目（より正確なお見積りのために）',
     en: 'Optional details for a more accurate quote',
@@ -330,7 +334,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     const options = selectOptions[field.name]
     const fieldId = `inquiry-${type}-${field.name}`
     const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
-    const isRequired = Boolean(field.required) && !alwaysOptionalFieldNames.has(field.name)
+    const isRequired = isFieldRequired(field)
     const fieldClassName = [
       'inquiry-form__field',
       `inquiry-form__field--${field.name}`,
@@ -463,14 +467,6 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           <p key={note}>{note}</p>
         ))}
       </div>
-
-      <label className="inquiry-form__privacy">
-        <input name="privacyConsent" type="checkbox" required />
-        <span>
-          <span lang="ja">プライバシーポリシーに同意します。</span>
-          <a href="/privacy" lang="en">Privacy Policy</a>
-        </span>
-      </label>
 
       {feedbackMessage && (
         <div className={`inquiry-form__feedback inquiry-form__feedback--${submitState}`} role="status">
@@ -786,53 +782,6 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           letter-spacing: 0.04em;
           line-height: 1.85;
           margin: 0;
-        }
-
-        .inquiry-form__privacy {
-          align-items: flex-start;
-          display: flex;
-          gap: 12px;
-          color: var(--washi-dim);
-          font-size: 12px;
-          letter-spacing: 0.04em;
-          line-height: 1.85;
-        }
-
-        .inquiry-form__privacy input {
-          appearance: none;
-          border: 1px solid rgba(201,168,76,0.48);
-          background: rgba(7,20,38,0.86);
-          cursor: pointer;
-          flex: 0 0 auto;
-          height: 18px;
-          margin-top: 3px;
-          min-height: 18px;
-          padding: 0;
-          position: relative;
-          width: 18px;
-        }
-
-        .inquiry-form__privacy input:checked {
-          background: var(--gold);
-          border-color: var(--gold);
-        }
-
-        .inquiry-form__privacy input:checked::after {
-          border: solid var(--navy-deep);
-          border-width: 0 2px 2px 0;
-          content: '';
-          height: 9px;
-          left: 6px;
-          position: absolute;
-          top: 2px;
-          transform: rotate(45deg);
-          width: 4px;
-        }
-
-        .inquiry-form__privacy a {
-          color: var(--gold);
-          margin-left: 8px;
-          text-decoration: none;
         }
 
         .inquiry-form__feedback {
