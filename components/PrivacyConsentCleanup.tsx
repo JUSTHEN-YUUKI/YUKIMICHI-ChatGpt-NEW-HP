@@ -28,5 +28,11 @@ export default function PrivacyConsentCleanup() {
     return () => observer.disconnect()
   }, [])
 
-  return null
+  return (
+    <style>{`
+      .inquiry-form__privacy {
+        display: none !important;
+      }
+    `}</style>
+  )
 }
