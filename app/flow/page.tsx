@@ -59,14 +59,14 @@ const steps = [
 
 const responsibilityCards = [
   {
-    term: 'What Incoterms Decide',
-    ja: 'インコタームズでは、商品の引渡し場所、輸送費の負担、保険、通関、リスクの移転時点などを確認します。',
-    en: 'Incoterms help clarify the delivery point, freight cost responsibility, insurance, customs-related scope, and when risk transfers between seller and buyer.',
+    term: 'What Incoterms® Rules Clarify',
+    ja: 'Incoterms® rulesでは、商品の引渡し場所、輸送手配の担当範囲、費用負担、売主から買主へリスクが移転するタイミングを整理します。',
+    en: 'Incoterms® rules help define the delivery point, transportation arrangements, cost allocation, and the timing of risk transfer from the seller to the buyer.',
   },
   {
     term: 'Japan-side Support',
-    ja: 'YUKIMICHIは、日本国内での商品調達、仕入先確認、簡易検品、梱包準備、Invoice・Packing Listの整理、配送会社・フォワーダーとの確認を支援します。',
-    en: 'YUKIMICHI supports Japan-side procurement, supplier checks, basic inspection, packing preparation, Invoice and Packing List organization, and coordination with carriers or freight forwarders.',
+    ja: 'YUKIMICHIは、日本国内での商品調達、仕入先確認、簡易検品、梱包準備、Commercial Invoice・Packing Listを含む輸出書類の作成・確認、配送会社・フォワーダーとの確認を支援します。',
+    en: 'YUKIMICHI supports Japan-side procurement, supplier checks, basic inspection, packing preparation, export document preparation and review including Commercial Invoice and Packing List, and coordination with carriers or freight forwarders.',
   },
   {
     term: 'Importer-side Checks',
@@ -111,8 +111,8 @@ const featuredIncoterms = [
     code: 'FCA',
     name: 'Free Carrier',
     badge: '日本側手配 / Japan-side Arrangement',
-    en: 'FCA is one practical trade term for Japan-side export arrangements. Based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan, YUKIMICHI can support supplier checks, packing preparation, Invoice and Packing List organization, and coordination with carriers or freight forwarders on a case-by-case basis.',
-    ja: 'FCAは、日本側の輸出手配で検討できる取引条件の一つです。日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準に、YUKIMICHIでは仕入先確認、梱包準備、Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
+    en: 'FCA is one practical trade term for Japan-side export arrangements. Based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan, YUKIMICHI can support supplier checks, packing preparation, Commercial Invoice and Packing List organization, and coordination with carriers or freight forwarders on a case-by-case basis.',
+    ja: 'FCAは、日本側の輸出手配で検討できる取引条件の一つです。日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準に、YUKIMICHIでは仕入先確認、梱包準備、Commercial Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
   },
   {
     code: 'EXW',
@@ -125,8 +125,8 @@ const featuredIncoterms = [
     code: 'FOB',
     name: 'Free On Board',
     badge: '海上輸送向け / Sea Freight',
-    en: 'FOB is a trade term used for sea freight. The cost and risk allocation is based on the point at which the goods are loaded on board the vessel at the named port of shipment, such as Tokyo Port, Osaka Port, or Yokohama Port. For sea LCL/FCL projects, YUKIMICHI can support supplier checks, coordination with port warehouses or freight forwarders, and export document organization on a case-by-case basis. For air cargo, EMS, DHL, FedEx, UPS, and other courier shipments, FCA or other suitable terms should be considered instead of FOB.',
-    ja: 'FOBは、海上輸送で使用される取引条件です。東京港、大阪港、横浜港などの指定船積港で、本船上に貨物が積み込まれた時点を基準に、費用負担とリスク移転の範囲を整理します。YUKIMICHIでは、海上LCL/FCL案件において、仕入先確認、港湾倉庫・フォワーダーとの確認、輸出書類の整理などを案件ごとに支援します。なお、航空貨物、EMS、DHL、FedEx、UPSなどの国際エクスプレスでは、FOBではなくFCA等の条件を確認します。',
+    en: 'FOB is a trade term used for sea freight. The cost and risk allocation is based on the point at which the goods are loaded on board the vessel at the named port of shipment, such as Tokyo Port, Osaka Port, or Yokohama Port. For sea LCL/FCL projects, YUKIMICHI can support supplier checks, coordination with port warehouses or freight forwarders, and export document preparation and review on a case-by-case basis. For air cargo, EMS, DHL, FedEx, UPS, and other courier shipments, FCA or other suitable terms should be considered instead of FOB.',
+    ja: 'FOBは、海上輸送で使用される取引条件です。東京港、大阪港、横浜港などの指定船積港で、本船上に貨物が積み込まれた時点を基準に、費用負担とリスク移転の範囲を整理します。YUKIMICHIでは、海上LCL/FCL案件において、仕入先確認、港湾倉庫・フォワーダーとの確認、輸出書類の作成・確認などを案件ごとに支援します。なお、航空貨物、EMS、DHL、FedEx、UPSなどの国際エクスプレスでは、FOBではなくFCA等の条件を確認します。',
   },
 ]
 
@@ -181,14 +181,27 @@ export default function FlowPage() {
           <h2 className="section-title">
             What Are
             <br />
-            <em>Incoterms?</em>
+            <em>Incoterms® Rules?</em>
           </h2>
+          <p className="flow-incoterms-heading-ja">Incoterms® rules（インコタームズ）とは</p>
           <div className="flow-incoterms-lead">
+            <p lang="en">
+              Incoterms® rules are internationally recognized trade terms used to clarify the allocation of responsibilities, costs, and risks between sellers and buyers in international transactions.
+            </p>
             <p>
-              インコタームズとは、国際取引で「売主と買主のどちらが、どこまで費用・手配・責任を負うか」を整理するための取引条件です。YUKIMICHIでは、案件ごとに日本側で対応する範囲と、輸入者側で確認が必要な範囲を分けてご案内します。
+              Incoterms® rules（インコタームズ）とは、国際取引において、売主と買主の間で、費用・手配・リスクの負担範囲を明確にするために使用される国際的な貿易条件です。
             </p>
             <p lang="en">
-              Incoterms are trade terms used to clarify which party is responsible for costs, arrangements, and risk in international transactions. YUKIMICHI explains the Japan-side support scope and the importer-side responsibilities case by case.
+              For example, terms such as FCA, FOB, CIF, and DAP help define the delivery point, transportation arrangements, cost allocation, and the timing of risk transfer from the seller to the buyer.
+            </p>
+            <p>
+              例えば、FCA、FOB、CIF、DAPなどの条件により、商品の引渡し場所、輸送手配の担当範囲、費用負担、売主から買主へリスクが移転するタイミングを整理できます。
+            </p>
+            <p lang="en">
+              YUKIMICHI uses Incoterms® rules as a reference when confirming shipping arrangements, cost responsibilities, and the scope of Japan-side export coordination. Final trade terms should be confirmed for each transaction between the buyer, seller, freight forwarder, and other relevant parties.
+            </p>
+            <p>
+              YUKIMICHIでは、配送手配、費用負担、日本側の輸出調整範囲を確認する際の参考として、Incoterms® rulesを確認します。最終的な取引条件は、案件ごとに買主、売主、フォワーダー、その他関係者の間で確認する必要があります。
             </p>
           </div>
         </div>
@@ -213,6 +226,58 @@ export default function FlowPage() {
         </div>
 
         <div className="flow-incoterms-expanded">
+          <div className="flow-document-info" aria-label="Export document preparation and review">
+            <article className="flow-document-card">
+              <span className="flow-incoterms-kicker">Commercial Invoice / Packing List</span>
+              <h2>Commercial Invoice（コマーシャルインボイス）・Packing List（パッキングリスト）</h2>
+              <div className="flow-document-copy">
+                <p lang="en">
+                  For international shipments, a Commercial Invoice and Packing List are commonly required as basic export documents.
+                </p>
+                <p>
+                  国際輸送では、基本的な輸出書類として、Commercial Invoice（コマーシャルインボイス）およびPacking List（パッキングリスト）が必要となる場合があります。
+                </p>
+                <p lang="en">
+                  A Commercial Invoice generally includes information such as product description, quantity, unit price, total amount, currency, seller, buyer, country of origin, and shipping terms.
+                </p>
+                <p>
+                  Commercial Invoiceには、通常、商品名、数量、単価、合計金額、通貨、売主、買主、原産国、取引条件などの情報を記載します。
+                </p>
+                <p lang="en">
+                  A Packing List generally includes packing details such as the number of cartons, weight, dimensions, and package contents.
+                </p>
+                <p>
+                  Packing Listには、通常、箱数、重量、サイズ、梱包内容などの梱包情報を記載します。
+                </p>
+                <p lang="en">
+                  YUKIMICHI supports the preparation and review of export documents, including Commercial Invoice and Packing List, based on information provided by the buyer, supplier, freight forwarder, and other relevant parties.
+                </p>
+                <p>
+                  YUKIMICHIでは、買主、仕入先、フォワーダー、その他関係者から提供された情報をもとに、Commercial InvoiceおよびPacking Listを含む輸出書類の作成・確認をサポートします。
+                </p>
+              </div>
+            </article>
+
+            <article className="flow-document-card flow-document-card--accent">
+              <span className="flow-incoterms-kicker">Export Document Preparation and Review</span>
+              <h2>輸出書類の作成・確認サポート</h2>
+              <div className="flow-document-copy">
+                <p lang="en">
+                  YUKIMICHI assists with Japan-side export document preparation and review for international shipments. The required documents may vary depending on the product, shipping method, destination country, carrier, customs broker, and applicable regulations.
+                </p>
+                <p>
+                  YUKIMICHIでは、国際輸送に必要となる日本側の輸出書類の作成・確認をサポートします。必要書類は、商品内容、配送方法、仕向国、配送会社、通関業者、関連規制により異なります。
+                </p>
+                <p lang="en">
+                  Please note that final acceptance, customs clearance, import approval, and local sales eligibility are subject to the decisions of carriers, customs authorities, regulatory agencies, and other relevant parties.
+                </p>
+                <p>
+                  なお、最終的な引受可否、通関可否、輸入許可、現地販売可否については、配送会社、税関、関係機関、その他関係者の判断に基づきます。
+                </p>
+              </div>
+            </article>
+          </div>
+
           <header className="flow-incoterms-expanded-header">
             <div>
               <span className="flow-incoterms-kicker">Supported Trade Terms</span>
@@ -220,10 +285,10 @@ export default function FlowPage() {
             </div>
             <div className="flow-incoterms-summary">
               <p>
-                インコタームズは、貨物の引渡し場所、費用負担、輸送手配、保険、通関、リスク移転の範囲を整理するための国際取引条件です。YUKIMICHIでは、案件ごとに商品内容、輸送方法、仕向地、買主側フォワーダーの有無を確認し、適切な取引条件を整理します。
+                Incoterms® rulesは、貨物の引渡し場所、費用負担、輸送手配、保険、通関、リスク移転の範囲を整理するための国際取引条件です。YUKIMICHIでは、案件ごとに商品内容、輸送方法、仕向地、買主側フォワーダーの有無を確認し、適切な取引条件を整理します。
               </p>
               <p lang="en">
-                Incoterms clarify the delivery point, cost allocation, transport arrangement, insurance, customs clearance, and transfer of risk between seller and buyer. YUKIMICHI reviews each project based on the product, shipping method, destination, and buyer-side forwarder arrangement, and supports the selection of suitable trade terms.
+                Incoterms® rules clarify the delivery point, cost allocation, transport arrangement, insurance, customs clearance, and transfer of risk between seller and buyer. YUKIMICHI reviews each project based on the product, shipping method, destination, and buyer-side forwarder arrangement, and supports the selection of suitable trade terms.
               </p>
             </div>
           </header>
@@ -276,10 +341,10 @@ export default function FlowPage() {
             </div>
             <div>
               <p>
-                取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なインコタームズ条件は、見積書、Invoice、Packing List、契約書等で明確に確認したうえで進行します。
+                取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なIncoterms® ruleは、見積書、Commercial Invoice、Packing List、契約書等で明確に確認したうえで進行します。
               </p>
               <p lang="en">
-                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms rule will be confirmed clearly in the quotation, Invoice, Packing List, contract, or related documents before proceeding.
+                Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms® rule will be confirmed clearly in the quotation, Commercial Invoice, Packing List, contract, or related documents before proceeding.
               </p>
             </div>
           </aside>
@@ -404,6 +469,13 @@ export default function FlowPage() {
           border-top: 1px solid rgba(201,168,76,0.08);
           border-bottom: 1px solid rgba(201,168,76,0.08);
         }
+        .flow-incoterms-heading-ja {
+          color: var(--gold-light);
+          font-size: 13px;
+          letter-spacing: 0.12em;
+          line-height: 1.8;
+          margin: 18px 0 0;
+        }
         .flow-incoterms-lead,
         .flow-incoterms-content {
           display: grid;
@@ -419,6 +491,9 @@ export default function FlowPage() {
           letter-spacing: 0.04em;
           line-height: 2;
           margin: 0;
+        }
+        .flow-incoterms-lead p[lang='en'] {
+          color: var(--washi);
         }
         .flow-incoterms-lead p + p {
           border-top: 1px solid rgba(201,168,76,0.12);
@@ -484,6 +559,49 @@ export default function FlowPage() {
           padding-top: clamp(28px, 4vw, 52px);
           border-top: 1px solid rgba(201,168,76,0.18);
           min-width: 0;
+        }
+        .flow-document-info {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+        .flow-document-card {
+          border: 1px solid rgba(201,168,76,0.2);
+          background: linear-gradient(145deg, rgba(7,17,31,0.72), rgba(13,28,53,0.58));
+          padding: clamp(22px, 3vw, 34px);
+          min-width: 0;
+        }
+        .flow-document-card--accent {
+          border-left: 3px solid var(--gold);
+          background: rgba(201,168,76,0.06);
+        }
+        .flow-document-card h2 {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(26px, 3.4vw, 42px);
+          font-weight: 300;
+          line-height: 1.16;
+          margin: 10px 0 22px;
+        }
+        .flow-document-copy {
+          display: grid;
+          gap: 0;
+        }
+        .flow-document-copy p {
+          color: var(--washi-dim);
+          font-size: 12.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.95;
+          margin: 0;
+          overflow-wrap: anywhere;
+        }
+        .flow-document-copy p[lang='en'] {
+          color: var(--washi);
+        }
+        .flow-document-copy p + p {
+          border-top: 1px solid rgba(201,168,76,0.1);
+          margin-top: 12px;
+          padding-top: 12px;
         }
         .flow-incoterms-expanded-header {
           display: grid;
@@ -693,6 +811,7 @@ export default function FlowPage() {
           .flow-incoterms { grid-template-columns: 1fr; }
           .flow-incoterms-expanded-header,
           .flow-incoterms-case-notice { grid-template-columns: 1fr; }
+          .flow-document-info,
           .flow-incoterms-featured { grid-template-columns: 1fr; }
         }
         @media (max-width: 760px) {
