@@ -746,9 +746,9 @@ export default function PricingPage() {
           grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
           gap: clamp(28px, 5vw, 72px);
           align-items: start;
-          background: #f3efe4;
-          border-top: 1px solid rgba(185,145,70,0.24);
-          border-bottom: 1px solid rgba(185,145,70,0.24);
+          background: #07111f;
+          border-top: 1px solid rgba(198,165,92,0.22);
+          border-bottom: 1px solid rgba(198,165,92,0.22);
         }
 
         .pricing-payment > div:first-child {
@@ -761,35 +761,35 @@ export default function PricingPage() {
         }
 
         .pricing-payment .section-label-line {
-          background: rgba(185,145,70,0.72);
+          background: rgba(198,165,92,0.78);
         }
 
         .pricing-payment .section-label-text {
-          color: #8b6c32;
+          color: #d6b76a;
         }
 
         .pricing-payment h2 {
-          color: #162233;
+          color: #e8eef6;
           margin-bottom: 20px;
         }
 
         .pricing-payment > div:first-child > p {
-          color: #243447;
+          color: #aab4c2;
           font-size: 14px;
           letter-spacing: 0.025em;
           line-height: 1.9;
         }
 
         .payment-card {
-          border: 1px solid rgba(185,145,70,0.3);
+          border: 1px solid rgba(198,165,92,0.35);
           border-radius: 2px;
-          background: #fffcf5;
-          box-shadow: 0 20px 60px rgba(15,23,42,0.06);
+          background: #0f1b2d;
+          box-shadow: 0 24px 80px rgba(0,0,0,0.28);
           padding: clamp(26px, 4vw, 42px);
         }
 
         .payment-card__item {
-          border-bottom: 1px solid rgba(22,34,51,0.1);
+          border-bottom: 1px solid rgba(198,165,92,0.2);
           padding: 0 0 18px;
         }
 
@@ -803,7 +803,7 @@ export default function PricingPage() {
         }
 
         .payment-card p {
-          color: #162233;
+          color: #e8eef6;
           line-height: 1.9;
           padding: 0;
         }
@@ -815,7 +815,7 @@ export default function PricingPage() {
         }
 
         .payment-card p[lang='en'] {
-          color: #5f6b78;
+          color: #aab4c2;
           font-size: 13.5px;
           letter-spacing: 0.015em;
           margin-top: 7px;
