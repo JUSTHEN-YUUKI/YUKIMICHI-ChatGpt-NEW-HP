@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import BackToTopButton from '@/components/BackToTopButton'
 import { LanguageProvider } from '@/components/LanguageProvider'
 import ContentTranslationBridge from '@/components/ContentTranslationBridge'
+import PrivacyConsentCleanup from '@/components/PrivacyConsentCleanup'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://justhen.co.jp'),
@@ -90,6 +91,7 @@ export default function RootLayout({
           <Footer />
           <BackToTopButton />
           <ContentTranslationBridge />
+          <PrivacyConsentCleanup />
         </LanguageProvider>
       </body>
     </html>
