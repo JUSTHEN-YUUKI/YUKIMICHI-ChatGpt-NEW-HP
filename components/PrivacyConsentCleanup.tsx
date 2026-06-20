@@ -10,25 +10,19 @@ export default function PrivacyConsentCleanup() {
       return
     }
 
-    function cleanupPrivacyConsent() {
-      document.querySelectorAll<HTMLFormElement>('form.inquiry-form').forEach((form) => {
-        form.querySelectorAll<HTMLLabelElement>('.inquiry-form__privacy').forEach((label) => {
-          label.remove()
+    function disableHiddenPrivacyRequirement() {
+      document
+        .querySelectorAll<HTMLInputElement>('form.inquiry-form input[name="privacyConsent"][type="checkbox"]')
+        .forEach((checkbox) => {
+          checkbox.required = false
+          checkbox.removeAttribute('required')
+          checkbox.tabIndex = -1
         })
-
-        if (!form.querySelector('input[name="privacyConsent"][type="hidden"]')) {
-          const hiddenConsent = document.createElement('input')
-          hiddenConsent.type = 'hidden'
-          hiddenConsent.name = 'privacyConsent'
-          hiddenConsent.value = 'on'
-          form.appendChild(hiddenConsent)
-        }
-      })
     }
 
-    cleanupPrivacyConsent()
+    disableHiddenPrivacyRequirement()
 
-    const observer = new MutationObserver(cleanupPrivacyConsent)
+    const observer = new MutationObserver(disableHiddenPrivacyRequirement)
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => observer.disconnect()
