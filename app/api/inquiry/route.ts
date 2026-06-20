@@ -318,7 +318,8 @@ export async function POST(request: Request) {
     minute: '2-digit',
     second: '2-digit',
   })
-  const quantityText = type === 'quote' && quantity !== quantityUnit ? quantity : ''
+  const normalizedQuantity = quantity && quantity !== quantityUnit ? quantity : ''
+  const quantityText = normalizedQuantity || '未入力 / Not provided'
   const adminRows = getDisplayRows([
     ['Reference No.', receiptNumber],
     ['Inquiry Type', type],

@@ -170,6 +170,21 @@ const contactFieldDisplayOrder: readonly (keyof FormState)[] = [
   'productCategory',
 ]
 
+const alwaysOptionalFieldNames = new Set<keyof FormState>([
+  'company',
+  'productUrl',
+  'sdsAvailability',
+  'documentUrl',
+  'productCategory',
+  'quantity',
+  'quantityUnit',
+  'destination',
+  'destinationCity',
+  'deadline',
+  'shippingMethod',
+  'website',
+])
+
 function orderContactFields(fields: readonly FieldConfig[]) {
   const fieldByName = new Map(fields.map((field) => [field.name, field]))
   const orderedContactFields = contactFieldDisplayOrder
@@ -261,7 +276,9 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     setFeedbackMessage('')
 
     const submittedFormState = readSubmittedFormState(new FormData(event.currentTarget))
-    const quantityWithUnit = [submittedFormState.quantity, submittedFormState.quantityUnit].filter(Boolean).join(' ')
+    const quantityWithUnit = submittedFormState.quantity
+      ? [submittedFormState.quantity, submittedFormState.quantityUnit].filter(Boolean).join(' ')
+      : ''
     const destinationText =
       [submittedFormState.destinationCountry, submittedFormState.destinationCity].filter(Boolean).join(' / ') ||
       submittedFormState.destination
@@ -277,6 +294,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         body: JSON.stringify({
           ...submittedFormState,
           quantity: quantityWithUnit,
+          quantityUnit: submittedFormState.quantity ? submittedFormState.quantityUnit : '',
           destination: destinationText,
           type,
           sourcePage,
@@ -312,7 +330,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     const options = selectOptions[field.name]
     const fieldId = `inquiry-${type}-${field.name}`
     const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
-    const isRequired = Boolean(field.required)
+    const isRequired = Boolean(field.required) && !alwaysOptionalFieldNames.has(field.name)
     const fieldClassName = [
       'inquiry-form__field',
       `inquiry-form__field--${field.name}`,
@@ -339,7 +357,6 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
               inputMode="decimal"
               value={formState.quantity}
               placeholder={field.placeholder}
-              required={isRequired}
               autoComplete={getAutoComplete('quantity')}
               onChange={syncField('quantity')}
               onInput={syncInputField('quantity')}
