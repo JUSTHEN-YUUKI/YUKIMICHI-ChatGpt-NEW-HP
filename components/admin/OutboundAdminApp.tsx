@@ -109,7 +109,7 @@ export default function OutboundAdminApp() {
       <section className="outbound-panel filter-panel">
         <div className="panel-heading">
           <span>Search & Filter</span>
-          <strong>未確認は推測せず絞り込み</strong>
+          <strong>未確認情報を推測せず絞り込み</strong>
         </div>
         <div className="filter-grid">
           <FilterInput label="Search" value={filters.search} onChange={(search) => setFilters({ ...filters, search })} />
