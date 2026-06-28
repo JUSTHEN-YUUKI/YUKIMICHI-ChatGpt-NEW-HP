@@ -39,21 +39,21 @@ export default function ImportGuideSection() {
             <div className="section-label-line" />
             <span className="section-label-text">Import Guide for Overseas Buyers</span>
           </div>
-          <h2 id="import-guide-title" className="section-title">
-            Import Guide
+          <h2 id="import-guide-title" className="section-title" lang="ja">
+            輸入前の確認ガイド
             <br />
-            <em>for Overseas Buyers</em>
+            <em lang="en">Import Guide for Overseas Buyers</em>
           </h2>
-          <p>
-            <span className="copy-line-ja">
+          <div className="import-guide-copy">
+            <p lang="ja" className="copy-line-ja">
               海外のお客様が日本商品を購入・輸入する前に、個人利用の小口輸入と法人取引の輸入で、確認すべき手続き・書類・配送方法を分けてご案内します。
-            </span>
-            <span className="copy-line-en">
+            </p>
+            <p lang="en" className="copy-line-en">
               Before purchasing or importing Japanese products, overseas buyers can review the key
               differences between small personal imports and business imports, including procedures,
               documents, and shipping options.
-            </span>
-          </p>
+            </p>
+          </div>
         </div>
       </ScrollReveal>
 
@@ -61,15 +61,15 @@ export default function ImportGuideSection() {
         <div className="buyer-guide-grid">
           <article className="buyer-guide-panel">
             <span className="guide-panel-kicker">Individual Buyers</span>
-            <h3>
+            <h3 lang="ja">
               個人のお客様
-              <span>Personal Import / Small Shipment Review</span>
             </h3>
+            <p className="guide-panel-title-en" lang="en">Personal Import / Small Shipment Review</p>
             <ul>
               {individualNotes.map((note) => (
                 <li key={note.en}>
-                  <strong>{note.ja}</strong>
-                  <span>{note.en}</span>
+                  <strong lang="ja">{note.ja}</strong>
+                  <span lang="en">{note.en}</span>
                 </li>
               ))}
             </ul>
@@ -77,15 +77,15 @@ export default function ImportGuideSection() {
 
           <article className="buyer-guide-panel">
             <span className="guide-panel-kicker">Business Buyers</span>
-            <h3>
+            <h3 lang="ja">
               法人のお客様
-              <span>Business Import / Commercial Shipment Review</span>
             </h3>
+            <p className="guide-panel-title-en" lang="en">Business Import / Commercial Shipment Review</p>
             <ul>
               {businessNotes.map((note) => (
                 <li key={note.en}>
-                  <strong>{note.ja}</strong>
-                  <span>{note.en}</span>
+                  <strong lang="ja">{note.ja}</strong>
+                  <span lang="en">{note.en}</span>
                 </li>
               ))}
             </ul>
@@ -105,12 +105,19 @@ export default function ImportGuideSection() {
           max-width: 900px;
         }
 
-        .import-guide-head p {
+        .import-guide-copy {
+          display: grid;
+          gap: 10px;
+          margin: -8px 0 0;
+          max-width: 860px;
+        }
+
+        .import-guide-copy p {
           color: var(--washi-dim);
           font-size: 13px;
           letter-spacing: 0.04em;
           line-height: 2;
-          margin: -8px 0 0;
+          margin: 0;
         }
 
         .buyer-guide-grid {
@@ -145,12 +152,13 @@ export default function ImportGuideSection() {
           margin: 0;
         }
 
-        .buyer-guide-panel h3 span {
+        .guide-panel-title-en {
           color: var(--washi-dim);
-          display: block;
           font-family: 'Cormorant Garamond', serif;
           font-size: 16px;
-          margin-top: 8px;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: -14px 0 0;
         }
 
         .buyer-guide-panel ul {

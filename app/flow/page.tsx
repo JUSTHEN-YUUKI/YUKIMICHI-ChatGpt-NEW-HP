@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { translateStaticText } from '@/lib/staticTextTranslations'
 
 export const metadata: Metadata = {
   title: 'Export Process | YUKIMICHI',
@@ -170,6 +171,16 @@ function ArrowRight() {
   )
 }
 
+function getEnglishSub(text: string) {
+  const translated = translateStaticText('en', text)
+  return translated !== text ? translated : ''
+}
+
+function EnglishSubText({ text }: { text: string }) {
+  const english = getEnglishSub(text)
+  return english ? <p lang="en">{english}</p> : null
+}
+
 export default function FlowPage() {
   return (
     <>
@@ -183,9 +194,12 @@ export default function FlowPage() {
           <br />
           to <em>Delivery.</em>
         </h1>
-        <p className="section-body flow-lead">
+        <p className="section-body flow-lead" lang="ja">
           お問い合わせから見積、前払い、商品調達、書類整理、国際配送、発送後フォローまで、必要な確認事項を順番に整理して進めます。
           早さだけでなく、輸出入規制・通関・費用項目を事前に確認し、できるだけ分かりやすい手順でご案内します。
+        </p>
+        <p className="section-body flow-lead flow-lead-en" lang="en">
+          We proceed step by step from inquiry and quotation to advance payment, procurement, document review, shipping arrangements, and follow-up.
         </p>
       </section>
 
@@ -195,9 +209,10 @@ export default function FlowPage() {
             <article className="flow-step" key={step.number}>
               <div className="flow-number">{step.number}</div>
               <div className="flow-content">
-                <span>{step.en}</span>
-                <h2>{step.title}</h2>
-                <p>{step.text}</p>
+                <h2 lang="ja">{step.title}</h2>
+                <span lang="en">{step.en}</span>
+                <p lang="ja">{step.text}</p>
+                <EnglishSubText text={step.text} />
               </div>
             </article>
           ))}
@@ -217,7 +232,7 @@ export default function FlowPage() {
           </h2>
           <p className="flow-subtitle-en">Incoterms® Rules and Export Document Basics</p>
           <div className="flow-main-lead">
-            <p>
+            <p lang="ja">
               輸出取引では、「誰が、どこまで、費用・手配・リスクを負担するか」を先に整理することが重要です。
               YUKIMICHIでは、専門用語をそのまま並べるのではなく、日本側で支援できる範囲と、輸入者側で確認が必要な範囲を分けてご案内します。
             </p>
@@ -232,19 +247,19 @@ export default function FlowPage() {
             {beginnerCards.map((item) => (
               <article className="flow-simple-card" key={item.step}>
                 <span className="flow-simple-step">{item.step}</span>
-                <h3>{item.title}</h3>
-                <small>{item.enTitle}</small>
-                <p>{item.text}</p>
+                <h3 lang="ja">{item.title}</h3>
+                <small lang="en">{item.enTitle}</small>
+                <p lang="ja">{item.text}</p>
                 <p lang="en">{item.en}</p>
               </article>
             ))}
           </div>
           <aside className="flow-incoterms-notice">
-            <strong>重要な確認事項</strong>
-            <p>
+            <strong lang="ja">重要な確認事項</strong>
+            <p lang="ja">
               最終的な輸入可否、税額、通関判断、輸入許可、現地販売可否は、輸入国の税関・通関業者・関係当局・配送会社の判断に従います。YUKIMICHIは日本側の確認と手配を支援しますが、輸入国側の許認可や販売可否を保証するものではありません。
             </p>
-            <small>
+            <small lang="en">
               Final import approval, tax amounts, customs decisions, import permits, and local sales eligibility are subject to the decisions of customs authorities, customs brokers, regulatory agencies, and carriers in the destination country.
             </small>
           </aside>
@@ -254,15 +269,15 @@ export default function FlowPage() {
           <section className="flow-explain-section">
             <header className="flow-explain-header">
               <span>Export Documents</span>
-              <h2>国際輸送でよく使う基本書類</h2>
+              <h2 lang="ja">国際輸送でよく使う基本書類</h2>
               <p lang="en">Basic documents commonly used for international shipments.</p>
             </header>
             <div className="flow-document-info" aria-label="Export document preparation and review">
               {documentCards.map((item) => (
                 <article className="flow-document-card" key={item.title}>
-                  <span>{item.enTitle}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
+                  <h3 lang="ja">{item.title}</h3>
+                  <span lang="en">{item.enTitle}</span>
+                  <p lang="ja">{item.text}</p>
                   <p lang="en">{item.en}</p>
                 </article>
               ))}
@@ -272,21 +287,21 @@ export default function FlowPage() {
           <section className="flow-explain-section">
             <header className="flow-explain-header">
               <span>Incoterms® 2020 Rules</span>
-              <h2>Incoterms® 2020 の種類</h2>
+              <h2 lang="ja">Incoterms® 2020 の種類</h2>
               <p lang="en">A simplified list of Incoterms® 2020 rules.</p>
             </header>
             <div className="flow-incoterms-types" aria-label="Incoterms 2020 types">
               {incotermsGroups.map((group) => (
                 <article className="flow-incoterms-type-card" key={group.title}>
-                  <h3>{group.title}</h3>
-                  <span>{group.enTitle}</span>
+                  <h3 lang="ja">{group.title}</h3>
+                  <span lang="en">{group.enTitle}</span>
                   <dl>
                     {group.terms.map(([code, name, ja]) => (
                       <div key={code}>
                         <dt>{code}</dt>
                         <dd>
-                          <strong>{ja}</strong>
-                          <small>{name}</small>
+                          <strong lang="ja">{ja}</strong>
+                          <small lang="en">{name}</small>
                         </dd>
                       </div>
                     ))}
@@ -299,7 +314,7 @@ export default function FlowPage() {
           <section className="flow-explain-section">
             <header className="flow-explain-header">
               <span>Common Examples</span>
-              <h2>実務上よく確認する条件</h2>
+              <h2 lang="ja">実務上よく確認する条件</h2>
               <p lang="en">Common examples reviewed in Japan-side export coordination.</p>
             </header>
             <div className="flow-incoterms-featured">
@@ -312,7 +327,7 @@ export default function FlowPage() {
                   <h3>
                     {term.code} <small>/ {term.name}</small>
                   </h3>
-                  <p>{term.ja}</p>
+                  <p lang="ja">{term.ja}</p>
                   <p lang="en">{term.en}</p>
                 </article>
               ))}
@@ -322,10 +337,11 @@ export default function FlowPage() {
           <aside className="flow-incoterms-case-notice">
             <div>
               <span>Case-by-case Confirmation</span>
-              <h3>取引条件は案件ごとに確認</h3>
+              <h3 lang="ja">取引条件は案件ごとに確認</h3>
+              <p className="flow-card-en-title" lang="en">Trade terms are confirmed case by case.</p>
             </div>
             <div>
-              <p>
+              <p lang="ja">
                 取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なIncoterms® ruleは、見積書、Commercial Invoice、Packing List、契約書等で明確に確認したうえで進行します。
               </p>
               <p lang="en">
@@ -348,10 +364,15 @@ export default function FlowPage() {
             <em>Key Details.</em>
           </h2>
         </div>
-        <p>
+        <div className="flow-note-copy">
+          <p lang="ja">
           見積依頼時には、商品URL、商品名、希望数量、配送先国、希望配送方法、希望納期、法人利用または個人利用の区分をお知らせください。
           情報がそろっているほど、見積、配送方法、輸出入規制の確認をスムーズに進められます。輸出入規制や認証の要否は国や商品により異なるため、最終判断は税関、通関業者、公的機関の確認を前提に進めます。
-        </p>
+          </p>
+          <p lang="en">
+            For quotation requests, please share the product URL, product name, quantity, destination country, preferred shipping method, deadline, and whether the shipment is for business or personal use. More complete information helps us review quotation conditions, shipping methods, and import/export requirements more smoothly.
+          </p>
+        </div>
       </section>
 
       <section className="flow-cta">
@@ -381,7 +402,16 @@ export default function FlowPage() {
           margin-bottom: 28px;
         }
         .flow-title em { color: var(--gold); font-style: italic; }
-        .flow-lead { max-width: 760px; }
+        .flow-lead {
+          max-width: 760px;
+          margin-bottom: 10px;
+        }
+        .flow-lead-en {
+          color: rgba(248, 245, 239, 0.58);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-bottom: 36px;
+        }
         .flow-section { padding: var(--section-pad) var(--gutter); }
         .flow-timeline {
           position: relative;
@@ -427,7 +457,7 @@ export default function FlowPage() {
           font-size: 10px;
           letter-spacing: 0.34em;
           text-transform: uppercase;
-          margin-bottom: 8px;
+          margin: -4px 0 10px;
         }
         .flow-content h2 {
           color: var(--washi);
@@ -441,6 +471,14 @@ export default function FlowPage() {
           font-size: 13px;
           line-height: 2;
           letter-spacing: 0.04em;
+        }
+        .flow-content p[lang='en'],
+        .flow-card-en-title {
+          color: rgba(248, 245, 239, 0.5);
+          font-size: 12.5px;
+          line-height: 1.8;
+          letter-spacing: 0.03em;
+          margin-top: 6px;
         }
         .flow-incoterms {
           padding: var(--section-pad) var(--gutter);
@@ -815,6 +853,15 @@ export default function FlowPage() {
           font-size: 13.5px;
           line-height: 2.2;
           letter-spacing: 0.05em;
+        }
+        .flow-note-copy {
+          display: grid;
+          gap: 10px;
+        }
+        .flow-note-copy p[lang='en'] {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
         }
         .flow-cta {
           padding: 64px var(--gutter);

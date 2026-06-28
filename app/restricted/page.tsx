@@ -97,6 +97,9 @@ export default function RestrictedItemsPage() {
           国際輸送では、商品内容や配送先国により、輸出・輸入・配送会社の引受条件が異なります。
           YUKIMICHIでは、法令遵守と透明性を前提に、取り扱い可否を事前に確認します。
         </p>
+        <p className="section-body restricted-lead restricted-lead-en" lang="en">
+          Export, import, and carrier acceptance requirements vary by product and destination. YUKIMICHI reviews handling feasibility with compliance and transparency in mind.
+        </p>
       </section>
 
       <section className="restricted-policy">
@@ -105,7 +108,8 @@ export default function RestrictedItemsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Compliance First</span>
           </div>
-          <h2>法令遵守を前提とした輸出支援</h2>
+          <h2 lang="ja">法令遵守を前提とした輸出支援</h2>
+          <p className="restricted-section-subtitle" lang="en">Compliance-first export coordination support</p>
         </div>
         <div className="restricted-policy-card">
           <p lang="ja">
@@ -116,6 +120,9 @@ export default function RestrictedItemsPage() {
             規制品・要確認品については、事前確認なしでの手配はできません。
             最終的な輸出入可否は、税関・通関業者・配送会社・公的機関等の確認を前提とします。
           </p>
+          <p lang="en">
+            YUKIMICHI does not arrange shipments based on false declarations, regulation avoidance, or carrier rule violations. Final export/import feasibility depends on confirmation by customs, customs brokers, carriers, or public authorities.
+          </p>
         </div>
       </section>
 
@@ -125,9 +132,13 @@ export default function RestrictedItemsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Categories</span>
           </div>
-          <h2>事前確認が必要になりやすい商品カテゴリ</h2>
-          <p>
+          <h2 lang="ja">事前確認が必要になりやすい商品カテゴリ</h2>
+          <p className="restricted-section-subtitle" lang="en">Product categories that often require prior review</p>
+          <p lang="ja">
             以下は代表的な確認対象です。記載のない商品でも、国・数量・用途・成分・配送方法により個別確認が必要となる場合があります。
+          </p>
+          <p lang="en">
+            The following are common review categories. Other products may also require case-by-case confirmation depending on country, quantity, use, ingredients, and shipping method.
           </p>
         </div>
 
@@ -136,14 +147,14 @@ export default function RestrictedItemsPage() {
             <article className="restricted-card" key={category.code}>
               <div className="restricted-card__top">
                 <span>{category.code}</span>
-                <h3>{category.title}</h3>
+                <h3 lang="ja">{category.title}</h3>
               </div>
               <ul>
                 {category.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} lang="ja">{item}</li>
                 ))}
               </ul>
-              <p>{category.note}</p>
+              <p lang="ja">{category.note}</p>
             </article>
           ))}
         </div>
@@ -155,9 +166,13 @@ export default function RestrictedItemsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Required Information</span>
           </div>
-          <h2>確認に必要な情報</h2>
-          <p>
+          <h2 lang="ja">確認に必要な情報</h2>
+          <p className="restricted-section-subtitle" lang="en">Information needed for review</p>
+          <p lang="ja">
             取り扱い可否や配送方法を確認する際は、商品ページだけでなく、成分・素材・用途・配送先情報があると確認が進めやすくなります。
+          </p>
+          <p lang="en">
+            Product ingredients, materials, use, and destination details help us review handling feasibility and possible shipping methods.
           </p>
         </div>
         <ol className="restricted-info-list">
@@ -176,18 +191,25 @@ export default function RestrictedItemsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notice</span>
           </div>
-          <h2>Important Notice</h2>
-          <p>
+          <h2 lang="ja">重要なご案内</h2>
+          <p className="restricted-section-subtitle" lang="en">Important Notice</p>
+          <p lang="ja">
             本ページは一般的な確認項目を整理したものであり、法的判断を保証するものではありません。
             実際の輸出入可否、関税、VAT/GST、認証、許可、配送会社の引受可否は、
             商品内容・配送先国・最新の規制により異なります。
           </p>
+          <p lang="en">
+            This page summarizes general review points and does not guarantee legal decisions. Final eligibility, duties, VAT/GST, certifications, permits, and carrier acceptance vary by product, destination, and current regulations.
+          </p>
           <p lang="ja">
             模倣品、海賊版、知的財産権侵害品は取り扱いできません。内容品の虚偽申告、価格の過少申告、品名の偽装、規制回避を前提とする手配も行いません。
           </p>
-          <p>
+          <p lang="ja">
             最終確認は、税関・通関業者・配送会社・公的機関等の確認を前提とします。
             無理な輸出、虚偽申告、内容物を偽る発送は行いません。
+          </p>
+          <p lang="en">
+            Final confirmation is subject to customs, customs brokers, carriers, and public authorities. We do not support forced export, false declarations, or shipment descriptions that misrepresent the contents.
           </p>
         </div>
       </section>
@@ -195,9 +217,13 @@ export default function RestrictedItemsPage() {
       <section className="restricted-cta">
         <div>
           <span>Check Before Export</span>
-          <h2>取り扱い可否を確認する</h2>
-          <p>
+          <h2 lang="ja">取り扱い可否を確認する</h2>
+          <p className="restricted-section-subtitle" lang="en">Check handling feasibility before export</p>
+          <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。見積前の取扱可否確認も承ります。
+          </p>
+          <p lang="en">
+            Please share the product URL, quantity, destination country, and preferred shipping method. We can review handling feasibility before preparing a quotation.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="restricted-mail">
             exporter@justhen.co.jp
@@ -240,6 +266,14 @@ export default function RestrictedItemsPage() {
 
         .restricted-lead {
           max-width: 820px;
+          margin-bottom: 10px;
+        }
+
+        .restricted-lead-en {
+          color: rgba(248, 245, 239, 0.58);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-bottom: 36px;
         }
 
         .restricted-policy,
@@ -282,6 +316,27 @@ export default function RestrictedItemsPage() {
           letter-spacing: 0.05em;
           line-height: 2.1;
           margin: 0;
+        }
+
+        .restricted-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: 8px 0 0;
+        }
+
+        .restricted-policy-card p[lang='en'],
+        .restricted-section-head p[lang='en']:not(.restricted-section-subtitle),
+        .restricted-info p[lang='en']:not(.restricted-section-subtitle),
+        .restricted-notice p[lang='en']:not(.restricted-section-subtitle),
+        .restricted-cta p[lang='en']:not(.restricted-section-subtitle) {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 8px;
         }
 
         .restricted-categories {

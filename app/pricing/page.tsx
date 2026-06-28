@@ -169,7 +169,8 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Handling Fee</span>
           </div>
-          <h2>手配手数料の基本体系</h2>
+          <h2 lang="ja">手配手数料の基本体系</h2>
+          <p className="pricing-section-subtitle" lang="en">Handling fees are calculated based on product value.</p>
           <p lang="ja">
             表示手数料は、送料・保険・関税等を含めた総額ではなく、原則として商品代金を基準に算出するYUKIMICHIの手配手数料です。
           </p>
@@ -206,7 +207,8 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Payment Method / お支払い方法</span>
           </div>
-          <h2>Payment by T/T Remittance</h2>
+          <h2 lang="ja">お支払い方法</h2>
+          <p className="pricing-payment-subtitle" lang="en">Payment by T/T Remittance</p>
           <p lang="ja">
             入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
           </p>
@@ -227,10 +229,11 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Optional Service Fees</span>
           </div>
-          <h2>
+          <h2 lang="ja">
             YUKIMICHI 追加サービス料金表
             <em>Optional Service Fees</em>
           </h2>
+          <p className="pricing-section-subtitle" lang="en">Optional service fees and additional work charges</p>
           <p lang="ja">
             写真撮影、検品、資料取得、化粧品確認項目など、通常対応を超える作業については、内容に応じて別途お見積りとなります。
             通常の在庫確認、価格確認、MOQ確認は基本手数料に含め、写真撮影・検品・資料取得・複数社比較・長期交渉などは追加費用として分けて表示します。
@@ -253,8 +256,11 @@ export default function PricingPage() {
         </div>
 
         <div className="optional-service-copy">
-          <p>
+          <p lang="ja">
             商品写真撮影、外箱・ラベル撮影、JANコード・成分表示確認、簡易検品、梱包前後の写真撮影、SDS/MSDS取得サポート、メーカー資料取得代行、特殊梱包、再梱包、分納、複数配送先対応、価格交渉・長期商談代行等は、作業内容に応じて別途お見積りとなります。
+          </p>
+          <p lang="en">
+            Product photography, label checks, JAN or ingredient checks, simple inspection, SDS/MSDS support, supplier document collection, special packing, repacking, split shipments, multiple destinations, and extended negotiation support may be quoted separately depending on the work required.
           </p>
         </div>
 
@@ -262,7 +268,7 @@ export default function PricingPage() {
           <span>Important Notes</span>
           <ul>
             {optionalServiceNotes.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item} lang="ja">{item}</li>
             ))}
           </ul>
         </div>
@@ -283,8 +289,9 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Fee Basis / 手数料の算出基準</span>
           </div>
-          <h2>費用の考え方をご案内</h2>
-          <p>
+          <h2 lang="ja">費用の考え方をご案内</h2>
+          <p className="pricing-section-subtitle" lang="en">How costs are separated in quotations</p>
+          <p lang="ja">
             正式見積りでは、商品代金、手配手数料、国際送料、保険料、その他費用をできるだけ分けて明示します。
           </p>
         </div>
@@ -292,7 +299,7 @@ export default function PricingPage() {
           {feeBasisItems.map((item) => (
             <article className="fee-basis-card" key={item.label}>
               <span>{item.label}</span>
-              <h3>{item.title}</h3>
+              <h3 lang="ja">{item.title}</h3>
               <p lang="ja">{item.body}</p>
               {item.sub && <p className="fee-basis-card__sub" lang="en">{item.sub}</p>}
             </article>
@@ -306,7 +313,8 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Costs Not Included</span>
           </div>
-          <h2>料金に含まれない主な費用</h2>
+          <h2 lang="ja">料金に含まれない主な費用</h2>
+          <p className="pricing-section-subtitle" lang="en">Main costs not included in the handling fee</p>
           <p lang="ja">
             表示されている手数料は、YUKIMICHIによる日本側の輸出調整・手配支援に対するサービス手数料です。
             以下の費用は、原則として別途実費または個別見積りとなります。
@@ -327,7 +335,7 @@ export default function PricingPage() {
           </div>
           <ul className="excluded-cost-list">
             {excludedCostItems.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item} lang="ja">{item}</li>
             ))}
           </ul>
         </div>
@@ -339,18 +347,22 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notes / 注意事項</span>
           </div>
-          <h2>正式見積り前に確認すること</h2>
+          <h2 lang="ja">正式見積り前に確認すること</h2>
+          <p className="pricing-section-subtitle" lang="en">Important points before a formal quotation</p>
           <ul>
             {noticeItems.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item} lang="ja">{item}</li>
             ))}
           </ul>
-          <p>
+          <p lang="ja">
             詳細な条件は
             <Link href="/terms"> 取引条件 </Link>
             と
             <Link href="/restricted-items"> 禁止・制限品目 </Link>
             をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
+          </p>
+          <p lang="en">
+            Please review the terms of transaction and restricted items pages for detailed conditions. We do not support false declarations, attempts to avoid regulations, or arrangements that conflict with carrier acceptance rules.
           </p>
         </div>
       </section>
@@ -358,9 +370,13 @@ export default function PricingPage() {
       <section className="pricing-cta">
         <div>
           <span>Estimate Request</span>
-          <h2>料金を確認して相談する</h2>
+          <h2 lang="ja">料金を確認して相談する</h2>
+          <p className="pricing-section-subtitle" lang="en">Request a quotation with product and destination details</p>
           <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。YUKIMICHIが商品代金・手配手数料・実費項目を分けて整理します。
+          </p>
+          <p lang="en">
+            Please share the product URL, quantity, destination country, and preferred shipping method. YUKIMICHI will separate product value, handling fees, and actual-cost items for review.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="pricing-mail">
             exporter@justhen.co.jp
@@ -434,6 +450,18 @@ export default function PricingPage() {
           font-style: italic;
           font-size: 0.72em;
           margin-top: 4px;
+        }
+
+        .pricing-section-head .pricing-section-subtitle,
+        .pricing-important .pricing-section-subtitle,
+        .pricing-cta .pricing-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: -4px 0 14px;
         }
 
         .pricing-section-head p,
@@ -751,6 +779,15 @@ export default function PricingPage() {
           border-bottom: 1px solid rgba(198,165,92,0.22);
         }
 
+        .optional-service-copy p[lang='en'],
+        .pricing-important p[lang='en'],
+        .pricing-cta p[lang='en'] {
+          color: rgba(248, 245, 239, 0.55);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 8px;
+        }
+
         .pricing-payment > div:first-child {
           max-width: 460px;
           padding-top: 8px;
@@ -770,7 +807,17 @@ export default function PricingPage() {
 
         .pricing-payment h2 {
           color: #e8eef6;
-          margin-bottom: 20px;
+          margin-bottom: 6px;
+        }
+
+        .pricing-payment-subtitle {
+          color: #c6a55c;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 18px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin-bottom: 18px;
         }
 
         .pricing-payment > div:first-child > p {

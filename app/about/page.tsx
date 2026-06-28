@@ -206,12 +206,12 @@ export default function AboutPage() {
             <h3>対応する主な業務</h3>
             <ul>
               {supportAreas.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} lang="ja">{item}</li>
               ))}
             </ul>
             <ul lang="en">
               {supportAreasEn.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} lang="en">{item}</li>
               ))}
             </ul>
           </article>
@@ -221,12 +221,12 @@ export default function AboutPage() {
             <h3>YUKIMICHIが保証できない事項</h3>
             <ul>
               {nonGuaranteeItems.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} lang="ja">{item}</li>
               ))}
             </ul>
             <ul lang="en">
               {nonGuaranteeItemsEn.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} lang="en">{item}</li>
               ))}
             </ul>
           </article>
@@ -236,9 +236,12 @@ export default function AboutPage() {
       <section className="about-cta">
         <div>
           <span>Export Coordination</span>
-          <h2>日本側の確認・調整について相談する</h2>
-          <p>
+          <h2 lang="ja">日本側の確認・調整について相談する</h2>
+          <p lang="ja">
             商品の仕入れ可否調査、仕入先との連絡、輸出関連書類、配送方法の比較、規制確認について、案件ごとに確認します。
+          </p>
+          <p lang="en">
+            We review product availability, supplier communication, export-related documents, shipping options, and compliance points case by case.
           </p>
         </div>
         <Link href="/contact" className="btn-primary">
@@ -326,6 +329,13 @@ export default function AboutPage() {
           letter-spacing: 0.04em;
           line-height: 2.05;
           margin: 0;
+        }
+
+        .about-cta p[lang='en'] {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 8px;
         }
 
         .about-section-head p + p,

@@ -20,12 +20,13 @@ export default function Footer() {
       <div className="site-footer__inner">
         <section className="site-footer__brand" aria-label="YUKIMICHI brand">
           <p className="site-footer__eyebrow">YUKIMICHI</p>
-          <p className="site-footer__tagline">Trusted Export Support from Japan.</p>
-          <p className="site-footer__copy">YUKIMICHI | Operated by JUSTHEN Co., Ltd.</p>
+          <p className="site-footer__tagline" lang="ja">日本側の輸出調整・手配支援</p>
+          <p className="site-footer__tagline-en" lang="en">Japan-side export coordination support.</p>
+          <p className="site-footer__copy" lang="en">YUKIMICHI | Operated by JUSTHEN Co., Ltd.</p>
         </section>
 
         <nav className="site-footer__nav" aria-label="Footer navigation">
-          <p className="site-footer__heading">Navigation</p>
+          <p className="site-footer__heading" lang="en">Navigation</p>
           <ul className="site-footer__links">
             {footerLinks.map(({ href, label, en }) => (
               <li key={href}>
@@ -39,17 +40,17 @@ export default function Footer() {
         </nav>
 
         <section className="site-footer__company" aria-label="Company information">
-          <p className="site-footer__heading">Contact / Company</p>
+          <p className="site-footer__heading" lang="en">Contact / Company</p>
           <div className="site-footer__company-list">
-            <p>JUSTHEN CO., LTD.</p>
-            <p>株式会社ジャッセン</p>
-            <p>〒060-0032 北海道札幌市中央区北二条東8-5-15</p>
-            <p>8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
+            <p lang="en">JUSTHEN CO., LTD.</p>
+            <p lang="ja">株式会社ジャッセン</p>
+            <p lang="ja">〒060-0032 北海道札幌市中央区北二条東8-5-15</p>
+            <p lang="en">8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
             <a href="mailto:exporter@justhen.co.jp" className="site-footer__email">
               exporter@justhen.co.jp
             </a>
-            <p>古物商許可証 第305581606050号</p>
-            <p>東京都公安委員会</p>
+            <p lang="ja">古物商許可証 第305581606050号</p>
+            <p lang="ja">東京都公安委員会</p>
           </div>
         </section>
       </div>
@@ -92,12 +93,21 @@ export default function Footer() {
         }
 
         .site-footer__tagline {
-          font-family: 'Cormorant Garamond', serif;
           font-size: 20px;
           font-weight: 300;
           line-height: 1.6;
           color: var(--washi);
-          margin: 0 0 10px;
+          margin: 0 0 6px;
+        }
+
+        .site-footer__tagline-en {
+          color: var(--washi-dim);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 17px;
+          font-weight: 300;
+          letter-spacing: 0.06em;
+          line-height: 1.5;
+          margin: 0 0 12px;
         }
 
         .site-footer__copy {

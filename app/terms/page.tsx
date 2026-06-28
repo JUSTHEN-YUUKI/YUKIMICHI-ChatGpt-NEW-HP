@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { translateStaticText } from '@/lib/staticTextTranslations'
 
 export const metadata: Metadata = {
   title: '取引条件 | YUKIMICHI',
@@ -126,21 +127,25 @@ const terms = [
 
 const responsibilityCards = [
   {
+    titleJa: '輸入者責任',
     title: 'Importer Responsibility',
     ja: '輸入国側の許可、通関、関税・輸入税・VAT/GST、現地販売可否は、原則として輸入者側の確認・負担となります。',
     en: 'Destination-side permits, customs clearance, duties, import taxes, VAT/GST, and local sales eligibility are generally the importer\'s responsibility.',
   },
   {
+    titleJa: '税関判断',
     title: 'Customs Decisions',
     ja: '税関判断による検査、遅延、没収、追加費用は、返金対象外となる場合があります。',
     en: 'Inspections, delays, seizure, or additional costs caused by customs decisions may be excluded from refunds.',
   },
   {
+    titleJa: '保険・運送約款',
     title: 'Insurance / Carrier Terms',
     ja: '輸送中の破損・紛失・遅延に関する補償は、加入した保険または運送会社約款の範囲に限定されます。',
     en: 'Compensation for damage, loss, or delay is limited to the applicable insurance coverage or carrier terms.',
   },
   {
+    titleJa: '制限品・権利侵害品',
     title: 'Restricted / Infringing Goods',
     ja: '模倣品、知的財産権侵害品、法令違反品、輸出入規制品、虚偽申告を前提とする取引は取り扱いできません。',
     en: 'Counterfeit goods, intellectual property-infringing goods, illegal products, restricted goods, or transactions based on false declarations cannot be handled.',
@@ -162,6 +167,31 @@ function ArrowRight() {
   )
 }
 
+function getEnglishSub(text: string) {
+  const translated = translateStaticText('en', text)
+  return translated !== text ? translated : ''
+}
+
+function EnglishSubText({
+  text,
+  as = 'p',
+  className,
+}: {
+  text: string
+  as?: 'p' | 'small'
+  className?: string
+}) {
+  const english = getEnglishSub(text)
+
+  if (!english) return null
+
+  if (as === 'small') {
+    return <small className={className} lang="en">{english}</small>
+  }
+
+  return <p className={className} lang="en">{english}</p>
+}
+
 export default function TermsPage() {
   return (
     <>
@@ -175,10 +205,16 @@ export default function TermsPage() {
           <br />
           <em>Terms of Transaction</em>
         </h1>
-        <p className="section-body terms-lead" lang="ja">
+        <div className="section-body terms-lead">
+          <p lang="ja">
           YUKIMICHIでは、日本商品の調達、輸出手配、国際配送において、透明性のある取引条件を重視しています。
           お見積り前に、支払い、キャンセル、関税、配送事故、規制確認などの基本条件をご確認ください。
-        </p>
+          </p>
+          <p lang="en">
+            YUKIMICHI values transparent terms for Japan-side sourcing, export coordination, and shipping arrangement support.
+            Please review the basic conditions before requesting a quotation.
+          </p>
+        </div>
       </section>
 
       <section className="terms-policy">
@@ -187,15 +223,23 @@ export default function TermsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Basic Policy</span>
           </div>
-          <h2>透明性を重視した輸出支援</h2>
+          <h2 lang="ja">透明性を重視した輸出支援</h2>
+          <p className="terms-heading-en" lang="en">Transparent Japan-side export coordination</p>
         </div>
         <div className="terms-policy-card">
-          <p>
+          <p lang="ja">
             YUKIMICHIは、無理な輸出、虚偽申告、規制逃れを前提とした取引は行いません。
             商品内容、配送先国、数量、サイズ、重量、配送方法により、費用・納期・対応可否は変動します。
           </p>
-          <p>
+          <p lang="en">
+            YUKIMICHI does not support transactions based on forced export, false declarations, or attempts to avoid regulations.
+            Costs, lead time, and handling feasibility vary depending on the product, destination, quantity, size, weight, and shipping method.
+          </p>
+          <p lang="ja">
             本ページは一般的な取引条件の概要であり、個別契約・見積書・請求書・メールでの合意内容が優先される場合があります。
+          </p>
+          <p lang="en">
+            This page provides a general outline of transaction terms. Individual agreements, quotations, invoices, or email confirmations may take priority.
           </p>
         </div>
       </section>
@@ -206,16 +250,21 @@ export default function TermsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Responsibility Scope</span>
           </div>
-          <h2>輸入者責任と免責範囲</h2>
-          <p>
+          <h2 lang="ja">輸入者責任と免責範囲</h2>
+          <p className="terms-section-head-en" lang="en">Importer responsibility and limitation of liability</p>
+          <p lang="ja">
             YUKIMICHIは日本側の輸出手配支援を行います。輸入国側の許可、通関、税金、販売可否、配送事故補償は、
             案件ごとの条件、関係機関、配送会社約款、保険条件により確認します。
+          </p>
+          <p lang="en">
+            YUKIMICHI supports Japan-side export arrangements. Destination-side permits, customs clearance, taxes, sales eligibility, and carrier compensation are reviewed case by case.
           </p>
         </div>
         <div className="terms-responsibility-grid">
           {responsibilityCards.map((item) => (
             <article className="terms-responsibility-card" key={item.title}>
-              <span>{item.title}</span>
+              <h3 lang="ja">{item.titleJa}</h3>
+              <span lang="en">{item.title}</span>
               <p lang="ja">{item.ja}</p>
               <small lang="en">{item.en}</small>
             </article>
@@ -229,10 +278,14 @@ export default function TermsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Transaction Terms</span>
           </div>
-          <h2>輸出取引に関する基本条件</h2>
-          <p>
+          <h2 lang="ja">輸出取引に関する基本条件</h2>
+          <p className="terms-section-head-en" lang="en">Basic terms for export coordination</p>
+          <p lang="ja">
             以下は、YUKIMICHIを通じた商品調達・輸出手配・国際配送における代表的な確認事項です。
             案件ごとの条件は、商品内容と配送先国により個別に確認します。
+          </p>
+          <p lang="en">
+            The following items summarize common points to review for sourcing, export arrangements, and international shipping through YUKIMICHI.
           </p>
         </div>
 
@@ -242,13 +295,16 @@ export default function TermsPage() {
               <div className="terms-card__head">
                 <span>{term.code}</span>
                 <div>
-                  <h3>{term.title}</h3>
-                  <p>{term.en}</p>
+                  <h3 lang="ja">{term.title}</h3>
+                  <p lang="en">{term.en}</p>
                 </div>
               </div>
               <ul>
                 {term.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>
+                    <p lang="ja">{item}</p>
+                    <EnglishSubText text={item} as="small" />
+                  </li>
                 ))}
               </ul>
               {term.href ? (
@@ -267,14 +323,16 @@ export default function TermsPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Related Links</span>
           </div>
-          <h2>関連ページ</h2>
-          <p>見積依頼、取扱可否、よくある質問は各ページで確認できます。</p>
+          <h2 lang="ja">関連ページ</h2>
+          <p lang="en" className="terms-heading-en">Related pages</p>
+          <p lang="ja">見積依頼、取扱可否、よくある質問は各ページで確認できます。</p>
+          <p lang="en">Quotation requests, handling feasibility, and frequently asked questions can be checked on the related pages.</p>
         </div>
         <div className="terms-related-grid">
           {relatedLinks.map((link) => (
             <Link href={link.href} className="terms-related-card" key={link.href}>
-              <span>{link.en}</span>
-              <strong>{link.label}</strong>
+              <strong lang="ja">{link.label}</strong>
+              <span lang="en">{link.en}</span>
               <ArrowRight />
             </Link>
           ))}
@@ -284,9 +342,12 @@ export default function TermsPage() {
       <section className="terms-cta">
         <div>
           <span>Confirm Terms Before Inquiry</span>
-          <h2>取引条件を確認して相談する</h2>
-          <p>
+          <h2 lang="ja">取引条件を確認して相談する</h2>
+          <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取引条件を確認したうえで、見積と手配可否を案内します。
+          </p>
+          <p lang="en">
+            Please share the product URL, quantity, destination country, and preferred shipping method. We will review the terms and respond with quotation and handling feasibility guidance.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="terms-mail">
             exporter@justhen.co.jp へ相談する
@@ -329,6 +390,22 @@ export default function TermsPage() {
 
         .terms-lead {
           max-width: 840px;
+          display: grid;
+          gap: 10px;
+        }
+
+        .terms-lead p {
+          margin: 0;
+        }
+
+        .terms-lead p[lang='en'],
+        .terms-heading-en,
+        .terms-section-head-en {
+          color: var(--washi-dim);
+          font-size: 12.5px;
+          letter-spacing: 0.05em;
+          line-height: 1.9;
+          margin: 8px 0 0;
         }
 
         .terms-policy,
@@ -372,6 +449,29 @@ export default function TermsPage() {
           margin: 0;
         }
 
+        .terms-policy .terms-heading-en,
+        .terms-related .terms-heading-en,
+        .terms-section-head .terms-section-head-en,
+        .terms-cta .terms-section-head-en {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: -6px 0 14px;
+        }
+
+        .terms-policy-card p[lang='en'],
+        .terms-section-head p[lang='en']:not(.terms-section-head-en),
+        .terms-related p[lang='en']:not(.terms-heading-en),
+        .terms-cta p[lang='en'] {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 8px;
+        }
+
         .terms-responsibility,
         .terms-list-section {
           padding: var(--section-pad) var(--gutter);
@@ -393,6 +493,15 @@ export default function TermsPage() {
           margin-bottom: 16px;
         }
 
+        .terms-section-head-en {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          margin: -8px 0 16px;
+        }
+
         .terms-responsibility-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -405,6 +514,15 @@ export default function TermsPage() {
             linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
             rgba(7,17,31,0.64);
           padding: clamp(22px, 3vw, 30px);
+        }
+
+        .terms-responsibility-card h3 {
+          color: var(--washi);
+          font-size: 16px;
+          font-weight: 300;
+          letter-spacing: 0.1em;
+          line-height: 1.6;
+          margin: 0 0 6px;
         }
 
         .terms-responsibility-card span {
@@ -501,10 +619,20 @@ export default function TermsPage() {
         .terms-card li {
           border-left: 1px solid rgba(201,168,76,0.34);
           color: var(--washi-dim);
+          display: grid;
+          gap: 6px;
           font-size: 12.5px;
           letter-spacing: 0.04em;
           line-height: 1.9;
           padding-left: 12px;
+        }
+
+        .terms-card li small {
+          color: rgba(248, 245, 239, 0.5);
+          display: block;
+          font-size: 12px;
+          letter-spacing: 0.03em;
+          line-height: 1.75;
         }
 
         .terms-card__link {

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { translateStaticText } from '@/lib/staticTextTranslations'
 
 export const metadata: Metadata = {
   title: 'FAQ | YUKIMICHI',
@@ -121,37 +122,51 @@ const faqCategories = [
     en: 'Trade Responsibility',
     items: [
       {
+        qJa: 'YUKIMICHIは輸入許可を保証できますか？',
         q: 'Can YUKIMICHI guarantee import approval?',
+        aJa: 'いいえ。輸入許可は仕向国の規制や税関判断により決まります。YUKIMICHIは日本側の書類整理や事前確認を支援しますが、最終的な輸入可否は輸入者、通関業者、税関、配送会社、公的機関等で確認する必要があります。',
         a: 'No. Import approval depends on destination country regulations and customs decisions. YUKIMICHI can support Japan-side document organization and pre-checks, but final import eligibility must be confirmed by the importer, customs broker, customs office, carrier, or public authority.',
         links: [{ href: '/terms', label: '取引条件を確認する' }],
       },
       {
+        qJa: '関税や輸入税は誰が支払いますか？',
         q: 'Who pays customs duties and import taxes?',
+        aJa: '原則として、関税、輸入税、VAT/GST、仕向国側の通関関連費用は、個別に書面で合意した場合を除き、輸入者または買主側の負担となります。',
         a: 'Generally, customs duties, import taxes, VAT/GST, and destination-side customs fees are paid by the importer or buyer, unless otherwise agreed in writing for a specific transaction.',
         links: [{ href: '/pricing', label: '料金の考え方を見る' }],
       },
       {
+        qJa: '輸送保険は必須ですか？',
         q: 'Is shipping insurance mandatory?',
+        aJa: '輸送保険は任意加入ですが、高額貨物では加入を推奨します。保険未加入の場合、破損・紛失時の補償は運送会社約款または適用される保険条件の範囲に限定されます。',
         a: 'Shipping insurance is optional, but recommended for high-value shipments. If insurance is not arranged, compensation for loss or damage is limited to the carrier terms or applicable insurance policy.',
         links: [{ href: '/pricing', label: '料金表を見る' }],
       },
       {
+        qJa: '化粧品、食品、電池、医薬品などは扱えますか？',
         q: 'Can you handle cosmetics, food, batteries, medical products?',
+        aJa: '事前確認が必要です。成分、表示、数量、用途、仕向国、配送会社条件により、取扱不可、制限付き対応、SDS/MSDS等の追加資料が必要となる場合があります。',
         a: 'A pre-check is required. Depending on ingredients, labels, quantity, use, destination country, and carrier rules, some items may be restricted, unavailable, or require additional documents such as SDS/MSDS.',
         links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
       },
       {
+        qJa: 'Commercial InvoiceやPacking Listの作成は依頼できますか？',
         q: 'Can you prepare Commercial Invoice and Packing List?',
+        aJa: '取引範囲に応じて支援可能です。必要書類は商品カテゴリ、配送方法、Incoterms、仕向国、通関業者の要件により異なります。',
         a: 'Support is available depending on the transaction scope. Required documents may vary by product category, shipping method, Incoterms, destination country, and customs broker requirements.',
         links: [{ href: '/services', label: 'サービスを見る' }],
       },
       {
+        qJa: 'FCA / EXW / DAP / DDPには対応できますか？',
         q: 'Do you support FCA / EXW / DAP / DDP?',
+        aJa: 'EXW、FCA、DAP、DDPは費用、リスク、通関、税金、配送責任の分担が異なるため、案件ごとに確認します。DDPは輸入通関、関税、税金を含むため、標準対応範囲外となる場合があります。',
         a: 'Conditions are confirmed individually because EXW, FCA, DAP, and DDP assign costs, risk, customs, tax, and delivery responsibilities differently. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
         links: [{ href: '/flow', label: '取引の流れを見る' }],
       },
       {
+        qJa: '商品の在庫や購入可否は保証できますか？',
         q: 'Can you guarantee product availability?',
+        aJa: 'いいえ。商品の在庫、販売条件、MOQ、価格変更、輸出向け取扱可否は仕入先確認により変動します。最終的な購入可否は案件ごとに確認します。',
         a: 'No. Product availability depends on supplier confirmation, stock status, sales conditions, minimum order quantity, price changes, and whether the product can be handled for export.',
         links: [{ href: '/quote', label: 'お見積りへ進む' }],
       },
@@ -308,16 +323,32 @@ function ArrowRight() {
   )
 }
 
+function getEnglishSub(text: string) {
+  const translated = translateStaticText('en', text)
+  return translated !== text ? translated : ''
+}
+
+function getOptionalText(item: object, key: string) {
+  const value = (item as Record<string, unknown>)[key]
+  return typeof value === 'string' ? value : ''
+}
+
 export default function FAQPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: allFaqs.map((faq) => ({
       '@type': 'Question',
-      name: 'qEn' in faq ? `${faq.q} / ${faq.qEn}` : faq.q,
+      name: [
+        getOptionalText(faq, 'qJa') || faq.q,
+        getOptionalText(faq, 'qEn') || (getOptionalText(faq, 'qJa') ? faq.q : getEnglishSub(faq.q)),
+      ].filter(Boolean).join(' / '),
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'aEn' in faq ? `${faq.a} ${faq.aEn}` : faq.a,
+        text: [
+          getOptionalText(faq, 'aJa') || faq.a,
+          getOptionalText(faq, 'aEn') || (getOptionalText(faq, 'aJa') ? faq.a : getEnglishSub(faq.a)),
+        ].filter(Boolean).join(' '),
       },
     })),
   }
@@ -336,9 +367,14 @@ export default function FAQPage() {
           <br />
           <em>よくある質問</em>
         </h1>
-        <p className="section-body faq-lead" lang="ja">
-          YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。
-        </p>
+        <div className="section-body faq-lead">
+          <p lang="ja">
+            YUKIMICHIへ寄せられる、日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積、関税、禁止・制限品目に関するよくある質問をまとめています。
+          </p>
+          <p lang="en">
+            Frequently asked questions about product availability checks, shipping methods, quotations, duties, and restricted items.
+          </p>
+        </div>
         <div className="faq-hero-actions">
           <Link href="/quote" className="btn-primary">
             お見積りへ進む <ArrowRight />
@@ -355,15 +391,18 @@ export default function FAQPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Categories</span>
           </div>
-          <h2>カテゴリから探す</h2>
-          <p>仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。</p>
+          <h2 lang="ja">カテゴリから探す</h2>
+          <p lang="en" className="faq-section-subtitle">Browse by Category</p>
+          <p lang="ja">仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。</p>
+          <p lang="en">Questions are organized by sourcing checks, shipping methods, pricing, duties, regulatory review, terms, and overseas buyer support.</p>
         </div>
         <div className="faq-category-grid">
           {faqCategories.map((category) => (
             <a href={`#${category.id}`} className="faq-category-card" key={category.id}>
-              <span>{category.en}</span>
-              <strong>{category.label}</strong>
-              <small>Questions: {category.items.length}</small>
+              <strong lang="ja">{category.label}</strong>
+              <span lang="en">{category.en}</span>
+              <small lang="ja">質問数: {category.items.length}</small>
+              <small lang="en">Questions: {category.items.length}</small>
             </a>
           ))}
         </div>
@@ -375,31 +414,38 @@ export default function FAQPage() {
             <div className="faq-group-head">
               <span>{String(categoryIndex + 1).padStart(2, '0')}</span>
               <div>
-                <p>{category.en}</p>
-                <h2>{category.label}</h2>
+                <h2 lang="ja">{category.label}</h2>
+                <p lang="en">{category.en}</p>
               </div>
             </div>
             <div className="faq-list">
-              {category.items.map((faq, index) => (
-                <article className="faq-item" key={faq.q}>
-                  <div className="faq-number">{String(index + 1).padStart(2, '0')}</div>
-                  <div>
-                    <h3 lang={category.id === 'trade-responsibility' ? 'en' : 'ja'}>{faq.q}</h3>
-                    {'qEn' in faq && <h4 lang="en">{faq.qEn}</h4>}
-                    <p lang={category.id === 'trade-responsibility' ? 'en' : 'ja'}>{faq.a}</p>
-                    {'aEn' in faq && <p className="faq-answer-en" lang="en">{faq.aEn}</p>}
-                    {faq.links ? (
-                      <div className="faq-item-links">
-                        {faq.links.map((link) => (
-                          <Link href={link.href} key={link.href}>
-                            {link.label} <ArrowRight />
-                          </Link>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
+              {category.items.map((faq, index) => {
+                const questionJa = getOptionalText(faq, 'qJa') || (category.id === 'trade-responsibility' ? '' : faq.q)
+                const questionEn = getOptionalText(faq, 'qEn') || (category.id === 'trade-responsibility' ? faq.q : getEnglishSub(faq.q))
+                const answerJa = getOptionalText(faq, 'aJa') || (category.id === 'trade-responsibility' ? '' : faq.a)
+                const answerEn = getOptionalText(faq, 'aEn') || (category.id === 'trade-responsibility' ? faq.a : getEnglishSub(faq.a))
+
+                return (
+                  <article className="faq-item" key={faq.q}>
+                    <div className="faq-number">{String(index + 1).padStart(2, '0')}</div>
+                    <div className="faq-item-copy">
+                      {questionJa ? <h3 lang="ja">{questionJa}</h3> : null}
+                      {questionEn ? <h4 lang="en">{questionEn}</h4> : null}
+                      {answerJa ? <p lang="ja">{answerJa}</p> : null}
+                      {answerEn ? <p className="faq-answer-en" lang="en">{answerEn}</p> : null}
+                      {faq.links ? (
+                        <div className="faq-item-links">
+                          {faq.links.map((link) => (
+                            <Link href={link.href} key={link.href}>
+                              {link.label} <ArrowRight />
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </div>
         ))}
@@ -411,10 +457,14 @@ export default function FAQPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notice</span>
           </div>
-          <h2>Important Notice</h2>
+          <h2 lang="ja">重要なご案内</h2>
+          <p className="faq-section-subtitle" lang="en">Important Notice</p>
           <ul>
             {importantNotices.map((notice) => (
-              <li key={notice}>{notice}</li>
+              <li key={notice}>
+                <p lang="ja">{notice}</p>
+                <p lang="en">{getEnglishSub(notice)}</p>
+              </li>
             ))}
           </ul>
         </div>
@@ -426,14 +476,16 @@ export default function FAQPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Related Links</span>
           </div>
-          <h2>関連ページ</h2>
-          <p>見積、問い合わせ、サービス内容、料金、禁止・制限品目、取引条件を各ページで確認できます。</p>
+          <h2 lang="ja">関連ページ</h2>
+          <p className="faq-section-subtitle" lang="en">Related Links</p>
+          <p lang="ja">見積、問い合わせ、サービス内容、料金、禁止・制限品目、取引条件を各ページで確認できます。</p>
+          <p lang="en">You can review quotations, inquiries, service scope, pricing, restricted items, and terms on the related pages.</p>
         </div>
         <div className="faq-related-grid">
           {relatedLinks.map((link) => (
             <Link href={link.href} className="faq-related-card" key={link.href}>
-              <span>{link.en}</span>
-              <strong>{link.label}</strong>
+              <strong lang="ja">{link.label}</strong>
+              <span lang="en">{link.en}</span>
               <ArrowRight />
             </Link>
           ))}
@@ -443,8 +495,9 @@ export default function FAQPage() {
       <section className="faq-cta">
         <div>
           <span>Inquiry Support</span>
-          <h2>不明点を相談する</h2>
-          <p>商品URL、数量、配送先国、希望納期を添えてご相談ください。商品内容に応じて、見積と取扱可否を確認します。</p>
+          <h2 lang="ja">不明点を相談する</h2>
+          <p lang="ja">商品URL、数量、配送先国、希望納期を添えてご相談ください。商品内容に応じて、見積と取扱可否を確認します。</p>
+          <p lang="en">Please share the product URL, quantity, destination country, and preferred deadline. We will review quotation and handling feasibility based on the product details.</p>
           <a href="mailto:exporter@justhen.co.jp" className="faq-mail">
             exporter@justhen.co.jp へ相談する
           </a>
@@ -486,6 +539,21 @@ export default function FAQPage() {
 
         .faq-lead {
           max-width: 860px;
+          display: grid;
+          gap: 10px;
+        }
+
+        .faq-lead p {
+          margin: 0;
+        }
+
+        .faq-lead p[lang='en'],
+        .faq-section-subtitle {
+          color: var(--washi-dim);
+          font-size: 12.5px;
+          letter-spacing: 0.05em;
+          line-height: 1.9;
+          margin: 6px 0 12px;
         }
 
         .faq-hero-actions {
@@ -530,14 +598,14 @@ export default function FAQPage() {
 
         .faq-category-grid {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 14px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
         }
 
         .faq-category-card {
           display: grid;
-          gap: 8px;
-          min-height: 132px;
+          gap: 10px;
+          min-height: 150px;
           border: 1px solid rgba(201,168,76,0.14);
           background: rgba(7,17,31,0.56);
           color: var(--washi);
@@ -566,12 +634,20 @@ export default function FAQPage() {
 
         .faq-category-card small {
           display: block;
-          color: var(--suzu);
           font-size: 11px;
           letter-spacing: 0.12em;
           line-height: 1.5;
-          margin-top: auto;
           text-transform: uppercase;
+        }
+
+        .faq-category-card small[lang='ja'] {
+          color: var(--washi-dim);
+          margin-top: auto;
+          text-transform: none;
+        }
+
+        .faq-category-card small[lang='en'] {
+          color: var(--suzu);
         }
 
         .faq-section {
@@ -611,7 +687,7 @@ export default function FAQPage() {
           font-size: 18px;
           font-style: italic;
           line-height: 1.3;
-          margin: 0 0 4px;
+          margin: 6px 0 0;
         }
 
         .faq-group-head h2 {
@@ -660,7 +736,7 @@ export default function FAQPage() {
           font-size: 17px;
           font-weight: 300;
           line-height: 1.55;
-          margin: -4px 0 12px;
+          margin: -2px 0 12px;
         }
 
         .faq-item p {
@@ -675,6 +751,10 @@ export default function FAQPage() {
           border-top: 1px solid rgba(201,168,76,0.12);
           margin-top: 12px;
           padding-top: 12px;
+        }
+
+        .faq-item-copy {
+          min-width: 0;
         }
 
         .faq-item-links {
@@ -722,10 +802,18 @@ export default function FAQPage() {
         .faq-important li {
           border-left: 1px solid rgba(201,168,76,0.34);
           color: var(--washi-dim);
+          display: grid;
+          gap: 6px;
           font-size: 13px;
           letter-spacing: 0.05em;
           line-height: 2;
           padding-left: 14px;
+        }
+
+        .faq-important li p[lang='en'] {
+          color: rgba(248, 245, 239, 0.5);
+          font-size: 12px;
+          line-height: 1.75;
         }
 
         .faq-related {

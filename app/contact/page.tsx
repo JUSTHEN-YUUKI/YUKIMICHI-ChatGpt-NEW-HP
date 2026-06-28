@@ -61,6 +61,9 @@ export default function ContactPage() {
             fallback="まずは分かる範囲でお問い合わせください。すべての情報が揃っていなくても送信できます。商品名または商品URL、配送先国、ご相談内容をお送りいただければ、確認に必要な追加情報は当社よりご案内します。"
           />
         </p>
+        <p className="section-body contact-lead contact-lead-en" lang="en">
+          You can contact us with the information currently available. A product name or URL, destination country, and message are enough to begin review.
+        </p>
         <div className="contact-hero-actions">
           <a className="btn-primary" href={inquiryMailto}>
             <TranslatedText id="pages.contact.mailCta" fallback="exporter@justhen.co.jp へ相談する" /> <ArrowRight />
@@ -82,6 +85,9 @@ export default function ContactPage() {
               <p lang="ja">
                 <TranslatedText id="pages.contact.helpfulLead" fallback="すべて必須ではありません。現在分かる範囲でご用意ください。" />
               </p>
+              <p lang="en">
+                These details are optional. Please provide what you currently know.
+              </p>
               <ol className="contact-checklist">
                 {helpfulItems.map((item, index) => (
                   <li key={item}><TranslatedText id={`pages.contact.helpfulItems.${index}`} fallback={item} /></li>
@@ -92,8 +98,10 @@ export default function ContactPage() {
 
           <div>
             <span className="contact-kicker">Quote Request</span>
-            <h2><TranslatedText id="pages.contact.quoteTitle" fallback="Request a Quote" /></h2>
-            <p><TranslatedText id="pages.contact.quoteLead" fallback="費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。" /></p>
+            <h2 lang="ja">お見積りについて</h2>
+            <p className="contact-section-subtitle" lang="en">Request a Quote</p>
+            <p lang="ja"><TranslatedText id="pages.contact.quoteLead" fallback="費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。" /></p>
+            <p lang="en">If you would like to review estimated costs first, please check the quotation page for the required information.</p>
             <Link href="/quote" className="btn-ghost">
               <TranslatedText id="common.quote" fallback="お見積りページへ進む" /> <ArrowRight />
             </Link>
@@ -105,12 +113,16 @@ export default function ContactPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Inquiry Details</span>
           </div>
-          <h2><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
+          <h2 lang="ja"><TranslatedText id="pages.contact.formTitle" fallback="フォームからお問い合わせを送信" /></h2>
+          <p className="contact-section-subtitle" lang="en">Send your inquiry using the form</p>
           <p className="contact-panel-lead" lang="ja">
             <TranslatedText
               id="pages.contact.formLead"
               fallback="必要事項を入力して送信すると、YUKIMICHIの確認窓口に内容が届きます。商品URLは任意です。仕入れ可否調査、国際配送、取扱可否確認、メーカー確認などの相談内容をMessage欄に記載できます。"
             />
+          </p>
+          <p className="contact-panel-lead" lang="en">
+            Fill in the required fields and describe your request in the message field. Product URLs are optional.
           </p>
 
           <InquiryForm type="contact" mailtoHref={inquiryMailto} />
@@ -123,7 +135,8 @@ export default function ContactPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Compliance Notes</span>
           </div>
-          <h2><TranslatedText id="pages.contact.noticeTitle" fallback="取扱可否・規制確認について" /></h2>
+          <h2 lang="ja"><TranslatedText id="pages.contact.noticeTitle" fallback="取扱可否・規制確認について" /></h2>
+          <p className="contact-section-subtitle" lang="en">Handling feasibility and regulatory review</p>
         </div>
         <ul>
           {noticeItems.map((item, index) => (
@@ -154,7 +167,16 @@ export default function ContactPage() {
           font-style: italic;
           font-size: 0.78em;
         }
-        .contact-lead { max-width: 800px; }
+        .contact-lead {
+          max-width: 800px;
+          margin-bottom: 10px;
+        }
+        .contact-lead-en {
+          color: rgba(248, 245, 239, 0.58);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-bottom: 36px;
+        }
         .contact-hero-actions {
           display: flex;
           flex-wrap: wrap;
@@ -188,6 +210,21 @@ export default function ContactPage() {
           line-height: 2;
           letter-spacing: 0.05em;
           margin: 0 0 28px;
+        }
+        .contact-panel-lead[lang='en'] {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: -16px;
+        }
+        .contact-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: -8px 0 14px;
         }
         .contact-kicker {
           color: var(--gold);
@@ -240,6 +277,12 @@ export default function ContactPage() {
         .contact-optional-details[open] summary::after { content: '−'; }
         .contact-optional-details > p {
           margin: 16px 0 20px;
+        }
+        .contact-optional-details > p[lang='en'],
+        .contact-aside p[lang='en'] {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
         }
         .contact-aside p {
           color: var(--washi-dim);

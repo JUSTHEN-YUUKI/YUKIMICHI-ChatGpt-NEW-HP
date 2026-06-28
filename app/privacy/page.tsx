@@ -131,9 +131,12 @@ export default function PrivacyPolicyPage() {
           <br />
           <em>Privacy Policy</em>
         </h1>
-        <p className="section-body privacy-lead">
+        <p className="section-body privacy-lead" lang="ja">
           YUKIMICHI を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、
           輸出相談、取引対応に関連して取得する情報を適切に取り扱います。
+        </p>
+        <p className="section-body privacy-lead privacy-lead-en" lang="en">
+          JUSTHEN CO., LTD., operator of YUKIMICHI, handles information received through inquiries, quotation requests, export consultations, and transaction support appropriately.
         </p>
       </section>
 
@@ -143,16 +146,20 @@ export default function PrivacyPolicyPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Basic Policy</span>
           </div>
-          <h2>個人情報の取扱い方針</h2>
+          <h2 lang="ja">個人情報の取扱い方針</h2>
+          <p className="privacy-section-subtitle" lang="en">Basic policy for handling personal information</p>
         </div>
         <div className="privacy-policy-card">
-          <p>
+          <p lang="ja">
             当社は、個人情報および取引に関連する情報の重要性を認識し、適切な取得、利用、管理に努めます。
             取得した情報は、利用目的の範囲内で取り扱います。
           </p>
-          <p>
+          <p lang="ja">
             法令に基づく場合を除き、本人の同意なく目的外利用を行わない方針です。
             個別の法的判断が必要な事項については、必要に応じて専門家確認を前提とします。
+          </p>
+          <p lang="en">
+            We recognize the importance of personal and transaction-related information and use it only within the stated purposes, except where required by law.
           </p>
         </div>
       </section>
@@ -163,17 +170,21 @@ export default function PrivacyPolicyPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Purpose / Retention</span>
           </div>
-          <h2>個人情報の利用目的と保存期間</h2>
-          <p>
+          <h2 lang="ja">個人情報の利用目的と保存期間</h2>
+          <p className="privacy-section-subtitle" lang="en">Purpose of use and retention period</p>
+          <p lang="ja">
             YUKIMICHIは、問い合わせ・見積・取引相談に必要な範囲で情報を取得し、目的外利用を避けて管理します。
+          </p>
+          <p lang="en">
+            YUKIMICHI collects information only as needed for inquiries, quotations, and transaction consultations, and manages it to avoid use outside those purposes.
           </p>
         </div>
         <div className="privacy-retention-grid">
           {retentionSummary.map((item) => (
             <article className="privacy-retention-card" key={item.en}>
-              <span>{item.en}</span>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
+              <h3 lang="ja">{item.title}</h3>
+              <span lang="en">{item.en}</span>
+              <p lang="ja">{item.body}</p>
             </article>
           ))}
         </div>
@@ -185,9 +196,13 @@ export default function PrivacyPolicyPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Information We Collect</span>
           </div>
-          <h2>取得する情報</h2>
-          <p>
+          <h2 lang="ja">取得する情報</h2>
+          <p className="privacy-section-subtitle" lang="en">Information we may collect</p>
+          <p lang="ja">
             お問い合わせ、見積依頼、輸出相談、取引対応のため、以下のような情報を取得する場合があります。
+          </p>
+          <p lang="en">
+            We may collect the following information for inquiries, quotation requests, export consultations, and transaction support.
           </p>
         </div>
         <div className="privacy-chip-grid">
@@ -200,23 +215,28 @@ export default function PrivacyPolicyPage() {
       <section className="privacy-split">
         <article className="privacy-list-card">
           <span className="privacy-card-kicker">Purpose of Use</span>
-          <h2>利用目的</h2>
+          <h2 lang="ja">利用目的</h2>
+          <p className="privacy-section-subtitle" lang="en">Purpose of use</p>
           <ul>
             {purposes.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item} lang="ja">{item}</li>
             ))}
           </ul>
         </article>
 
         <article className="privacy-list-card">
           <span className="privacy-card-kicker">Sharing with Third Parties</span>
-          <h2>第三者への提供・共有</h2>
-          <p>
+          <h2 lang="ja">第三者への提供・共有</h2>
+          <p className="privacy-section-subtitle" lang="en">Sharing with third parties</p>
+          <p lang="ja">
             原則として、本人の同意なく第三者へ提供しない方針です。ただし、以下の場合に必要な範囲で共有する場合があります。
+          </p>
+          <p lang="en">
+            In principle, we do not provide personal information to third parties without consent, except where sharing is necessary in the following cases.
           </p>
           <ul>
             {sharingCases.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item} lang="ja">{item}</li>
             ))}
           </ul>
         </article>
@@ -228,11 +248,11 @@ export default function PrivacyPolicyPage() {
             <div className="privacy-card__head">
               <span>{section.code}</span>
               <div>
-                <h2>{section.title}</h2>
-                <p>{section.en}</p>
+                <h2 lang="ja">{section.title}</h2>
+                <p lang="en">{section.en}</p>
               </div>
             </div>
-            <p>{section.body}</p>
+            <p lang="ja">{section.body}</p>
           </article>
         ))}
       </section>
@@ -243,12 +263,14 @@ export default function PrivacyPolicyPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Contact Window</span>
           </div>
-          <h2>お問い合わせ窓口</h2>
-          <p>個人情報の取扱いに関するお問い合わせは、以下までご連絡ください。</p>
+          <h2 lang="ja">お問い合わせ窓口</h2>
+          <p className="privacy-section-subtitle" lang="en">Contact window</p>
+          <p lang="ja">個人情報の取扱いに関するお問い合わせは、以下までご連絡ください。</p>
+          <p lang="en">For inquiries about the handling of personal information, please contact us below.</p>
         </div>
         <div className="privacy-contact-card">
-          <p>JUSTHEN CO., LTD.</p>
-          <p>YUKIMICHI</p>
+          <p lang="en">JUSTHEN CO., LTD.</p>
+          <p lang="en">YUKIMICHI</p>
           <a href="mailto:exporter@justhen.co.jp?subject=Privacy%20Policy%20Inquiry">
             exporter@justhen.co.jp
           </a>
@@ -261,14 +283,16 @@ export default function PrivacyPolicyPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Related Links</span>
           </div>
-          <h2>関連ページ</h2>
-          <p>問い合わせ、取引条件、禁止・制限品目、見積依頼に関する情報は各ページで確認できます。</p>
+          <h2 lang="ja">関連ページ</h2>
+          <p className="privacy-section-subtitle" lang="en">Related pages</p>
+          <p lang="ja">問い合わせ、取引条件、禁止・制限品目、見積依頼に関する情報は各ページで確認できます。</p>
+          <p lang="en">You can review inquiries, terms, restricted items, and quotation requests on the related pages.</p>
         </div>
         <div className="privacy-related-grid">
           {relatedLinks.map((link) => (
             <Link href={link.href} className="privacy-related-card" key={link.href}>
-              <span>{link.en}</span>
-              <strong>{link.label}</strong>
+              <strong lang="ja">{link.label}</strong>
+              <span lang="en">{link.en}</span>
               <ArrowRight />
             </Link>
           ))}
@@ -302,6 +326,14 @@ export default function PrivacyPolicyPage() {
 
         .privacy-lead {
           max-width: 860px;
+          margin-bottom: 10px;
+        }
+
+        .privacy-lead-en {
+          color: rgba(248, 245, 239, 0.58);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-bottom: 36px;
         }
 
         .privacy-policy,
@@ -349,6 +381,27 @@ export default function PrivacyPolicyPage() {
           letter-spacing: 0.05em;
           line-height: 2.1;
           margin: 0;
+        }
+
+        .privacy-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: 8px 0 0;
+        }
+
+        .privacy-policy-card p[lang='en'],
+        .privacy-section-head p[lang='en']:not(.privacy-section-subtitle),
+        .privacy-list-card p[lang='en']:not(.privacy-section-subtitle),
+        .privacy-contact p[lang='en']:not(.privacy-section-subtitle),
+        .privacy-related p[lang='en']:not(.privacy-section-subtitle) {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 8px;
         }
 
         .privacy-retention,

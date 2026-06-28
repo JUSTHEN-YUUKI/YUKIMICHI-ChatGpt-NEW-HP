@@ -14,24 +14,24 @@ function shouldSkipElement(element: Element) {
 
 const paymentCopy = [
   {
-    ja: '海外からのお支払いは、Wiseを利用して、三井住友銀行の当社指定法人口座へ日本円でご送金いただく方法を推奨しています。',
-    en: 'For overseas payments, we recommend using Wise to send Japanese yen (JPY) to our designated corporate account at Sumitomo Mitsui Banking Corporation (SMBC).',
+    ja: 'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
+    en: 'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
   },
   {
-    ja: 'Wiseをご利用できない場合は、三井住友銀行の当社指定法人口座への直接T/T送金（電信送金）にも対応可能です。',
-    en: 'If Wise is not available, direct T/T remittance to our designated SMBC corporate account is also available.',
+    ja: '支払方法：T/T送金（電信送金）',
+    en: 'Payment by T/T remittance.',
   },
   {
-    ja: '正式な送金先情報は、正式見積書・請求書の発行時に個別にご案内します。',
-    en: 'Detailed payment instructions will be provided individually with the official quotation and invoice.',
+    ja: '海外からのお支払いは、Wise経由の日本円送金を推奨しています。代替方法として、三井住友銀行の当社指定法人口座への直接T/T送金にも対応可能です。正式な送金先情報は、正式見積り・請求時に個別にご案内します。',
+    en: 'For overseas payments, we recommend JPY transfer via Wise. As an alternative, direct T/T remittance to our designated SMBC corporate bank account is also available. Detailed payment instructions will be provided individually at the time of formal quotation and invoice issuance.',
   },
   {
-    ja: 'Wise手数料、銀行手数料、中継銀行手数料、受取手数料、その他送金関連費用は、原則としてお客様負担となります。',
-    en: 'All Wise fees, bank charges, intermediary bank fees, receiving fees, and other transfer-related charges shall be borne by the customer.',
+    ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
+    en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
   },
   {
-    ja: '請求金額の全額着金を確認後、仕入先対応、発注、輸出関連手配を開始します。',
-    en: 'We will begin supplier coordination, ordering, and export-related arrangements after confirming receipt of the full invoice amount.',
+    ja: '入金確認後、仕入れ・発注・輸出手配を開始します。',
+    en: 'After payment is confirmed, we will begin procurement, ordering, and export arrangement procedures.',
   },
 ]
 
@@ -67,15 +67,26 @@ function normalizePricingPaymentCopy(pathname: string | null) {
   label.append(labelLine, labelText)
 
   const heading = document.createElement('h2')
-  heading.textContent = 'JPY Advance Payment / 日本円での前払い'
+  heading.lang = 'ja'
+  heading.textContent = 'お支払い方法'
+
+  const subtitle = document.createElement('p')
+  subtitle.className = 'pricing-payment-subtitle'
+  subtitle.lang = 'en'
+  subtitle.textContent = 'Payment by T/T Remittance'
 
   appendParagraph(
     headingColumn,
-    'お支払いは、原則として日本円（JPY）建ての前払いとなります。案件内容を確認後、正式見積書・請求書にて送金先情報をご案内します。',
+    '入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。',
     'ja',
   )
+  appendParagraph(
+    headingColumn,
+    'We begin coordination, ordering, and export preparation after payment is confirmed. Detailed payment instructions are provided individually with the formal quotation and invoice.',
+    'en',
+  )
 
-  headingColumn.prepend(label, heading)
+  headingColumn.prepend(label, heading, subtitle)
 
   const card = document.createElement('div')
   card.className = 'payment-card'

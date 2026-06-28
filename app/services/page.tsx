@@ -252,9 +252,13 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Core Services</span>
           </div>
-          <h2><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス" /></h2>
-          <p>
+          <h2 lang="ja"><TranslatedText id="pages.services.coreTitle" fallback="輸出実務を前提としたサービス" /></h2>
+          <p className="services-section-subtitle" lang="en">Core services based on practical export coordination</p>
+          <p lang="ja">
             <TranslatedText id="pages.services.coreLead" fallback="仕入先確認、国内取引調整、輸出手配、書類・物流調整まで、問い合わせ前に確認すべき実務項目を整理します。" />
+          </p>
+          <p lang="en">
+            We organize supplier checks, domestic transaction coordination, export arrangements, documents, and shipping-related points before quotation.
           </p>
         </div>
 
@@ -264,16 +268,16 @@ export default function ServicesPage() {
               <div className="service-card__head">
                 <span>{service.code}</span>
                 <div>
-                  <h2><TranslatedText id={`pages.services.coreItems.${serviceIndex}.title`} fallback={service.title} /></h2>
-                  <p><TranslatedText id={`pages.services.coreItems.${serviceIndex}.en`} fallback={service.en} /></p>
+                  <h2 lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.title`} fallback={service.title} /></h2>
+                  <p lang="en"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.en`} fallback={service.en} /></p>
                 </div>
               </div>
               <ul>
                 {service.points.map((point, pointIndex) => (
-                  <li key={point}><TranslatedText id={`pages.services.coreItems.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
+                  <li key={point} lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
                 ))}
               </ul>
-              <p className="service-card__note"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></p>
+              <p className="service-card__note" lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></p>
             </article>
           ))}
         </div>
@@ -311,10 +315,14 @@ export default function ServicesPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Role / 役割分担</span>
           </div>
-          <h2>YUKIMICHIは運送会社そのものではありません</h2>
-          <p>
+          <h2 lang="ja">YUKIMICHIは運送会社そのものではありません</h2>
+          <p className="services-section-subtitle" lang="en">YUKIMICHI is not an international carrier.</p>
+          <p lang="ja">
             YUKIMICHIは日本側の輸出手配支援会社として、仕入れ可否調査、仕入先連絡、書類整理、配送手配支援を行います。
             実輸送、通関判断、輸入国側の許可・税金・販売可否は、関係事業者または輸入者側の確認が前提です。
+          </p>
+          <p lang="en">
+            YUKIMICHI supports Japan-side sourcing checks, supplier communication, document organization, and shipping arrangement support. Final transport, customs decisions, destination-side permits, taxes, and sales eligibility must be confirmed by the relevant parties or importer.
           </p>
         </div>
 
@@ -322,8 +330,8 @@ export default function ServicesPage() {
           {roleItems.map((item) => (
             <article className="services-role-card" key={item.actor}>
               <span>{item.actor}</span>
-              <p>{item.ja}</p>
-              <small>{item.en}</small>
+              <p lang="ja">{item.ja}</p>
+              <small lang="en">{item.en}</small>
             </article>
           ))}
         </div>
@@ -608,6 +616,23 @@ export default function ServicesPage() {
           letter-spacing: 0.05em;
           line-height: 2.1;
           margin: 0;
+        }
+
+        .services-section-head .services-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+          margin: -6px 0 14px;
+        }
+
+        .services-section-head p[lang='en']:not(.services-section-subtitle) {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 10px;
         }
 
         .services-grid {

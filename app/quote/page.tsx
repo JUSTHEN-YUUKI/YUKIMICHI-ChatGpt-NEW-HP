@@ -100,6 +100,9 @@ export default function QuotePage() {
             fallback="まずは分かる範囲でご相談ください。商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
           />
         </p>
+        <p className="section-body quote-lead quote-lead-en" lang="en">
+          Please share what you know first. A product name or URL, destination country, and your request details are enough to start the review.
+        </p>
         <div className="quote-hero-actions">
           <a href={quoteMailto} className="btn-primary">
             <TranslatedText id="pages.quote.mailCta" fallback="exporter@justhen.co.jp へ見積相談する" /> <ArrowRight />
@@ -120,6 +123,9 @@ export default function QuotePage() {
               fallback="商品名または商品URL、配送先国、ご希望内容をお送りいただければ、確認に必要な追加情報は当社よりご案内いたします。"
             />
           </p>
+          <p lang="en">
+            Send the product name or URL, destination country, and request details. We will guide you on any additional information needed.
+          </p>
           <a href={quoteMailto} className="quote-mail-address">
             exporter@justhen.co.jp
           </a>
@@ -139,6 +145,9 @@ export default function QuotePage() {
                 fallback="すべて必須ではありません。現在分かる範囲でご記載ください。"
               />
             </p>
+            <p lang="en">
+              These details are optional. Please provide what is currently available.
+            </p>
             <ul>
               {requiredItems.map((item, index) => (
                 <li key={item}>
@@ -156,15 +165,16 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Quotation Flow</span>
           </div>
-          <h2><TranslatedText id="pages.quote.flowTitle" fallback="見積依頼の流れ" /></h2>
-          <p><TranslatedText id="pages.quote.flowLead" fallback="初回相談では、確定料金ではなく確認に必要な条件を整理し、対応可否と配送候補を確認します。" /></p>
+          <h2 lang="ja"><TranslatedText id="pages.quote.flowTitle" fallback="見積依頼の流れ" /></h2>
+          <p lang="ja"><TranslatedText id="pages.quote.flowLead" fallback="初回相談では、確定料金ではなく確認に必要な条件を整理し、対応可否と配送候補を確認します。" /></p>
+          <p lang="en">At the first inquiry stage, we organize the conditions needed for review and check handling feasibility and possible shipping options.</p>
         </div>
         <div className="quote-flow-grid">
           {quoteFlow.map((item) => (
             <article className="quote-flow-card" key={item.step}>
               <span>{item.step}</span>
               <h3><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.title`} fallback={item.title} /></h3>
-              <p><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.text`} fallback={item.text} /></p>
+              <p lang="ja"><TranslatedText id={`pages.quote.flowItems.${Number(item.step) - 1}.text`} fallback={item.text} /></p>
             </article>
           ))}
         </div>
@@ -176,15 +186,16 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Shipping Guide</span>
           </div>
-          <h2><TranslatedText id="pages.quote.shippingTitle" fallback="配送方法の目安" /></h2>
-          <p><TranslatedText id="pages.quote.shippingLead" fallback="配送先国、内容品、数量、納期、サイズ・重量により、候補となる配送方法が変わります。" /></p>
+          <h2 lang="ja"><TranslatedText id="pages.quote.shippingTitle" fallback="配送方法の目安" /></h2>
+          <p lang="ja"><TranslatedText id="pages.quote.shippingLead" fallback="配送先国、内容品、数量、納期、サイズ・重量により、候補となる配送方法が変わります。" /></p>
+          <p lang="en">Candidate shipping methods vary by destination, item type, quantity, timeline, dimensions, and weight.</p>
         </div>
         <div className="quote-shipping-grid">
           {shippingMethods.map((method, index) => (
             <article className="quote-shipping-card" key={method.name}>
               <span>{method.name}</span>
               <h3>{method.detail}</h3>
-              <p><TranslatedText id={`pages.quote.shippingNotes.${index}`} fallback={method.note} /></p>
+              <p lang="ja"><TranslatedText id={`pages.quote.shippingNotes.${index}`} fallback={method.note} /></p>
             </article>
           ))}
         </div>
@@ -196,7 +207,8 @@ export default function QuotePage() {
             <div className="section-label-line" />
             <span className="section-label-text">Important Notice</span>
           </div>
-          <h2><TranslatedText id="pages.quote.noticeTitle" fallback="注意事項" /></h2>
+          <h2 lang="ja"><TranslatedText id="pages.quote.noticeTitle" fallback="注意事項" /></h2>
+          <p className="quote-section-subtitle" lang="en">Important notes before requesting a quotation</p>
         </div>
         <ul>
           {noticeItems.map((item, index) => (
@@ -232,6 +244,14 @@ export default function QuotePage() {
 
         .quote-lead {
           max-width: 820px;
+          margin-bottom: 10px;
+        }
+
+        .quote-lead-en {
+          color: rgba(248, 245, 239, 0.58);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-bottom: 36px;
         }
 
         .quote-hero-actions {
@@ -270,6 +290,25 @@ export default function QuotePage() {
           letter-spacing: 0.05em;
           line-height: 2.1;
           margin: 0;
+        }
+
+        .quote-section-head p[lang='en'],
+        .quote-mail p[lang='en'],
+        .quote-optional-details > p[lang='en'],
+        .quote-section-subtitle {
+          color: rgba(248, 245, 239, 0.54);
+          font-size: 12.5px;
+          line-height: 1.85;
+          margin-top: 10px;
+        }
+
+        .quote-section-subtitle {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 17px;
+          font-style: italic;
+          letter-spacing: 0.04em;
+          margin: -4px 0 14px;
         }
 
         .quote-flow-grid,
