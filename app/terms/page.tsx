@@ -26,10 +26,12 @@ const terms = [
     title: '支払いについて',
     en: 'Payment',
     items: [
-      '原則として、商品調達・発送手配の前に支払い確認が必要です。',
-      '支払い方法、支払い期日、通貨、支払い関連手数料等は見積書または個別案内により確認します。',
-      '支払い情報は、必要に応じて見積書・請求書・個別案内で提示します。',
-      '支払い確認後に、商品調達または配送手配を進める想定です。',
+      '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。',
+      'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。',
+      'Wiseのご利用が難しい場合は、通常の海外銀行送金（T/T送金）により、弊社指定の三井住友銀行（SMBC）口座へお支払いいただく方法をご案内いたします。',
+      '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。',
+      'ご入金確認後、商品調達、発注、梱包、輸出関連手配を開始します。',
+      '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     ],
   },
   {
@@ -159,6 +161,21 @@ const relatedLinks = [
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
 
+const paymentTermEnglishSubTexts: Record<string, string> = {
+  '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。':
+    'For overseas payments, we recommend using Wise due to transfer fees and easier payment confirmation.',
+  'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。':
+    'The payment destination is our designated Sumitomo Mitsui Banking Corporation (SMBC) account. Payment is generally required in advance in Japanese yen.',
+  'Wiseのご利用が難しい場合は、通常の海外銀行送金（T/T送金）により、弊社指定の三井住友銀行（SMBC）口座へお支払いいただく方法をご案内いたします。':
+    'If Wise is difficult to use, we will provide instructions for payment to our designated SMBC account by conventional international bank transfer, also known as T/T remittance.',
+  '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。':
+    'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
+  'ご入金確認後、商品調達、発注、梱包、輸出関連手配を開始します。':
+    'After payment is confirmed, we begin procurement, ordering, packing, and export-related arrangements.',
+  '送金手数料・銀行手数料は、原則としてお客様負担となります。':
+    'Bank transfer fees and remittance charges are generally borne by the customer.',
+}
+
 function ArrowRight() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -168,6 +185,9 @@ function ArrowRight() {
 }
 
 function getEnglishSub(text: string) {
+  const paymentSubText = paymentTermEnglishSubTexts[text]
+  if (paymentSubText) return paymentSubText
+
   const translated = translateStaticText('en', text)
   return translated !== text ? translated : ''
 }

@@ -14,8 +14,16 @@ function shouldSkipElement(element: Element) {
 
 const paymentCopy = [
   {
-    ja: 'お支払い条件は、原則として日本の当社指定銀行口座（三井住友銀行）へのT/T送金（電信送金）による前払いとなります。',
-    en: 'Payment terms are, in principle, advance payment by T/T remittance to our designated bank account in Japan at Sumitomo Mitsui Banking Corporation (SMBC).',
+    ja: '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。',
+    en: 'For overseas payments, we recommend using Wise due to transfer fees and easier payment confirmation.',
+  },
+  {
+    ja: 'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。',
+    en: 'The payment destination is our designated Sumitomo Mitsui Banking Corporation (SMBC) account. Payment is generally required in advance in Japanese yen.',
+  },
+  {
+    ja: 'Wiseのご利用が難しい場合は、通常の海外銀行送金（T/T送金）により、弊社指定の三井住友銀行（SMBC）口座へお支払いいただく方法をご案内いたします。',
+    en: 'If Wise is difficult to use, we will provide instructions for payment to our designated SMBC account by conventional international bank transfer, also known as T/T remittance.',
   },
   {
     ja: '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
@@ -28,10 +36,6 @@ const paymentCopy = [
   {
     ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
-  },
-  {
-    ja: 'Wise等の送金サービスを利用する場合は、事前に当社との確認が必要です。',
-    en: 'Use of Wise or similar remittance services requires prior confirmation with YUKIMICHI.',
   },
 ]
 
@@ -62,27 +66,27 @@ function normalizePricingPaymentCopy(pathname: string | null) {
 
   const labelText = document.createElement('span')
   labelText.className = 'section-label-text'
-  labelText.textContent = 'Payment Terms / お支払い条件'
+  labelText.textContent = 'Payment'
 
   label.append(labelLine, labelText)
 
   const heading = document.createElement('h2')
   heading.lang = 'ja'
-  heading.textContent = 'お支払い条件'
+  heading.textContent = 'お支払い方法・条件'
 
   const subtitle = document.createElement('p')
   subtitle.className = 'pricing-payment-subtitle'
   subtitle.lang = 'en'
-  subtitle.textContent = 'Payment Terms'
+  subtitle.textContent = 'Payment Method & Terms'
 
   appendParagraph(
     headingColumn,
-    '原則として、正式見積り・請求書に基づく前払いで手配を開始します。支払方法や銀行手数料の扱いは案件ごとにご案内します。',
+    '正式見積り・請求書に基づき、支払い方法、支払期日、通貨、銀行手数料の扱いを案件ごとに確認します。',
     'ja',
   )
   appendParagraph(
     headingColumn,
-    'Arrangements generally begin after advance payment based on the formal quotation or invoice. Payment method details and bank fee handling are confirmed case by case.',
+    'Payment method, due date, currency, and bank fee handling are confirmed case by case based on the formal quotation or invoice.',
     'en',
   )
 

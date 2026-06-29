@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
-import { translateStaticText } from '@/lib/staticTextTranslations'
 
 export const metadata: Metadata = {
   title: 'Export Process | YUKIMICHI',
@@ -13,48 +12,56 @@ const steps = [
     title: 'お問い合わせ',
     en: 'Inquiry',
     text: '商品名、ブランド名、数量、配送先国、用途、希望納期をお知らせください。商品URLがない場合は、写真や分かる範囲の情報だけでも確認を開始できます。',
+    enText: 'Please provide the product name, brand, quantity, destination country, intended use, and desired delivery timing. If no product URL is available, we can begin review based on photos or available details.',
   },
   {
     number: '02',
     title: '商品・輸入条件の確認',
     en: 'Product & Import Requirements Review',
     text: '商品カテゴリ、数量、配送先国、用途をもとに、輸出入規制、配送会社の引受条件、輸入者側で確認すべき許可・税金・販売条件を整理します。',
+    enText: 'Based on the product category, quantity, destination country, and intended use, we review export/import restrictions, carrier acceptance conditions, and items the importer should confirm, such as permits, taxes, and sales requirements.',
   },
   {
     number: '03',
     title: '仕入先への確認',
     en: 'Supplier Check',
     text: '日本国内の仕入先へ、在庫、価格、MOQ、納期、商品資料、SDS/MSDSの有無などを確認します。仕入先情報の開示可否は案件ごとに確認します。',
+    enText: 'We check stock, pricing, MOQ, lead time, product documents, and SDS/MSDS availability with suppliers in Japan. Disclosure of supplier information is reviewed case by case.',
   },
   {
     number: '04',
     title: '見積提示',
     en: 'Quotation',
     text: '商品代金、手配手数料、国際送料、保険料、想定される追加費用を分けて提示します。関税やVAT/GSTは参考確認となり、最終判断は輸入国側での確認が前提です。',
+    enText: 'We present product costs, handling fees, international shipping, insurance, and estimated additional costs separately. Duties and VAT/GST are provided for reference, and final confirmation must be made in the importing country.',
   },
   {
     number: '05',
-    title: '前払い確認',
-    en: 'Advance Payment',
-    text: '正式見積りと条件に合意後、原則としてご入金確認後に商品調達、梱包、配送手配を開始します。支払条件は案件ごとにメールまたは書面で確認します。',
+    title: 'お支払い確認',
+    en: 'Payment Confirmation',
+    text: '正式見積りと条件に合意後、原則としてご入金確認後に商品調達、発注、梱包、配送手配を開始します。支払い条件は案件ごとにメールまたは書面で確認します。',
+    enText: 'After the quotation and terms are agreed, procurement, ordering, packing, and shipping arrangements generally begin after payment confirmation. Payment terms are confirmed by email or written notice for each case.',
   },
   {
     number: '06',
-    title: '調達・検品・書類整理',
-    en: 'Procurement & Documents',
-    text: '日本国内での商品調達、数量確認、簡易検品、梱包準備を行い、Commercial Invoice、Packing List、必要に応じた商品資料を整理します。',
+    title: '商品調達・国内手配',
+    en: 'Procurement & Japan-side Arrangement',
+    text: '日本国内の仕入先への発注、商品受領、必要に応じた写真確認、簡易検品、梱包前確認などを進めます。',
+    enText: 'We proceed with supplier ordering in Japan, product receipt, photo confirmation, simple inspection, and pre-packing checks as needed.',
   },
   {
     number: '07',
-    title: '配送方法の確定・手配',
-    en: 'Shipping Coordination',
-    text: 'EMS・DHL・FedEx・UPSなどの国際宅配便、航空貨物、海上輸送を比較し、貨物内容と配送先に合う方法を確認したうえで手配します。',
+    title: '輸出書類・配送手配',
+    en: 'Export Documents & Shipping Arrangement',
+    text: 'Commercial Invoice、Packing List等の基本書類を整理し、配送方法に応じてクーリエ、航空貨物、海上輸送等の手配を進めます。',
+    enText: 'We organize basic export documents such as the Commercial Invoice and Packing List, and arrange courier, air freight, or sea freight depending on the shipping method.',
   },
   {
     number: '08',
-    title: '発送・追跡共有・フォロー',
-    en: 'Shipment & Follow-up',
-    text: '発送後は追跡情報を共有し、到着までの確認事項をフォローします。輸入国側の通関、許可、税金、販売可否は原則として輸入者側での確認事項です。',
+    title: '出荷・追跡情報共有',
+    en: 'Shipment & Tracking Information',
+    text: '出荷後、追跡番号や配送状況を共有します。配送遅延、税関確認、追加資料依頼が発生した場合は、案件ごとに状況を整理してご連絡します。',
+    enText: 'After shipment, we share tracking information and delivery status. If delays, customs checks, or additional document requests occur, we organize and report the situation case by case.',
   },
 ]
 
@@ -171,16 +178,6 @@ function ArrowRight() {
   )
 }
 
-function getEnglishSub(text: string) {
-  const translated = translateStaticText('en', text)
-  return translated !== text ? translated : ''
-}
-
-function EnglishSubText({ text }: { text: string }) {
-  const english = getEnglishSub(text)
-  return english ? <p lang="en">{english}</p> : null
-}
-
 export default function FlowPage() {
   return (
     <>
@@ -212,7 +209,7 @@ export default function FlowPage() {
                 <h2 lang="ja">{step.title}</h2>
                 <span lang="en">{step.en}</span>
                 <p lang="ja">{step.text}</p>
-                <EnglishSubText text={step.text} />
+                <p lang="en">{step.enText}</p>
               </div>
             </article>
           ))}
