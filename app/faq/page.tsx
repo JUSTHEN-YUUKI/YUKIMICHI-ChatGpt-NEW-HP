@@ -21,6 +21,14 @@ const faqCategories = [
         links: [{ href: '/services', label: 'サービスを見る' }],
       },
       {
+        qJa: '商品代金に中間マージンは上乗せされますか？',
+        q: 'Is an intermediate margin added to the product price?',
+        qEn: 'Is an intermediate margin added to the product price?',
+        aJa: 'いいえ。YUKIMICHIは転売会社ではなく、日本側の輸出手配・実務調整を支援する会社です。メーカー・卸・販売店から提示された商品価格に、弊社が中間マージンを上乗せすることはありません。たとえば、日本メーカー様から商品総額20万円の卸価格が提示された場合、海外のお客様へも商品代金は20万円として提示します。YUKIMICHIの手数料は、商品代金とは別に「手配手数料」として明確にご案内します。',
+        a: 'No. YUKIMICHI is not a resale company. We support Japan-side export coordination and practical arrangements. We do not add an intermediate margin to the product price provided by manufacturers, wholesalers, or retailers. For example, if a Japanese manufacturer provides a wholesale price of JPY 200,000, the product price will also be presented to the overseas customer as JPY 200,000. YUKIMICHI’s fee is clearly shown separately as an arrangement fee.',
+        aEn: 'No. YUKIMICHI is not a resale company. We support Japan-side export coordination and practical arrangements. We do not add an intermediate margin to the product price provided by manufacturers, wholesalers, or retailers. For example, if a Japanese manufacturer provides a wholesale price of JPY 200,000, the product price will also be presented to the overseas customer as JPY 200,000. YUKIMICHI’s fee is clearly shown separately as an arrangement fee.',
+      },
+      {
         q: '小ロットやサンプルだけでも依頼できますか？',
         a: '小ロット、サンプル、少量発送の相談も可能です。商品内容や配送先国により対応可否が変わるため、まずは商品URL、数量、配送先国を添えてご相談ください。',
         links: [{ href: '/quote', label: 'お見積りへ進む' }],
