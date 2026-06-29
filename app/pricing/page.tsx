@@ -214,7 +214,7 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Payment</span>
           </div>
-          <h2 lang="ja">お支払い方法・条件</h2>
+          <h2 lang="ja">お支払い方法</h2>
           <p className="pricing-payment-subtitle" lang="en">Payment Method & Terms</p>
           <p lang="ja">
             正式見積り・請求書に基づき、支払い方法、支払期日、通貨、銀行手数料の扱いを案件ごとに確認します。

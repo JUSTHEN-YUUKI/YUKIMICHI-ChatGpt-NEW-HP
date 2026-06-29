@@ -72,7 +72,7 @@ function normalizePricingPaymentCopy(pathname: string | null) {
 
   const heading = document.createElement('h2')
   heading.lang = 'ja'
-  heading.textContent = 'お支払い方法・条件'
+  heading.textContent = 'お支払い方法'
 
   const subtitle = document.createElement('p')
   subtitle.className = 'pricing-payment-subtitle'
