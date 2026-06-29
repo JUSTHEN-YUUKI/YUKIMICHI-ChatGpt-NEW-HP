@@ -240,6 +240,19 @@ function getAutoComplete(name: keyof FormState) {
   return fieldAutoComplete[name] ?? 'on'
 }
 
+function splitBilingualText(text: string) {
+  const separator = ' / '
+  if (!text.includes(separator)) {
+    return { ja: text, en: '' }
+  }
+
+  const [ja, ...enParts] = text.split(separator)
+  return {
+    ja: ja.trim(),
+    en: enParts.join(separator).trim(),
+  }
+}
+
 export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
@@ -258,9 +271,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
   const optionalDetailsLabel = {
     ja: '任意項目（より正確なお見積りのために）',
     en: 'Optional details for a more accurate quote',
-    zh: '可选信息（用于更准确的报价）',
-    es: 'Datos opcionales para una cotización más precisa',
-  }[language]
+  }
 
   function updateField(name: keyof FormState, value: string) {
     setFormState((current) => ({ ...current, [name]: value }))
@@ -335,6 +346,8 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     const fieldId = `inquiry-${type}-${field.name}`
     const listId = options ? `inquiry-${type}-${field.name}-options` : undefined
     const isRequired = isFieldRequired(field)
+    const labelCopy = splitBilingualText(field.label)
+    const noteCopy = field.note ? splitBilingualText(field.note) : null
     const fieldClassName = [
       'inquiry-form__field',
       `inquiry-form__field--${field.name}`,
@@ -346,7 +359,10 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
     return (
       <label className={fieldClassName} htmlFor={fieldId} key={field.name}>
         <span className="inquiry-form__label">
-          <span>{field.label}</span>
+          <span className="inquiry-form__label-text">
+            <span lang="ja">{labelCopy.ja}</span>
+            {labelCopy.en && <span lang="en">{labelCopy.en}</span>}
+          </span>
           {isRequired && <em>{common.required}</em>}
         </span>
 
@@ -428,7 +444,12 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           />
         )}
 
-        {field.note && <small className="inquiry-form__field-note">{field.note}</small>}
+        {noteCopy && (
+          <small className="inquiry-form__field-note">
+            <span lang="ja">{noteCopy.ja}</span>
+            {noteCopy.en && <span lang="en">{noteCopy.en}</span>}
+          </small>
+        )}
       </label>
     )
   }
@@ -443,7 +464,10 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
       {optionalFields.length > 0 && (
         <details className="inquiry-form__optional">
-          <summary>{optionalDetailsLabel}</summary>
+          <summary>
+            <span lang="ja">{optionalDetailsLabel.ja}</span>
+            <span lang="en">{optionalDetailsLabel.en}</span>
+          </summary>
           <div className="inquiry-form__grid">{optionalFields.map(renderField)}</div>
         </details>
       )}
@@ -521,10 +545,19 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         .inquiry-form__optional summary {
           color: var(--gold);
           cursor: pointer;
+          display: grid;
+          gap: 3px;
           font-size: 12px;
           letter-spacing: 0.08em;
           line-height: 1.7;
           padding: 16px 0;
+        }
+
+        .inquiry-form__optional summary span[lang='en'] {
+          color: rgba(248,245,239,0.5);
+          font-size: 10.5px;
+          letter-spacing: 0.06em;
+          line-height: 1.45;
         }
 
         .inquiry-form__intro {
@@ -542,23 +575,35 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         }
 
         .inquiry-form__label {
-          align-items: center;
+          align-items: flex-start;
           color: var(--gold);
           display: flex;
           flex-wrap: nowrap;
-          font-size: 11px;
           gap: 8px;
           justify-content: flex-start;
-          letter-spacing: 0.18em;
-          line-height: 1.6;
           max-width: 100%;
           min-height: 22px;
-          text-transform: uppercase;
-          width: fit-content;
+          width: 100%;
         }
 
-        .inquiry-form__label > span {
+        .inquiry-form__label-text {
+          display: grid;
+          gap: 3px;
           min-width: 0;
+        }
+
+        .inquiry-form__label-text span[lang='ja'] {
+          color: var(--gold);
+          font-size: 11.5px;
+          letter-spacing: 0.14em;
+          line-height: 1.55;
+        }
+
+        .inquiry-form__label-text span[lang='en'] {
+          color: rgba(248,245,239,0.5);
+          font-size: 10px;
+          letter-spacing: 0.08em;
+          line-height: 1.45;
         }
 
         .inquiry-form--contact .inquiry-form__field--destinationCountry .inquiry-form__label,
@@ -657,9 +702,15 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
         .inquiry-form__field-note {
           color: var(--washi-dim);
+          display: grid;
+          gap: 3px;
           font-size: 11px;
           letter-spacing: 0.04em;
           line-height: 1.8;
+        }
+
+        .inquiry-form__field-note span[lang='en'] {
+          color: rgba(248,245,239,0.48);
         }
 
         .inquiry-form textarea {

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 import { TranslatedText } from '@/components/TranslatedText'
+import { translations } from '@/lib/translations'
 
 export const metadata: Metadata = {
   title: 'サービス | YUKIMICHI',
@@ -101,30 +102,30 @@ const coreServices = [
 ]
 
 const supportScope = [
-  '商品情報の整理',
-  '商品の仕入れ可否調査',
-  '仕入先への確認・連絡支援',
-  '国内取引条件の整理',
-  '購入条件・見積条件の整理',
-  '国際配送方法の比較',
-  '航空貨物・海上輸送の確認',
-  'Invoice / Packing List 等の基本書類整理',
-  'SDS / 成分表等の確認',
-  '禁止・制限品目の事前確認',
-  '海外バイヤーとの取引条件整理',
+  { ja: '商品情報の整理', en: 'Product information organization' },
+  { ja: '商品の仕入れ可否調査', en: 'Product availability and sourcing checks' },
+  { ja: '仕入先への確認・連絡支援', en: 'Supplier communication support' },
+  { ja: '国内取引条件の整理', en: 'Domestic transaction condition review' },
+  { ja: '購入条件・見積条件の整理', en: 'Purchase and quotation condition review' },
+  { ja: '国際配送方法の比較', en: 'International shipping option comparison' },
+  { ja: '航空貨物・海上輸送の確認', en: 'Air and sea freight arrangement review' },
+  { ja: 'Invoice / Packing List 等の基本書類整理', en: 'Basic export document organization such as Invoice and Packing List' },
+  { ja: 'SDS / 成分表等の確認', en: 'SDS, ingredient sheet, and related document checks' },
+  { ja: '禁止・制限品目の事前確認', en: 'Restricted item pre-checks' },
+  { ja: '海外バイヤーとの取引条件整理', en: 'Trade condition organization with overseas buyers' },
 ]
 
 const limitations = [
-  '相手国での最終的な輸入許可',
-  '税関による最終判断',
-  '関税・VAT/GSTの最終金額',
-  'HSコードの最終分類',
-  '原産地証明・各種認証の発給可否',
-  'FDA、CE、FCC、CPSIA等の認証取得代行',
-  '危険品の最終輸送可否',
-  '配送会社の最終引受判断',
-  '輸入国での販売可否',
-  '配送遅延が発生しないことの保証',
+  { ja: '相手国での最終的な輸入許可', en: 'Final import approval in the destination country' },
+  { ja: '税関による最終判断', en: 'Final customs decisions' },
+  { ja: '関税・VAT/GSTの最終金額', en: 'Final customs duty, VAT, or GST amounts' },
+  { ja: 'HSコードの最終分類', en: 'Final HS code classification' },
+  { ja: '原産地証明・各種認証の発給可否', en: 'Issuance of certificates of origin or other official certifications' },
+  { ja: 'FDA、CE、FCC、CPSIA等の認証取得代行', en: 'Certification acquisition services such as FDA, CE, FCC, or CPSIA' },
+  { ja: '危険品の最終輸送可否', en: 'Final dangerous goods transport acceptance' },
+  { ja: '配送会社の最終引受判断', en: 'Final carrier acceptance decisions' },
+  { ja: '輸入国での販売可否', en: 'Local sales eligibility in the destination country' },
+  { ja: '配送遅延が発生しないことの保証', en: 'Guarantee that no shipping delay will occur' },
 ]
 
 const roleItems = [
@@ -175,6 +176,8 @@ const relatedLinks = [
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
+
+const englishCoreServices = translations.en.pages.services.coreItems
 
 function ArrowRight() {
   return (
@@ -263,23 +266,33 @@ export default function ServicesPage() {
         </div>
 
         <div className="services-grid">
-          {coreServices.map((service, serviceIndex) => (
-            <article className="service-card" key={service.code}>
-              <div className="service-card__head">
-                <span>{service.code}</span>
-                <div>
-                  <h2 lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.title`} fallback={service.title} /></h2>
-                  <p lang="en"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.en`} fallback={service.en} /></p>
+          {coreServices.map((service, serviceIndex) => {
+            const englishService = englishCoreServices[serviceIndex]
+
+            return (
+              <article className="service-card" key={service.code}>
+                <div className="service-card__head">
+                  <span>{service.code}</span>
+                  <div>
+                    <h2 lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.title`} fallback={service.title} /></h2>
+                    <p lang="en">{englishService?.en ?? service.en}</p>
+                  </div>
                 </div>
-              </div>
-              <ul>
-                {service.points.map((point, pointIndex) => (
-                  <li key={point} lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.points.${pointIndex}`} fallback={point} /></li>
-                ))}
-              </ul>
-              <p className="service-card__note" lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></p>
-            </article>
-          ))}
+                <ul>
+                  {service.points.map((point, pointIndex) => (
+                    <li key={point}>
+                      <span lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.points.${pointIndex}`} fallback={point} /></span>
+                      {englishService?.points?.[pointIndex] && <small lang="en">{englishService.points[pointIndex]}</small>}
+                    </li>
+                  ))}
+                </ul>
+                <p className="service-card__note">
+                  <span lang="ja"><TranslatedText id={`pages.services.coreItems.${serviceIndex}.note`} fallback={service.note} /></span>
+                  {englishService?.note && <small lang="en">{englishService.note}</small>}
+                </p>
+              </article>
+            )
+          })}
         </div>
       </section>
 
@@ -290,7 +303,10 @@ export default function ServicesPage() {
           <p><TranslatedText id="pages.services.supportLead" fallback="YUKIMICHIが実務上の整理・確認・手配相談として対応できる主な範囲です。" /></p>
           <ul>
             {supportScope.map((item, index) => (
-              <li key={item}><TranslatedText id={`pages.services.supportScope.${index}`} fallback={item} /></li>
+              <li key={item.ja}>
+                <span lang="ja"><TranslatedText id={`pages.services.supportScope.${index}`} fallback={item.ja} /></span>
+                <small lang="en">{item.en}</small>
+              </li>
             ))}
           </ul>
         </article>
@@ -303,7 +319,10 @@ export default function ServicesPage() {
           </p>
           <ul>
             {limitations.map((item, index) => (
-              <li key={item}><TranslatedText id={`pages.services.limitations.${index}`} fallback={item} /></li>
+              <li key={item.ja}>
+                <span lang="ja"><TranslatedText id={`pages.services.limitations.${index}`} fallback={item.ja} /></span>
+                <small lang="en">{item.en}</small>
+              </li>
             ))}
           </ul>
         </article>
@@ -707,6 +726,22 @@ export default function ServicesPage() {
           padding-left: 12px;
         }
 
+        .service-card li span,
+        .services-list-panel li span {
+          display: block;
+        }
+
+        .service-card li small,
+        .services-list-panel li small,
+        .service-card__note small {
+          color: rgba(248,245,239,0.5);
+          display: block;
+          font-size: 11.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.75;
+          margin-top: 3px;
+        }
+
         .service-card__note {
           align-self: end;
           border-top: 1px solid rgba(201,168,76,0.1);
@@ -787,7 +822,7 @@ export default function ServicesPage() {
           color: var(--washi-dim);
           font-size: 12.5px;
           letter-spacing: 0.04em;
-          line-height: 1.8;
+          line-height: 1.75;
           padding-left: 18px;
           position: relative;
         }

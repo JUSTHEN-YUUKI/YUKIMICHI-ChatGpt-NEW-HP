@@ -82,44 +82,47 @@ const excludedCostItems = [
 ]
 
 const optionalServiceFees = [
-  { service: '商品写真撮影', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
-  { service: '外箱・ラベル撮影', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
-  { service: 'JANコード・成分表示確認', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
-  { service: '簡易検品', type: '有料オプション', guide: '1商品 2,000〜5,000円' },
-  { service: '数量確認', type: '基本または有料', guide: '案件規模による' },
-  { service: '梱包前写真', type: '有料オプション', guide: '1箱 500〜1,500円' },
-  { service: '梱包後写真', type: '有料オプション', guide: '1箱 500〜1,500円' },
-  { service: 'ダメージ確認', type: '有料オプション', guide: '1箱 1,000〜3,000円' },
-  { service: '賞味期限・使用期限確認', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
-  { service: 'SDS/MSDS取得サポート', type: '有料オプション', guide: '1商品 3,000〜10,000円' },
-  { service: 'メーカー資料取得代行', type: '有料オプション', guide: '1社1,000〜3,000円' },
-  { service: '追加メーカー問い合わせ', type: '有料オプション', guide: '1社 5,000〜10,000円' },
-  { service: 'サンプル購入代行', type: '有料オプション', guide: '商品代金 + 手数料' },
-  { service: '小分け・再梱包', type: '有料オプション', guide: '個別見積り' },
-  { service: '特殊梱包', type: '有料オプション', guide: '個別見積り' },
-  { service: '複数仕入先の商品集約', type: '有料オプション', guide: '個別見積り' },
-  { service: '分納・複数配送先対応', type: '有料オプション', guide: '個別見積り' },
-  { service: '価格交渉・条件交渉', type: '有料オプション', guide: '10,000円〜' },
-  { service: '長期商談代行', type: '月額または個別', guide: '10,000円〜' },
+  { service: '商品写真撮影', en: 'Product photography', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
+  { service: '外箱・ラベル撮影', en: 'Outer box and label photos', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
+  { service: 'JANコード・成分表示確認', en: 'JAN code and ingredient label check', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
+  { service: '簡易検品', en: 'Simple inspection', type: '有料オプション', guide: '1商品 2,000〜5,000円' },
+  { service: '数量確認', en: 'Quantity confirmation', type: '基本または有料', guide: '案件規模による' },
+  { service: '梱包前写真', en: 'Pre-packing photos', type: '有料オプション', guide: '1箱 500〜1,500円' },
+  { service: '梱包後写真', en: 'Post-packing photos', type: '有料オプション', guide: '1箱 500〜1,500円' },
+  { service: 'ダメージ確認', en: 'Damage check', type: '有料オプション', guide: '1箱 1,000〜3,000円' },
+  { service: '賞味期限・使用期限確認', en: 'Best-before or expiration date check', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
+  { service: 'SDS/MSDS取得サポート', en: 'SDS/MSDS collection support', type: '有料オプション', guide: '1商品 3,000〜10,000円' },
+  { service: 'メーカー資料取得代行', en: 'Supplier document collection support', type: '有料オプション', guide: '1社1,000〜3,000円' },
+  { service: '追加メーカー問い合わせ', en: 'Additional supplier inquiry', type: '有料オプション', guide: '1社 5,000〜10,000円' },
+  { service: 'サンプル購入代行', en: 'Sample purchase support', type: '有料オプション', guide: '商品代金 + 手数料' },
+  { service: '小分け・再梱包', en: 'Repacking or splitting', type: '有料オプション', guide: '個別見積り' },
+  { service: '特殊梱包', en: 'Special packing', type: '有料オプション', guide: '個別見積り' },
+  { service: '複数仕入先の商品集約', en: 'Multi-supplier consolidation', type: '有料オプション', guide: '個別見積り' },
+  { service: '分納・複数配送先対応', en: 'Split shipment or multiple destinations', type: '有料オプション', guide: '個別見積り' },
+  { service: '価格交渉・条件交渉', en: 'Price or term negotiation', type: '有料オプション', guide: '10,000円〜' },
+  { service: '長期商談代行', en: 'Long-term negotiation support', type: '月額または個別', guide: '10,000円〜' },
 ]
 
 const paymentItems = [
   {
-    ja: 'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
-    en: 'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
+    ja: 'お支払い条件は、原則として日本の当社指定銀行口座（三井住友銀行）へのT/T送金（電信送金）による前払いとなります。',
+    en: 'Payment terms are, in principle, advance payment by T/T remittance to our designated bank account in Japan at Sumitomo Mitsui Banking Corporation (SMBC).',
   },
-  { ja: '支払方法：T/T送金（電信送金）', en: 'Payment by T/T remittance.' },
   {
-    ja: '海外からのお支払いは、Wise経由の日本円送金を推奨しています。代替方法として、三井住友銀行の当社指定法人口座への直接T/T送金にも対応可能です。正式な送金先情報は、正式見積り・請求時に個別にご案内します。',
-    en: 'For overseas payments, we recommend JPY transfer via Wise. As an alternative, direct T/T remittance to our designated SMBC corporate bank account is also available. Detailed payment instructions will be provided individually at the time of formal quotation and invoice issuance.',
+    ja: '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
+    en: 'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
+  },
+  {
+    ja: '入金確認後に、商品調達、発注、梱包、輸出関連手配を開始します。',
+    en: 'After payment is confirmed, we begin procurement, ordering, packing, and export-related arrangements.',
   },
   {
     ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
   },
   {
-    ja: '入金確認後、仕入れ・発注・輸出手配を開始します。',
-    en: 'After payment is confirmed, we will begin procurement, ordering, and export arrangement procedures.',
+    ja: 'Wise等の送金サービスを利用する場合は、事前に当社との確認が必要です。',
+    en: 'Use of Wise or similar remittance services requires prior confirmation with YUKIMICHI.',
   },
 ]
 
@@ -205,12 +208,15 @@ export default function PricingPage() {
         <div>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Payment Method / お支払い方法</span>
+            <span className="section-label-text">Payment Terms / お支払い条件</span>
           </div>
-          <h2 lang="ja">お支払い方法</h2>
-          <p className="pricing-payment-subtitle" lang="en">Payment by T/T Remittance</p>
+          <h2 lang="ja">お支払い条件</h2>
+          <p className="pricing-payment-subtitle" lang="en">Payment Terms</p>
           <p lang="ja">
-            入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。
+            原則として、正式見積り・請求書に基づく前払いで手配を開始します。支払方法や銀行手数料の扱いは案件ごとにご案内します。
+          </p>
+          <p lang="en">
+            Arrangements generally begin after advance payment based on the formal quotation or invoice. Payment method details and bank fee handling are confirmed case by case.
           </p>
         </div>
         <div className="payment-card">
@@ -248,7 +254,10 @@ export default function PricingPage() {
           </div>
           {optionalServiceFees.map((fee) => (
             <div className="optional-fee-row" role="row" key={fee.service}>
-              <span role="cell" data-label="サービス">{fee.service}</span>
+              <span role="cell" data-label="サービス">
+                <span className="optional-fee-service-ja" lang="ja">{fee.service}</span>
+                <span className="optional-fee-service-en" lang="en">{fee.en}</span>
+              </span>
               <span role="cell" data-label="料金扱い">{fee.type}</span>
               <strong role="cell" data-label="目安">{fee.guide}</strong>
             </div>
@@ -527,6 +536,23 @@ export default function PricingPage() {
 
         .optional-fee-row strong {
           color: var(--washi);
+        }
+
+        .optional-fee-service-ja,
+        .optional-fee-service-en {
+          display: block;
+        }
+
+        .optional-fee-service-ja {
+          color: var(--washi);
+        }
+
+        .optional-fee-service-en {
+          color: rgba(248,245,239,0.52);
+          font-size: 12px;
+          letter-spacing: 0.035em;
+          line-height: 1.7;
+          margin-top: 3px;
         }
 
         .optional-fee-head {
@@ -825,6 +851,22 @@ export default function PricingPage() {
           font-size: 14px;
           letter-spacing: 0.025em;
           line-height: 1.9;
+          margin: 0;
+        }
+
+        .pricing-payment > div:first-child > p + p {
+          margin-top: 10px;
+        }
+
+        .pricing-payment > div:first-child > p[lang='ja'] {
+          color: #e8eef6;
+          font-weight: 500;
+        }
+
+        .pricing-payment > div:first-child > p[lang='en'] {
+          color: #aab4c2;
+          font-size: 13px;
+          letter-spacing: 0.015em;
         }
 
         .payment-card {

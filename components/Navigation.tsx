@@ -5,26 +5,24 @@ import Image from "next/image"
 import Link from "@/components/NewTabLink"
 import { usePathname } from "next/navigation"
 import LanguageSwitcher from "@/components/LanguageSwitcher"
-import { useLanguage } from "@/components/LanguageProvider"
 import { multilingualUiEnabled } from "@/lib/i18n"
 import { translations } from "@/lib/translations"
 
 const navLinks = [
-  { href: "/", labelKey: "top" },
-  { href: "/about", labelKey: "about" },
-  { href: "/services", labelKey: "services" },
-  { href: "/pricing", labelKey: "pricing" },
-  { href: "/flow", labelKey: "flow" },
-  { href: "/quote", labelKey: "quote" },
-  { href: "/faq", labelKey: "faq" },
+  { href: "/", labelKey: "top", en: "Home" },
+  { href: "/about", labelKey: "about", en: "About" },
+  { href: "/services", labelKey: "services", en: "Services" },
+  { href: "/pricing", labelKey: "pricing", en: "Pricing" },
+  { href: "/flow", labelKey: "flow", en: "Flow" },
+  { href: "/quote", labelKey: "quote", en: "Quote" },
+  { href: "/faq", labelKey: "faq", en: "FAQ" },
 ] as const
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { language } = useLanguage()
-  const navigation = translations[language].navigation
+  const japaneseNavigation = translations.ja.navigation
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48)
@@ -113,28 +111,49 @@ export default function Navigation() {
             listStyle: "none",
           }}
         >
-          {navLinks.map(({ href, labelKey }) => {
+          {navLinks.map(({ href, labelKey, en }) => {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
-            const label = navigation[labelKey]
+            const label = japaneseNavigation[labelKey]
 
             return (
               <li key={href}>
                 <Link
                   href={href}
                   style={{
-                    display: "block",
-                    padding: "9px 12px",
-                    fontSize: "10.5px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "2px",
+                    padding: "7px 10px",
                     fontWeight: 300,
-                    letterSpacing: "0.16em",
                     color: active ? "var(--gold)" : "var(--washi-dim)",
                     textDecoration: "none",
-                    textTransform: "uppercase",
                     transition: "color 0.25s ease",
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {label}
+                  <span
+                    lang="ja"
+                    style={{
+                      fontSize: "10.5px",
+                      letterSpacing: "0.15em",
+                      lineHeight: 1.15,
+                    }}
+                  >
+                    {label}
+                  </span>
+                  <span
+                    lang="en"
+                    style={{
+                      color: active ? "rgba(201,168,76,0.78)" : "rgba(248,245,239,0.5)",
+                      fontSize: "9px",
+                      letterSpacing: "0.12em",
+                      lineHeight: 1.1,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {en}
+                  </span>
                 </Link>
               </li>
             )
@@ -149,23 +168,36 @@ export default function Navigation() {
               href="/contact"
               style={{
                 display: "inline-flex",
+                flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                gap: "2px",
                 minHeight: "38px",
-                padding: "10px 20px",
+                padding: "8px 18px",
                 border: "1px solid rgba(201,168,76,0.32)",
                 background: "rgba(139,30,47,0.34)",
                 color: "var(--washi)",
                 textDecoration: "none",
-                fontSize: "10.5px",
                 fontWeight: 300,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
                 borderRadius: "1px",
                 whiteSpace: "nowrap",
               }}
             >
-              {navigation.contact}
+              <span lang="ja" style={{ fontSize: "10.5px", letterSpacing: "0.15em", lineHeight: 1.15 }}>
+                {japaneseNavigation.contact}
+              </span>
+              <span
+                lang="en"
+                style={{
+                  color: "rgba(248,245,239,0.58)",
+                  fontSize: "9px",
+                  letterSpacing: "0.12em",
+                  lineHeight: 1.1,
+                  textTransform: "uppercase",
+                }}
+              >
+                Contact
+              </span>
             </Link>
           </li>
         </ul>
@@ -233,9 +265,9 @@ export default function Navigation() {
           >
             {multilingualUiEnabled && <LanguageSwitcher variant="full" />}
 
-            {navLinks.map(({ href, labelKey }) => {
+            {navLinks.map(({ href, labelKey, en }) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
-              const label = navigation[labelKey]
+              const label = japaneseNavigation[labelKey]
 
               return (
                 <Link
@@ -243,17 +275,39 @@ export default function Navigation() {
                   href={href}
                   onClick={() => setMenuOpen(false)}
                   style={{
+                    display: "grid",
+                    gap: "5px",
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "30px",
                     fontWeight: 300,
-                    letterSpacing: "0.14em",
                     color: active ? "var(--gold)" : "var(--washi-dim)",
                     textDecoration: "none",
                     borderBottom: "1px solid rgba(201,168,76,0.1)",
                     paddingBottom: "16px",
                   }}
                 >
-                  {label}
+                  <span
+                    lang="ja"
+                    style={{
+                      fontFamily: "'Noto Sans JP', sans-serif",
+                      fontSize: "21px",
+                      letterSpacing: "0.16em",
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {label}
+                  </span>
+                  <span
+                    lang="en"
+                    style={{
+                      color: active ? "rgba(201,168,76,0.72)" : "rgba(248,245,239,0.5)",
+                      fontSize: "20px",
+                      letterSpacing: "0.13em",
+                      lineHeight: 1.1,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {en}
+                  </span>
                 </Link>
               )
             })}
@@ -262,9 +316,10 @@ export default function Navigation() {
               href="/contact"
               onClick={() => setMenuOpen(false)}
               className="btn-primary"
-              style={{ justifyContent: "center", marginTop: "12px" }}
+              style={{ display: "grid", gap: "3px", justifyContent: "center", marginTop: "12px" }}
             >
-              {navigation.contact}
+              <span lang="ja">{japaneseNavigation.contact}</span>
+              <span lang="en" style={{ fontSize: "10px", opacity: 0.72 }}>Contact</span>
             </Link>
           </div>
         </div>

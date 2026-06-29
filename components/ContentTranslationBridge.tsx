@@ -14,24 +14,24 @@ function shouldSkipElement(element: Element) {
 
 const paymentCopy = [
   {
-    ja: 'お支払い条件は、原則として日本の当社指定銀行口座へのT/T送金（電信送金）による前払いとなります。',
-    en: 'Payment is generally required in advance by bank transfer (T/T remittance) to YUKIMICHI’s designated bank account in Japan.',
+    ja: 'お支払い条件は、原則として日本の当社指定銀行口座（三井住友銀行）へのT/T送金（電信送金）による前払いとなります。',
+    en: 'Payment terms are, in principle, advance payment by T/T remittance to our designated bank account in Japan at Sumitomo Mitsui Banking Corporation (SMBC).',
   },
   {
-    ja: '支払方法：T/T送金（電信送金）',
-    en: 'Payment by T/T remittance.',
+    ja: '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
+    en: 'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
   },
   {
-    ja: '海外からのお支払いは、Wise経由の日本円送金を推奨しています。代替方法として、三井住友銀行の当社指定法人口座への直接T/T送金にも対応可能です。正式な送金先情報は、正式見積り・請求時に個別にご案内します。',
-    en: 'For overseas payments, we recommend JPY transfer via Wise. As an alternative, direct T/T remittance to our designated SMBC corporate bank account is also available. Detailed payment instructions will be provided individually at the time of formal quotation and invoice issuance.',
+    ja: '入金確認後に、商品調達、発注、梱包、輸出関連手配を開始します。',
+    en: 'After payment is confirmed, we begin procurement, ordering, packing, and export-related arrangements.',
   },
   {
     ja: '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     en: 'Bank transfer fees and remittance charges are generally borne by the customer.',
   },
   {
-    ja: '入金確認後、仕入れ・発注・輸出手配を開始します。',
-    en: 'After payment is confirmed, we will begin procurement, ordering, and export arrangement procedures.',
+    ja: 'Wise等の送金サービスを利用する場合は、事前に当社との確認が必要です。',
+    en: 'Use of Wise or similar remittance services requires prior confirmation with YUKIMICHI.',
   },
 ]
 
@@ -62,27 +62,27 @@ function normalizePricingPaymentCopy(pathname: string | null) {
 
   const labelText = document.createElement('span')
   labelText.className = 'section-label-text'
-  labelText.textContent = 'Payment Method / お支払い方法'
+  labelText.textContent = 'Payment Terms / お支払い条件'
 
   label.append(labelLine, labelText)
 
   const heading = document.createElement('h2')
   heading.lang = 'ja'
-  heading.textContent = 'お支払い方法'
+  heading.textContent = 'お支払い条件'
 
   const subtitle = document.createElement('p')
   subtitle.className = 'pricing-payment-subtitle'
   subtitle.lang = 'en'
-  subtitle.textContent = 'Payment by T/T Remittance'
+  subtitle.textContent = 'Payment Terms'
 
   appendParagraph(
     headingColumn,
-    '入金確認後に手配・発注・輸出準備を進めます。支払い方法の詳細は正式見積り・請求時に個別にご案内します。',
+    '原則として、正式見積り・請求書に基づく前払いで手配を開始します。支払方法や銀行手数料の扱いは案件ごとにご案内します。',
     'ja',
   )
   appendParagraph(
     headingColumn,
-    'We begin coordination, ordering, and export preparation after payment is confirmed. Detailed payment instructions are provided individually with the formal quotation and invoice.',
+    'Arrangements generally begin after advance payment based on the formal quotation or invoice. Payment method details and bank fee handling are confirmed case by case.',
     'en',
   )
 
