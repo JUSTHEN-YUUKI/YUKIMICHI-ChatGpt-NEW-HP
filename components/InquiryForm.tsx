@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 import { translateStaticText } from '@/lib/staticTextTranslations'
+import { analyticsEventNames, trackAnalyticsEvent } from '@/lib/analytics'
 
 type InquiryType = 'quote' | 'contact'
 
@@ -334,6 +335,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
           result.receiptNumber ? `\n受付番号 / Reference No.: ${result.receiptNumber}` : ''
         }`,
       )
+      trackAnalyticsEvent(type === 'quote' ? analyticsEventNames.quoteSubmit : analyticsEventNames.contactSubmit)
       setFormState(initialState)
     } catch (error) {
       setSubmitState('error')

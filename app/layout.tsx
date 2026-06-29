@@ -5,6 +5,9 @@ import Footer from '@/components/Footer'
 import BackToTopButton from '@/components/BackToTopButton'
 import { LanguageProvider } from '@/components/LanguageProvider'
 import ContentTranslationBridge from '@/components/ContentTranslationBridge'
+import Analytics from '@/components/Analytics'
+
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim()
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://justhen.co.jp'),
@@ -43,6 +46,13 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png?v=2',
     apple: '/favicon.png?v=2',
   },
+  ...(googleSiteVerification
+    ? {
+        verification: {
+          google: googleSiteVerification,
+        },
+      }
+    : {}),
 }
 
 export default function RootLayout({
@@ -84,6 +94,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <Analytics />
         <LanguageProvider>
           <Navigation />
           <main>{children}</main>
