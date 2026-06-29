@@ -9,7 +9,7 @@ import ContentTranslationBridge from '@/components/ContentTranslationBridge'
 export const metadata: Metadata = {
   metadataBase: new URL('https://justhen.co.jp'),
   title: {
-    default: 'YUKIMICHI | Japan Export Coordination',
+    default: 'YUKIMICHI | Japan Export Support',
     template: '%s',
   },
   description:
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'YUKIMICHI – SNOWPATH JAPAN',
-    title: 'YUKIMICHI | Japan Export Coordination',
+    title: 'YUKIMICHI | Japan Export Support',
     description:
       'Japan-side product sourcing, export document review, and shipping arrangement support for overseas buyers.',
     locale: 'ja_JP',
