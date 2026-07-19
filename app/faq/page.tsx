@@ -13,20 +13,24 @@ const faqCategories = [
   {
     id: 'procurement',
     label: '仕入れ可否調査・購入調整',
-    en: 'Sourcing Feasibility',
+    en: 'Product Sourcing and Availability',
     items: [
       {
-        q: '取扱可能な日本商品を海外から購入できますか？',
-        a: 'YUKIMICHIでは、日本国内の正規流通品を中心に、仕入れ可否調査や購入条件の調整に関する相談に対応します。商品URL、数量、配送先国、希望納期をもとに、仕入れ可否、配送方法、見積条件を確認します。',
+        qJa: '海外から日本商品の調達を依頼できますか？',
+        q: 'Can YUKIMICHI help me source Japanese products from overseas?',
+        qEn: 'Can YUKIMICHI help me source Japanese products from overseas?',
+        aJa: 'はい。日本国内の正規流通経路で取り扱われる商品を中心に、仕入れ可否や購入条件を確認します。商品URL、数量、配送先国、希望納期をもとに、在庫、取引条件、配送方法、見積条件を案件ごとに確認します。',
+        a: 'Yes. We focus on products distributed through authorized channels in Japan and confirm availability and purchasing conditions. Based on the product URL, quantity, destination country, and requested delivery date, we review stock, transaction terms, shipping options, and quotation conditions for each request.',
+        aEn: 'Yes. We focus on products distributed through authorized channels in Japan and confirm availability and purchasing conditions. Based on the product URL, quantity, destination country, and requested delivery date, we review stock, transaction terms, shipping options, and quotation conditions for each request.',
         links: [{ href: '/services', label: 'サービスを見る' }],
       },
       {
-        qJa: '商品代金に中間マージンは上乗せされますか？',
-        q: 'Is an intermediate margin added to the product price?',
-        qEn: 'Is an intermediate margin added to the product price?',
-        aJa: 'いいえ。YUKIMICHIは転売会社ではなく、日本側の輸出手配・実務調整を支援する会社です。メーカー・卸・販売店から提示された商品価格に、弊社が中間マージンを上乗せすることはありません。たとえば、日本メーカー様から商品総額20万円の卸価格が提示された場合、海外のお客様へも商品代金は20万円として提示します。YUKIMICHIの手数料は、商品代金とは別に「手配手数料」として明確にご案内します。',
-        a: 'No. YUKIMICHI is not a resale company. We support Japan-side export coordination and practical arrangements. We do not add an intermediate margin to the product price provided by manufacturers, wholesalers, or retailers. For example, if a Japanese manufacturer provides a wholesale price of JPY 200,000, the product price will also be presented to the overseas customer as JPY 200,000. YUKIMICHI’s fee is clearly shown separately as an arrangement fee.',
-        aEn: 'No. YUKIMICHI is not a resale company. We support Japan-side export coordination and practical arrangements. We do not add an intermediate margin to the product price provided by manufacturers, wholesalers, or retailers. For example, if a Japanese manufacturer provides a wholesale price of JPY 200,000, the product price will also be presented to the overseas customer as JPY 200,000. YUKIMICHI’s fee is clearly shown separately as an arrangement fee.',
+        qJa: '商品代金とYUKIMICHIの手配手数料は分けて表示されますか？',
+        q: 'Are the product cost and YUKIMICHI handling fee shown separately?',
+        qEn: 'Are the product cost and YUKIMICHI handling fee shown separately?',
+        aJa: 'はい。正式見積りでは、仕入先から確認した商品代金と、YUKIMICHIの手配手数料、国際送料、保険料、その他実費を分けて明示します。案件ごとの価格条件は、仕入先の提示内容と正式見積りで確認します。',
+        a: 'Yes. The formal quotation separately shows the product cost confirmed with the supplier, YUKIMICHI handling fee, international shipping, insurance, and other expenses. Pricing conditions for each transaction are confirmed using the supplier’s terms and the formal quotation.',
+        aEn: 'Yes. The formal quotation separately shows the product cost confirmed with the supplier, YUKIMICHI handling fee, international shipping, insurance, and other expenses. Pricing conditions for each transaction are confirmed using the supplier’s terms and the formal quotation.',
       },
       {
         q: '小ロットやサンプルだけでも依頼できますか？',
@@ -41,7 +45,7 @@ const faqCategories = [
       {
         q: 'どのような商品に対応していますか？',
         a: '日本国内の一般消費財、サンプル品、法人向け商品などを中心に相談可能です。ただし、医薬品、食品、化粧品、電池、危険品、中古品、ブランド品などは、商品内容・配送先国・配送会社条件により事前確認が必要です。',
-        links: [{ href: '/restricted-items', label: '禁止・制限品目を確認する' }],
+        links: [{ href: '/restricted', label: '禁止・制限品目を確認する' }],
       },
     ],
   },
@@ -87,9 +91,13 @@ const faqCategories = [
         links: [{ href: '/pricing', label: '料金表を見る' }],
       },
       {
-        q: '初回の手配手数料無料はありますか？',
-        a: '新規のお客様向けに、初回の手配手数料無料の案内を行う場合があります。ただし、商品代金、国際送料、関税、VAT/GST、梱包費、保険料、規制確認費用などの実費は別途となります。',
-        links: [{ href: '/pricing', label: '初回特典を確認する' }],
+        qJa: '見積にはどの費用が含まれますか？',
+        q: 'Which costs are included in the quotation?',
+        qEn: 'Which costs are included in the quotation?',
+        aJa: '正式見積りでは、商品代金、手配手数料、国際送料、保険料、梱包費、その他の実費を分けて明示します。関税、輸入税、VAT/GST、仕向国側の通関関連費用は、原則として別途または輸入者側の負担です。',
+        a: 'The formal quotation separately lists the product cost, handling fee, international shipping, insurance, packing, and other expenses. Customs duties, import taxes, VAT/GST, and destination-side customs charges are generally separate or payable by the importer.',
+        aEn: 'The formal quotation separately lists the product cost, handling fee, international shipping, insurance, packing, and other expenses. Customs duties, import taxes, VAT/GST, and destination-side customs charges are generally separate or payable by the importer.',
+        links: [{ href: '/pricing', label: '料金表を確認する' }],
       },
       {
         q: '見積に必要な情報は何ですか？',
@@ -133,7 +141,7 @@ const faqCategories = [
         qJa: 'YUKIMICHIは輸入許可を保証できますか？',
         q: 'Can YUKIMICHI guarantee import approval?',
         aJa: 'いいえ。輸入許可は仕向国の規制や税関判断により決まります。YUKIMICHIは日本側の書類整理や事前確認を支援しますが、最終的な輸入可否は輸入者、通関業者、税関、配送会社、公的機関等で確認する必要があります。',
-        a: 'No. Import approval depends on destination country regulations and customs decisions. YUKIMICHI can support Japan-side document organization and pre-checks, but final import eligibility must be confirmed by the importer, customs broker, customs office, carrier, or public authority.',
+        a: 'No. Import approval depends on destination-country regulations and customs decisions. YUKIMICHI can assist with document preparation and preliminary checks in Japan, but final import eligibility must be confirmed by the importer, customs broker, customs authority, carrier, or relevant authority.',
         links: [{ href: '/terms', label: '取引条件を確認する' }],
       },
       {
@@ -146,20 +154,20 @@ const faqCategories = [
       {
         qJa: '輸送保険は必須ですか？',
         q: 'Is shipping insurance mandatory?',
-        aJa: '輸送保険は任意加入ですが、高額貨物では加入を推奨します。保険未加入の場合、破損・紛失時の補償は運送会社約款または適用される保険条件の範囲に限定されます。',
-        a: 'Shipping insurance is optional, but recommended for high-value shipments. If insurance is not arranged, compensation for loss or damage is limited to the carrier terms or applicable insurance policy.',
+        aJa: '輸送保険は任意加入ですが、高額貨物では加入を推奨します。輸送保険に加入しない場合、破損・紛失時の補償は運送会社の運送約款および責任限度額の範囲に限定されます。',
+        a: "Shipping insurance is optional but recommended for high-value shipments. If shipping insurance is not arranged, compensation for loss or damage is limited to the carrier's terms and applicable liability limits.",
         links: [{ href: '/pricing', label: '料金表を見る' }],
       },
       {
         qJa: '化粧品、食品、電池、医薬品などは扱えますか？',
-        q: 'Can you handle cosmetics, food, batteries, medical products?',
+        q: 'Can you handle cosmetics, food, batteries, and pharmaceutical products?',
         aJa: '事前確認が必要です。成分、表示、数量、用途、仕向国、配送会社条件により、取扱不可、制限付き対応、SDS/MSDS等の追加資料が必要となる場合があります。',
         a: 'A pre-check is required. Depending on ingredients, labels, quantity, use, destination country, and carrier rules, some items may be restricted, unavailable, or require additional documents such as SDS/MSDS.',
-        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
+        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
       },
       {
         qJa: 'Commercial InvoiceやPacking Listの作成は依頼できますか？',
-        q: 'Can you prepare Commercial Invoice and Packing List?',
+        q: 'Can you help prepare a Commercial Invoice and Packing List?',
         aJa: '取引範囲に応じて支援可能です。必要書類は商品カテゴリ、配送方法、Incoterms、仕向国、通関業者の要件により異なります。',
         a: 'Support is available depending on the transaction scope. Required documents may vary by product category, shipping method, Incoterms, destination country, and customs broker requirements.',
         links: [{ href: '/services', label: 'サービスを見る' }],
@@ -168,7 +176,7 @@ const faqCategories = [
         qJa: 'FCA / EXW / DAP / DDPには対応できますか？',
         q: 'Do you support FCA / EXW / DAP / DDP?',
         aJa: 'EXW、FCA、DAP、DDPは費用、リスク、通関、税金、配送責任の分担が異なるため、案件ごとに確認します。DDPは輸入通関、関税、税金を含むため、標準対応範囲外となる場合があります。',
-        a: 'Conditions are confirmed individually because EXW, FCA, DAP, and DDP assign costs, risk, customs, tax, and delivery responsibilities differently. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country. Availability will be reviewed on a case-by-case basis.',
+        a: 'We review the applicable terms for each transaction because EXW, FCA, DAP, and DDP allocate costs, risk, customs, taxes, and delivery responsibilities differently. DDP terms are generally outside our standard scope because they include import customs clearance, duties, and taxes in the destination country.',
         links: [{ href: '/flow', label: '取引の流れを見る' }],
       },
       {
@@ -183,14 +191,14 @@ const faqCategories = [
   {
     id: 'compliance-transactions',
     label: '規制品・対応不可取引',
-    en: 'Compliance',
+    en: 'Restricted Transactions and Compliance',
     items: [
       {
         q: 'どのような商品は事前確認が必要ですか？',
         qEn: 'What types of products require prior confirmation?',
         a: '化粧品、食品、健康関連商品、医薬品・医薬部外品、電池、スプレー、液体、アルコールを含む商品、中古品、ブランド品、動植物由来素材、危険品に該当する可能性がある商品は、輸出・配送の取扱可否、配送会社の引受可否、輸入国側の規制確認が必要です。',
         aEn: 'Cosmetics, food and health-related products, pharmaceuticals, quasi-drugs, batteries, sprays, liquids, alcohol-containing products, secondhand or branded goods, animal- or plant-derived materials, and potential dangerous goods require prior review for export and shipping feasibility, carrier acceptance, and destination-country requirements.',
-        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
+        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
       },
       {
         q: '対応できない取引はありますか？',
@@ -203,14 +211,14 @@ const faqCategories = [
         q: 'YUKIMICHIは通関許可を保証できますか？',
         qEn: 'Can YUKIMICHI guarantee customs clearance?',
         a: 'いいえ。YUKIMICHIは日本側の確認・調整・書類整理を支援しますが、輸入国側の最終的な通関可否、追加検査、関税・輸入税、許認可、配送会社の最終判断を保証するものではありません。',
-        aEn: 'No. YUKIMICHI supports Japan-side coordination, checks, and document preparation, but does not guarantee final customs clearance, inspections, duties or import taxes, permits, approvals, or carrier decisions in the destination country.',
+        aEn: 'No. YUKIMICHI supports coordination, preliminary checks, and document preparation in Japan, but does not guarantee customs clearance, inspections, duties or import taxes, permits, approvals, or carrier decisions in the destination country.',
         links: [{ href: '/services', label: 'サービス範囲を見る' }],
       },
       {
         q: 'メーカーや卸の連絡先を教えてもらえますか？',
         qEn: 'Can you disclose supplier or wholesaler contact details?',
-        a: '原則として、確認先となるメーカー、卸、販売店、外部パートナーの直接連絡先は開示していません。YUKIMICHIが日本側の窓口として、必要な確認・調整を行います。',
-        aEn: 'In principle, we do not disclose direct contact details for manufacturers, wholesalers, retailers, or external partners. YUKIMICHI acts as the Japan-side contact and coordinates the necessary checks and communication.',
+        a: '仕入先情報の開示範囲は、契約条件および仕入先の同意に基づき案件ごとに確認します。YUKIMICHIは、買主の日本での窓口として必要な確認・調整を行います。',
+        aEn: 'The scope of supplier information that can be disclosed is confirmed for each transaction based on the agreed terms and the supplier&apos;s consent. YUKIMICHI acts as the buyer&apos;s point of contact in Japan and coordinates the necessary checks and communication.',
         links: [{ href: '/about', label: '会社概要を見る' }],
       },
       {
@@ -230,12 +238,12 @@ const faqCategories = [
       {
         q: '輸出できない商品はありますか？',
         a: '商品によっては、日本側の輸出規制、輸入国側の規制、配送会社の引受条件により取り扱いできない場合があります。取扱可否は商品内容、数量、用途、配送先国により確認します。',
-        links: [{ href: '/restricted-items', label: '禁止・制限品目を見る' }],
+        links: [{ href: '/restricted', label: '禁止・制限品目を見る' }],
       },
       {
         q: '医薬品、食品、化粧品は取扱確認が必要ですか？',
         a: '国、成分、用途、数量、販売目的か個人使用かにより規制が異なります。医薬品、食品、化粧品は事前確認が必要であり、商品条件により発送できない場合があります。',
-        links: [{ href: '/restricted-items', label: '規制品の確認事項を見る' }],
+        links: [{ href: '/restricted', label: '規制品の確認事項を見る' }],
       },
       {
         q: '日焼け止めや香水、スプレー商品は事前確認が必要ですか？',
@@ -248,7 +256,7 @@ const faqCategories = [
       {
         q: '中古品やブランド品は扱えますか？',
         a: '商品状態、真贋、証明書、知的財産権、相手国規制の観点から確認が必要です。内容によっては対応できない場合があります。',
-        links: [{ href: '/restricted-items', label: '中古品・ブランド品の注意点を見る' }],
+        links: [{ href: '/restricted', label: '中古品・ブランド品の注意点を見る' }],
       },
     ],
   },
@@ -259,7 +267,7 @@ const faqCategories = [
     items: [
       {
         q: '支払いはいつ必要ですか？',
-        a: '原則として、商品調達や発送手配の前に支払い確認が必要です。支払い方法、支払い期日、通貨、手数料等は見積書、請求書、メールでの案内により確認します。',
+        a: '原則として、商品調達や発送手配の前に支払い確認が必要です。正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書、請求書、またはメールでご案内します。',
         links: [{ href: '/terms', label: '取引条件を見る' }],
       },
       {
@@ -277,7 +285,7 @@ const faqCategories = [
   {
     id: 'buyers',
     label: '法人・海外バイヤー対応',
-    en: 'Global Buyers',
+    en: 'Overseas Clients',
     items: [
       {
         q: '海外法人から依頼できますか？',
@@ -291,7 +299,7 @@ const faqCategories = [
       },
       {
         q: '英語対応はできますか？',
-        a: '必要に応じて英語での基本的なやり取りに対応する想定です。最終的な契約条件、見積条件、規制確認については、必要に応じて正式な確認を行います。',
+        a: '基本的な英語での対応が可能です。契約条件、見積条件、輸出入要件などの重要事項は、案件ごとに書面で確認します。',
       },
       {
         q: 'まず何を送れば相談できますか？',
@@ -317,7 +325,7 @@ const relatedLinks = [
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
   { href: '/services', label: 'サービス', en: 'Services' },
   { href: '/pricing', label: '料金表', en: 'Pricing' },
-  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
 ]
 
@@ -402,7 +410,7 @@ export default function FAQPage() {
           <h2 lang="ja">カテゴリから探す</h2>
           <p lang="en" className="faq-section-subtitle">Browse by Category</p>
           <p lang="ja">仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。</p>
-          <p lang="en">Questions are organized by sourcing checks, shipping methods, pricing, duties, regulatory review, terms, and overseas buyer support.</p>
+          <p lang="en">Questions are organized by product sourcing and availability, shipping methods, pricing, duties, preliminary requirements checks, terms, and overseas client support.</p>
         </div>
         <div className="faq-category-grid">
           {faqCategories.map((category) => (
@@ -505,7 +513,7 @@ export default function FAQPage() {
           <span>Inquiry Support</span>
           <h2 lang="ja">不明点を相談する</h2>
           <p lang="ja">商品URL、数量、配送先国、希望納期を添えてご相談ください。商品内容に応じて、見積と取扱可否を確認します。</p>
-          <p lang="en">Please share the product URL, quantity, destination country, and preferred deadline. We will review quotation and handling feasibility based on the product details.</p>
+          <p lang="en">Please share the product URL, quantity, destination country, and requested delivery date. We will review the quotation requirements and whether YUKIMICHI can support the request.</p>
           <a href="mailto:exporter@justhen.co.jp" className="faq-mail">
             exporter@justhen.co.jp へ相談する
           </a>

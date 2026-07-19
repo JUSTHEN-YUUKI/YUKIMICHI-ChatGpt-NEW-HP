@@ -1,15 +1,15 @@
 import Link from '@/components/NewTabLink'
 
 const footerLinks = [
-  { href: '/', label: 'Top', en: 'Home' },
+  { href: '/', label: 'トップ', en: 'Home' },
   { href: '/about', label: '会社概要', en: 'About YUKIMICHI' },
   { href: '/services', label: 'サービス', en: 'Export Support' },
   { href: '/pricing', label: '料金表', en: 'Pricing' },
   { href: '/flow', label: '取引の流れ', en: 'Export Process' },
   { href: '/quote', label: '見積依頼', en: 'Request a Quote' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
-  { href: '/contact', label: 'お問い合わせ', en: 'Free Consultation' },
-  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/contact', label: 'お問い合わせ', en: 'Contact Us' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms' },
   { href: '/privacy', label: 'プライバシーポリシー', en: 'Privacy Policy' },
 ]
@@ -21,7 +21,7 @@ export default function Footer() {
         <section className="site-footer__brand" aria-label="YUKIMICHI brand">
           <p className="site-footer__eyebrow">YUKIMICHI</p>
           <p className="site-footer__tagline" lang="ja">日本側の輸出調整・手配支援</p>
-          <p className="site-footer__tagline-en" lang="en">Japan-side export coordination support.</p>
+          <p className="site-footer__tagline-en" lang="en">Japan-based sourcing and export coordination support.</p>
           <p className="site-footer__copy" lang="en">YUKIMICHI | Operated by JUSTHEN Co., Ltd.</p>
         </section>
 
@@ -40,9 +40,9 @@ export default function Footer() {
         </nav>
 
         <section className="site-footer__company" aria-label="Company information">
-          <p className="site-footer__heading" lang="en">Contact / Company</p>
+          <p className="site-footer__heading" lang="en">Company & Contact</p>
           <div className="site-footer__company-list">
-            <p lang="en">JUSTHEN CO., LTD.</p>
+            <p lang="en">JUSTHEN Co., Ltd.</p>
             <p lang="ja">株式会社ジャッセン</p>
             <p lang="ja">〒060-0032 北海道札幌市中央区北二条東8-5-15</p>
             <p lang="en">8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
@@ -56,7 +56,7 @@ export default function Footer() {
       </div>
 
       <div className="site-footer__bottom">
-        <p>© JUSTHEN CO., LTD. All rights reserved.</p>
+        <p>© JUSTHEN Co., Ltd. All rights reserved.</p>
       </div>
 
       <style>{`

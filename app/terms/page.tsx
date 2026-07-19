@@ -26,10 +26,10 @@ const terms = [
     title: '支払いについて',
     en: 'Payment',
     items: [
-      '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。',
+      '海外からのお支払いでは、国際送金と入金確認を簡潔にするため、Wiseのご利用を推奨しております。',
       'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。',
       'Wiseのご利用が難しい場合は、通常の海外銀行送金（T/T送金）により、弊社指定の三井住友銀行（SMBC）口座へお支払いいただく方法をご案内いたします。',
-      '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。',
+      '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。',
       'ご入金確認後、商品調達、発注、梱包、輸出関連手配を開始します。',
       '送金手数料・銀行手数料は、原則としてお客様負担となります。',
     ],
@@ -40,8 +40,8 @@ const terms = [
     en: 'Procurement',
     items: [
       '商品在庫、価格、販売条件は仕入れ先により変動します。',
-      '注文後に在庫切れ、価格変更、販売停止となる場合があります。',
-      '購入後の商品変更・キャンセルは、仕入れ先の条件に従う場合があります。',
+      '購入が完了する前に、在庫切れ、価格変更、販売終了となる場合があります。',
+      '購入後の商品変更・キャンセルは、仕入れ先の条件に従います。',
     ],
   },
   {
@@ -103,7 +103,7 @@ const terms = [
       '詳細は「禁止・制限品目」ページをご確認ください。',
       '内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。',
     ],
-    href: '/restricted-items',
+    href: '/restricted',
   },
   {
     code: 'J',
@@ -120,7 +120,7 @@ const terms = [
     title: '免責事項',
     en: 'Disclaimer',
     items: [
-      '本ページは一般的な取引条件の概要であり、個別の契約・見積書・請求書・メールでの合意内容が優先される場合があります。',
+      '本ページは一般的な取引条件の概要です。個別契約、見積書、請求書、または書面で合意した条件がある場合は、その内容が優先されます。',
       '法令、配送会社条件、税関判断、各国規制は変更される可能性があります。',
       'YUKIMICHIは、税関・通関業者・配送会社・公的機関等の最終判断を保証するものではありません。',
     ],
@@ -157,19 +157,19 @@ const responsibilityCards = [
 const relatedLinks = [
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
-  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
 
 const paymentTermEnglishSubTexts: Record<string, string> = {
-  '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。':
-    'For overseas payments, we recommend using Wise due to transfer fees and easier payment confirmation.',
+  '海外からのお支払いでは、国際送金と入金確認を簡潔にするため、Wiseのご利用を推奨しております。':
+    'For overseas payments, we recommend Wise to simplify international transfers and payment confirmation.',
   'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。':
     'The payment destination is our designated Sumitomo Mitsui Banking Corporation (SMBC) account. Payment is generally required in advance in Japanese yen.',
   'Wiseのご利用が難しい場合は、通常の海外銀行送金（T/T送金）により、弊社指定の三井住友銀行（SMBC）口座へお支払いいただく方法をご案内いたします。':
     'If Wise is difficult to use, we will provide instructions for payment to our designated SMBC account by conventional international bank transfer, also known as T/T remittance.',
-  '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。':
-    'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
+  '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。':
+    'Detailed payment instructions, the payment due date, and the handling of bank charges will be provided with the formal quotation or invoice.',
   'ご入金確認後、商品調達、発注、梱包、輸出関連手配を開始します。':
     'After payment is confirmed, we begin procurement, ordering, packing, and export-related arrangements.',
   '送金手数料・銀行手数料は、原則としてお客様負担となります。':
@@ -231,7 +231,7 @@ export default function TermsPage() {
           お見積り前に、支払い、キャンセル、関税、配送事故、規制確認などの基本条件をご確認ください。
           </p>
           <p lang="en">
-            YUKIMICHI values transparent terms for Japan-side sourcing, export coordination, and shipping arrangement support.
+            YUKIMICHI values transparent terms for sourcing, export coordination, and shipping arrangements in Japan.
             Please review the basic conditions before requesting a quotation.
           </p>
         </div>
@@ -244,7 +244,7 @@ export default function TermsPage() {
             <span className="section-label-text">Basic Policy</span>
           </div>
           <h2 lang="ja">透明性を重視した輸出支援</h2>
-          <p className="terms-heading-en" lang="en">Transparent Japan-side export coordination</p>
+          <p className="terms-heading-en" lang="en">Transparent export coordination in Japan</p>
         </div>
         <div className="terms-policy-card">
           <p lang="ja">
@@ -252,14 +252,14 @@ export default function TermsPage() {
             商品内容、配送先国、数量、サイズ、重量、配送方法により、費用・納期・対応可否は変動します。
           </p>
           <p lang="en">
-            YUKIMICHI does not support transactions based on forced export, false declarations, or attempts to avoid regulations.
-            Costs, lead time, and handling feasibility vary depending on the product, destination, quantity, size, weight, and shipping method.
+            YUKIMICHI does not support shipments that cannot lawfully or practically be exported, false declarations, or attempts to circumvent regulations.
+            Costs, lead time, and whether we can support a request vary depending on the product, destination, quantity, size, weight, and shipping method.
           </p>
           <p lang="ja">
             本ページは一般的な取引条件の概要であり、個別契約・見積書・請求書・メールでの合意内容が優先される場合があります。
           </p>
           <p lang="en">
-            This page provides a general outline of transaction terms. Individual agreements, quotations, invoices, or email confirmations may take priority.
+            This page provides a general outline of transaction terms. The terms agreed in an individual contract, quotation, invoice, or written correspondence will prevail.
           </p>
         </div>
       </section>
@@ -277,7 +277,7 @@ export default function TermsPage() {
             案件ごとの条件、関係機関、配送会社約款、保険条件により確認します。
           </p>
           <p lang="en">
-            YUKIMICHI supports Japan-side export arrangements. Destination-side permits, customs clearance, taxes, sales eligibility, and carrier compensation are reviewed case by case.
+            YUKIMICHI supports export arrangements in Japan. Destination-side permits, customs clearance, taxes, and sales eligibility remain subject to confirmation by the importer and relevant authorities. Carrier liability and compensation are determined under the applicable carrier and insurance terms.
           </p>
         </div>
         <div className="terms-responsibility-grid">
@@ -346,7 +346,7 @@ export default function TermsPage() {
           <h2 lang="ja">関連ページ</h2>
           <p lang="en" className="terms-heading-en">Related pages</p>
           <p lang="ja">見積依頼、取扱可否、よくある質問は各ページで確認できます。</p>
-          <p lang="en">Quotation requests, handling feasibility, and frequently asked questions can be checked on the related pages.</p>
+          <p lang="en">Quotation requests, information about whether we can support a request, and frequently asked questions are available on the related pages.</p>
         </div>
         <div className="terms-related-grid">
           {relatedLinks.map((link) => (
@@ -367,7 +367,7 @@ export default function TermsPage() {
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。取引条件を確認したうえで、見積と手配可否を案内します。
           </p>
           <p lang="en">
-            Please share the product URL, quantity, destination country, and preferred shipping method. We will review the terms and respond with quotation and handling feasibility guidance.
+            Please share the product URL, quantity, destination country, and preferred shipping method. We will review the request and advise whether we can support it before preparing a quotation.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="terms-mail">
             exporter@justhen.co.jp へ相談する

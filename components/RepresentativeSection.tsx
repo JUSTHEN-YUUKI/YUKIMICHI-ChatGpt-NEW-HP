@@ -75,7 +75,7 @@ export default function RepresentativeSection() {
             >
               <Image
                 src="/profile.png"
-                alt="Representative of JUSTHEN CO., LTD."
+                alt="Representative of JUSTHEN Co., Ltd."
                 fill
                 sizes="(max-width: 900px) 100vw, 48vw"
                 style={{
@@ -133,7 +133,7 @@ export default function RepresentativeSection() {
                     marginTop: "8px",
                   }}
                 >
-                  JUSTHEN CO., LTD.
+                  JUSTHEN Co., Ltd.
                 </div>
               </div>
             </div>
@@ -181,9 +181,9 @@ export default function RepresentativeSection() {
                 marginBottom: "20px",
               }}
             >
-              私は会社員時代、成田空港・横浜港・品川港に関連する
-              国際物流業務に携わり、輸出入に関わる事務手続き、
-              書類管理、物流オペレーションの実務経験を積んできました。
+              私は会社員時代、空港・港湾に関連する国際物流業務に携わり、
+              輸出入に関わる事務手続き、書類管理、
+              物流オペレーションの実務経験を積んできました。
             </p>
 
             <p
@@ -259,7 +259,7 @@ export default function RepresentativeSection() {
                     marginTop: "8px",
                   }}
                 >
-                  JUSTHEN CO., LTD.
+                  JUSTHEN Co., Ltd.
                 </div>
               </div>
 

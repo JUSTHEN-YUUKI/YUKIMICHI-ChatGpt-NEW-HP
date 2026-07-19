@@ -17,8 +17,8 @@ export default function OutboundDraftGenerator({ lead, onApplyDraft }: Props) {
     purpose: 'Introduce Japanese product sourcing and export support',
     language: lead?.language || 'English',
     tone: 'B2B Formal',
-    cta: 'Please reply or submit your inquiry through your official contact form.',
-    signature: 'YUKIMICHI\nJUSTHEN CO., LTD.\nexporter@justhen.co.jp',
+    cta: 'Please reply to this message if sourcing Japanese products is relevant to your current plans.',
+    signature: 'Best regards,\n\nYuuki Hayashi\nJUSTHEN Co., Ltd. / YUKIMICHI\nhttps://justhen.co.jp/\nexporter@justhen.co.jp',
   })
   const draft = buildDraft(lead, form)
 
@@ -30,7 +30,7 @@ export default function OutboundDraftGenerator({ lead, onApplyDraft }: Props) {
     <section className="outbound-panel draft-panel">
       <div className="panel-heading">
         <span>Draft Generator</span>
-        <strong>Template based, review only</strong>
+        <strong>Template-based drafts for human review only</strong>
       </div>
       <div className="admin-form compact">
         <label className="outbound-field">
@@ -96,7 +96,7 @@ export default function OutboundDraftGenerator({ lead, onApplyDraft }: Props) {
       >
         Save draft to selected lead
       </button>
-      {lead.doNotContact && <p className="muted">Do not contact leads cannot be moved to send candidates.</p>}
+      {lead.doNotContact && <p className="muted">Leads marked Do Not Contact cannot be moved to Ready to Contact.</p>}
     </section>
   )
 }
@@ -109,17 +109,19 @@ function buildDraft(lead: OutboundLead | undefined, form: Record<string, string>
   const emailBody = [
     `Dear ${company} team,`,
     '',
-    `We are YUKIMICHI - SNOWPATH JAPAN, operated by JUSTHEN CO., LTD. in Sapporo, Japan.`,
-    `We support eligible Japanese product sourcing for overseas businesses, including international express, air freight, sea freight, packing, inspection, and export documentation coordination.`,
+    `We are YUKIMICHI - SNOWPATH JAPAN, operated by JUSTHEN Co., Ltd. in Sapporo, Japan.`,
+    'YUKIMICHI supports overseas buyers by helping confirm the availability of Japanese products, coordinating with Japanese suppliers, organizing export-related documentation, and helping confirm suitable international shipping options.',
     '',
-    `Based on your public business profile in ${country}, we would like to ask whether ${category} may be relevant to your current buying or distribution plans.`,
-    'We work with compliance and transparency. Availability depends on the product, destination country, quantity, and intended use. Final import/export availability is subject to confirmation by customs, carriers, brokers, and relevant authorities. Restricted categories require prior confirmation.',
+    `Based on information published on your official website, your business appears to be involved in ${category} in the ${country} market.`,
+    `We would be pleased to discuss proposals for ${category} sourced from Japan.`,
+    '',
+    'Availability and shipping eligibility depend on the product, destination, quantity, and intended use. Final export and import eligibility must be confirmed with the relevant customs authorities, carriers, brokers, or other authorities. Products subject to restrictions require prior confirmation.',
     '',
     form.cta,
     '',
     form.signature,
   ].join('\n')
-  const dmBody = `YUKIMICHI - SNOWPATH JAPAN supports eligible Japanese product sourcing with international express / air freight / sea freight and compliance review. If ${category} is relevant for ${company}, please reply or contact exporter@justhen.co.jp.`
+  const dmBody = `YUKIMICHI - SNOWPATH JAPAN supports overseas buyers with Japanese product sourcing checks, supplier coordination in Japan, export-related document coordination, and assistance confirming suitable shipping options. If ${category} is relevant to ${company}, please reply or contact exporter@justhen.co.jp. Website: https://justhen.co.jp/`
 
   return {
     subject,

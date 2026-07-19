@@ -4,14 +4,14 @@ import Link from '@/components/NewTabLink'
 export const metadata: Metadata = {
   title: 'プライバシーポリシー | YUKIMICHI',
   description:
-    'YUKIMICHI / JUSTHEN CO., LTD. のプライバシーポリシー。お問い合わせ、見積依頼、輸出相談、取引対応に関連して取得する情報の取扱い方針について。',
+    'YUKIMICHI / JUSTHEN Co., Ltd. のプライバシーポリシー。お問い合わせ、見積依頼、輸出相談、取引対応に関連して取得する情報の取扱い方針について。',
 }
 
 const collectedInfo = [
   '会社名',
   'ご担当者名',
   'メールアドレス',
-  '電話番号が提供された場合の電話番号',
+  '電話番号（任意で提供された場合）',
   '商品名',
   '商品URL',
   '数量',
@@ -54,7 +54,8 @@ const retentionSummary = [
   {
     title: '保存期間',
     en: 'Retention Period',
-    body: '問い合わせ、見積、取引対応、法令・会計・税務・紛争防止のために必要な期間保存する場合があります。不要となった情報は、適切な方法で削除または管理します。',
+    body: '問い合わせ、見積、取引対応、法令・会計・税務・紛争防止のために必要な期間保存し、必要性を定期的に見直します。不要となった情報は、法令上保存が必要なものを除き、安全な方法で削除または匿名化します。',
+    bodyEn: 'We retain information for as long as necessary for inquiries, quotations, transactions, legal, accounting, tax, or dispute-prevention purposes and review that need periodically. Information that is no longer required is securely deleted or anonymized, except where retention is required by law.',
   },
 ]
 
@@ -62,9 +63,11 @@ const policySections = [
   {
     code: '01',
     title: '海外取引に関連する情報の取扱い',
-    en: 'International Handling',
+    en: 'Handling of Data in International Transactions',
     body:
       'YUKIMICHIは海外バイヤー・海外法人との取引相談を扱うため、配送先国、輸入者情報、配送会社、通関業者等に関連する情報を取り扱う場合があります。国際配送・輸出入確認に必要な範囲で、関係事業者に情報を共有する場合があります。',
+    bodyEn:
+      'For international transactions, we may handle destination, importer, carrier, and customs-broker information and share only the information needed with relevant service providers.',
   },
   {
     code: '02',
@@ -72,13 +75,17 @@ const policySections = [
     en: 'Security Management',
     body:
       '取得した情報について、漏えい、滅失、毀損、不正アクセス等を防止するため、必要かつ適切な安全管理に努めます。具体的な管理方法は、取扱う情報の内容や業務運用に応じて継続的に見直します。',
+    bodyEn:
+      'We take appropriate security measures to help prevent unauthorized access, loss, damage, or disclosure and review those measures as our operations change.',
   },
   {
     code: '03',
     title: '情報の保存期間',
     en: 'Retention Period',
     body:
-      '問い合わせ・見積・取引対応に必要な期間、または法令・会計・税務・紛争防止のために必要な期間、情報を保存する場合があります。不要となった情報は、適切な方法で削除または管理する方針です。',
+      '問い合わせ・見積・取引対応、または法令・会計・税務・紛争防止のために必要な期間、情報を保存し、必要性を定期的に見直します。不要となった情報は、法令上保存が必要なものを除き、安全な方法で削除または匿名化します。',
+    bodyEn:
+      'We retain information only for as long as needed for inquiries, quotations, transactions, legal, accounting, tax, or dispute-prevention purposes. Information no longer required is securely deleted or anonymized, except where retention is required by law.',
   },
   {
     code: '04',
@@ -86,13 +93,17 @@ const policySections = [
     en: 'Disclosure / Correction / Deletion',
     body:
       '本人から、保有する個人情報について、開示、訂正、利用停止、削除等の希望があった場合、本人確認のうえ、法令に従い適切に対応します。',
+    bodyEn:
+      'Requests for access, correction, suspension of use, or deletion are handled after identity verification and in accordance with applicable law.',
   },
   {
     code: '05',
     title: 'Cookie等の利用',
     en: 'Cookies / Analytics',
     body:
-      '当サイトでは、利便性向上やサイト改善のため、Cookieまたは類似技術を利用する場合があります。利用する場合でも、取得情報はサイト改善・利用状況把握等の目的で使用し、個人を不当に識別する目的では使用しません。',
+      '当サイトでは、利用状況の把握とサイト改善のため、Google AnalyticsおよびCookie等の技術を使用しています。アクセス情報はGoogleへ送信される場合があります。ブラウザーの設定でCookieを無効にできますが、一部機能に影響する場合があります。',
+    bodyEn:
+      'This website uses Google Analytics and technologies such as cookies to understand site usage and improve the website. Usage data may be transmitted to Google. You can disable cookies in your browser settings, although doing so may affect some features.',
   },
   {
     code: '06',
@@ -100,13 +111,15 @@ const policySections = [
     en: 'Revision',
     body:
       '本ポリシーは、法令改正、サービス内容の変更、運用改善等により改定される場合があります。重要な変更がある場合は、当サイト上で告知します。',
+    bodyEn:
+      'This policy may be revised in response to legal, service, or operational changes. Material changes will be announced on this website.',
   },
 ]
 
 const relatedLinks = [
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
-  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
 ]
 
@@ -132,11 +145,11 @@ export default function PrivacyPolicyPage() {
           <em>Privacy Policy</em>
         </h1>
         <p className="section-body privacy-lead" lang="ja">
-          YUKIMICHI を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、
+          YUKIMICHI を運営する JUSTHEN Co., Ltd. は、お問い合わせ、見積依頼、
           輸出相談、取引対応に関連して取得する情報を適切に取り扱います。
         </p>
         <p className="section-body privacy-lead privacy-lead-en" lang="en">
-          JUSTHEN CO., LTD., operator of YUKIMICHI, handles information received through inquiries, quotation requests, export consultations, and transaction support appropriately.
+          JUSTHEN Co., Ltd., operator of YUKIMICHI, handles information received through inquiries, quotation requests, export consultations, and transaction support appropriately.
         </p>
       </section>
 
@@ -155,8 +168,7 @@ export default function PrivacyPolicyPage() {
             取得した情報は、利用目的の範囲内で取り扱います。
           </p>
           <p lang="ja">
-            法令に基づく場合を除き、本人の同意なく目的外利用を行わない方針です。
-            個別の法的判断が必要な事項については、必要に応じて専門家確認を前提とします。
+            法令に基づく場合を除き、本人の同意なく目的外利用を行いません。
           </p>
           <p lang="en">
             We recognize the importance of personal and transaction-related information and use it only within the stated purposes, except where required by law.
@@ -185,6 +197,7 @@ export default function PrivacyPolicyPage() {
               <h3 lang="ja">{item.title}</h3>
               <span lang="en">{item.en}</span>
               <p lang="ja">{item.body}</p>
+              {'bodyEn' in item && <p lang="en">{item.bodyEn}</p>}
             </article>
           ))}
         </div>
@@ -253,6 +266,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </div>
             <p lang="ja">{section.body}</p>
+            <p lang="en">{section.bodyEn}</p>
           </article>
         ))}
       </section>
@@ -261,15 +275,15 @@ export default function PrivacyPolicyPage() {
         <div>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Contact Window</span>
+            <span className="section-label-text">Privacy Contact</span>
           </div>
           <h2 lang="ja">お問い合わせ窓口</h2>
-          <p className="privacy-section-subtitle" lang="en">Contact window</p>
+          <p className="privacy-section-subtitle" lang="en">Privacy Contact</p>
           <p lang="ja">個人情報の取扱いに関するお問い合わせは、以下までご連絡ください。</p>
           <p lang="en">For inquiries about the handling of personal information, please contact us below.</p>
         </div>
         <div className="privacy-contact-card">
-          <p lang="en">JUSTHEN CO., LTD.</p>
+          <p lang="en">JUSTHEN Co., Ltd.</p>
           <p lang="en">YUKIMICHI</p>
           <a href="mailto:exporter@justhen.co.jp?subject=Privacy%20Policy%20Inquiry">
             exporter@justhen.co.jp
@@ -286,7 +300,7 @@ export default function PrivacyPolicyPage() {
           <h2 lang="ja">関連ページ</h2>
           <p className="privacy-section-subtitle" lang="en">Related pages</p>
           <p lang="ja">問い合わせ、取引条件、禁止・制限品目、見積依頼に関する情報は各ページで確認できます。</p>
-          <p lang="en">You can review inquiries, terms, restricted items, and quotation requests on the related pages.</p>
+          <p lang="en">Information about contacting us, transaction terms, restricted items, and quotation requests is available on the related pages.</p>
         </div>
         <div className="privacy-related-grid">
           {relatedLinks.map((link) => (
@@ -298,6 +312,8 @@ export default function PrivacyPolicyPage() {
           ))}
         </div>
       </section>
+
+      <p className="privacy-revision" lang="ja">制定日・最終改定日：2026年7月19日</p>
 
       <style>{`
         .privacy-hero {
@@ -608,6 +624,14 @@ export default function PrivacyPolicyPage() {
           background:
             linear-gradient(135deg, rgba(139,30,47,0.26), transparent 46%),
             var(--navy-mid);
+        }
+
+        .privacy-revision {
+          margin: 0;
+          padding: 0 var(--gutter) 40px;
+          background: var(--navy-deep);
+          color: var(--washi-faint);
+          font-size: 12px;
         }
 
         .privacy-related-grid {

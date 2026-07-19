@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: '禁止・制限品目 | YUKIMICHI',
   description:
     'YUKIMICHIの禁止・制限品目ページ。日本側の輸出規制、相手国の輸入規制、配送会社の引受条件、危険品判定、認証・許可確認について。',
-  alternates: { canonical: '/restricted-items' },
+  alternates: { canonical: '/restricted' },
 }
 
 const categories = [
@@ -47,14 +47,14 @@ const categories = [
   },
   {
     code: 'G',
-    title: 'ワシントン条約・動植物関連',
+    title: 'ワシントン条約（CITES）・動植物関連',
     items: ['皮革製品', '毛皮', '木材', '動植物由来素材', '象牙・べっ甲等'],
-    note: '素材や原産地により、輸出入規制や証明書が必要になる場合があります。',
+    note: '象牙・べっ甲を含む動植物由来素材は厳格な規制対象となる場合があります。関係機関への確認と必要書類の確認が完了した案件のみ、対応可否を検討します。',
   },
   {
     code: 'H',
     title: 'その他要確認品',
-    items: ['高額商品', '精密機器', '大型貨物', '温度管理品', '法人向け特殊商品'],
+    items: ['高額商品', '精密機器', '大型貨物', '温度管理品', '特殊用途・業務用商品'],
     note: '商品条件、配送先国、梱包条件、保険要否により個別確認が必要です。',
   },
 ]
@@ -98,7 +98,7 @@ export default function RestrictedItemsPage() {
           YUKIMICHIでは、法令遵守と透明性を前提に、取り扱い可否を事前に確認します。
         </p>
         <p className="section-body restricted-lead restricted-lead-en" lang="en">
-          Export, import, and carrier acceptance requirements vary by product and destination. YUKIMICHI reviews handling feasibility with compliance and transparency in mind.
+          Export, import, and carrier acceptance requirements vary by product and destination. YUKIMICHI checks whether an item can be handled and shipped, with compliance and transparency in mind.
         </p>
       </section>
 
@@ -121,7 +121,7 @@ export default function RestrictedItemsPage() {
             最終的な輸出入可否は、税関・通関業者・配送会社・公的機関等の確認を前提とします。
           </p>
           <p lang="en">
-            YUKIMICHI does not arrange shipments based on false declarations, regulation avoidance, or carrier rule violations. Final export/import feasibility depends on confirmation by customs, customs brokers, carriers, or public authorities.
+            YUKIMICHI does not arrange shipments based on false declarations, attempts to circumvent regulations, or carrier rule violations. Final export and import eligibility depends on confirmation by customs, customs brokers, carriers, or relevant authorities.
           </p>
         </div>
       </section>
@@ -172,7 +172,7 @@ export default function RestrictedItemsPage() {
             取り扱い可否や配送方法を確認する際は、商品ページだけでなく、成分・素材・用途・配送先情報があると確認が進めやすくなります。
           </p>
           <p lang="en">
-            Product ingredients, materials, use, and destination details help us review handling feasibility and possible shipping methods.
+            Product ingredients, materials, intended use, and destination details help us check whether an item can be handled and identify possible shipping methods.
           </p>
         </div>
         <ol className="restricted-info-list">
@@ -194,22 +194,22 @@ export default function RestrictedItemsPage() {
           <h2 lang="ja">重要なご案内</h2>
           <p className="restricted-section-subtitle" lang="en">Important Notice</p>
           <p lang="ja">
-            本ページは一般的な確認項目を整理したものであり、法的判断を保証するものではありません。
+            本ページは一般情報であり、法的助言または規制当局の判断を提供するものではありません。
             実際の輸出入可否、関税、VAT/GST、認証、許可、配送会社の引受可否は、
             商品内容・配送先国・最新の規制により異なります。
           </p>
           <p lang="en">
-            This page summarizes general review points and does not guarantee legal decisions. Final eligibility, duties, VAT/GST, certifications, permits, and carrier acceptance vary by product, destination, and current regulations.
+            This page provides general information and does not constitute legal or regulatory advice. Final export and import eligibility, duties, VAT/GST, certifications, permits, and carrier acceptance vary by product, destination, and current regulations.
           </p>
           <p lang="ja">
             模倣品、海賊版、知的財産権侵害品は取り扱いできません。内容品の虚偽申告、価格の過少申告、品名の偽装、規制回避を前提とする手配も行いません。
           </p>
           <p lang="ja">
-            最終確認は、税関・通関業者・配送会社・公的機関等の確認を前提とします。
-            無理な輸出、虚偽申告、内容物を偽る発送は行いません。
+            最終確認は、税関・通関業者・配送会社・関係機関等の確認を前提とします。
+            法令上輸出できない貨物、虚偽申告、内容物を偽る発送は取り扱いません。
           </p>
           <p lang="en">
-            Final confirmation is subject to customs, customs brokers, carriers, and public authorities. We do not support forced export, false declarations, or shipment descriptions that misrepresent the contents.
+            Final confirmation is subject to customs, customs brokers, carriers, and relevant authorities. We do not support shipments that cannot lawfully be exported, false declarations, or shipment descriptions that misrepresent the contents.
           </p>
         </div>
       </section>
@@ -218,12 +218,12 @@ export default function RestrictedItemsPage() {
         <div>
           <span>Check Before Export</span>
           <h2 lang="ja">取り扱い可否を確認する</h2>
-          <p className="restricted-section-subtitle" lang="en">Check handling feasibility before export</p>
+          <p className="restricted-section-subtitle" lang="en">Check product and shipping eligibility before export</p>
           <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。見積前の取扱可否確認も承ります。
           </p>
           <p lang="en">
-            Please share the product URL, quantity, destination country, and preferred shipping method. We can review handling feasibility before preparing a quotation.
+            Please share the product URL, quantity, destination country, and preferred shipping method. We can check whether the item can be handled and shipped before preparing a quotation.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="restricted-mail">
             exporter@justhen.co.jp

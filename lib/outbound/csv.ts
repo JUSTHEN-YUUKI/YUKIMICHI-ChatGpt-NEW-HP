@@ -183,7 +183,7 @@ function validateImportedLead(lead: OutboundLead): string[] {
     warnings.push('メールアドレス形式が不自然です。')
   }
   if (!lead.sourceUrl) warnings.push('情報元未確認')
-  if (lead.doNotContact) warnings.push('doNotContact true is excluded from send candidates.')
+  if (lead.doNotContact) warnings.push('doNotContact true is excluded from Ready to Contact.')
   return warnings
 }
 

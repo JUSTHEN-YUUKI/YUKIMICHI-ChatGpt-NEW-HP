@@ -230,7 +230,7 @@ function renderCustomerHtml(rows: Array<[string, string]>, contactToEmail: strin
     `<table style="border-collapse: collapse; width: 100%; max-width: 760px;">${tableRows}</table>`,
     `<p>内容を確認のうえ、担当者より ${escapeHtml(contactToEmail)} からご連絡いたします。</p>`,
     '<p>商品内容、配送先国、数量、サイズ、重量、用途により、対応可否・費用・納期は変動します。最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。</p>',
-    '<p>YUKIMICHI<br>JUSTHEN CO., LTD.</p>',
+    '<p>YUKIMICHI<br>JUSTHEN Co., Ltd.</p>',
     '<p>※本メールは自動返信です。</p>',
     '</div>',
   ].join('')
@@ -387,7 +387,7 @@ export async function POST(request: Request) {
     '最終的な輸出入可否、関税、VAT/GST、配送会社引受可否は、税関・通関業者・配送会社・公的機関等の確認が前提となります。',
     '',
     'YUKIMICHI',
-    'JUSTHEN CO., LTD.',
+    'JUSTHEN Co., Ltd.',
     '',
     '※本メールは自動返信です。',
   ].join('\n')

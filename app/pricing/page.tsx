@@ -16,6 +16,7 @@ const pricingPlans = [
     rate: '15%',
     minimum: 'JPY 10,000',
     use: '小口貨物、サンプル、EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
+    useEn: 'Small parcels, samples, and international courier shipments',
   },
   {
     label: 'Air Freight',
@@ -23,6 +24,7 @@ const pricingPlans = [
     rate: '10%',
     minimum: 'JPY 30,000',
     use: '航空貨物、急ぎの商業貨物',
+    useEn: 'Air freight and time-sensitive commercial cargo',
   },
   {
     label: 'Sea LCL',
@@ -30,6 +32,7 @@ const pricingPlans = [
     rate: '7%',
     minimum: 'JPY 30,000',
     use: '小〜中規模の海上混載貨物',
+    useEn: 'Small to medium-sized LCL sea freight',
   },
   {
     label: 'Sea FCL / Large Volume',
@@ -37,6 +40,7 @@ const pricingPlans = [
     rate: '7%',
     minimum: 'JPY 50,000',
     use: 'コンテナ貨物、大口案件、継続取引',
+    useEn: 'Container cargo, large-volume projects, and ongoing trade',
     note: '高額商品、特殊貨物、長期契約、大量案件については個別見積り',
   },
 ]
@@ -63,8 +67,8 @@ const feeBasisItems = [
   {
     label: 'Insurance & Customs Notes',
     title: '保険・税関注意事項',
-    body: '輸送保険は任意加入です。未加入の場合、輸送中の紛失・破損に関する補償は、運送会社または保険約款の範囲に限定されます。税関判断による遅延、検査、没収、追加費用は返金対象外となる場合があります。',
-    sub: 'Shipping insurance is optional but recommended for high-value shipments. Without insurance, compensation is limited to carrier terms or the applicable insurance policy.',
+    body: '輸送保険は任意加入です。輸送保険に加入しない場合、補償は運送会社の運送約款および責任限度額の範囲に限定されます。税関判断による遅延、検査、没収、追加費用は返金対象外となる場合があります。',
+    sub: "Shipping insurance is optional but recommended for high-value shipments. If shipping insurance is not arranged, compensation is limited to the carrier's terms and applicable liability limits.",
   },
 ]
 
@@ -77,7 +81,7 @@ const excludedCostItems = [
   '倉庫費用',
   '検査費用',
   '証明書取得費用',
-  'ラベル作成・貼替費用',
+  'ラベル作成・貼り替え費用',
   '梱包資材費・再梱包費用',
 ]
 
@@ -91,7 +95,7 @@ const optionalServiceFees = [
   { service: '梱包後写真', en: 'Post-packing photos', type: '有料オプション', guide: '1箱 500〜1,500円' },
   { service: 'ダメージ確認', en: 'Damage check', type: '有料オプション', guide: '1箱 1,000〜3,000円' },
   { service: '賞味期限・使用期限確認', en: 'Best-before or expiration date check', type: '有料オプション', guide: '1商品 1,000〜3,000円' },
-  { service: 'SDS/MSDS取得サポート', en: 'SDS/MSDS collection support', type: '有料オプション', guide: '1商品 3,000〜10,000円' },
+  { service: 'SDS/MSDS取得サポート', en: 'Assistance obtaining an SDS or MSDS', type: '有料オプション', guide: '1商品 3,000〜10,000円' },
   { service: 'メーカー資料取得代行', en: 'Supplier document collection support', type: '有料オプション', guide: '1社1,000〜3,000円' },
   { service: '追加メーカー問い合わせ', en: 'Additional supplier inquiry', type: '有料オプション', guide: '1社 5,000〜10,000円' },
   { service: 'サンプル購入代行', en: 'Sample purchase support', type: '有料オプション', guide: '商品代金 + 手数料' },
@@ -99,14 +103,14 @@ const optionalServiceFees = [
   { service: '特殊梱包', en: 'Special packing', type: '有料オプション', guide: '個別見積り' },
   { service: '複数仕入先の商品集約', en: 'Multi-supplier consolidation', type: '有料オプション', guide: '個別見積り' },
   { service: '分納・複数配送先対応', en: 'Split shipment or multiple destinations', type: '有料オプション', guide: '個別見積り' },
-  { service: '価格交渉・条件交渉', en: 'Price or term negotiation', type: '有料オプション', guide: '10,000円〜' },
+  { service: '価格交渉・条件交渉', en: 'Price and contract-term negotiation', type: '有料オプション', guide: '10,000円〜' },
   { service: '長期商談代行', en: 'Long-term negotiation support', type: '月額または個別', guide: '10,000円〜' },
 ]
 
 const paymentItems = [
   {
-    ja: '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。',
-    en: 'For overseas payments, we recommend using Wise due to transfer fees and easier payment confirmation.',
+    ja: '海外からのお支払いでは、国際送金と入金確認を簡潔にするため、Wiseのご利用を推奨しております。',
+    en: 'For overseas payments, we recommend Wise to simplify international transfers and payment confirmation.',
   },
   {
     ja: 'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。',
@@ -117,8 +121,8 @@ const paymentItems = [
     en: 'If Wise is difficult to use, we will provide instructions for payment to our designated SMBC account by conventional international bank transfer, also known as T/T remittance.',
   },
   {
-    ja: '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
-    en: 'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
+    ja: '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
+    en: 'Detailed payment instructions, due date, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
   },
   {
     ja: '入金確認後に、商品調達、発注、梱包、輸出関連手配を開始します。',
@@ -199,7 +203,10 @@ export default function PricingPage() {
                 </p>
                 <p>
                   <span>Use Case</span>
-                  <strong>{plan.use}</strong>
+                  <strong>
+                    <span lang="ja">{plan.use}</span>
+                    <small lang="en">{plan.useEn}</small>
+                  </strong>
                 </p>
               </div>
               {plan.note && <p className="pricing-card-note">{plan.note}</p>}
@@ -217,10 +224,10 @@ export default function PricingPage() {
           <h2 lang="ja">お支払い方法</h2>
           <p className="pricing-payment-subtitle" lang="en">Payment Method & Terms</p>
           <p lang="ja">
-            正式見積り・請求書に基づき、支払い方法、支払期日、通貨、銀行手数料の扱いを案件ごとに確認します。
+            正式見積り・請求書に基づき、支払い方法、支払期日、銀行手数料の扱いを案件ごとに確認します。
           </p>
           <p lang="en">
-            Payment method, due date, currency, and bank fee handling are confirmed case by case based on the formal quotation or invoice.
+            Detailed payment instructions, the payment due date, and the handling of bank charges will be provided with the formal quotation or invoice.
           </p>
         </div>
         <div className="payment-card">
@@ -230,6 +237,27 @@ export default function PricingPage() {
               <p lang="en">{item.en}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="pricing-wise-notice" aria-labelledby="wise-payment-title" data-no-translate>
+        <div className="pricing-wise-notice__inner">
+          <div>
+            <span className="pricing-wise-notice__label">WISE</span>
+            <h2 id="wise-payment-title" lang="ja">Wiseを利用した請求・お支払い案内</h2>
+            <p lang="ja">
+              YUKIMICHIでは、正式見積り・請求内容の確定後、Wiseを利用した請求・お支払い案内に対応しています。
+              請求リンク、送金手数料などの詳細は、案件ごとにご案内します。
+            </p>
+            <p lang="en">
+              After the quotation and billing details are confirmed, YUKIMICHI can provide a Wise payment request or payment instructions.
+              Payment links, transfer fees, and other details are confirmed case by case.
+            </p>
+          </div>
+          <a href="https://wise.com/home" target="_blank" rel="noopener noreferrer">
+            <span lang="ja">Wise公式サイト</span>
+            <span lang="en">Visit Wise</span>
+          </a>
         </div>
       </section>
 
@@ -243,7 +271,7 @@ export default function PricingPage() {
             YUKIMICHI 追加サービス料金表
             <em>Optional Service Fees</em>
           </h2>
-          <p className="pricing-section-subtitle" lang="en">Optional service fees and additional work charges</p>
+          <p className="pricing-section-subtitle" lang="en">Additional service charges</p>
           <p lang="ja">
             写真撮影、検品、資料取得、化粧品確認項目など、通常対応を超える作業については、内容に応じて別途お見積りとなります。
             通常の在庫確認、価格確認、MOQ確認は基本手数料に含め、写真撮影・検品・資料取得・複数社比較・長期交渉などは追加費用として分けて表示します。
@@ -333,7 +361,7 @@ export default function PricingPage() {
             以下の費用は、原則として別途実費または個別見積りとなります。
           </p>
           <p lang="en">
-            The listed service fees are coordination fees for YUKIMICHI’s Japan-side export arrangement support.
+            The listed service fees are coordination fees for YUKIMICHI’s export support in Japan.
             The following costs are generally charged separately at actual cost or quoted individually.
           </p>
         </div>
@@ -371,7 +399,7 @@ export default function PricingPage() {
             詳細な条件は
             <Link href="/terms"> 取引条件 </Link>
             と
-            <Link href="/restricted-items"> 禁止・制限品目 </Link>
+            <Link href="/restricted"> 禁止・制限品目 </Link>
             をご確認ください。内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。
           </p>
           <p lang="en">
@@ -382,14 +410,14 @@ export default function PricingPage() {
 
       <section className="pricing-cta">
         <div>
-          <span>Estimate Request</span>
+          <span>Request a Quote</span>
           <h2 lang="ja">料金を確認して相談する</h2>
           <p className="pricing-section-subtitle" lang="en">Request a quotation with product and destination details</p>
           <p lang="ja">
             商品URL、数量、配送先国、希望配送方法を添えてご相談ください。YUKIMICHIが商品代金・手配手数料・実費項目を分けて整理します。
           </p>
           <p lang="en">
-            Please share the product URL, quantity, destination country, and preferred shipping method. YUKIMICHI will separate product value, handling fees, and actual-cost items for review.
+            Please share the product URL, quantity, destination country, and preferred shipping method. We will provide a clear breakdown of the product cost, handling fee, and separately charged expenses.
           </p>
           <a href="mailto:exporter@justhen.co.jp" className="pricing-mail">
             exporter@justhen.co.jp
@@ -809,6 +837,95 @@ export default function PricingPage() {
           border-bottom: 1px solid rgba(198,165,92,0.22);
         }
 
+        .pricing-card-info strong > span,
+        .pricing-card-info strong > small {
+          display: block;
+        }
+
+        .pricing-card-info strong > small {
+          color: rgba(248,245,239,0.5);
+          font-size: 11.5px;
+          line-height: 1.7;
+          margin-top: 4px;
+        }
+
+        .pricing-wise-notice {
+          background: #0a1626;
+          border-bottom: 1px solid rgba(198,165,92,0.22);
+          padding: clamp(30px, 4vw, 48px) var(--gutter);
+        }
+
+        .pricing-wise-notice__inner {
+          align-items: center;
+          display: grid;
+          gap: clamp(24px, 4vw, 56px);
+          grid-template-columns: minmax(0, 1fr) auto;
+          margin: 0 auto;
+          max-width: 1180px;
+        }
+
+        .pricing-wise-notice__label {
+          color: #9fe870;
+          display: block;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          margin-bottom: 9px;
+        }
+
+        .pricing-wise-notice h2 {
+          color: #e8eef6;
+          font-size: clamp(20px, 2.2vw, 28px);
+          margin: 0 0 12px;
+        }
+
+        .pricing-wise-notice p {
+          color: #d7dee8;
+          font-size: 14px;
+          letter-spacing: 0.02em;
+          line-height: 1.85;
+          margin: 0;
+          max-width: 780px;
+        }
+
+        .pricing-wise-notice p[lang='en'] {
+          color: #8f9baa;
+          font-size: 12.5px;
+          margin-top: 8px;
+        }
+
+        .pricing-wise-notice a {
+          align-items: center;
+          border: 1px solid rgba(159,232,112,0.6);
+          color: #dfffd1;
+          display: inline-flex;
+          flex-direction: column;
+          gap: 2px;
+          justify-content: center;
+          min-height: 54px;
+          min-width: 154px;
+          padding: 10px 18px;
+          text-decoration: none;
+          transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+
+        .pricing-wise-notice a:hover {
+          background: rgba(159,232,112,0.1);
+          border-color: #9fe870;
+          color: #ffffff;
+        }
+
+        .pricing-wise-notice a span[lang='ja'] {
+          font-size: 13px;
+          font-weight: 600;
+        }
+
+        .pricing-wise-notice a span[lang='en'] {
+          color: #9fe870;
+          font-size: 10px;
+          letter-spacing: 0.04em;
+        }
+
         .optional-service-copy p[lang='en'],
         .pricing-important p[lang='en'],
         .pricing-cta p[lang='en'] {
@@ -1001,6 +1118,16 @@ export default function PricingPage() {
         @media (max-width: 900px) {
           .pricing-payment {
             grid-template-columns: 1fr;
+          }
+
+          .pricing-wise-notice__inner {
+            align-items: start;
+            grid-template-columns: 1fr;
+          }
+
+          .pricing-wise-notice a {
+            min-width: 0;
+            width: 100%;
           }
 
           .excluded-cost-layout {

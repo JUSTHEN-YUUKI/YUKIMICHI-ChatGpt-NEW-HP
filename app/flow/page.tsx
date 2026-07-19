@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 
 export const metadata: Metadata = {
-  title: 'Export Process | YUKIMICHI',
+  title: '取引の流れ | YUKIMICHI',
   description: 'YUKIMICHIの取引の流れ。お問い合わせ、商品確認、見積、前払い、調達、書類整理、国際配送、発送後フォローまで。',
 }
 
@@ -12,7 +12,7 @@ const steps = [
     title: 'お問い合わせ',
     en: 'Inquiry',
     text: '商品名、ブランド名、数量、配送先国、用途、希望納期をお知らせください。商品URLがない場合は、写真や分かる範囲の情報だけでも確認を開始できます。',
-    enText: 'Please provide the product name, brand, quantity, destination country, intended use, and desired delivery timing. If no product URL is available, we can begin review based on photos or available details.',
+    enText: 'Please provide the product name, brand, quantity, destination country, intended use, and requested delivery date. If no product URL is available, we can begin our review using photos or the information currently available.',
   },
   {
     number: '02',
@@ -26,28 +26,28 @@ const steps = [
     title: '仕入先への確認',
     en: 'Supplier Check',
     text: '日本国内の仕入先へ、在庫、価格、MOQ、納期、商品資料、SDS/MSDSの有無などを確認します。仕入先情報の開示可否は案件ごとに確認します。',
-    enText: 'We check stock, pricing, MOQ, lead time, product documents, and SDS/MSDS availability with suppliers in Japan. Disclosure of supplier information is reviewed case by case.',
+    enText: 'We check stock, pricing, MOQ, lead time, product documents, and SDS/MSDS availability with suppliers in Japan. Whether supplier information can be disclosed is confirmed for each transaction.',
   },
   {
     number: '04',
     title: '見積提示',
     en: 'Quotation',
     text: '商品代金、手配手数料、国際送料、保険料、想定される追加費用を分けて提示します。関税やVAT/GSTは参考確認となり、最終判断は輸入国側での確認が前提です。',
-    enText: 'We present product costs, handling fees, international shipping, insurance, and estimated additional costs separately. Duties and VAT/GST are provided for reference, and final confirmation must be made in the importing country.',
+    enText: 'We present product costs, handling fees, international shipping, insurance, and estimated additional costs separately. Any duty or VAT/GST estimate is provided for reference only, and the final amount must be confirmed in the importing country.',
   },
   {
     number: '05',
     title: 'お支払い確認',
     en: 'Payment Confirmation',
     text: '正式見積りと条件に合意後、原則としてご入金確認後に商品調達、発注、梱包、配送手配を開始します。支払い条件は案件ごとにメールまたは書面で確認します。',
-    enText: 'After the quotation and terms are agreed, procurement, ordering, packing, and shipping arrangements generally begin after payment confirmation. Payment terms are confirmed by email or written notice for each case.',
+    enText: 'After the quotation and terms are agreed, procurement, ordering, packing, and shipping arrangements generally begin after payment confirmation. Payment terms are confirmed by email or other written confirmation for each case.',
   },
   {
     number: '06',
     title: '商品調達・国内手配',
-    en: 'Procurement & Japan-side Arrangement',
+    en: 'Procurement and Domestic Arrangements in Japan',
     text: '日本国内の仕入先への発注、商品受領、必要に応じた写真確認、簡易検品、梱包前確認などを進めます。',
-    enText: 'We proceed with supplier ordering in Japan, product receipt, photo confirmation, simple inspection, and pre-packing checks as needed.',
+    enText: 'We proceed with supplier ordering in Japan, product receipt, photographic confirmation, simple inspection, and pre-packing checks as needed.',
   },
   {
     number: '07',
@@ -61,7 +61,7 @@ const steps = [
     title: '出荷・追跡情報共有',
     en: 'Shipment & Tracking Information',
     text: '出荷後、追跡番号や配送状況を共有します。配送遅延、税関確認、追加資料依頼が発生した場合は、案件ごとに状況を整理してご連絡します。',
-    enText: 'After shipment, we share tracking information and delivery status. If delays, customs checks, or additional document requests occur, we organize and report the situation case by case.',
+    enText: 'After shipment, we share tracking information and delivery status. If delays, customs checks, or requests for additional documents occur, we will summarize the status and keep you informed.',
   },
 ]
 
@@ -76,13 +76,13 @@ const beginnerCards = [
   {
     step: '02',
     title: '次に、日本側で対応できる範囲を確認します',
-    enTitle: 'Confirm Japan-side support scope',
+    enTitle: 'Confirm the support available in Japan',
     text: 'YUKIMICHIは、仕入先確認、商品調達、梱包準備、輸出書類の作成・確認、配送会社やフォワーダーとの調整を支援します。',
     en: 'YUKIMICHI supports supplier checks, procurement, packing preparation, export document preparation and review, and coordination with carriers or forwarders.',
   },
   {
     step: '03',
-    title: '輸入国側の確認事項は買主側で確認します',
+    title: '輸入国側の要件は買主または輸入者が確認します',
     enTitle: 'Importer-side matters must be checked locally',
     text: '輸入許可、通関可否、関税・VAT/GST、現地販売可否、ラベル規制などは、原則として輸入者側で確認が必要です。',
     en: 'Import permits, customs clearance, duties, VAT/GST, local sales eligibility, and labeling rules generally need to be checked by the importer.',
@@ -101,7 +101,7 @@ const documentCards = [
     title: 'Commercial Invoice（コマーシャルインボイス）',
     enTitle: 'Commercial Invoice',
     text: '商品名、数量、単価、合計金額、通貨、売主、買主、原産国、取引条件などを記載する基本書類です。',
-    en: 'A basic export document showing product description, quantity, unit price, total amount, currency, seller, buyer, country of origin, and shipping terms.',
+    en: 'A basic export document showing the product description, quantity, unit price, total amount, currency, seller, buyer, country of origin, and trade terms or applicable Incoterms® rule.',
   },
   {
     title: 'Packing List（パッキングリスト）',
@@ -113,14 +113,14 @@ const documentCards = [
     title: '輸出書類の作成・確認サポート',
     enTitle: 'Export Document Preparation and Review',
     text: '買主、仕入先、フォワーダー、関係者から提供された情報をもとに、輸出書類の作成・確認を支援します。必要書類は商品・配送方法・仕向国により異なります。',
-    en: 'YUKIMICHI assists with Japan-side export document preparation and review based on information from the buyer, supplier, forwarder, and relevant parties.',
+    en: 'YUKIMICHI assists with export document preparation and review in Japan, based on information from the buyer, supplier, forwarder, and other relevant parties.',
   },
 ]
 
 const incotermsGroups = [
   {
     title: '全輸送モードで使われる条件',
-    enTitle: 'All Transport Modes',
+    enTitle: 'Rules for Any Mode or Modes of Transport',
     terms: [
       ['EXW', 'Ex Works', '工場渡し'],
       ['FCA', 'Free Carrier', '運送人渡し'],
@@ -148,9 +148,9 @@ const featuredIncoterms = [
     code: 'FCA',
     name: 'Free Carrier',
     badge: '日本側手配で使いやすい条件',
-    enBadge: 'Practical for Japan-side arrangement',
+    enBadge: 'Practical for arrangements in Japan',
     ja: '日本国内の指定倉庫、港湾倉庫、空港貨物施設、または買主指定フォワーダーへの引き渡しを基準にする条件です。YUKIMICHIでは、仕入先確認、梱包準備、Commercial Invoice・Packing List整理、配送会社・フォワーダーとの確認を案件ごとに支援します。',
-    en: 'FCA is practical for Japan-side export arrangements based on delivery to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan.',
+    en: 'FCA can be practical when goods are delivered to a designated warehouse, port facility, airport cargo terminal, or buyer-nominated forwarder in Japan. YUKIMICHI can assist with supplier checks, packing preparation, export document organization, and coordination with the carrier or forwarder.',
   },
   {
     code: 'EXW',
@@ -158,7 +158,7 @@ const featuredIncoterms = [
     badge: '個別確認が必要な条件',
     enBadge: 'Case-by-case review required',
     ja: 'メーカー、卸、販売店、倉庫などで貨物を引き渡す条件です。ただし、海外向け輸出では、輸出通関、国内輸送、国際輸送手配などが買主側に集中しやすいため、FCAの方が実務上適している場合があります。',
-    en: 'EXW means goods are made available at the supplier or warehouse location. For international shipments, FCA may be more practical depending on the project.',
+    en: 'EXW means goods are made available at the supplier or warehouse location. The buyer generally assumes responsibility for export clearance, domestic transport, and international transport arrangements, so FCA may be more practical for international shipments.',
   },
   {
     code: 'FOB',
@@ -234,7 +234,7 @@ export default function FlowPage() {
               YUKIMICHIでは、専門用語をそのまま並べるのではなく、日本側で支援できる範囲と、輸入者側で確認が必要な範囲を分けてご案内します。
             </p>
             <p lang="en">
-              In export transactions, it is important to clarify who is responsible for each cost, arrangement, and risk. YUKIMICHI explains the Japan-side support scope and importer-side responsibilities in a practical way.
+              In export transactions, it is important to clarify who is responsible for each cost, arrangement, and risk. YUKIMICHI explains the support available in Japan and the importer&apos;s responsibilities in practical terms.
             </p>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function FlowPage() {
             <header className="flow-explain-header">
               <span>Common Examples</span>
               <h2 lang="ja">実務上よく確認する条件</h2>
-              <p lang="en">Common examples reviewed in Japan-side export coordination.</p>
+              <p lang="en">Common examples reviewed when coordinating exports from Japan.</p>
             </header>
             <div className="flow-incoterms-featured">
               {featuredIncoterms.map((term) => (
@@ -333,13 +333,13 @@ export default function FlowPage() {
 
           <aside className="flow-incoterms-case-notice">
             <div>
-              <span>Case-by-case Confirmation</span>
+              <span>Case-by-Case Review</span>
               <h3 lang="ja">取引条件は案件ごとに確認</h3>
               <p className="flow-card-en-title" lang="en">Trade terms are confirmed case by case.</p>
             </div>
             <div>
               <p lang="ja">
-                取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なIncoterms® ruleは、見積書、Commercial Invoice、Packing List、契約書等で明確に確認したうえで進行します。
+                取引条件は、商品内容、輸送方法、仕向地、買主側フォワーダーの有無、輸出入規制、保険条件により異なります。最終的なIncoterms® ruleは、見積書、Proforma Invoice、Commercial Invoice、売買契約書等で明確に確認したうえで進行します。
               </p>
               <p lang="en">
                 Trade terms may vary depending on the product, shipping method, destination, buyer-side forwarder arrangement, export/import regulations, and insurance conditions. The final Incoterms® rule will be confirmed in the quotation, Commercial Invoice, Packing List, contract, or related documents before proceeding.
@@ -367,7 +367,7 @@ export default function FlowPage() {
           情報がそろっているほど、見積、配送方法、輸出入規制の確認をスムーズに進められます。輸出入規制や認証の要否は国や商品により異なるため、最終判断は税関、通関業者、公的機関の確認を前提に進めます。
           </p>
           <p lang="en">
-            For quotation requests, please share the product URL, product name, quantity, destination country, preferred shipping method, deadline, and whether the shipment is for business or personal use. More complete information helps us review quotation conditions, shipping methods, and import/export requirements more smoothly.
+            For quotation requests, please share the product URL, product name, quantity, destination country, preferred shipping method, requested delivery date, and whether the shipment is for business or personal use. More complete information helps us review quotation conditions, shipping methods, and import/export requirements more efficiently.
           </p>
         </div>
       </section>

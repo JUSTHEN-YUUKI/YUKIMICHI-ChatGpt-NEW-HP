@@ -53,7 +53,7 @@ const coreServices = [
       '少量、サンプル、小口貨物向けの配送方法確認を支援します。',
       '配送会社の引受可否、サイズ、重量、内容品条件を整理します。',
     ],
-    note: 'YUKIMICHIが国際物流会社として実輸送を保証するものではありません。',
+    note: '実際の運送は、各配送会社またはフォワーダーが行います。',
   },
   {
     code: '05',
@@ -102,7 +102,7 @@ const coreServices = [
 ]
 
 const supportScope = [
-  { ja: '商品情報の整理', en: 'Product information organization' },
+  { ja: '商品情報の整理', en: 'Product information preparation' },
   { ja: '商品の仕入れ可否調査', en: 'Product availability and sourcing checks' },
   { ja: '仕入先への確認・連絡支援', en: 'Supplier communication support' },
   { ja: '国内取引条件の整理', en: 'Domestic transaction condition review' },
@@ -112,7 +112,7 @@ const supportScope = [
   { ja: 'Invoice / Packing List 等の基本書類整理', en: 'Basic export document organization such as Invoice and Packing List' },
   { ja: 'SDS / 成分表等の確認', en: 'SDS, ingredient sheet, and related document checks' },
   { ja: '禁止・制限品目の事前確認', en: 'Restricted item pre-checks' },
-  { ja: '海外バイヤーとの取引条件整理', en: 'Trade condition organization with overseas buyers' },
+  { ja: '海外バイヤーとの取引条件整理', en: 'Coordination of commercial terms with overseas buyers' },
 ]
 
 const limitations = [
@@ -121,8 +121,8 @@ const limitations = [
   { ja: '関税・VAT/GSTの最終金額', en: 'Final customs duty, VAT, or GST amounts' },
   { ja: 'HSコードの最終分類', en: 'Final HS code classification' },
   { ja: '原産地証明・各種認証の発給可否', en: 'Issuance of certificates of origin or other official certifications' },
-  { ja: 'FDA、CE、FCC、CPSIA等の認証取得代行', en: 'Certification acquisition services such as FDA, CE, FCC, or CPSIA' },
-  { ja: '危険品の最終輸送可否', en: 'Final dangerous goods transport acceptance' },
+  { ja: 'FDA、CEマーキング、FCC、CPSIA等に関する適合性の最終判断・認証・申請代行', en: 'Final regulatory determinations, certification, or filing services for FDA, CE marking, FCC, CPSIA, or similar requirements' },
+  { ja: '危険品の最終輸送可否', en: 'Final carrier acceptance of dangerous goods' },
   { ja: '配送会社の最終引受判断', en: 'Final carrier acceptance decisions' },
   { ja: '輸入国での販売可否', en: 'Local sales eligibility in the destination country' },
   { ja: '配送遅延が発生しないことの保証', en: 'Guarantee that no shipping delay will occur' },
@@ -132,7 +132,7 @@ const roleItems = [
   {
     actor: 'YUKIMICHI',
     ja: '日本側の仕入れ可否調査、国内取引調整、書類整理、配送手配支援',
-    en: 'Japan-side product availability checks, domestic transaction coordination, document organization, and shipping arrangement support.',
+    en: 'Product availability checks, domestic transaction coordination, document preparation, and shipping coordination in Japan.',
   },
   {
     actor: 'Supplier',
@@ -142,7 +142,7 @@ const roleItems = [
   {
     actor: 'Freight Forwarder / Carrier',
     ja: '実輸送、引受可否判断、運送約款に基づく輸送',
-    en: 'Actual transportation, acceptance decisions, and carriage under carrier terms.',
+    en: "Actual carriage and final acceptance under the carrier's terms and conditions.",
   },
   {
     actor: 'Customs Broker',
@@ -172,7 +172,7 @@ const requiredInfo = [
 const relatedLinks = [
   { href: '/quote', label: 'お見積り', en: 'Quote Request' },
   { href: '/contact', label: 'お問い合わせ', en: 'Contact' },
-  { href: '/restricted-items', label: '禁止・制限品目', en: 'Restricted Items' },
+  { href: '/restricted', label: '禁止・制限品目', en: 'Restricted Items' },
   { href: '/terms', label: '取引条件', en: 'Terms of Transaction' },
   { href: '/faq', label: 'FAQ', en: 'Frequently Asked Questions' },
 ]
@@ -196,7 +196,7 @@ export default function ServicesPage() {
           <span className="section-label-text">JAPAN EXPORT COORDINATION</span>
         </div>
         <h1 className="services-title">
-          <TranslatedText id="pages.services.heroTitle" fallback="Japan Export Coordination & Arrangement" />
+          <TranslatedText id="pages.services.heroTitle" fallback="Japan-Based Export Coordination" />
         </h1>
         <p className="services-hero-subtitle">
           <TranslatedText id="pages.services.heroSubtitle" fallback="日本側の輸出調整・手配サービス" />
@@ -204,7 +204,7 @@ export default function ServicesPage() {
         <article className="services-domestic-support" aria-labelledby="domestic-support-title">
           <div className="services-domestic-support__head">
             <span>EXPORT COORDINATION SERVICES</span>
-            <h2 id="domestic-support-title">Japan Export Coordination & Arrangement</h2>
+            <h2 id="domestic-support-title">Japan-Based Export Coordination</h2>
             <p className="services-domestic-support__subtitle-ja">
               日本商品の仕入れ可否調査・国内取引調整・輸出関連手配
             </p>
@@ -223,10 +223,10 @@ export default function ServicesPage() {
             </div>
             <div className="services-domestic-support__copy services-domestic-support__copy--en">
               <p lang="en">
-                YUKIMICHI provides Japan-side export coordination services for overseas buyers, including product availability checks, supplier communication, purchase coordination, document review, and shipping arrangement support.
+                YUKIMICHI provides Japan-based export coordination services for overseas buyers, including product availability checks, supplier communication, purchase coordination, document review, and shipping arrangement support.
               </p>
               <p lang="en">
-                We are not an inventory sales company or an international carrier. Each case is reviewed with suppliers, carriers, brokers, and relevant parties as needed.
+                We do not operate as a stockholding seller or international carrier. Each case is reviewed with suppliers, carriers, brokers, and other relevant parties as needed.
               </p>
             </div>
           </div>
@@ -332,7 +332,7 @@ export default function ServicesPage() {
         <div className="services-section-head">
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">Role / 役割分担</span>
+            <span className="section-label-text">役割分担 / Roles and Responsibilities</span>
           </div>
           <h2 lang="ja">YUKIMICHIは運送会社そのものではありません</h2>
           <p className="services-section-subtitle" lang="en">YUKIMICHI is not an international carrier.</p>
@@ -341,7 +341,7 @@ export default function ServicesPage() {
             実輸送、通関判断、輸入国側の許可・税金・販売可否は、関係事業者または輸入者側の確認が前提です。
           </p>
           <p lang="en">
-            YUKIMICHI supports Japan-side sourcing checks, supplier communication, document organization, and shipping arrangement support. Final transport, customs decisions, destination-side permits, taxes, and sales eligibility must be confirmed by the relevant parties or importer.
+            YUKIMICHI supports sourcing checks, supplier communication, document preparation, and shipping coordination in Japan. Final transport, customs decisions, destination-side permits, taxes, and sales eligibility must be confirmed by the relevant parties or importer.
           </p>
         </div>
 
@@ -405,9 +405,9 @@ export default function ServicesPage() {
             YUKIMICHIは日本側の輸出手配支援を行います。輸入国側の輸入許可、関税・税金、現地販売可否、通関手続き、各種認証については、個別に書面で合意した場合を除き、原則として輸入者側の責任となります。
           </p>
           <p lang="en">
-            YUKIMICHI provides Japan-side export arrangement support. Final import approval, duties, taxes, permits, local sales eligibility, and customs clearance in the destination country remain the responsibility of the importer, unless otherwise agreed in writing.
+            YUKIMICHI provides export coordination support in Japan. Final import approval, duties, taxes, permits, local sales eligibility, and customs clearance in the destination country remain the responsibility of the importer, unless otherwise agreed in writing.
           </p>
-          <Link href="/restricted-items" className="services-inline-link">
+          <Link href="/restricted" className="services-inline-link">
             <TranslatedText id="pages.services.restrictedLink" fallback="禁止・制限品目を確認する" /> <ArrowRight />
           </Link>
         </div>

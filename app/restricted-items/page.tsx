@@ -1,2 +1,5 @@
-export { metadata } from '@/app/restricted/page'
-export { default } from '@/app/restricted/page'
+import { permanentRedirect } from 'next/navigation'
+
+export default function RestrictedItemsRedirectPage() {
+  permanentRedirect('/restricted')
+}

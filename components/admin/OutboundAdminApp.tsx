@@ -47,7 +47,7 @@ export default function OutboundAdminApp() {
 
   const selectedLead = leads.find((lead) => lead.leadId === selectedLeadId)
   const filteredLeads = useMemo(() => filterLeads(leads, filters), [leads, filters])
-  const sendCandidateCount = leads.filter((lead) => !lead.doNotContact && lead.priority !== 'DO_NOT_CONTACT' && ['READY_FOR_REVIEW', 'DRAFT_CREATED'].includes(lead.status)).length
+  const readyToContactCount = leads.filter((lead) => !lead.doNotContact && lead.priority !== 'DO_NOT_CONTACT' && ['READY_FOR_REVIEW', 'DRAFT_CREATED'].includes(lead.status)).length
 
   function upsertLead(nextLead: OutboundLead) {
     const scored = { ...nextLead, ...scoreLead(nextLead) }
@@ -101,7 +101,7 @@ export default function OutboundAdminApp() {
 
       <section className="stats-row">
         <Metric label="Leads" value={leads.length} />
-        <Metric label="Send Candidates" value={sendCandidateCount} />
+        <Metric label="Ready to Contact" value={readyToContactCount} />
         <Metric label="Do Not Contact" value={leads.filter((lead) => lead.doNotContact).length} />
         <Metric label="Needs Source Review" value={leads.filter((lead) => !lead.sourceUrl).length} />
       </section>

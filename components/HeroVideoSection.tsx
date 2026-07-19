@@ -14,12 +14,12 @@ export default function HeroVideoSection() {
             </div>
 
             <h2 id="hero-video-title">
-              Export Scenes
-              <span>from Japan</span>
+              Export Support
+              <span>in Practice</span>
             </h2>
 
             <p>
-              YUKIMICHI / Product Sourcing / Packing / Documentation / Air Freight / Sea Freight
+              YUKIMICHI / Product Sourcing / Packing / Documentation / Shipping Coordination
             </p>
           </div>
         </ScrollReveal>
@@ -33,7 +33,7 @@ export default function HeroVideoSection() {
               playsInline
               preload="metadata"
               poster="/hero-bg.jpg"
-              aria-label="YUKIMICHI product and logistics media"
+              aria-label="YUKIMICHI sourcing and export coordination video"
             >
               <source src="/yukimichi-site-promo-remotion-final.mp4" type="video/mp4" />
             </video>

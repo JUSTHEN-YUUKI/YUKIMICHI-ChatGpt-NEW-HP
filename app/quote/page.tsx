@@ -27,7 +27,7 @@ const quoteFlow = [
   {
     step: '03',
     title: '概算見積を作成',
-    text: '商品代金、国際送料、手配手数料、必要な実費を分けて確認します。',
+    text: '商品代金、国際送料、手配手数料、その他の実費を分けて概算見積として提示します。',
   },
   {
     step: '04',
@@ -101,11 +101,11 @@ export default function QuotePage() {
           />
         </p>
         <p className="section-body quote-lead quote-lead-en" lang="en">
-          Please share what you know first. A product name or URL, destination country, and your request details are enough to start the review.
+          Please send us the information currently available. A product name or URL, destination country, and your request details are enough to start the review.
         </p>
         <div className="quote-hero-actions">
           <a href={quoteMailto} className="btn-primary">
-            <TranslatedText id="pages.quote.mailCta" fallback="exporter@justhen.co.jp へ見積相談する" /> <ArrowRight />
+            <TranslatedText id="pages.quote.mailCta" fallback="exporter@justhen.co.jp へ見積りを依頼する" /> <ArrowRight />
           </a>
           <Link href="/contact" className="btn-ghost">
             <TranslatedText id="common.contact" fallback="お問い合わせ" /> <ArrowRight />
@@ -115,7 +115,7 @@ export default function QuotePage() {
 
       <section className="quote-mail">
         <div className="quote-mail-copy">
-          <span>Official Quotation Email</span>
+          <span>Quotation Contact</span>
           <h2><TranslatedText id="pages.quote.formTitle" fallback="見積依頼" /></h2>
           <p lang="ja">
             <TranslatedText
@@ -167,7 +167,7 @@ export default function QuotePage() {
           </div>
           <h2 lang="ja"><TranslatedText id="pages.quote.flowTitle" fallback="見積依頼の流れ" /></h2>
           <p lang="ja"><TranslatedText id="pages.quote.flowLead" fallback="初回相談では、確定料金ではなく確認に必要な条件を整理し、対応可否と配送候補を確認します。" /></p>
-          <p lang="en">At the first inquiry stage, we organize the conditions needed for review and check handling feasibility and possible shipping options.</p>
+          <p lang="en">At the first inquiry stage, we organize the information required for our initial review and confirm whether we can support the request and which shipping options may be suitable.</p>
         </div>
         <div className="quote-flow-grid">
           {quoteFlow.map((item) => (
@@ -188,7 +188,7 @@ export default function QuotePage() {
           </div>
           <h2 lang="ja"><TranslatedText id="pages.quote.shippingTitle" fallback="配送方法の目安" /></h2>
           <p lang="ja"><TranslatedText id="pages.quote.shippingLead" fallback="配送先国、内容品、数量、納期、サイズ・重量により、候補となる配送方法が変わります。" /></p>
-          <p lang="en">Candidate shipping methods vary by destination, item type, quantity, timeline, dimensions, and weight.</p>
+          <p lang="en">Candidate shipping methods vary by destination, product details or cargo contents, quantity, timeline, dimensions, and weight.</p>
         </div>
         <div className="quote-shipping-grid">
           {shippingMethods.map((method, index) => (

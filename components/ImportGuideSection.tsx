@@ -3,7 +3,7 @@ import ScrollReveal from "@/components/ScrollReveal"
 const individualNotes = [
   {
     ja: "個人輸入は、少量・個人利用を前提とするため、通関業者の手配ができない場合や、対応範囲が限られる場合があります。",
-    en: "Personal imports are usually small shipments for private use, so customs broker support may be unavailable or limited.",
+    en: "Personal imports are usually small shipments for private use, so arrangements with a customs broker may be unavailable or limited.",
   },
   {
     ja: "関税、輸入税、輸入許可、受取国側の規制は、お客様側で事前確認が必要です。",
@@ -21,8 +21,8 @@ const businessNotes = [
     en: "For business imports, coordination with customs brokers or freight forwarders can be reviewed based on the cargo, volume, and trade terms.",
   },
   {
-    ja: "Invoice、Packing List、商品情報、HS Code確認用資料など、見積・輸出手配に必要な情報を整理します。",
-    en: "We organize the information needed for quotation and export arrangements, including invoices, packing lists, product details, and HS Code review materials.",
+    ja: "Invoice、Packing List、商品情報、HSコード確認用資料など、見積・輸出手配に必要な情報を整理します。",
+    en: "We organize the information needed for quotations and export arrangements, including invoices, packing lists, product details, and materials for confirming the HS code.",
   },
   {
     ja: "国際宅配便、航空貨物、海上輸送を比較し、数量・納期・品目に合う方法を提案します。",
@@ -46,7 +46,7 @@ export default function ImportGuideSection() {
           </h2>
           <div className="import-guide-copy">
             <p lang="ja" className="copy-line-ja">
-              海外のお客様が日本商品を購入・輸入する前に、個人利用の小口輸入と法人取引の輸入で、確認すべき手続き・書類・配送方法を分けてご案内します。
+              海外のお客様が日本商品を購入・輸入する前に、個人利用を目的とした小口輸入と、法人による商業輸入で確認すべき手続き・書類・配送方法を分けてご案内します。
             </p>
             <p lang="en" className="copy-line-en">
               Before purchasing or importing Japanese products, overseas buyers can review the key
@@ -64,7 +64,7 @@ export default function ImportGuideSection() {
             <h3 lang="ja">
               個人のお客様
             </h3>
-            <p className="guide-panel-title-en" lang="en">Personal Import / Small Shipment Review</p>
+            <p className="guide-panel-title-en" lang="en">Personal Imports and Small Shipments</p>
             <ul>
               {individualNotes.map((note) => (
                 <li key={note.en}>
@@ -80,7 +80,7 @@ export default function ImportGuideSection() {
             <h3 lang="ja">
               法人のお客様
             </h3>
-            <p className="guide-panel-title-en" lang="en">Business Import / Commercial Shipment Review</p>
+            <p className="guide-panel-title-en" lang="en">Business Imports and Commercial Shipments</p>
             <ul>
               {businessNotes.map((note) => (
                 <li key={note.en}>

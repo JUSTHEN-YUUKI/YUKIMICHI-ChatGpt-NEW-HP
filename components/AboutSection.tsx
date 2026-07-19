@@ -89,7 +89,7 @@ export default function AboutSection() {
           </h2>
 
           <p className="section-body">
-            YUKIMICHI（雪道）は、JUSTHEN CO., LTD. が運営する
+            YUKIMICHI（雪道）は、JUSTHEN Co., Ltd. が運営する
             日本発の輸出サポートブランドです。
             <br />
             <br />
@@ -97,8 +97,8 @@ export default function AboutSection() {
             配送方法の比較、海外バイヤーとのやり取りまで、
             海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。
             <span className="copy-line-en">
-              YUKIMICHI is an Export Support brand operated by JUSTHEN CO., LTD.,
-              helping overseas buyers review eligible Japanese products, shipping methods,
+              YUKIMICHI is a Japan-based export support brand operated by JUSTHEN Co., Ltd.,
+              helping overseas buyers confirm Japanese product availability, shipping options,
               documents, and communication before moving into quotation.
             </span>
           </p>

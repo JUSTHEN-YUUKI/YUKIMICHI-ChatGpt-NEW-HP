@@ -14,8 +14,8 @@ function shouldSkipElement(element: Element) {
 
 const paymentCopy = [
   {
-    ja: '海外からのお支払いについては、送金手数料および入金確認のしやすさの観点から、Wiseのご利用を推奨しております。',
-    en: 'For overseas payments, we recommend using Wise due to transfer fees and easier payment confirmation.',
+    ja: '海外からのお支払いでは、国際送金と入金確認を簡潔にするため、Wiseのご利用を推奨しております。',
+    en: 'For overseas payments, we recommend Wise to simplify international transfers and payment confirmation.',
   },
   {
     ja: 'お支払い先は、弊社指定の三井住友銀行（SMBC）口座です。お支払いは、原則として日本円での前払いとなります。',
@@ -26,8 +26,8 @@ const paymentCopy = [
     en: 'If Wise is difficult to use, we will provide instructions for payment to our designated SMBC account by conventional international bank transfer, also known as T/T remittance.',
   },
   {
-    ja: '正式な送金先情報、支払期日、通貨、銀行手数料の扱いは、正式見積りまたは請求書発行時に個別にご案内します。',
-    en: 'Detailed payment instructions, due date, currency, and bank fee handling will be provided individually at the time of quotation or invoice issuance.',
+    ja: '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。',
+    en: 'Detailed payment instructions, the payment due date, and the handling of bank charges will be provided with the formal quotation or invoice.',
   },
   {
     ja: '入金確認後に、商品調達、発注、梱包、輸出関連手配を開始します。',
@@ -81,12 +81,12 @@ function normalizePricingPaymentCopy(pathname: string | null) {
 
   appendParagraph(
     headingColumn,
-    '正式見積り・請求書に基づき、支払い方法、支払期日、通貨、銀行手数料の扱いを案件ごとに確認します。',
+    '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。',
     'ja',
   )
   appendParagraph(
     headingColumn,
-    'Payment method, due date, currency, and bank fee handling are confirmed case by case based on the formal quotation or invoice.',
+    'Detailed payment instructions, the payment due date, and the handling of bank charges will be provided with the formal quotation or invoice.',
     'en',
   )
 

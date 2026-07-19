@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: '%s',
   },
   description:
-    'YUKIMICHI provides transparent Japan-side export coordination for overseas buyers, including product availability checks, supplier communication, document review, and shipping arrangement support.',
+    'YUKIMICHI provides transparent, Japan-based sourcing and export coordination for overseas buyers, including product availability checks, supplier communication, document review, and shipping arrangement support.',
   keywords:
     'Japan export coordination, Japanese product sourcing, small lot export, international courier services, air freight, sea freight',
   alternates: {
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     siteName: 'YUKIMICHI – SNOWPATH JAPAN',
     title: 'YUKIMICHI | Japan Export Support',
     description:
-      'Japan-side product sourcing, export document review, and shipping arrangement support for overseas buyers.',
+      'Japan-based product sourcing, export document review, and shipping arrangement support for overseas buyers.',
     locale: 'ja_JP',
     images: [
       {
         url: '/hero-bg.jpg',
-        alt: 'YUKIMICHI – Japan-side export coordination from Hokkaido',
+        alt: 'YUKIMICHI – Japan-based sourcing and export coordination from Hokkaido',
       },
     ],
   },
@@ -63,7 +63,7 @@ export default function RootLayout({
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'JUSTHEN CO., LTD.',
+    name: 'JUSTHEN Co., Ltd.',
     alternateName: 'YUKIMICHI – SNOWPATH JAPAN',
     url: 'https://justhen.co.jp/',
     email: 'exporter@justhen.co.jp',

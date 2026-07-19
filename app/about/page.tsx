@@ -5,12 +5,12 @@ import Link from '@/components/NewTabLink'
 export const metadata: Metadata = {
   title: '会社概要 | YUKIMICHI',
   description:
-    'YUKIMICHIを運営する株式会社ジャッセン / JUSTHEN CO., LTD.の会社概要、代表者情報、本店所在地、札幌営業拠点、輸出調整サービスの責任範囲。',
+    'YUKIMICHIを運営する株式会社ジャッセン / JUSTHEN Co., Ltd.の会社概要、代表者情報、本店所在地、札幌営業拠点、輸出調整サービスの責任範囲。',
   alternates: { canonical: '/about' },
 }
 
 const companyProfile = [
-  { ja: '会社名', en: 'Company Name', valueJa: '株式会社ジャッセン', valueEn: 'JUSTHEN CO., LTD.' },
+  { ja: '会社名', en: 'Company Name', valueJa: '株式会社ジャッセン', valueEn: 'JUSTHEN Co., Ltd.' },
   { ja: 'サービスブランド', en: 'Service Brand', valueJa: 'YUKIMICHI', valueEn: 'YUKIMICHI' },
   { ja: '代表', en: 'Representative Director', valueJa: '林 祐樹', valueEn: 'Yuuki Hayashi' },
   { ja: '設立', en: 'Established', valueJa: '2016年2月', valueEn: 'February 2016' },
@@ -23,7 +23,7 @@ const companyProfile = [
   },
   {
     ja: '札幌営業拠点',
-    en: 'Sapporo Business Office',
+    en: 'Sapporo Operations Base',
     valueJa: '北海道札幌市中央区北二条東8-5-15',
     valueEn: '8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido, Japan',
   },
@@ -37,7 +37,7 @@ const companyProfile = [
 ]
 
 const supportAreas = [
-  '商品の在庫・価格・取引可否を含む仕入れ可否調査',
+  '日本商品について、国内のメーカー、卸、販売店などへの在庫・価格・取引可否の確認',
   'メーカー、卸、販売店との連絡・交渉',
   'Invoice、Packing List、SDS、成分表などの書類確認・整理',
   'EMS、DHL、FedEx、UPS、ヤマト国際宅急便、航空貨物、海上輸送の比較',
@@ -58,7 +58,7 @@ const nonGuaranteeItems = [
 const supportAreasEn = [
   'Product availability, pricing, and sourcing checks',
   'Communication and negotiation with Japanese manufacturers, wholesalers, and retailers',
-  'Review and organization of Invoice, Packing List, SDS, ingredient sheets, and related documents',
+  'Review and organization of commercial invoices, packing lists, SDS documents, ingredient lists, and related materials',
   'Comparison of EMS, DHL, FedEx, UPS, Yamato International TA-Q-BIN, air freight, and sea freight',
   'Coordination with forwarders, customs brokers, and carriers',
   'Preliminary checks for export and shipping feasibility',
@@ -70,7 +70,7 @@ const nonGuaranteeItemsEn = [
   'Final decisions by customs, carriers, or relevant authorities',
   'Sales approval, certification, or labeling compliance in the importing country',
   'Delays, inspections, seizure, return shipments, or force majeure during international transportation',
-  'Final transaction approval by manufacturers, wholesalers, or retailers',
+  'Final approval of a transaction by manufacturers, wholesalers, or retailers',
   'Changes in exchange rates, freight charges, customs duties, import taxes, VAT/GST, or related costs',
 ]
 
@@ -97,10 +97,10 @@ export default function AboutPage() {
         </h1>
         <div className="about-lead-grid">
           <p lang="ja">
-            株式会社ジャッセンは、YUKIMICHIブランドを通じて、日本国内のメーカー、卸、販売店などに対する仕入れ可否調査と取引調整を行い、海外バイヤー向けに日本側の輸出調整・手配支援を提供しています。
+            株式会社ジャッセンは、YUKIMICHIブランドを通じて、日本商品について国内のメーカー、卸、販売店などへ仕入れ可否を確認し、海外バイヤー向けに日本での取引調整と輸出手配支援を提供しています。
           </p>
           <p lang="en">
-            JUSTHEN CO., LTD. operates YUKIMICHI, a Japan-side export coordination service for overseas buyers, with a focus on transparency, compliance, and practical coordination.
+            JUSTHEN Co., Ltd. operates YUKIMICHI, a Japan-based sourcing and export coordination service for overseas buyers, with a focus on transparency, compliance, and practical coordination.
           </p>
         </div>
       </section>
@@ -116,7 +116,7 @@ export default function AboutPage() {
             商品の在庫・価格・取引可否を含む仕入れ可否調査、輸出関連書類、配送方法、規制確認などを案件ごとに整理し、透明性のある取引を重視しています。
           </p>
           <p lang="en">
-            We support product availability and sourcing checks, supplier communication, export document preparation, shipping method comparison, and regulatory review on a case-by-case basis.
+            We support product availability and sourcing checks, supplier communication, export document preparation, shipping method comparison, and preliminary checks of applicable requirements on a case-by-case basis.
           </p>
         </div>
 
@@ -149,7 +149,7 @@ export default function AboutPage() {
         <div className="representative-photo">
           <Image
             src="/profile.png"
-            alt="Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD."
+            alt="Yuuki Hayashi, Representative Director of JUSTHEN Co., Ltd."
             width={1377}
             height={672}
             sizes="(max-width: 900px) 100vw, 50vw"
@@ -162,10 +162,10 @@ export default function AboutPage() {
           </div>
           <h2>代表者について</h2>
           <p lang="ja">
-            代表の林祐樹は、会社員時代に成田空港、横浜港、品川港に関連する国際物流業務に携わり、輸出入書類、貨物管理、港湾・空港関連の実務を経験してきました。
+            代表の林祐樹は、会社員時代に空港・港湾に関連する国際物流業務に携わり、輸出入書類、貨物管理、港湾・空港関連の実務を経験してきました。
           </p>
           <p lang="ja">
-            YUKIMICHIでは、その実務経験をもとに、海外バイヤーが日本商品を安心して検討できるよう、商品の仕入れ可否調査、仕入先との連絡、輸出書類の整理、配送方法の比較、規制確認を丁寧に支援しています。
+            YUKIMICHIでは、その実務経験をもとに、海外バイヤーが日本商品を安心して検討できるよう、商品の仕入れ可否確認、仕入先との連絡、輸出書類の整理、配送方法の比較、適用要件の事前確認を丁寧に支援しています。
           </p>
           <p lang="ja">
             無理な輸出、虚偽申告、規制逃れを前提とした取引は行わず、法令遵守と透明性を重視しています。
@@ -173,10 +173,10 @@ export default function AboutPage() {
           <div className="representative-en">
             <h3>About the Representative</h3>
             <p lang="en">
-              Yuuki Hayashi, Representative Director of JUSTHEN CO., LTD., has practical experience in international logistics operations related to Narita Airport, Yokohama Port, and Shinagawa Port.
+              Yuuki Hayashi, Representative Director of JUSTHEN Co., Ltd., has practical experience in international logistics operations related to airports and ports, including import and export documentation, cargo management, and logistics operations.
             </p>
             <p lang="en">
-              Based on this background, YUKIMICHI supports overseas buyers with product availability checks, supplier communication, export document preparation, shipping method comparison, and regulatory review from the Japan side.
+              Based on this background, YUKIMICHI supports overseas buyers with product availability checks, supplier communication, export document preparation, shipping method comparison, and preliminary checks of applicable requirements in Japan.
             </p>
             <p lang="en">
               We do not support false declarations, regulatory avoidance, or transactions involving counterfeit or infringing goods. Compliance and transparency are central to our service.
@@ -196,7 +196,7 @@ export default function AboutPage() {
             YUKIMICHIは、国際物流会社・通関業者そのものではありません。日本国内のメーカー、卸、販売店などとの確認・調整、輸出関連書類の整理、配送方法の比較、外部フォワーダー・通関業者との連携を支援する、日本側の輸出調整サービスです。
           </p>
           <p lang="en">
-            YUKIMICHI is not an international freight forwarder, customs broker, or carrier. We provide Japan-side export coordination support with external partners as needed.
+            YUKIMICHI is not an international freight forwarder, customs broker, or carrier. We provide sourcing and export coordination in Japan and work with independent freight forwarders, customs brokers, and carriers when required.
           </p>
         </div>
 
@@ -217,7 +217,7 @@ export default function AboutPage() {
           </article>
 
           <article className="scope-card scope-card--muted">
-            <span>Non-Guaranteed Items</span>
+            <span>Matters We Cannot Guarantee</span>
             <h3>YUKIMICHIが保証できない事項</h3>
             <ul>
               {nonGuaranteeItems.map((item) => (
@@ -238,10 +238,10 @@ export default function AboutPage() {
           <span>Export Coordination</span>
           <h2 lang="ja">日本側の確認・調整について相談する</h2>
           <p lang="ja">
-            商品の仕入れ可否調査、仕入先との連絡、輸出関連書類、配送方法の比較、規制確認について、案件ごとに確認します。
+            商品の仕入れ可否確認、仕入先との連絡、輸出関連書類、配送方法の比較、適用要件の事前確認について、案件ごとに対応します。
           </p>
           <p lang="en">
-            We review product availability, supplier communication, export-related documents, shipping options, and compliance points case by case.
+            We review product availability, supplier communication, export-related documents, shipping options, and applicable requirements case by case.
           </p>
         </div>
         <Link href="/contact" className="btn-primary">

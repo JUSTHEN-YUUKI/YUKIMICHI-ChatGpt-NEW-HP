@@ -4,7 +4,7 @@ import InquiryForm from '@/components/InquiryForm'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
-  title: 'Contact | YUKIMICHI',
+  title: 'お問い合わせ | YUKIMICHI',
   description: 'YUKIMICHIへのお問い合わせ。日本商品の仕入れ可否調査、国際配送、航空貨物、海上輸送、見積依頼、取扱可否確認についてご相談ください。',
   alternates: { canonical: '/contact' },
 }
@@ -18,13 +18,13 @@ const helpfulItems = [
   '商品URLまたは参考画像',
   '希望数量',
   '希望納期',
-  '仕入希望条件',
-  '日本国内の引取場所または仕入先情報',
+  '仕入希望条件（希望価格、MOQ、支払条件など）',
+  '日本国内の希望引渡し場所または仕入先情報',
   '輸出先国・都市',
   '希望配送方法',
   '商品サイズ・重量',
   'SDS、成分表、JANコード、商品ラベル情報の有無',
-  '法人取引か個人利用か',
+  '法人利用・販売目的か、個人利用か',
   '継続取引か単発取引か',
 ]
 
@@ -100,7 +100,7 @@ export default function ContactPage() {
             <span className="contact-kicker">Quote Request</span>
             <h2 lang="ja">お見積りについて</h2>
             <p className="contact-section-subtitle" lang="en">Request a Quote</p>
-            <p lang="ja"><TranslatedText id="pages.contact.quoteLead" fallback="費用感を先に確認したい場合は、お見積りページで必要情報をご確認ください。" /></p>
+            <p lang="ja"><TranslatedText id="pages.contact.quoteLead" fallback="概算費用を先に確認したい場合は、お見積りページで必要情報をご確認ください。" /></p>
             <p lang="en">If you would like to review estimated costs first, please check the quotation page for the required information.</p>
             <Link href="/quote" className="btn-ghost">
               <TranslatedText id="common.quote" fallback="お見積りページへ進む" /> <ArrowRight />
@@ -136,7 +136,7 @@ export default function ContactPage() {
             <span className="section-label-text">Compliance Notes</span>
           </div>
           <h2 lang="ja"><TranslatedText id="pages.contact.noticeTitle" fallback="取扱可否・規制確認について" /></h2>
-          <p className="contact-section-subtitle" lang="en">Handling feasibility and regulatory review</p>
+          <p className="contact-section-subtitle" lang="en">Product and shipping requirements</p>
         </div>
         <ul>
           {noticeItems.map((item, index) => (

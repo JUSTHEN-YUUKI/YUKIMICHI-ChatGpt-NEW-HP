@@ -8,13 +8,13 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     zh: '来自日本的可信出口支持。',
     es: 'Soporte de exportación confiable desde Japón.',
   },
-  'Operated by JUSTHEN CO., LTD.': {
-    en: 'Operated by JUSTHEN CO., LTD.',
-    zh: '由 JUSTHEN CO., LTD. 运营。',
-    es: 'Operado por JUSTHEN CO., LTD.',
+  'Operated by JUSTHEN Co., Ltd.': {
+    en: 'Operated by JUSTHEN Co., Ltd.',
+    zh: '由 JUSTHEN Co., Ltd. 运营。',
+    es: 'Operado por JUSTHEN Co., Ltd.',
   },
   'Navigation': { en: 'Navigation', zh: '导航', es: 'Navegación' },
-  'Contact / Company': { en: 'Contact / Company', zh: '联系方式 / 公司信息', es: 'Contacto / Empresa' },
+  'Company & Contact': { en: 'Company & Contact', zh: '公司与联系', es: 'Empresa y contacto' },
   '会社概要': { en: 'About', zh: '公司概要', es: 'Empresa' },
   'サービス': { en: 'Services', zh: '服务', es: 'Servicios' },
   '料金表': { en: 'Pricing', zh: '价格', es: 'Precios' },
@@ -55,12 +55,12 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   },
   'カテゴリから探す': { en: 'Browse by Category', zh: '按类别浏览', es: 'Buscar por categoría' },
   '仕入れ可否調査、配送方法、料金、関税、規制確認、取引条件、海外バイヤー対応に分けて整理しています。': {
-    en: 'Questions are organized by product availability and sourcing checks, shipping methods, pricing, duties, regulatory review, terms, and overseas buyer support.',
+    en: 'Questions are organized by product sourcing and availability, shipping methods, pricing, duties, preliminary requirements checks, terms, and overseas client support.',
     zh: '按采购可行性确认、配送方式、价格、关税、法规确认、交易条款和海外买家支持进行整理。',
     es: 'Las preguntas están organizadas por revisión de viabilidad de abastecimiento, métodos de envío, precios, aranceles, revisión regulatoria, condiciones y soporte a compradores internacionales.',
   },
   '仕入れ可否調査・購入調整': {
-    en: 'Sourcing Feasibility & Purchase Coordination',
+    en: 'Product Sourcing, Availability, and Purchase Coordination',
     zh: '采购可行性确认与购买协调',
     es: 'Viabilidad de abastecimiento y coordinación de compra',
   },
@@ -126,11 +126,6 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     en: 'How is pricing determined?',
     zh: '费用如何确定？',
     es: '¿Cómo se determinan los precios?',
-  },
-  '初回の手配手数料無料はありますか？': {
-    en: 'Is there a first-time handling fee benefit?',
-    zh: '是否有首次手配手续费免费？',
-    es: '¿Hay beneficio de comisión de gestión gratis en el primer pedido?',
   },
   '見積に必要な情報は何ですか？': {
     en: 'What information is needed for a quote?',
@@ -228,7 +223,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: 'Podemos revisar lotes pequeños, muestras y envíos de bajo volumen. La disponibilidad depende del producto y destino, por lo que debe enviarnos URL, cantidad y país de destino.',
   },
   '商品URLがあると確認がスムーズです。可能であれば、数量、配送先国、希望納期、法人宛・個人宛、希望配送方法もあわせてお知らせください。サイズや重量が不明な場合は、確認できる範囲で概算条件を整理します。': {
-    en: 'A product URL helps us review smoothly. If possible, also provide quantity, destination country, deadline, business or personal recipient, and preferred shipping method. If size or weight is unknown, we organize approximate conditions within what can be confirmed.',
+    en: 'A product URL helps us review your request. If possible, also provide the quantity, destination country, requested delivery date, whether the import is for business or personal use, and the preferred shipping method. If the size or weight is unknown, we will prepare an estimate using the information available.',
     zh: '有商品URL会更便于确认。如可能，请同时提供数量、配送国家、希望交期、法人或个人收件、希望配送方式。尺寸和重量不明时，我们会在可确认范围内整理概算条件。',
     es: 'Una URL del producto facilita la revisión. Si es posible, incluya cantidad, país de destino, plazo, destinatario empresa o particular y método preferido. Si tamaño o peso no se conocen, organizaremos condiciones aproximadas.',
   },
@@ -263,22 +258,17 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: 'El plazo varía por método, destino, aduana, clima, temporada alta y transportista. Los plazos indicados son estimados y no garantizan fecha de llegada.',
   },
   '商品代金、数量、サイズ、重量、容積重量、配送先国、配送方法、梱包、保険、規制確認の有無などにより変動します。料金は基本体系をもとに、案件ごとの個別見積で確認します。': {
-    en: 'Pricing varies by product cost, quantity, size, weight, volumetric weight, destination, shipping method, packing, insurance, and regulatory review. Final pricing is confirmed by case-specific quote.',
+    en: 'Pricing varies by product cost, quantity, size, weight, volumetric weight, destination, shipping method, packing, insurance, and any preliminary requirements checks. Final pricing is confirmed in a quotation prepared for each case.',
     zh: '费用会因商品代金、数量、尺寸、重量、容积重量、配送国家、配送方式、包装、保险和法规确认等而变化。最终费用按案件个别报价确认。',
     es: 'El precio varía por costo del producto, cantidad, tamaño, peso, peso volumétrico, destino, método, embalaje, seguro y revisión regulatoria. Se confirma por cotización individual.',
   },
-  '新規のお客様向けに、初回の手配手数料無料の案内を行う場合があります。ただし、商品代金、国際送料、関税、VAT/GST、梱包費、保険料、規制確認費用などの実費は別途となります。': {
-    en: 'For new customers, we may offer a first-time handling fee benefit. Product cost, international freight, duties, VAT/GST, packing, insurance, and regulatory review costs remain separate.',
-    zh: '针对新客户，可能提供首次手配手续费免费的说明。但商品代金、国际运费、关税、VAT/GST、包装费、保险费和法规确认费等实际费用另计。',
-    es: 'Para nuevos clientes, puede haber beneficio de comisión de gestión gratis en el primer pedido. Producto, flete, aranceles, VAT/GST, embalaje, seguro y revisión regulatoria son costos separados.',
-  },
   '商品名、商品URL、数量、単価、サイズ、重量、成分・素材、配送先国・都市、希望納期、希望配送方法、法人宛・個人宛などがあると確認がスムーズです。': {
-    en: 'Product name, URL, quantity, unit price, size, weight, ingredients/materials, destination country/city, deadline, preferred method, and recipient type help us review smoothly.',
+    en: 'The product name, URL, quantity, unit price, size, weight, ingredients or materials, destination country and city, requested delivery date, preferred method, and whether the import is for business or personal use help us review the request.',
     zh: '如有商品名、商品URL、数量、单价、尺寸、重量、成分・材料、配送国家・城市、希望交期、希望配送方式、法人或个人收件等，会更便于确认。',
     es: 'Nombre, URL, cantidad, precio unitario, tamaño, peso, ingredientes/materiales, destino, plazo, método preferido y tipo de destinatario facilitan la revisión.',
   },
   '商品価格、在庫状況、為替、配送会社料金、燃油サーチャージ、規制確認、サイズ・重量の実測により変動する場合があります。最終料金は個別見積、請求書、メールでの合意内容により確認します。': {
-    en: 'Costs may change due to product price, stock, exchange rates, carrier fees, fuel surcharges, regulatory review, and measured size/weight. Final costs are confirmed by quote, invoice, or email agreement.',
+    en: 'Costs may change due to product price, stock, exchange rates, carrier fees, fuel surcharges, preliminary requirements checks, and measured size or weight. Final costs are confirmed in the quotation, invoice, or written agreement.',
     zh: '金额可能因商品价格、库存、汇率、配送公司费用、燃油附加费、法规确认以及实际尺寸重量而变化。最终费用以个别报价、发票或邮件合意内容确认。',
     es: 'El importe puede cambiar por precio, stock, tipo de cambio, tarifas, recargos, revisión regulatoria y tamaño/peso real. El costo final se confirma por cotización, factura o acuerdo por email.',
   },
@@ -322,10 +312,10 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     zh: '需要从商品状态、真伪、证明书、知识产权和目的地国家规定等角度确认。根据内容可能无法处理。',
     es: 'Se requiere revisión de condición, autenticidad, certificados, propiedad intelectual y reglas del país destino. Algunos casos pueden no ser gestionables.',
   },
-  '原則として、商品調達や発送手配の前に支払い確認が必要です。支払い方法、支払い期日、通貨、手数料等は見積書、請求書、メールでの案内により確認します。': {
-    en: 'Payment confirmation is generally required before sourcing or shipping arrangements. Method, due date, currency, and fees are confirmed by quote, invoice, or email guidance.',
-    zh: '原则上，在商品采购或发货手配前需要确认付款。付款方式、期限、币种和手续费等通过报价书、发票或邮件说明确认。',
-    es: 'Generalmente se requiere confirmar pago antes de abastecimiento o envío. Método, plazo, moneda y comisiones se confirman por cotización, factura o email.',
+  '原則として、商品調達や発送手配の前に支払い確認が必要です。正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書、請求書、またはメールでご案内します。': {
+    en: 'Payment confirmation is generally required before sourcing or shipping arrangements. Detailed payment instructions, the payment due date, and the handling of bank charges are provided in the formal quotation, invoice, or email.',
+    zh: '原则上，在商品采购或发货安排前需要确认付款。正式汇款信息、付款期限和银行手续费的处理方式将在正式报价书、发票或邮件中说明。',
+    es: 'Generalmente se requiere confirmar el pago antes del abastecimiento o envío. Los datos de pago, la fecha de vencimiento y las comisiones bancarias se indican en la cotización formal, factura o correo.',
   },
   '商品購入前であればキャンセル可能な場合があります。商品購入後、梱包後、発送後のキャンセルは難しい場合があり、仕入れ先手数料、返品送料、決済手数料などが発生する場合があります。': {
     en: 'Cancellation may be possible before purchase. After purchase, packing, or shipment, cancellation may be difficult and supplier fees, return freight, or payment fees may apply.',
@@ -343,7 +333,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: 'Aceptamos consultas de empresas extranjeras, compradores, influencers y particulares. La disponibilidad se decide tras revisar producto, destino y condiciones.',
   },
   '継続取引、定期発送、サンプル出荷、複数回の調達についても相談可能です。商品カテゴリー、仕入れ先条件、配送先国、通関条件により運用方法を整理します。': {
-    en: 'Recurring trade, regular shipments, samples, and multiple sourcing cycles can be discussed. We organize operations by product category, supplier conditions, destination, and customs requirements.',
+    en: 'Ongoing trade, regular shipments, samples, and repeated purchase orders can be discussed. We organize the process based on the product category, supplier conditions, destination, and customs requirements.',
     zh: '可咨询持续交易、定期发货、样品出货和多次采购。我们会根据商品类别、供应商条件、配送国家和通关条件整理运用方式。',
     es: 'Podemos revisar operaciones recurrentes, envíos regulares, muestras y múltiples compras. Organizamos según categoría, proveedor, destino y aduana.',
   },
@@ -353,7 +343,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: 'Podemos comunicarnos en inglés cuando sea necesario. Condiciones finales, cotización y revisión regulatoria se confirman formalmente cuando corresponda.',
   },
   '商品URL、数量、配送先国、希望納期、希望配送方法、法人宛・個人宛をお知らせください。可能であれば、サイズ、重量、成分、素材、用途も添えてください。': {
-    en: 'Please share product URL, quantity, destination country, preferred deadline, shipping method, and whether the recipient is business or personal. If possible, include size, weight, ingredients, materials, and intended use.',
+    en: 'Please share the product URL, quantity, destination country, requested delivery date, shipping method, and whether the import is for business or personal use. If possible, include the size, weight, ingredients, materials, and intended use.',
     zh: '请提供商品URL、数量、配送国家、希望交期、希望配送方式、法人或个人收件。如可能，也请附上尺寸、重量、成分、材料和用途。',
     es: 'Comparta URL, cantidad, país de destino, plazo, método preferido y tipo de destinatario. Si es posible, incluya tamaño, peso, ingredientes, materiales y uso.',
   },
@@ -373,7 +363,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
     es: 'La disponibilidad final, aranceles, VAT/GST, código HS y aceptación del transportista están sujetos a confirmación por aduanas, agentes, transportistas y autoridades.',
   },
   '内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。': {
-    en: 'We do not arrange false declarations, regulation avoidance, or shipments against carrier acceptance conditions.',
+    en: 'We do not arrange false declarations, attempts to circumvent regulations, or shipments that breach carrier acceptance conditions.',
     zh: '我们不进行虚假申报、规避规定或违反承运商受理条件的手配。',
     es: 'No realizamos declaraciones falsas, evasión regulatoria ni envíos contra condiciones del transportista.',
   },
@@ -384,7 +374,7 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   '禁止・制限品目を見る': { en: 'View Restricted Items', zh: '查看禁止・限制物品', es: 'Ver artículos restringidos' },
   '不明点を相談する': { en: 'Ask About Unclear Points', zh: '咨询不明事项', es: 'Consultar dudas' },
   '商品URL、数量、配送先国、希望納期を添えてご相談ください。商品内容に応じて、見積と取扱可否を確認します。': {
-    en: 'Please include the product URL, quantity, destination country, and preferred deadline. We will review quotation conditions and handling eligibility according to the product details.',
+    en: 'Please include the product URL, quantity, destination country, and requested delivery date. We will review the quotation requirements and whether YUKIMICHI can support the request.',
     zh: '请附上商品URL、数量、配送国家和希望交期。我们会根据商品内容确认报价和可否处理。',
     es: 'Incluya URL del producto, cantidad, país de destino y plazo deseado. Revisaremos la cotización y elegibilidad según el producto.',
   },
@@ -402,9 +392,9 @@ export const staticTextTranslations: Record<string, LocalizedStaticText> = {
   'A Clear Path': { en: 'A Clear Path', zh: '清晰的道路', es: 'Un camino claro' },
   'from Hokkaido.': { en: 'from Hokkaido.', zh: '从北海道出发。', es: 'desde Hokkaido.' },
   'YUKIMICHI は、JUSTHEN Co., Ltd. が運営する日本発の輸出支援ブランドです。 北海道の静かな信頼感と、日本企業らしい誠実な手続きを軸に、海外バイヤーとの長期取引を支援します。': {
-    en: 'YUKIMICHI is a Japan-based export support brand operated by JUSTHEN CO., LTD. We support long-term transactions with overseas buyers through Hokkaido’s calm trust and sincere Japanese business procedures.',
-    zh: 'YUKIMICHI 是由 JUSTHEN CO., LTD. 运营的日本出口支持品牌。我们以北海道的静可信赖感和日本企业的诚实流程，支持与海外买家的长期交易。',
-    es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN CO., LTD. Apoyamos relaciones de largo plazo con compradores internacionales mediante confianza tranquila de Hokkaido y procedimientos japoneses serios.',
+    en: 'YUKIMICHI is a Japan-based export support brand operated by JUSTHEN Co., Ltd. We support long-term transactions with overseas buyers through Hokkaido’s calm trust and sincere Japanese business procedures.',
+    zh: 'YUKIMICHI 是由 JUSTHEN Co., Ltd. 运营的日本出口支持品牌。我们以北海道的静可信赖感和日本企业的诚实流程，支持与海外买家的长期交易。',
+    es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN Co., Ltd. Apoyamos relaciones de largo plazo con compradores internacionales mediante confianza tranquila de Hokkaido y procedimientos japoneses serios.',
   },
   '相談する': { en: 'Consult Us', zh: '咨询', es: 'Consultar' },
   'Delivering Trust.': { en: 'Delivering Trust.', zh: '传递信赖。', es: 'Entregando confianza.' },
@@ -521,10 +511,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     zh: '发送失败。请直接通过电子邮件联系我们。',
     es: 'No se pudo enviar. Contáctenos directamente por email.',
   },
-  'Representative of JUSTHEN CO., LTD.': {
-    en: 'Representative of JUSTHEN CO., LTD.',
-    zh: 'JUSTHEN CO., LTD. 代表',
-    es: 'Representante de JUSTHEN CO., LTD.',
+  'Representative of JUSTHEN Co., Ltd.': {
+    en: 'Representative of JUSTHEN Co., Ltd.',
+    zh: 'JUSTHEN Co., Ltd. 代表',
+    es: 'Representante de JUSTHEN Co., Ltd.',
   },
   'Main visual area for product and logistics film': {
     en: 'Main visual area for product and logistics film',
@@ -545,10 +535,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Representative': { en: 'Representative', zh: '代表', es: 'Representante' },
   'Location': { en: 'Location', zh: '所在地', es: 'Ubicación' },
   'License': { en: 'License', zh: '许可', es: 'Licencia' },
-  'YUKIMICHI（雪道）は、JUSTHEN CO., LTD. が運営する 日本発の輸出サポートブランドです。': {
-    en: 'YUKIMICHI is a Japan-based export support brand operated by JUSTHEN CO., LTD.',
-    zh: 'YUKIMICHI 是由 JUSTHEN CO., LTD. 运营的日本出口支持品牌。',
-    es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN CO., LTD.',
+  'YUKIMICHI（雪道）は、JUSTHEN Co., Ltd. が運営する 日本発の輸出サポートブランドです。': {
+    en: 'YUKIMICHI is a Japan-based export support brand operated by JUSTHEN Co., Ltd.',
+    zh: 'YUKIMICHI 是由 JUSTHEN Co., Ltd. 运营的日本出口支持品牌。',
+    es: 'YUKIMICHI es una marca japonesa de soporte de exportación operada por JUSTHEN Co., Ltd.',
   },
   '日本商品の仕入れ可否調査、国際配送、輸出関連書類の準備、 配送方法の比較、海外バイヤーとのやり取りまで、 海外のお客様が安心して取扱可能な日本商品を取引できる環境づくりを支援します。': {
     en: 'We support product availability checks, shipping arrangements, export document preparation, shipping method comparison, and communication with overseas buyers.',
@@ -608,7 +598,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Valoramos procedimientos transparentes que reducen riesgos aduaneros, no solo rapidez.',
   },
   '商品名、数量、配送先国、希望納期などをお知らせください。内容が未確定でも、まずは相談ベースで対応します。': {
-    en: 'Please share the product name, quantity, destination country, and preferred deadline. Even if details are not final, we can start with consultation.',
+    en: 'Please share the product name, quantity, destination country, and requested delivery date. Even if the details are not final, you can contact us using the information available.',
     zh: '请提供商品名、数量、配送国家和希望交期。内容未确定也可以先咨询。',
     es: 'Comparta nombre del producto, cantidad, país de destino y plazo deseado. Aunque los detalles no estén cerrados, podemos empezar con una consulta.',
   },
@@ -643,7 +633,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Puede consultarnos aunque el producto o destino aún no estén definidos. Primero organizamos la situación y proponemos el siguiente paso adecuado.',
   },
   '商品URL、商品名、希望数量、仕向地、希望配送方法、希望納期、法人または個人利用の区分があると、 見積と規制確認がスムーズです。輸出入規制や認証の要否は国や商品により異なるため、最終判断は税関、通関業者、公的機関の確認を前提に進めます。': {
-    en: 'A product URL, product name, desired quantity, destination, preferred shipping method, deadline, and business or personal use make quotation and regulatory review smoother. Import/export rules and certification needs differ by country and product, so final judgment is subject to confirmation by customs, brokers, and authorities.',
+    en: 'A product URL, product name, desired quantity, destination, preferred shipping method, requested delivery date, and whether the import is for business or personal use help us prepare a quotation and check applicable requirements. Import and export rules differ by country and product, so final determinations must be confirmed by customs, brokers, and relevant authorities.',
     zh: '提供商品URL、商品名、希望数量、目的地、希望配送方式、希望交期以及法人或个人用途区分，将使报价和法规确认更顺利。进出口规定和认证需求因国家和商品而异，最终判断以海关、报关行和公的机构确认为前提。',
     es: 'La URL del producto, nombre, cantidad, destino, método preferido, plazo y tipo de uso facilitan la cotización y revisión normativa. Las reglas y certificaciones dependen del país y producto; la decisión final está sujeta a aduanas, agentes y autoridades.',
   },
@@ -692,7 +682,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Duties & Taxes': { en: 'Duties & Taxes', zh: '关税与税费', es: 'Aranceles e impuestos' },
   'Restricted Items': { en: 'Restricted Items', zh: '限制物品', es: 'Artículos restringidos' },
   'Terms & Payment': { en: 'Terms & Payment', zh: '条款与付款', es: 'Condiciones y pagos' },
-  'Global Buyers': { en: 'Global Buyers', zh: '海外买家', es: 'Compradores internacionales' },
+  'Overseas Clients': { en: 'Overseas Clients', zh: '海外客户', es: 'Clientes internacionales' },
   'Related Links': { en: 'Related Links', zh: '相关链接', es: 'Enlaces relacionados' },
   'Inquiry Support': { en: 'Inquiry Support', zh: '咨询支持', es: 'Soporte de consultas' },
   'Quote Request': { en: 'Quote Request', zh: '报价申请', es: 'Solicitud de cotización' },
@@ -735,7 +725,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'En transporte internacional, las condiciones de exportación, importación y aceptación del transportista varían según producto y destino. YUKIMICHI confirma la elegibilidad con base en cumplimiento y transparencia.',
   },
   'YUKIMICHIは、内容品の虚偽申告、規制逃れ、配送会社の引受条件に反する手配は行いません。 商品内容・数量・成分・用途・配送先国により対応可否が変わるため、安全で透明性のある取引を重視します。': {
-    en: 'YUKIMICHI does not arrange false declarations, regulation avoidance, or shipments against carrier acceptance rules. Availability depends on product details, quantity, ingredients, intended use, and destination, so we prioritize safe and transparent transactions.',
+    en: 'YUKIMICHI does not arrange false declarations, attempts to circumvent regulations, or shipments that breach carrier acceptance rules. Whether an item can be handled depends on its details, quantity, ingredients, intended use, and destination, so we prioritize safe and transparent transactions.',
     zh: 'YUKIMICHI不进行虚假申报、规避规定或违反承运商受理条件的手配。可否处理会因商品内容、数量、成分、用途和配送国家而变化，因此重视安全透明的交易。',
     es: 'YUKIMICHI no organiza declaraciones falsas, evasión normativa ni envíos contra condiciones del transportista. La disponibilidad depende del producto, cantidad, ingredientes, uso y destino; priorizamos operaciones seguras y transparentes.',
   },
@@ -803,7 +793,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Esta página resume puntos generales de revisión y no garantiza criterio legal. La elegibilidad, aranceles, VAT/GST, certificaciones, permisos y aceptación del transportista varían por producto, destino y normativa vigente.',
   },
   '最終確認は、税関・通関業者・配送会社・公的機関等の確認を前提とします。 無理な輸出、虚偽申告、内容物を偽る発送は行いません。': {
-    en: 'Final confirmation is subject to customs, brokers, carriers, and relevant authorities. We do not arrange forced exports, false declarations, or shipments with misrepresented contents.',
+    en: 'Final confirmation is subject to customs, brokers, carriers, and relevant authorities. We do not arrange shipments that cannot lawfully be exported, false declarations, or shipments with misrepresented contents.',
     zh: '最终确认以海关、报关行、承运商和公的机构等确认为前提。我们不进行强行出口、虚假申报或伪装内容物的发货。',
     es: 'La confirmación final está sujeta a aduanas, agentes, transportistas y autoridades. No realizamos exportaciones forzadas, declaraciones falsas ni envíos con contenido ocultado.',
   },
@@ -827,7 +817,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'YUKIMICHI valora condiciones transparentes para abastecimiento, exportación y envíos internacionales. Revise pago, cancelación, aranceles, incidencias y revisión normativa antes de solicitar cotización.',
   },
   'YUKIMICHIは、無理な輸出、虚偽申告、規制逃れを前提とした取引は行いません。 商品内容、配送先国、数量、サイズ、重量、配送方法により、費用・納期・対応可否は変動します。': {
-    en: 'YUKIMICHI does not conduct transactions based on forced exports, false declarations, or regulation avoidance. Costs, lead time, and availability vary by product, destination, quantity, size, weight, and shipping method.',
+    en: 'YUKIMICHI does not conduct transactions involving shipments that cannot lawfully or practically be exported, false declarations, or attempts to circumvent regulations. Costs, lead time, and whether we can support a request vary by product, destination, quantity, size, weight, and shipping method.',
     zh: 'YUKIMICHI不进行以强行出口、虚假申报或规避规定为前提的交易。费用、交期和可否处理会因商品内容、配送国家、数量、尺寸、重量和配送方式而变化。',
     es: 'YUKIMICHI no realiza operaciones basadas en exportaciones forzadas, declaraciones falsas o evasión normativa. Costos, plazos y disponibilidad varían por producto, destino, cantidad, tamaño, peso y método.',
   },
@@ -847,7 +837,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: 'Las cotizaciones se preparan según producto, cantidad, destino, método de envío, tamaño, peso y condiciones.',
   },
   '見積金額は、商品価格、手配手数料、国際送料、梱包費、保険料、規制確認費用などにより変動します。': {
-    en: 'Quoted amounts vary by product price, handling fees, international freight, packing, insurance, regulatory review costs, and other factors.',
+    en: 'Quoted amounts vary by product price, handling fees, international freight, packing, insurance, preliminary requirements checks, and other factors.',
     zh: '报价金额会因商品价格、手配手续费、国际运费、包装费、保险费和法规确认费用等而变化。',
     es: 'Los importes varían por precio del producto, gestión, flete, embalaje, seguro, revisión normativa y otros factores.',
   },
@@ -866,10 +856,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     zh: '原则上，在商品采购或发货手配前需要确认付款。',
     es: 'Generalmente se requiere confirmar pago antes de abastecimiento o envío.',
   },
-  '支払い方法、支払い期日、通貨、支払い関連手数料等は見積書または個別案内により確認します。': {
-    en: 'Payment method, due date, currency, and related fees are confirmed by quotation or individual guidance.',
-    zh: '付款方式、期限、币种和相关手续费通过报价书或个别说明确认。',
-    es: 'Método, fecha de pago, moneda y comisiones se confirman por cotización o guía individual.',
+  '正式な送金先情報、支払期日、銀行手数料の扱いは、正式見積書または請求書発行時に個別にご案内します。': {
+    en: 'Detailed payment instructions, the payment due date, and the handling of bank charges will be provided with the formal quotation or invoice.',
+    zh: '正式汇款信息、付款期限和银行手续费的处理方式将在正式报价书或发票中另行说明。',
+    es: 'Los datos de pago, la fecha de vencimiento y las comisiones bancarias se indicarán en la cotización formal o factura.',
   },
   '支払い情報は、必要に応じて見積書・請求書・個別案内で提示します。': {
     en: 'Payment information is provided in quotations, invoices, or individual guidance when necessary.',
@@ -973,10 +963,10 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
   'Disclosure / Correction / Deletion': { en: 'Disclosure / Correction / Deletion', zh: '披露・更正・删除', es: 'Divulgación / corrección / eliminación' },
   'Cookies / Analytics': { en: 'Cookies / Analytics', zh: 'Cookie等 / 分析', es: 'Cookies / analítica' },
   'Revision': { en: 'Revision', zh: '修订', es: 'Revisión' },
-  'YUKIMICHI を運営する JUSTHEN CO., LTD. は、お問い合わせ、見積依頼、 輸出相談、取引対応に関連して取得する情報を適切に取り扱います。': {
-    en: 'JUSTHEN CO., LTD., operator of YUKIMICHI, appropriately handles information obtained through inquiries, quote requests, export consultations, and transaction support.',
-    zh: '运营 YUKIMICHI 的 JUSTHEN CO., LTD. 会适当处理通过咨询、报价申请、出口咨询和交易对应取得的信息。',
-    es: 'JUSTHEN CO., LTD., operador de YUKIMICHI, trata adecuadamente la información obtenida en consultas, cotizaciones, soporte de exportación y operaciones.',
+  'YUKIMICHI を運営する JUSTHEN Co., Ltd. は、お問い合わせ、見積依頼、 輸出相談、取引対応に関連して取得する情報を適切に取り扱います。': {
+    en: 'JUSTHEN Co., Ltd., operator of YUKIMICHI, appropriately handles information obtained through inquiries, quote requests, export consultations, and transaction support.',
+    zh: '运营 YUKIMICHI 的 JUSTHEN Co., Ltd. 会适当处理通过咨询、报价申请、出口咨询和交易对应取得的信息。',
+    es: 'JUSTHEN Co., Ltd., operador de YUKIMICHI, trata adecuadamente la información obtenida en consultas, cotizaciones, soporte de exportación y operaciones.',
   },
   '当社は、個人情報および取引に関連する情報の重要性を認識し、適切な取得、利用、管理に努めます。 取得した情報は、利用目的の範囲内で取り扱います。': {
     en: 'We recognize the importance of personal and transaction-related information and strive for appropriate acquisition, use, and management. Information is handled within the scope of stated purposes.',
@@ -1116,7 +1106,7 @@ const supplementalStaticTextTranslations: Record<string, LocalizedStaticText> = 
     es: '¿Qué información se necesita para cotizar?',
   },
   '商品名、数量、商品URL、配送先国、希望納期、サイズ・重量、希望配送方法があるとスムーズです。未確定の場合でも、分かる範囲でご相談いただけます。': {
-    en: 'Product name, quantity, URL, destination country, preferred deadline, size/weight, and shipping method help. If details are not final, share what you know.',
+    en: 'The product name, quantity, URL, destination country, requested delivery date, size or weight, and shipping method help us review the request. If details are not final, send us the information currently available.',
     zh: '商品名、数量、商品URL、配送国家、希望交期、尺寸・重量和希望配送方式会有帮助。未确定时，也可在知道范围内咨询。',
     es: 'Ayudan nombre, cantidad, URL, país de destino, plazo, tamaño/peso y método deseado. Si no está definido, comparta lo disponible.',
   },

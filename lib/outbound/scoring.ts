@@ -77,7 +77,7 @@ export function scoreLead(input: Partial<OutboundLead>): Pick<OutboundLead, 'lea
   }
   if (input.publicEmail) {
     score += 10
-    reasons.push('public business email candidate present')
+    reasons.push('publicly listed business email requires source verification')
   }
   if (input.productCategory && input.productCategory !== 'Other') {
     score += 15

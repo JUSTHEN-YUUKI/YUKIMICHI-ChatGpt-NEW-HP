@@ -252,7 +252,7 @@ export default function FlowSection() {
                 まずは状況を整理し、最適な進め方をご提案します。
               </span>
               <span className="copy-line-en">
-                Even when details are still being considered, we can begin with Free Consultation
+                Even when details are still being considered, you can contact us
                 and organize the next practical steps.
               </span>
             </p>
