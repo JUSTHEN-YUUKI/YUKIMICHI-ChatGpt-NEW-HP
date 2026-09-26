@@ -61,7 +61,17 @@ export default function Footer() {
               </p>
               <a
                 href="/images/yukimichi-digital-business-card.png"
-                className="site-footer__business-card-link"
+                className="site-footer__business-card-link site-footer__business-card-link--desktop"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Digital Business Card / デジタル名刺を見る"
+              >
+                <span lang="en">View Digital Business Card</span>
+                <small lang="ja">デジタル名刺を見る</small>
+              </a>
+              <a
+                href="/images/yukimichi-digital-business-card-mobile.png"
+                className="site-footer__business-card-link site-footer__business-card-link--mobile"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View Digital Business Card / デジタル名刺を見る"
@@ -262,6 +272,10 @@ export default function Footer() {
           letter-spacing: 0.05em;
         }
 
+        .site-footer__business-card-link--mobile {
+          display: none;
+        }
+
         .site-footer__business-card-link:hover,
         .site-footer__business-card-link:focus-visible {
           border-color: rgba(201, 168, 76, 0.72);
@@ -302,6 +316,14 @@ export default function Footer() {
         }
 
         @media (max-width: 520px) {
+          .site-footer__business-card-link--desktop {
+            display: none;
+          }
+
+          .site-footer__business-card-link--mobile {
+            display: inline-grid;
+          }
+
           .site-footer__eyebrow {
             letter-spacing: 0.12em;
           }
