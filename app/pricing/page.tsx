@@ -213,21 +213,6 @@ export default function PricingPage() {
           </table>
         </div>
 
-        <div className="fee-calculation-copy lcl-review-copy">
-          <div>
-            <span className="fee-calculation-copy__label">Sea LCLについて</span>
-            <p lang="ja">
-              商品代金500万円を超えるSea LCL案件は、貨物量、重量、荷姿、仕向地、輸送条件等を確認したうえで、個別にご案内します。貨物の条件によっては、Sea LCLよりSea FCLの方が適している場合があります。商品代金のみでLCL / FCLを判断するものではありません。
-            </p>
-          </div>
-          <div>
-            <span className="fee-calculation-copy__label">About Sea LCL</span>
-            <p lang="en">
-              For Sea LCL shipments with a product value exceeding JPY 5,000,000, the appropriate handling fee and shipping method will be reviewed on a case-by-case basis. Depending on cargo volume, weight, packing configuration, destination, and other shipping conditions, Sea FCL may be more suitable than Sea LCL. LCL or FCL is not determined solely by the product value.
-            </p>
-          </div>
-        </div>
-
         <div className="fee-calculation-copy">
           <div>
             <span className="fee-calculation-copy__label">段階手数料について</span>
@@ -239,6 +224,21 @@ export default function PricingPage() {
             <span className="fee-calculation-copy__label">Progressive Handling Fees</span>
             <p lang="en">
               Handling fees are calculated progressively according to each product value tier. A single percentage is not applied to the entire product value. Instead, each portion of the product value is calculated using the percentage assigned to its respective tier. As the product value increases, a lower percentage is applied only to the amount falling within the higher tier.
+            </p>
+          </div>
+        </div>
+
+        <div className="fee-calculation-copy lcl-review-copy">
+          <div>
+            <span className="fee-calculation-copy__label">Sea LCLについて</span>
+            <p lang="ja">
+              商品代金500万円を超えるSea LCL案件は、貨物量、重量、荷姿、仕向地、輸送条件等を確認したうえで、個別にご案内します。貨物の条件によっては、Sea LCLよりSea FCLの方が適している場合があります。商品代金のみでLCL / FCLを判断するものではありません。
+            </p>
+          </div>
+          <div>
+            <span className="fee-calculation-copy__label">About Sea LCL</span>
+            <p lang="en">
+              For Sea LCL shipments with a product value exceeding JPY 5,000,000, the appropriate handling fee and shipping method will be reviewed on a case-by-case basis. Depending on cargo volume, weight, packing configuration, destination, and other shipping conditions, Sea FCL may be more suitable than Sea LCL. LCL or FCL is not determined solely by the product value.
             </p>
           </div>
         </div>
