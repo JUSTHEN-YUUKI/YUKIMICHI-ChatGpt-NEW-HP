@@ -11,39 +11,76 @@ export const metadata: Metadata = {
 
 const pricingPlans = [
   {
+    key: 'express',
     label: 'International Express',
     title: 'International Express',
-    rate: '15%',
     minimum: 'JPY 10,000',
     use: '小口貨物、サンプル、EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
     useEn: 'Small parcels, samples, and international courier shipments',
   },
   {
+    key: 'air',
     label: 'Air Freight',
     title: 'Air Freight',
-    rate: '10%',
     minimum: 'JPY 30,000',
     use: '航空貨物、急ぎの商業貨物',
     useEn: 'Air freight and time-sensitive commercial cargo',
   },
   {
+    key: 'lcl',
     label: 'Sea LCL',
     title: 'Sea LCL',
-    rate: '7%',
     minimum: 'JPY 30,000',
     use: '小〜中規模の海上混載貨物',
     useEn: 'Small to medium-sized LCL sea freight',
   },
   {
-    label: 'Sea FCL / Large Volume',
-    title: 'Sea FCL / Large Volume',
-    rate: '7%',
+    key: 'fcl',
+    label: 'Sea FCL',
+    title: 'Sea FCL',
     minimum: 'JPY 50,000',
     use: 'コンテナ貨物、大口案件、継続取引',
     useEn: 'Container cargo, large-volume projects, and ongoing trade',
-    note: '高額商品、特殊貨物、長期契約、大量案件については個別見積り',
   },
-]
+] as const
+
+const pricingTiers = [
+  {
+    rangeJa: '～100万円',
+    rangeEn: 'Up to JPY 1,000,000',
+    rates: { express: '15%', air: '10%', lcl: '7%', fcl: '7%' },
+  },
+  {
+    rangeJa: '100万円超～300万円',
+    rangeEn: 'Over JPY 1,000,000 to JPY 3,000,000',
+    rates: { express: '13%', air: '9%', lcl: '6.5%', fcl: '6.5%' },
+  },
+  {
+    rangeJa: '300万円超～500万円',
+    rangeEn: 'Over JPY 3,000,000 to JPY 5,000,000',
+    rates: { express: '12%', air: '8.5%', lcl: '6%', fcl: '6%' },
+  },
+  {
+    rangeJa: '500万円超～1,000万円',
+    rangeEn: 'Over JPY 5,000,000 to JPY 10,000,000',
+    rates: { express: '11%', air: '8%', lcl: '5.5%', fcl: '5.5%' },
+  },
+  {
+    rangeJa: '1,000万円超～2,000万円',
+    rangeEn: 'Over JPY 10,000,000 to JPY 20,000,000',
+    rates: { express: '10%', air: '7.5%', lcl: '5%', fcl: '5%' },
+  },
+  {
+    rangeJa: '2,000万円超～3,000万円',
+    rangeEn: 'Over JPY 20,000,000 to JPY 30,000,000',
+    rates: { express: '9%', air: '7%', lcl: '4.5%', fcl: '4.5%' },
+  },
+  {
+    rangeJa: '3,000万円超',
+    rangeEn: 'Over JPY 30,000,000',
+    rates: { express: '8%', air: '6.5%', lcl: '4%', fcl: '4%' },
+  },
+] as const
 
 const feeBasisItems = [
   {
@@ -61,8 +98,8 @@ const feeBasisItems = [
   {
     label: 'Individual Quotation',
     title: '個別見積り',
-    body: '高額商品、大量貨物、海上コンテナ輸送（FCL）、継続取引、特殊梱包、複数仕入先の商品集約は、案件内容に応じて手配手数料や実費項目を個別に確認します。',
-    sub: 'High-value products, large-volume cargo, FCL shipments, ongoing transactions, special packaging, and multi-supplier consolidation may be quoted individually.',
+    body: '特殊貨物、特殊梱包、特別な検査・書類対応、複数仕入先の商品集約、長期契約、通常範囲を大きく超える作業など、案件内容によって追加作業が発生する場合は、別途個別にお見積りする場合があります。',
+    sub: 'Special cargo, special packing, additional inspections or documentation, multi-supplier consolidation, long-term contracts, and work substantially beyond the normal scope may require a separate quotation.',
   },
   {
     label: 'Insurance & Customs Notes',
@@ -180,22 +217,126 @@ export default function PricingPage() {
             <div className="section-label-line" />
             <span className="section-label-text">Handling Fee</span>
           </div>
-          <h2 lang="ja">手配手数料の基本体系</h2>
-          <p className="pricing-section-subtitle" lang="en">Handling fees are calculated based on product value.</p>
+          <h2 lang="ja">手配手数料の段階料金</h2>
+          <p className="pricing-section-subtitle" lang="en">Progressive handling fees based on product value</p>
           <p lang="ja">
             表示手数料は、送料・保険・関税等を含めた総額ではなく、原則として商品代金を基準に算出するYUKIMICHIの手配手数料です。
           </p>
         </div>
 
+        <div
+          className="pricing-tier-table-wrap"
+          role="region"
+          aria-label="商品代金の金額帯別手配手数料"
+          tabIndex={0}
+        >
+          <table className="pricing-tier-table">
+            <caption>Handling Fee Tiers / 商品代金の金額帯別手数料</caption>
+            <thead>
+              <tr>
+                <th scope="col">
+                  <span lang="ja">商品代金の金額帯</span>
+                  <small lang="en">Product Value Tier</small>
+                </th>
+                {pricingPlans.map((plan) => (
+                  <th scope="col" key={plan.key}>
+                    <span>{plan.title}</span>
+                    <small>Minimum {plan.minimum}</small>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {pricingTiers.map((tier) => (
+                <tr key={tier.rangeJa}>
+                  <th scope="row">
+                    <span lang="ja">{tier.rangeJa}</span>
+                    <small lang="en">{tier.rangeEn}</small>
+                  </th>
+                  {pricingPlans.map((plan) => (
+                    <td key={plan.key}>{tier.rates[plan.key]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="progressive-fee-summary">
+          <p lang="ja">
+            <strong>各料率は商品代金全額に適用されるものではありません。商品代金を金額帯ごとに分け、それぞれの金額帯に設定された料率で計算します。</strong>
+          </p>
+          <p lang="en">
+            Each percentage applies only to the portion of the product value within that tier, not to the full product value.
+          </p>
+          <div className="progressive-fee-summary__formula" aria-label="Sea freight example for a product value of JPY 3,000,000">
+            <span>JPY 1,000,000 × 7%</span>
+            <b aria-hidden="true">＋</b>
+            <span>JPY 2,000,000 × 6.5%</span>
+            <b aria-hidden="true">＝</b>
+            <strong>JPY 200,000</strong>
+          </div>
+        </div>
+
+        <div className="fee-calculation-copy">
+          <div>
+            <span className="fee-calculation-copy__label">手数料の計算方法</span>
+            <p lang="ja">
+              手数料は、商品代金の金額帯ごとに設定された料率で段階的に計算します。商品代金全額に1つの料率を適用するのではなく、それぞれの金額帯に該当する金額に対して、それぞれの手数料率を適用します。商品代金が高くなるほど、追加される金額部分に適用される手数料率が段階的に下がる仕組みです。
+            </p>
+          </div>
+          <div>
+            <span className="fee-calculation-copy__label">Fee Calculation</span>
+            <p lang="en">
+              Handling fees are calculated progressively according to each product value tier. A single percentage is not applied to the entire product value. Instead, each portion of the product value is calculated using the percentage assigned to its respective tier. As the product value increases, a lower percentage is applied only to the amount falling within the higher tier.
+            </p>
+          </div>
+        </div>
+
+        <article className="fee-example" aria-labelledby="fee-example-title">
+          <header>
+            <span>Calculation Example</span>
+            <h3 id="fee-example-title" lang="ja">計算例：商品代金300万円・Seaの場合</h3>
+            <p lang="en">Example: JPY 3,000,000 Product Value / Sea Freight</p>
+          </header>
+          <div className="fee-example__steps">
+            <div>
+              <span lang="ja">最初の100万円</span>
+              <small lang="en">First JPY 1,000,000</small>
+              <strong>JPY 1,000,000 × 7% = JPY 70,000</strong>
+            </div>
+            <b aria-hidden="true">＋</b>
+            <div>
+              <span lang="ja">100万円を超え300万円までの200万円</span>
+              <small lang="en">Next JPY 2,000,000</small>
+              <strong>JPY 2,000,000 × 6.5% = JPY 130,000</strong>
+            </div>
+            <b aria-hidden="true">＝</b>
+            <div className="fee-example__total">
+              <span lang="ja">手配手数料 合計</span>
+              <small lang="en">Total Handling Fee</small>
+              <strong>JPY 200,000</strong>
+            </div>
+          </div>
+          <div className="fee-example__note">
+            <p lang="ja">
+              「300万円 × 6.5% ＝ 195,000円」ではありません。商品代金を金額帯ごとに分けて計算するため、手配手数料は200,000円となります。
+            </p>
+            <p lang="en">
+              The 6.5% rate is not applied to the full JPY 3,000,000 product value. Because each tier is calculated separately, the total handling fee is JPY 200,000.
+            </p>
+          </div>
+        </article>
+
+        <div className="pricing-method-heading">
+          <span>Minimum Fees & Use Cases</span>
+          <h3 lang="ja">最低手数料・配送方法の目安</h3>
+        </div>
         <div className="pricing-grid">
           {pricingPlans.map((plan) => (
             <article className="pricing-card" key={plan.label}>
               <span className="pricing-card__label">{plan.label}</span>
               <h2>{plan.title}</h2>
-              <div className="pricing-rate" aria-label={`${plan.rate} of product value`}>
-                {plan.rate}
-                <small>of product value</small>
-              </div>
               <div className="pricing-card-info">
                 <p>
                   <span>Minimum Fee</span>
@@ -209,7 +350,6 @@ export default function PricingPage() {
                   </strong>
                 </p>
               </div>
-              {plan.note && <p className="pricing-card-note">{plan.note}</p>}
             </article>
           ))}
         </div>
@@ -517,6 +657,314 @@ export default function PricingPage() {
           margin: 0;
         }
 
+        .pricing-tier-table-wrap {
+          border: 1px solid rgba(201,168,76,0.2);
+          background: rgba(7,17,31,0.72);
+          margin-bottom: 22px;
+          overflow-x: auto;
+          overscroll-behavior-inline: contain;
+          scrollbar-color: rgba(201,168,76,0.48) rgba(7,17,31,0.72);
+        }
+
+        .pricing-tier-table-wrap:focus-visible {
+          outline: 2px solid var(--gold);
+          outline-offset: 4px;
+        }
+
+        .pricing-tier-table {
+          border-collapse: collapse;
+          min-width: 940px;
+          table-layout: fixed;
+          width: 100%;
+        }
+
+        .pricing-tier-table caption {
+          color: var(--gold);
+          font-size: 10px;
+          letter-spacing: 0.22em;
+          padding: 16px 18px;
+          text-align: left;
+          text-transform: uppercase;
+        }
+
+        .pricing-tier-table th,
+        .pricing-tier-table td {
+          border-top: 1px solid rgba(201,168,76,0.12);
+          border-right: 1px solid rgba(201,168,76,0.1);
+          padding: 16px 18px;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        .pricing-tier-table th:last-child,
+        .pricing-tier-table td:last-child {
+          border-right: 0;
+        }
+
+        .pricing-tier-table thead th {
+          background: rgba(201,168,76,0.09);
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 19px;
+          font-weight: 400;
+          line-height: 1.25;
+        }
+
+        .pricing-tier-table thead th:first-child,
+        .pricing-tier-table tbody th {
+          position: sticky;
+          left: 0;
+          text-align: left;
+          width: 268px;
+          z-index: 1;
+        }
+
+        .pricing-tier-table thead th:first-child {
+          background: #17243a;
+          z-index: 2;
+        }
+
+        .pricing-tier-table tbody th {
+          background: #0d1c35;
+          box-shadow: 10px 0 18px rgba(0,0,0,0.12);
+          color: var(--washi);
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1.6;
+        }
+
+        .pricing-tier-table th span,
+        .pricing-tier-table th small {
+          display: block;
+        }
+
+        .pricing-tier-table th small {
+          color: rgba(248,245,239,0.48);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 10.5px;
+          font-weight: 300;
+          letter-spacing: 0.025em;
+          line-height: 1.55;
+          margin-top: 5px;
+        }
+
+        .pricing-tier-table td {
+          color: var(--gold-light);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 25px;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+        }
+
+        .pricing-tier-table tbody tr:hover td,
+        .pricing-tier-table tbody tr:hover th {
+          background-color: rgba(201,168,76,0.08);
+        }
+
+        .progressive-fee-summary {
+          border: 1px solid rgba(201,168,76,0.34);
+          background:
+            linear-gradient(120deg, rgba(201,168,76,0.09), transparent 58%),
+            rgba(13,28,53,0.88);
+          padding: clamp(22px, 3vw, 32px);
+        }
+
+        .progressive-fee-summary p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.035em;
+          line-height: 1.9;
+          margin: 0;
+        }
+
+        .progressive-fee-summary p strong {
+          color: var(--washi);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .progressive-fee-summary p[lang='en'] {
+          color: rgba(248,245,239,0.55);
+          font-size: 12.5px;
+          margin-top: 5px;
+        }
+
+        .progressive-fee-summary__formula {
+          align-items: center;
+          border-top: 1px solid rgba(201,168,76,0.18);
+          color: var(--washi);
+          display: grid;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(17px, 2vw, 23px);
+          gap: 12px;
+          grid-template-columns: max-content auto max-content auto max-content;
+          justify-content: center;
+          margin-top: 20px;
+          padding-top: 20px;
+        }
+
+        .progressive-fee-summary__formula b {
+          color: rgba(201,168,76,0.64);
+          font-weight: 300;
+        }
+
+        .progressive-fee-summary__formula strong {
+          color: var(--gold-light);
+          font-size: 1.16em;
+          font-weight: 500;
+        }
+
+        .fee-calculation-copy {
+          border-left: 1px solid rgba(201,168,76,0.32);
+          display: grid;
+          gap: clamp(24px, 4vw, 48px);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin: clamp(32px, 5vw, 52px) 0 24px;
+          padding-left: clamp(20px, 3vw, 32px);
+        }
+
+        .fee-calculation-copy__label {
+          color: var(--gold);
+          display: block;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 22px;
+          letter-spacing: 0.03em;
+          margin-bottom: 10px;
+        }
+
+        .fee-calculation-copy p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.035em;
+          line-height: 2;
+          margin: 0;
+        }
+
+        .fee-calculation-copy p[lang='en'] {
+          color: rgba(248,245,239,0.58);
+        }
+
+        .fee-example {
+          border: 1px solid rgba(201,168,76,0.22);
+          background:
+            linear-gradient(135deg, rgba(139,30,47,0.15), transparent 46%),
+            rgba(7,17,31,0.78);
+          padding: clamp(24px, 4vw, 42px);
+        }
+
+        .fee-example header > span,
+        .pricing-method-heading > span {
+          color: var(--gold);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.24em;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        .fee-example h3,
+        .pricing-method-heading h3 {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(24px, 3.3vw, 38px);
+          font-weight: 300;
+          line-height: 1.4;
+          margin: 0;
+        }
+
+        .fee-example header p {
+          color: rgba(248,245,239,0.55);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 16px;
+          font-style: italic;
+          letter-spacing: 0.035em;
+          margin: 4px 0 0;
+        }
+
+        .fee-example__steps {
+          align-items: stretch;
+          display: grid;
+          gap: 14px;
+          grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(190px, 0.72fr);
+          margin-top: 26px;
+        }
+
+        .fee-example__steps > div {
+          border: 1px solid rgba(201,168,76,0.14);
+          background: rgba(13,28,53,0.78);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 128px;
+          padding: 20px;
+        }
+
+        .fee-example__steps > b {
+          align-self: center;
+          color: rgba(201,168,76,0.72);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 28px;
+          font-weight: 300;
+        }
+
+        .fee-example__steps span,
+        .fee-example__steps small {
+          color: var(--washi-dim);
+          display: block;
+          font-size: 12px;
+          font-weight: 300;
+          line-height: 1.7;
+        }
+
+        .fee-example__steps small {
+          color: rgba(248,245,239,0.46);
+          margin-top: 2px;
+        }
+
+        .fee-example__steps strong {
+          color: var(--washi);
+          display: block;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(16px, 1.8vw, 20px);
+          font-weight: 400;
+          line-height: 1.45;
+          margin-top: 12px;
+        }
+
+        .fee-example__steps .fee-example__total {
+          border-color: rgba(201,168,76,0.38);
+          background: rgba(201,168,76,0.09);
+        }
+
+        .fee-example__total strong {
+          color: var(--gold-light);
+          font-size: clamp(24px, 2.8vw, 34px);
+        }
+
+        .fee-example__note {
+          border-top: 1px solid rgba(201,168,76,0.16);
+          margin-top: 24px;
+          padding-top: 20px;
+        }
+
+        .fee-example__note p {
+          color: var(--washi-dim);
+          font-size: 13px;
+          letter-spacing: 0.035em;
+          line-height: 1.9;
+          margin: 0;
+        }
+
+        .fee-example__note p[lang='en'] {
+          color: rgba(248,245,239,0.52);
+          font-size: 12.5px;
+          margin-top: 6px;
+        }
+
+        .pricing-method-heading {
+          margin: clamp(42px, 6vw, 68px) 0 24px;
+        }
+
         .optional-service-copy,
         .optional-service-notes {
           border: 1px solid rgba(201,168,76,0.18);
@@ -640,7 +1088,7 @@ export default function PricingPage() {
           background:
             linear-gradient(135deg, rgba(139,30,47,0.16), transparent 48%),
             rgba(7,17,31,0.84);
-          min-height: 430px;
+          min-height: 300px;
           padding: clamp(24px, 3vw, 32px);
           display: flex;
           flex-direction: column;
@@ -665,28 +1113,8 @@ export default function PricingPage() {
           font-weight: 300;
           line-height: 1.08;
           margin-bottom: 26px;
-          min-height: 128px;
+          min-height: 78px;
           letter-spacing: 0;
-        }
-
-        .pricing-rate {
-          color: var(--gold);
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(58px, 6vw, 78px);
-          font-weight: 300;
-          line-height: 0.95;
-          margin-bottom: 26px;
-        }
-
-        .pricing-rate small {
-          display: block;
-          color: var(--washi-dim);
-          font-family: 'Noto Sans JP', sans-serif;
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          line-height: 1.6;
-          margin-top: 10px;
-          text-transform: uppercase;
         }
 
         .pricing-card-info {
@@ -711,21 +1139,13 @@ export default function PricingPage() {
           text-transform: uppercase;
         }
 
-        .pricing-card-info strong,
-        .pricing-card-note {
+        .pricing-card-info strong {
           color: var(--washi-dim);
           display: block;
           font-size: 13px;
           font-weight: 300;
           letter-spacing: 0.04em;
           line-height: 1.9;
-        }
-
-        .pricing-card-note {
-          border: 1px solid rgba(201,168,76,0.18);
-          background: rgba(201,168,76,0.06);
-          margin: 16px 0 0;
-          padding: 12px 14px;
         }
 
         .fee-basis-grid {
@@ -1116,6 +1536,18 @@ export default function PricingPage() {
         }
 
         @media (max-width: 900px) {
+          .fee-calculation-copy {
+            grid-template-columns: 1fr;
+          }
+
+          .fee-example__steps {
+            grid-template-columns: 1fr;
+          }
+
+          .fee-example__steps > b {
+            line-height: 1;
+          }
+
           .pricing-payment {
             grid-template-columns: 1fr;
           }
@@ -1145,6 +1577,25 @@ export default function PricingPage() {
         }
 
         @media (max-width: 680px) {
+          .pricing-tier-table {
+            min-width: 800px;
+          }
+
+          .pricing-tier-table thead th:first-child,
+          .pricing-tier-table tbody th {
+            width: 210px;
+          }
+
+          .progressive-fee-summary__formula {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+
+          .fee-calculation-copy {
+            border-left: 0;
+            padding-left: 0;
+          }
+
           .pricing-payment {
             gap: 24px;
             padding-top: 64px;
