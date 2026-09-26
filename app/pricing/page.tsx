@@ -175,6 +175,9 @@ export default function PricingPage() {
                 {pricingPlans.map((plan) => (
                   <th scope="col" key={plan.key}>
                     <span>{plan.title}</span>
+                    {(plan.key === 'lcl' || plan.key === 'fcl') && (
+                      <small>7%–3% Progressive Rate / 7%–3% 段階手数料</small>
+                    )}
                     <small>Minimum {formatJpy(plan.minimumFee)}</small>
                   </th>
                 ))}
@@ -188,7 +191,14 @@ export default function PricingPage() {
                     <small lang="en">{tier.rangeEn}</small>
                   </th>
                   {pricingPlans.map((plan) => (
-                    <td key={plan.key}>{formatFeeRate(tier.rates[plan.key])}</td>
+                    <td key={plan.key}>
+                      {tier.rates[plan.key] === null ? (
+                        <span className="pricing-tier-table__quote">
+                          <span lang="ja">個別見積り</span>
+                          <small lang="en">Individual Quotation</small>
+                        </span>
+                      ) : formatFeeRate(tier.rates[plan.key])}
+                    </td>
                   ))}
                 </tr>
               ))}
@@ -198,13 +208,13 @@ export default function PricingPage() {
 
         <div className="fee-calculation-copy">
           <div>
-            <span className="fee-calculation-copy__label">手数料の計算方法</span>
+            <span className="fee-calculation-copy__label">段階手数料について</span>
             <p lang="ja">
               手数料は、商品代金の金額帯ごとに設定された料率で段階的に計算します。商品代金全額に1つの料率を適用するのではなく、それぞれの金額帯に該当する金額に対して、それぞれの手数料率を適用します。商品代金が高くなるほど、追加される金額部分に適用される手数料率が段階的に下がる仕組みです。
             </p>
           </div>
           <div>
-            <span className="fee-calculation-copy__label">Fee Calculation</span>
+            <span className="fee-calculation-copy__label">Progressive Handling Fees</span>
             <p lang="en">
               Handling fees are calculated progressively according to each product value tier. A single percentage is not applied to the entire product value. Instead, each portion of the product value is calculated using the percentage assigned to its respective tier. As the product value increases, a lower percentage is applied only to the amount falling within the higher tier.
             </p>
@@ -227,21 +237,21 @@ export default function PricingPage() {
             <div>
               <span lang="ja">100万円を超え300万円までの200万円</span>
               <small lang="en">Next JPY 2,000,000</small>
-              <strong>JPY 2,000,000 × 6.5% = JPY 130,000</strong>
+              <strong>JPY 2,000,000 × 6% = JPY 120,000</strong>
             </div>
             <b aria-hidden="true">＝</b>
             <div className="fee-example__total">
               <span lang="ja">手配手数料 合計</span>
               <small lang="en">Total Handling Fee</small>
-              <strong>JPY 200,000</strong>
+              <strong>JPY 190,000</strong>
             </div>
           </div>
           <div className="fee-example__note">
             <p lang="ja">
-              「300万円 × 6.5% ＝ 195,000円」ではありません。商品代金を金額帯ごとに分けて計算するため、手配手数料は200,000円となります。
+              「300万円 × 6% ＝ 180,000円」ではありません。商品代金を金額帯ごとに分けて計算するため、手配手数料は190,000円となります。
             </p>
             <p lang="en">
-              The 6.5% rate is not applied to the full JPY 3,000,000 product value. Because each tier is calculated separately, the total handling fee is JPY 200,000.
+              The 6% rate is not applied to the full JPY 3,000,000 product value. Because each tier is calculated separately, the total handling fee is JPY 190,000.
             </p>
           </div>
         </article>
@@ -674,6 +684,28 @@ export default function PricingPage() {
           font-size: 25px;
           font-weight: 400;
           letter-spacing: 0.02em;
+        }
+
+        .pricing-tier-table__quote > span,
+        .pricing-tier-table__quote > small {
+          display: block;
+        }
+
+        .pricing-tier-table__quote > span {
+          color: var(--washi);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.06em;
+          line-height: 1.5;
+        }
+
+        .pricing-tier-table__quote > small {
+          color: rgba(248,245,239,0.48);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 9.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.45;
+          margin-top: 4px;
         }
 
         .pricing-tier-table tbody tr:hover td,

@@ -9,7 +9,7 @@ import {
   getHandlingFeePlan,
   handlingFeePlans,
   MAX_PRODUCT_VALUE,
-  type HandlingFeeResult,
+  type HandlingFeeCalculationResult,
   type ShippingMethod,
 } from '@/lib/pricing/handlingFees'
 
@@ -37,7 +37,7 @@ function ArrowRight() {
 export function HandlingFeeCalculator() {
   const [productValue, setProductValue] = useState('')
   const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('lcl')
-  const [result, setResult] = useState<HandlingFeeResult | null>(null)
+  const [result, setResult] = useState<HandlingFeeCalculationResult | null>(null)
   const [error, setError] = useState('')
 
   const handleProductValueChange = (value: string) => {
@@ -153,47 +153,69 @@ export function HandlingFeeCalculator() {
             </div>
           </div>
 
-          <div className="handling-fee-result__breakdown">
-            <h4>Fee Breakdown <small>/ 計算内訳</small></h4>
-            <div>
-              {result.breakdown.map((item) => (
-                <article key={`${item.lowerBound}-${item.upperBound ?? 'open'}`}>
-                  <span>{formatTierRange(item.lowerBound, item.upperBound)}</span>
-                  <p>{formatJpy(item.amount)} × {formatFeeRate(item.rate)}</p>
-                  <strong>= {formatJpy(item.fee)}</strong>
-                </article>
-              ))}
-            </div>
-          </div>
+          {result.individualQuotationRequired ? (
+            <>
+              <div className="handling-fee-result__total">
+                <div>
+                  <span lang="ja">3,000万円を超えるSea Freight案件</span>
+                  <small lang="en">Sea freight projects over JPY 30,000,000</small>
+                </div>
+                <strong>Individual Quotation</strong>
+              </div>
+              <div className="handling-fee-result__notice">
+                <p lang="ja">
+                  商品内容、数量、仕入先数、輸送条件、梱包、必要書類、検査などを確認したうえで、個別にお見積りいたします。
+                </p>
+                <p lang="en">
+                  A separate quotation will be prepared after reviewing the products, quantity, number of suppliers, shipping conditions, packaging, documentation, and inspection requirements.
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="handling-fee-result__breakdown">
+                <h4>Fee Breakdown <small>/ 計算内訳</small></h4>
+                <div>
+                  {result.breakdown.map((item) => (
+                    <article key={`${item.lowerBound}-${item.upperBound ?? 'open'}`}>
+                      <span>{formatTierRange(item.lowerBound, item.upperBound)}</span>
+                      <p>{formatJpy(item.amount)} × {formatFeeRate(item.rate)}</p>
+                      <strong>= {formatJpy(item.fee)}</strong>
+                    </article>
+                  ))}
+                </div>
+              </div>
 
-          <div className="handling-fee-result__total">
-            <div>
-              <span lang="ja">概算手配手数料</span>
-              <small lang="en">Estimated Handling Fee</small>
-            </div>
-            <strong>{formatJpy(result.totalFee)}</strong>
-          </div>
+              <div className="handling-fee-result__total">
+                <div>
+                  <span lang="ja">概算手配手数料</span>
+                  <small lang="en">Estimated Handling Fee</small>
+                </div>
+                <strong>{formatJpy(result.totalFee)}</strong>
+              </div>
 
-          <div className="handling-fee-result__effective-rate">
-            <span>実効手数料率 / Effective Fee Rate</span>
-            <strong>{result.effectiveRate.toFixed(2)}%</strong>
-          </div>
+              <div className="handling-fee-result__effective-rate">
+                <span>実効手数料率 / Effective Fee Rate</span>
+                <strong>{result.effectiveRate.toFixed(2)}%</strong>
+              </div>
 
-          {result.minimumFeeApplied && (
-            <p className="handling-fee-result__minimum-note" role="status">
-              <strong>最低手数料が適用されています。</strong>
-              <span>The minimum handling fee applies.</span>
-            </p>
+              {result.minimumFeeApplied && (
+                <p className="handling-fee-result__minimum-note" role="status">
+                  <strong>最低手数料が適用されています。</strong>
+                  <span>The minimum handling fee applies.</span>
+                </p>
+              )}
+
+              <div className="handling-fee-result__notice">
+                <p lang="ja">
+                  このシミュレーターは、商品代金を基準とした手配手数料の概算確認用です。正式な料金は、商品内容、数量、仕入先数、輸送方法、梱包、必要書類、検査、その他の作業内容を確認したうえでご案内いたします。国際送料、輸送保険、関税、輸入税、通関関連費用、特殊梱包、検査費用、その他の実費は、この計算には含まれていません。
+                </p>
+                <p lang="en">
+                  This calculator provides an estimate of the handling fee based on the product value. Final fees may vary depending on the products, quantity, number of suppliers, shipping method, packaging, required documentation, inspections, and other project-specific requirements. International freight, shipping insurance, customs duties, import taxes, customs-related charges, special packaging, inspection fees, and other actual costs are not included in this calculation.
+                </p>
+              </div>
+            </>
           )}
-
-          <div className="handling-fee-result__notice">
-            <p lang="ja">
-              このシミュレーターは、商品代金を基準とした手配手数料の概算確認用です。正式な料金は、商品内容、数量、仕入先数、輸送方法、梱包、必要書類、検査、その他の作業内容を確認したうえでご案内いたします。国際送料、輸送保険、関税、輸入税、通関関連費用、特殊梱包、検査費用、その他の実費は、この計算には含まれていません。
-            </p>
-            <p lang="en">
-              This calculator provides an estimate of the handling fee based on the product value. Final fees may vary depending on the products, quantity, number of suppliers, shipping method, packaging, required documentation, inspections, and other project-specific requirements. International freight, shipping insurance, customs duties, import taxes, customs-related charges, special packaging, inspection fees, and other actual costs are not included in this calculation.
-            </p>
-          </div>
 
           <Link href="/quote" className="handling-fee-result__cta">
             <span lang="ja">正式なお見積りを依頼する</span>

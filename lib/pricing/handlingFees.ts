@@ -15,7 +15,7 @@ export type HandlingFeeTier = {
   upperBound: number | null
   rangeJa: string
   rangeEn: string
-  rates: Record<ShippingMethod, number>
+  rates: Record<ShippingMethod, number | null>
 }
 
 export type FeeBreakdownItem = {
@@ -27,6 +27,7 @@ export type FeeBreakdownItem = {
 }
 
 export type HandlingFeeResult = {
+  individualQuotationRequired: false
   productValue: number
   shippingMethod: ShippingMethod
   calculatedFee: number
@@ -36,6 +37,15 @@ export type HandlingFeeResult = {
   minimumFee: number
   minimumFeeApplied: boolean
 }
+
+export type IndividualQuotationResult = {
+  individualQuotationRequired: true
+  productValue: number
+  shippingMethod: ShippingMethod
+  minimumFee: number
+}
+
+export type HandlingFeeCalculationResult = HandlingFeeResult | IndividualQuotationResult
 
 export const MAX_PRODUCT_VALUE = 999_999_999_999
 
@@ -85,37 +95,37 @@ export const handlingFeeTiers: readonly HandlingFeeTier[] = [
     upperBound: 3_000_000,
     rangeJa: '100万円超～300万円',
     rangeEn: 'Over JPY 1,000,000 to JPY 3,000,000',
-    rates: { express: 13, air: 9, lcl: 6.5, fcl: 6.5 },
+    rates: { express: 13, air: 9, lcl: 6, fcl: 6 },
   },
   {
     upperBound: 5_000_000,
     rangeJa: '300万円超～500万円',
     rangeEn: 'Over JPY 3,000,000 to JPY 5,000,000',
-    rates: { express: 12, air: 8.5, lcl: 6, fcl: 6 },
+    rates: { express: 12, air: 8.5, lcl: 5, fcl: 5 },
   },
   {
     upperBound: 10_000_000,
     rangeJa: '500万円超～1,000万円',
     rangeEn: 'Over JPY 5,000,000 to JPY 10,000,000',
-    rates: { express: 11, air: 8, lcl: 5.5, fcl: 5.5 },
+    rates: { express: 11, air: 8, lcl: 4.5, fcl: 4.5 },
   },
   {
     upperBound: 20_000_000,
     rangeJa: '1,000万円超～2,000万円',
     rangeEn: 'Over JPY 10,000,000 to JPY 20,000,000',
-    rates: { express: 10, air: 7.5, lcl: 5, fcl: 5 },
+    rates: { express: 10, air: 7.5, lcl: 4, fcl: 4 },
   },
   {
     upperBound: 30_000_000,
     rangeJa: '2,000万円超～3,000万円',
     rangeEn: 'Over JPY 20,000,000 to JPY 30,000,000',
-    rates: { express: 9, air: 7, lcl: 4.5, fcl: 4.5 },
+    rates: { express: 9, air: 7, lcl: 3, fcl: 3 },
   },
   {
     upperBound: null,
     rangeJa: '3,000万円超',
     rangeEn: 'Over JPY 30,000,000',
-    rates: { express: 8, air: 6.5, lcl: 4, fcl: 4 },
+    rates: { express: 8, air: 6.5, lcl: null, fcl: null },
   },
 ]
 
@@ -123,7 +133,11 @@ export function formatJpy(value: number) {
   return `JPY ${Math.round(value).toLocaleString('en-US')}`
 }
 
-export function formatFeeRate(rate: number) {
+export function formatFeeRate(rate: number | null) {
+  if (rate === null) {
+    return 'Individual Quotation / 個別見積り'
+  }
+
   return `${Number.isInteger(rate) ? rate.toFixed(0) : rate.toFixed(1)}%`
 }
 
@@ -140,7 +154,7 @@ export function getHandlingFeePlan(method: ShippingMethod) {
 export function calculateHandlingFee(
   productValue: number,
   shippingMethod: ShippingMethod,
-): HandlingFeeResult {
+): HandlingFeeCalculationResult {
   if (!Number.isSafeInteger(productValue) || productValue <= 0 || productValue > MAX_PRODUCT_VALUE) {
     throw new RangeError('Product value is outside the supported range.')
   }
@@ -155,6 +169,16 @@ export function calculateHandlingFee(
 
     if (amount > 0) {
       const rate = tier.rates[shippingMethod]
+
+      if (rate === null) {
+        return {
+          individualQuotationRequired: true,
+          productValue,
+          shippingMethod,
+          minimumFee: plan.minimumFee,
+        }
+      }
+
       breakdown.push({
         lowerBound,
         upperBound: tier.upperBound,
@@ -175,6 +199,7 @@ export function calculateHandlingFee(
   const totalFee = Math.max(calculatedFee, plan.minimumFee)
 
   return {
+    individualQuotationRequired: false,
     productValue,
     shippingMethod,
     calculatedFee,
