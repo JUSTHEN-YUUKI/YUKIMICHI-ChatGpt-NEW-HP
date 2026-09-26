@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
+import { HandlingFeeCalculator } from '@/components/pricing/HandlingFeeCalculator'
 import { TranslatedText } from '@/components/TranslatedText'
+import {
+  formatFeeRate,
+  formatJpy,
+  handlingFeePlans as pricingPlans,
+  handlingFeeTiers as pricingTiers,
+} from '@/lib/pricing/handlingFees'
 
 export const metadata: Metadata = {
   title: '料金表 | YUKIMICHI',
@@ -8,79 +15,6 @@ export const metadata: Metadata = {
     'YUKIMICHIの料金表。商品代金に対する手配手数料率、追加サービス料金、国際送料・保険・関税・VAT/GST等の実費、Wise推奨、SMBC口座への日本円前払い、T/T送金、注意事項について。',
   alternates: { canonical: '/pricing' },
 }
-
-const pricingPlans = [
-  {
-    key: 'express',
-    label: 'International Express',
-    title: 'International Express',
-    minimum: 'JPY 10,000',
-    use: '小口貨物、サンプル、EMS / DHL / FedEx / UPS / ヤマト国際宅急便',
-    useEn: 'Small parcels, samples, and international courier shipments',
-  },
-  {
-    key: 'air',
-    label: 'Air Freight',
-    title: 'Air Freight',
-    minimum: 'JPY 30,000',
-    use: '航空貨物、急ぎの商業貨物',
-    useEn: 'Air freight and time-sensitive commercial cargo',
-  },
-  {
-    key: 'lcl',
-    label: 'Sea LCL',
-    title: 'Sea LCL',
-    minimum: 'JPY 30,000',
-    use: '小〜中規模の海上混載貨物',
-    useEn: 'Small to medium-sized LCL sea freight',
-  },
-  {
-    key: 'fcl',
-    label: 'Sea FCL',
-    title: 'Sea FCL',
-    minimum: 'JPY 50,000',
-    use: 'コンテナ貨物、大口案件、継続取引',
-    useEn: 'Container cargo, large-volume projects, and ongoing trade',
-  },
-] as const
-
-const pricingTiers = [
-  {
-    rangeJa: '～100万円',
-    rangeEn: 'Up to JPY 1,000,000',
-    rates: { express: '15%', air: '10%', lcl: '7%', fcl: '7%' },
-  },
-  {
-    rangeJa: '100万円超～300万円',
-    rangeEn: 'Over JPY 1,000,000 to JPY 3,000,000',
-    rates: { express: '13%', air: '9%', lcl: '6.5%', fcl: '6.5%' },
-  },
-  {
-    rangeJa: '300万円超～500万円',
-    rangeEn: 'Over JPY 3,000,000 to JPY 5,000,000',
-    rates: { express: '12%', air: '8.5%', lcl: '6%', fcl: '6%' },
-  },
-  {
-    rangeJa: '500万円超～1,000万円',
-    rangeEn: 'Over JPY 5,000,000 to JPY 10,000,000',
-    rates: { express: '11%', air: '8%', lcl: '5.5%', fcl: '5.5%' },
-  },
-  {
-    rangeJa: '1,000万円超～2,000万円',
-    rangeEn: 'Over JPY 10,000,000 to JPY 20,000,000',
-    rates: { express: '10%', air: '7.5%', lcl: '5%', fcl: '5%' },
-  },
-  {
-    rangeJa: '2,000万円超～3,000万円',
-    rangeEn: 'Over JPY 20,000,000 to JPY 30,000,000',
-    rates: { express: '9%', air: '7%', lcl: '4.5%', fcl: '4.5%' },
-  },
-  {
-    rangeJa: '3,000万円超',
-    rangeEn: 'Over JPY 30,000,000',
-    rates: { express: '8%', air: '6.5%', lcl: '4%', fcl: '4%' },
-  },
-] as const
 
 const feeBasisItems = [
   {
@@ -241,7 +175,7 @@ export default function PricingPage() {
                 {pricingPlans.map((plan) => (
                   <th scope="col" key={plan.key}>
                     <span>{plan.title}</span>
-                    <small>Minimum {plan.minimum}</small>
+                    <small>Minimum {formatJpy(plan.minimumFee)}</small>
                   </th>
                 ))}
               </tr>
@@ -254,7 +188,7 @@ export default function PricingPage() {
                     <small lang="en">{tier.rangeEn}</small>
                   </th>
                   {pricingPlans.map((plan) => (
-                    <td key={plan.key}>{tier.rates[plan.key]}</td>
+                    <td key={plan.key}>{formatFeeRate(tier.rates[plan.key])}</td>
                   ))}
                 </tr>
               ))}
@@ -328,6 +262,8 @@ export default function PricingPage() {
           </div>
         </article>
 
+        <HandlingFeeCalculator />
+
         <div className="pricing-method-heading">
           <span>Minimum Fees & Use Cases</span>
           <h3 lang="ja">最低手数料・配送方法の目安</h3>
@@ -340,7 +276,7 @@ export default function PricingPage() {
               <div className="pricing-card-info">
                 <p>
                   <span>Minimum Fee</span>
-                  <strong>{plan.minimum}</strong>
+                  <strong>{formatJpy(plan.minimumFee)}</strong>
                 </p>
                 <p>
                   <span>Use Case</span>
@@ -961,6 +897,394 @@ export default function PricingPage() {
           margin-top: 6px;
         }
 
+        .handling-fee-calculator {
+          border: 1px solid rgba(201,168,76,0.3);
+          background:
+            radial-gradient(circle at 88% 8%, rgba(201,168,76,0.1), transparent 28%),
+            linear-gradient(145deg, rgba(13,28,53,0.96), rgba(7,17,31,0.96));
+          box-shadow: 0 26px 70px rgba(0,0,0,0.22);
+          margin-top: clamp(42px, 6vw, 68px);
+          padding: clamp(24px, 4.5vw, 52px);
+        }
+
+        .handling-fee-calculator__header > span {
+          color: var(--gold);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.24em;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        .handling-fee-calculator__header h3 {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(28px, 4vw, 46px);
+          font-weight: 300;
+          line-height: 1.35;
+          margin: 0;
+        }
+
+        .handling-fee-calculator__header p {
+          color: rgba(248,245,239,0.54);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 16px;
+          font-style: italic;
+          letter-spacing: 0.035em;
+          margin: 5px 0 0;
+        }
+
+        .handling-fee-calculator__form {
+          align-items: end;
+          border-top: 1px solid rgba(201,168,76,0.16);
+          display: grid;
+          gap: 20px;
+          grid-template-columns: minmax(0, 1fr) minmax(240px, 0.72fr) auto;
+          margin-top: 30px;
+          padding-top: 30px;
+        }
+
+        .handling-fee-calculator__field {
+          min-width: 0;
+        }
+
+        .handling-fee-calculator__field label {
+          color: var(--washi);
+          display: block;
+          font-size: 13px;
+          letter-spacing: 0.05em;
+          margin-bottom: 9px;
+        }
+
+        .handling-fee-calculator__field label span,
+        .handling-fee-calculator__field label small {
+          display: block;
+        }
+
+        .handling-fee-calculator__field label small {
+          color: rgba(248,245,239,0.5);
+          font-size: 10px;
+          font-weight: 300;
+          letter-spacing: 0.09em;
+          margin-top: 3px;
+          text-transform: uppercase;
+        }
+
+        .handling-fee-calculator__field > small {
+          color: rgba(248,245,239,0.42);
+          display: block;
+          font-size: 10.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.5;
+          margin-top: 7px;
+        }
+
+        .handling-fee-calculator__input-wrap {
+          align-items: center;
+          background: rgba(248,245,239,0.96);
+          border: 1px solid rgba(201,168,76,0.4);
+          display: flex;
+          min-height: 58px;
+        }
+
+        .handling-fee-calculator__input-wrap > span {
+          border-right: 1px solid rgba(10,31,56,0.14);
+          color: #7b6326;
+          flex: 0 0 auto;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 17px;
+          letter-spacing: 0.08em;
+          padding: 0 16px;
+        }
+
+        .handling-fee-calculator input,
+        .handling-fee-calculator select {
+          border: 1px solid rgba(201,168,76,0.4);
+          border-radius: 0;
+          color: #0a1f38;
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 16px;
+          min-height: 58px;
+          outline: none;
+          width: 100%;
+        }
+
+        .handling-fee-calculator input {
+          background: transparent;
+          border: 0;
+          font-size: clamp(18px, 2.2vw, 24px);
+          font-variant-numeric: tabular-nums;
+          padding: 12px 16px;
+        }
+
+        .handling-fee-calculator select {
+          appearance: auto;
+          background: rgba(248,245,239,0.96);
+          padding: 12px 14px;
+        }
+
+        .handling-fee-calculator input:focus-visible,
+        .handling-fee-calculator select:focus-visible,
+        .handling-fee-calculator__submit:focus-visible,
+        .handling-fee-result__cta:focus-visible {
+          outline: 2px solid var(--gold-light);
+          outline-offset: 3px;
+        }
+
+        .handling-fee-calculator input[aria-invalid='true'] {
+          box-shadow: inset 0 0 0 2px rgba(174,63,79,0.7);
+        }
+
+        .handling-fee-calculator__submit,
+        .handling-fee-result__cta {
+          align-items: center;
+          background: var(--gold);
+          border: 1px solid var(--gold);
+          color: var(--navy-deep);
+          cursor: pointer;
+          display: inline-grid;
+          font-family: 'Noto Sans JP', sans-serif;
+          grid-template-columns: 1fr auto;
+          min-height: 58px;
+          min-width: 190px;
+          padding: 11px 18px;
+          text-align: left;
+          text-decoration: none;
+        }
+
+        .handling-fee-calculator__submit span,
+        .handling-fee-calculator__submit small,
+        .handling-fee-result__cta span,
+        .handling-fee-result__cta small {
+          display: block;
+          grid-column: 1;
+        }
+
+        .handling-fee-calculator__submit span,
+        .handling-fee-result__cta span {
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+        }
+
+        .handling-fee-calculator__submit small,
+        .handling-fee-result__cta small {
+          font-size: 9px;
+          font-weight: 400;
+          letter-spacing: 0.13em;
+          margin-top: 3px;
+          text-transform: uppercase;
+        }
+
+        .handling-fee-calculator__submit svg,
+        .handling-fee-result__cta svg {
+          grid-column: 2;
+          grid-row: 1 / span 2;
+          margin-left: 14px;
+        }
+
+        .handling-fee-calculator__error {
+          color: #f2b7bf;
+          font-size: 12.5px;
+          grid-column: 1 / -1;
+          line-height: 1.7;
+          margin: -6px 0 0;
+        }
+
+        .handling-fee-result {
+          border-top: 1px solid rgba(201,168,76,0.2);
+          margin-top: 34px;
+          padding-top: 34px;
+        }
+
+        .handling-fee-result__summary {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .handling-fee-result__summary > div {
+          background: rgba(248,245,239,0.04);
+          border: 1px solid rgba(201,168,76,0.13);
+          padding: 18px 20px;
+        }
+
+        .handling-fee-result__summary span,
+        .handling-fee-result__effective-rate span {
+          color: rgba(248,245,239,0.5);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.11em;
+          line-height: 1.5;
+          text-transform: uppercase;
+        }
+
+        .handling-fee-result__summary strong {
+          color: var(--washi);
+          display: block;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(20px, 2.5vw, 28px);
+          font-weight: 400;
+          line-height: 1.35;
+          margin-top: 5px;
+          overflow-wrap: anywhere;
+        }
+
+        .handling-fee-result__breakdown {
+          margin-top: 28px;
+        }
+
+        .handling-fee-result__breakdown h4 {
+          color: var(--gold);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: 22px;
+          font-weight: 400;
+          letter-spacing: 0.03em;
+          margin: 0 0 14px;
+        }
+
+        .handling-fee-result__breakdown h4 small {
+          color: rgba(248,245,239,0.52);
+          font-size: 0.68em;
+          font-weight: 300;
+        }
+
+        .handling-fee-result__breakdown > div {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .handling-fee-result__breakdown article {
+          border-left: 1px solid rgba(201,168,76,0.3);
+          min-width: 0;
+          padding: 14px 16px;
+        }
+
+        .handling-fee-result__breakdown article > span {
+          color: rgba(248,245,239,0.48);
+          display: block;
+          font-size: 10px;
+          letter-spacing: 0.04em;
+          line-height: 1.5;
+        }
+
+        .handling-fee-result__breakdown article p {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(16px, 1.8vw, 20px);
+          line-height: 1.4;
+          margin: 8px 0 0;
+          overflow-wrap: anywhere;
+        }
+
+        .handling-fee-result__breakdown article strong {
+          color: var(--gold-light);
+          display: block;
+          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
+          font-size: clamp(18px, 2vw, 23px);
+          font-weight: 400;
+          line-height: 1.4;
+          margin-top: 4px;
+          overflow-wrap: anywhere;
+        }
+
+        .handling-fee-result__total {
+          align-items: center;
+          background: rgba(201,168,76,0.09);
+          border: 1px solid rgba(201,168,76,0.36);
+          display: flex;
+          gap: 24px;
+          justify-content: space-between;
+          margin-top: 26px;
+          padding: clamp(22px, 3vw, 32px);
+        }
+
+        .handling-fee-result__total span,
+        .handling-fee-result__total small {
+          color: var(--washi);
+          display: block;
+          font-size: 13px;
+          letter-spacing: 0.05em;
+        }
+
+        .handling-fee-result__total small {
+          color: rgba(248,245,239,0.5);
+          font-size: 10px;
+          margin-top: 4px;
+          text-transform: uppercase;
+        }
+
+        .handling-fee-result__total > strong {
+          color: var(--gold-light);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(32px, 5vw, 52px);
+          font-weight: 400;
+          line-height: 1;
+          overflow-wrap: anywhere;
+          text-align: right;
+        }
+
+        .handling-fee-result__effective-rate {
+          align-items: center;
+          border-bottom: 1px solid rgba(201,168,76,0.14);
+          display: flex;
+          justify-content: space-between;
+          padding: 18px 4px;
+        }
+
+        .handling-fee-result__effective-rate strong {
+          color: var(--washi);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 27px;
+          font-weight: 400;
+        }
+
+        .handling-fee-result__minimum-note {
+          background: rgba(201,168,76,0.08);
+          border-left: 2px solid var(--gold);
+          color: var(--washi-dim);
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+          line-height: 1.7;
+          margin: 18px 0 0;
+          padding: 13px 16px;
+        }
+
+        .handling-fee-result__minimum-note strong {
+          color: var(--washi);
+          font-weight: 500;
+        }
+
+        .handling-fee-result__minimum-note span {
+          color: rgba(248,245,239,0.5);
+        }
+
+        .handling-fee-result__notice {
+          display: grid;
+          gap: 24px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 26px;
+        }
+
+        .handling-fee-result__notice p {
+          color: var(--washi-dim);
+          font-size: 11.5px;
+          letter-spacing: 0.025em;
+          line-height: 1.9;
+          margin: 0;
+        }
+
+        .handling-fee-result__notice p[lang='en'] {
+          color: rgba(248,245,239,0.48);
+        }
+
+        .handling-fee-result__cta {
+          margin-top: 26px;
+          max-width: 290px;
+        }
+
         .pricing-method-heading {
           margin: clamp(42px, 6vw, 68px) 0 24px;
         }
@@ -1548,6 +1872,19 @@ export default function PricingPage() {
             line-height: 1;
           }
 
+          .handling-fee-calculator__form {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .handling-fee-calculator__submit {
+            grid-column: 1 / -1;
+            max-width: 240px;
+          }
+
+          .handling-fee-result__breakdown > div {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
           .pricing-payment {
             grid-template-columns: 1fr;
           }
@@ -1594,6 +1931,55 @@ export default function PricingPage() {
           .fee-calculation-copy {
             border-left: 0;
             padding-left: 0;
+          }
+
+          .handling-fee-calculator {
+            margin-left: calc(var(--gutter) * -0.35);
+            margin-right: calc(var(--gutter) * -0.35);
+            padding: 26px 20px;
+          }
+
+          .handling-fee-calculator__form,
+          .handling-fee-result__summary,
+          .handling-fee-result__breakdown > div,
+          .handling-fee-result__notice {
+            grid-template-columns: 1fr;
+          }
+
+          .handling-fee-calculator__submit {
+            max-width: none;
+            width: 100%;
+          }
+
+          .handling-fee-calculator__input-wrap,
+          .handling-fee-calculator input,
+          .handling-fee-calculator select {
+            min-height: 60px;
+          }
+
+          .handling-fee-result__breakdown article {
+            padding: 12px 14px;
+          }
+
+          .handling-fee-result__total {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .handling-fee-result__total > strong {
+            max-width: 100%;
+            text-align: left;
+          }
+
+          .handling-fee-result__effective-rate {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 5px;
+          }
+
+          .handling-fee-result__cta {
+            max-width: none;
+            width: 100%;
           }
 
           .pricing-payment {
