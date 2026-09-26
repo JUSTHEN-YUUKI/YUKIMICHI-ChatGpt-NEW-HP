@@ -15,7 +15,7 @@ export type HandlingFeeTier = {
   upperBound: number | null
   rangeJa: string
   rangeEn: string
-  rates: Record<ShippingMethod, number>
+  rates: Record<ShippingMethod, number | null>
 }
 
 export type FeeBreakdownItem = {
@@ -27,6 +27,7 @@ export type FeeBreakdownItem = {
 }
 
 export type HandlingFeeResult = {
+  caseByCaseReviewRequired: false
   productValue: number
   shippingMethod: ShippingMethod
   calculatedFee: number
@@ -36,6 +37,15 @@ export type HandlingFeeResult = {
   minimumFee: number
   minimumFeeApplied: boolean
 }
+
+export type HandlingFeeReviewResult = {
+  caseByCaseReviewRequired: true
+  productValue: number
+  shippingMethod: ShippingMethod
+  minimumFee: number
+}
+
+export type HandlingFeeCalculationResult = HandlingFeeResult | HandlingFeeReviewResult
 
 export const MAX_PRODUCT_VALUE = 999_999_999_999
 
@@ -97,25 +107,25 @@ export const handlingFeeTiers: readonly HandlingFeeTier[] = [
     upperBound: 10_000_000,
     rangeJa: '500万円超～1,000万円',
     rangeEn: 'Over JPY 5,000,000 to JPY 10,000,000',
-    rates: { express: 11, air: 8, lcl: 4.5, fcl: 4.5 },
+    rates: { express: 11, air: 8, lcl: null, fcl: 4.5 },
   },
   {
     upperBound: 20_000_000,
     rangeJa: '1,000万円超～2,000万円',
     rangeEn: 'Over JPY 10,000,000 to JPY 20,000,000',
-    rates: { express: 10, air: 7.5, lcl: 4, fcl: 4 },
+    rates: { express: 10, air: 7.5, lcl: null, fcl: 4 },
   },
   {
     upperBound: 30_000_000,
     rangeJa: '2,000万円超～3,000万円',
     rangeEn: 'Over JPY 20,000,000 to JPY 30,000,000',
-    rates: { express: 9, air: 7, lcl: 3.5, fcl: 3.5 },
+    rates: { express: 9, air: 7, lcl: null, fcl: 3.5 },
   },
   {
     upperBound: null,
     rangeJa: '3,000万円超',
     rangeEn: 'Over JPY 30,000,000',
-    rates: { express: 8, air: 6.5, lcl: 3, fcl: 3 },
+    rates: { express: 8, air: 6.5, lcl: null, fcl: 3 },
   },
 ]
 
@@ -140,7 +150,7 @@ export function getHandlingFeePlan(method: ShippingMethod) {
 export function calculateHandlingFee(
   productValue: number,
   shippingMethod: ShippingMethod,
-): HandlingFeeResult {
+): HandlingFeeCalculationResult {
   if (!Number.isSafeInteger(productValue) || productValue <= 0 || productValue > MAX_PRODUCT_VALUE) {
     throw new RangeError('Product value is outside the supported range.')
   }
@@ -155,6 +165,16 @@ export function calculateHandlingFee(
 
     if (amount > 0) {
       const rate = tier.rates[shippingMethod]
+
+      if (rate === null) {
+        return {
+          caseByCaseReviewRequired: true,
+          productValue,
+          shippingMethod,
+          minimumFee: plan.minimumFee,
+        }
+      }
+
       breakdown.push({
         lowerBound,
         upperBound: tier.upperBound,
@@ -175,6 +195,7 @@ export function calculateHandlingFee(
   const totalFee = Math.max(calculatedFee, plan.minimumFee)
 
   return {
+    caseByCaseReviewRequired: false,
     productValue,
     shippingMethod,
     calculatedFee,

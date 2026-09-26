@@ -9,7 +9,7 @@ import {
   getHandlingFeePlan,
   handlingFeePlans,
   MAX_PRODUCT_VALUE,
-  type HandlingFeeResult,
+  type HandlingFeeCalculationResult,
   type ShippingMethod,
 } from '@/lib/pricing/handlingFees'
 
@@ -41,7 +41,7 @@ function ArrowRight() {
 export function HandlingFeeCalculator() {
   const [productValue, setProductValue] = useState('')
   const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('lcl')
-  const [result, setResult] = useState<HandlingFeeResult | null>(null)
+  const [result, setResult] = useState<HandlingFeeCalculationResult | null>(null)
   const [error, setError] = useState('')
 
   const handleProductValueChange = (value: string) => {
@@ -157,45 +157,63 @@ export function HandlingFeeCalculator() {
             </div>
           </div>
 
-          <div className="handling-fee-result__breakdown">
-            <h4>Fee Breakdown <small>/ 計算内訳</small></h4>
-            <div>
-              {result.breakdown.map((item) => (
-                <article key={`${item.lowerBound}-${item.upperBound ?? 'open'}`}>
-                  <span>{formatTierRange(item.lowerBound, item.upperBound)}</span>
-                  <p>{formatJpy(item.amount)} × {formatFeeRate(item.rate)}</p>
-                  <strong>= {formatJpy(item.fee)}</strong>
-                </article>
-              ))}
-            </div>
-          </div>
+          {result.caseByCaseReviewRequired ? (
+            <>
+              <div className="handling-fee-result__total">
+                <div>
+                  <span lang="ja">Sea LCL・商品代金500万円超</span>
+                  <small lang="en">Sea LCL over JPY 5,000,000 in product value</small>
+                </div>
+                <strong>Case-by-case review</strong>
+              </div>
+              <p className="handling-fee-result__minimum-note" role="status">
+                <strong>Sea LCLで500万円を超える案件は、貨物条件を確認のうえ個別にご案内します。</strong>
+                <span>For Sea LCL shipments exceeding JPY 5,000,000 in product value, fees will be reviewed based on the shipment conditions.</span>
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="handling-fee-result__breakdown">
+                <h4>Fee Breakdown <small>/ 計算内訳</small></h4>
+                <div>
+                  {result.breakdown.map((item) => (
+                    <article key={`${item.lowerBound}-${item.upperBound ?? 'open'}`}>
+                      <span>{formatTierRange(item.lowerBound, item.upperBound)}</span>
+                      <p>{formatJpy(item.amount)} × {formatFeeRate(item.rate)}</p>
+                      <strong>= {formatJpy(item.fee)}</strong>
+                    </article>
+                  ))}
+                </div>
+              </div>
 
-          <div className="handling-fee-result__total">
-            <div>
-              <span lang="ja">概算手配手数料</span>
-              <small lang="en">Estimated Handling Fee</small>
-            </div>
-            <strong>{formatJpy(result.totalFee)}</strong>
-          </div>
+              <div className="handling-fee-result__total">
+                <div>
+                  <span lang="ja">概算手配手数料</span>
+                  <small lang="en">Estimated Handling Fee</small>
+                </div>
+                <strong>{formatJpy(result.totalFee)}</strong>
+              </div>
 
-          <div className="handling-fee-result__effective-rate">
-            <span>実効手数料率 / Effective Fee Rate</span>
-            <strong>{formatEffectiveRate(result.effectiveRate)}</strong>
-          </div>
+              <div className="handling-fee-result__effective-rate">
+                <span>実効手数料率 / Effective Fee Rate</span>
+                <strong>{formatEffectiveRate(result.effectiveRate)}</strong>
+              </div>
 
-          {result.minimumFeeApplied && (
-            <p className="handling-fee-result__minimum-note" role="status">
-              <strong>最低手数料が適用されています。</strong>
-              <span>The minimum handling fee applies.</span>
-            </p>
+              {result.minimumFeeApplied && (
+                <p className="handling-fee-result__minimum-note" role="status">
+                  <strong>最低手数料が適用されています。</strong>
+                  <span>The minimum handling fee applies.</span>
+                </p>
+              )}
+            </>
           )}
 
           <div className="handling-fee-result__notice">
             <p lang="ja">
-              このシミュレーターは、商品代金を基準とした手配手数料の概算確認用です。正式な料金は、商品内容、数量、仕入先数、輸送方法、梱包、必要書類、検査、その他の作業内容を確認したうえでご案内いたします。国際送料、輸送保険、関税、輸入税、通関関連費用、特殊梱包、検査費用、その他の実費は、この計算には含まれていません。
+              このシミュレーターは、商品代金を基準とした手配手数料の概算確認用です。正式な料金は、商品内容、数量、貨物量、重量、荷姿、仕入先数、輸送方法、必要書類、梱包、検査、その他の作業内容を確認したうえでご案内します。国際送料、輸送保険、関税・輸入税、通関関連費用、検査費用、特殊梱包費、その他実費は含まれていません。
             </p>
             <p lang="en">
-              This calculator provides an estimate of the handling fee based on the product value. Final fees may vary depending on the products, quantity, number of suppliers, shipping method, packaging, required documentation, inspections, and other project-specific requirements. International freight, shipping insurance, customs duties, import taxes, customs-related charges, special packaging, inspection fees, and other actual costs are not included in this calculation.
+              This calculator provides an estimated handling fee based on the product value. Final fees may vary depending on the products, quantity, cargo volume, weight, packing configuration, number of suppliers, shipping method, required documentation, inspections, and other project-specific requirements. International freight, shipping insurance, customs duties, import taxes, customs-related charges, inspection fees, special packaging, and other actual costs are not included.
             </p>
           </div>
 

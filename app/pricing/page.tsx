@@ -175,7 +175,10 @@ export default function PricingPage() {
                 {pricingPlans.map((plan) => (
                   <th scope="col" key={plan.key}>
                     <span>{plan.title}</span>
-                    {(plan.key === 'lcl' || plan.key === 'fcl') && (
+                    {plan.key === 'lcl' && (
+                      <small>7%–5% Progressive Rate / 500万円超は個別確認</small>
+                    )}
+                    {plan.key === 'fcl' && (
                       <small>7%–3% Progressive Rate / 7%–3% 段階手数料</small>
                     )}
                     <small>Minimum {formatJpy(plan.minimumFee)}</small>
@@ -190,13 +193,39 @@ export default function PricingPage() {
                     <span lang="ja">{tier.rangeJa}</span>
                     <small lang="en">{tier.rangeEn}</small>
                   </th>
-                  {pricingPlans.map((plan) => (
-                    <td key={plan.key}>{formatFeeRate(tier.rates[plan.key])}</td>
-                  ))}
+                  {pricingPlans.map((plan) => {
+                    const rate = tier.rates[plan.key]
+
+                    return (
+                      <td key={plan.key}>
+                        {rate === null ? (
+                          <span className="pricing-tier-table__review">
+                            <span lang="ja">個別確認</span>
+                            <small lang="en">Case-by-case review</small>
+                          </span>
+                        ) : formatFeeRate(rate)}
+                      </td>
+                    )
+                  })}
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="fee-calculation-copy lcl-review-copy">
+          <div>
+            <span className="fee-calculation-copy__label">Sea LCLについて</span>
+            <p lang="ja">
+              商品代金500万円を超えるSea LCL案件は、貨物量、重量、荷姿、仕向地、輸送条件等を確認したうえで、個別にご案内します。貨物の条件によっては、Sea LCLよりSea FCLの方が適している場合があります。商品代金のみでLCL / FCLを判断するものではありません。
+            </p>
+          </div>
+          <div>
+            <span className="fee-calculation-copy__label">About Sea LCL</span>
+            <p lang="en">
+              For Sea LCL shipments with a product value exceeding JPY 5,000,000, the appropriate handling fee and shipping method will be reviewed on a case-by-case basis. Depending on cargo volume, weight, packing configuration, destination, and other shipping conditions, Sea FCL may be more suitable than Sea LCL. LCL or FCL is not determined solely by the product value.
+            </p>
+          </div>
         </div>
 
         <div className="fee-calculation-copy">
@@ -679,6 +708,28 @@ export default function PricingPage() {
           letter-spacing: 0.02em;
         }
 
+        .pricing-tier-table__review > span,
+        .pricing-tier-table__review > small {
+          display: block;
+        }
+
+        .pricing-tier-table__review > span {
+          color: var(--washi);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.06em;
+          line-height: 1.5;
+        }
+
+        .pricing-tier-table__review > small {
+          color: rgba(248,245,239,0.48);
+          font-family: 'Noto Sans JP', sans-serif;
+          font-size: 9.5px;
+          letter-spacing: 0.03em;
+          line-height: 1.45;
+          margin-top: 4px;
+        }
+
         .pricing-tier-table tbody tr:hover td,
         .pricing-tier-table tbody tr:hover th {
           background-color: rgba(201,168,76,0.08);
@@ -712,6 +763,14 @@ export default function PricingPage() {
 
         .fee-calculation-copy p[lang='en'] {
           color: rgba(248,245,239,0.58);
+        }
+
+        .lcl-review-copy {
+          margin-bottom: 0;
+        }
+
+        .lcl-review-copy + .fee-calculation-copy {
+          margin-top: 24px;
         }
 
         .fee-example {
