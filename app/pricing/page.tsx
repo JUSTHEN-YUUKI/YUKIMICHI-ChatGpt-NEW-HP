@@ -191,14 +191,7 @@ export default function PricingPage() {
                     <small lang="en">{tier.rangeEn}</small>
                   </th>
                   {pricingPlans.map((plan) => (
-                    <td key={plan.key}>
-                      {tier.rates[plan.key] === null ? (
-                        <span className="pricing-tier-table__quote">
-                          <span lang="ja">個別見積り</span>
-                          <small lang="en">Individual Quotation</small>
-                        </span>
-                      ) : formatFeeRate(tier.rates[plan.key])}
-                    </td>
+                    <td key={plan.key}>{formatFeeRate(tier.rates[plan.key])}</td>
                   ))}
                 </tr>
               ))}
@@ -684,28 +677,6 @@ export default function PricingPage() {
           font-size: 25px;
           font-weight: 400;
           letter-spacing: 0.02em;
-        }
-
-        .pricing-tier-table__quote > span,
-        .pricing-tier-table__quote > small {
-          display: block;
-        }
-
-        .pricing-tier-table__quote > span {
-          color: var(--washi);
-          font-family: 'Noto Sans JP', sans-serif;
-          font-size: 12px;
-          letter-spacing: 0.06em;
-          line-height: 1.5;
-        }
-
-        .pricing-tier-table__quote > small {
-          color: rgba(248,245,239,0.48);
-          font-family: 'Noto Sans JP', sans-serif;
-          font-size: 9.5px;
-          letter-spacing: 0.03em;
-          line-height: 1.45;
-          margin-top: 4px;
         }
 
         .pricing-tier-table tbody tr:hover td,
