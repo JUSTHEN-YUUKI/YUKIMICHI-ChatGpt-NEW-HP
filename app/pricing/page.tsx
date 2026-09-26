@@ -196,22 +196,6 @@ export default function PricingPage() {
           </table>
         </div>
 
-        <div className="progressive-fee-summary">
-          <p lang="ja">
-            <strong>各料率は商品代金全額に適用されるものではありません。商品代金を金額帯ごとに分け、それぞれの金額帯に設定された料率で計算します。</strong>
-          </p>
-          <p lang="en">
-            Each percentage applies only to the portion of the product value within that tier, not to the full product value.
-          </p>
-          <div className="progressive-fee-summary__formula" aria-label="Sea freight example for a product value of JPY 3,000,000">
-            <span>JPY 1,000,000 × 7%</span>
-            <b aria-hidden="true">＋</b>
-            <span>JPY 2,000,000 × 6.5%</span>
-            <b aria-hidden="true">＝</b>
-            <strong>JPY 200,000</strong>
-          </div>
-        </div>
-
         <div className="fee-calculation-copy">
           <div>
             <span className="fee-calculation-copy__label">手数料の計算方法</span>
@@ -695,59 +679,6 @@ export default function PricingPage() {
         .pricing-tier-table tbody tr:hover td,
         .pricing-tier-table tbody tr:hover th {
           background-color: rgba(201,168,76,0.08);
-        }
-
-        .progressive-fee-summary {
-          border: 1px solid rgba(201,168,76,0.34);
-          background:
-            linear-gradient(120deg, rgba(201,168,76,0.09), transparent 58%),
-            rgba(13,28,53,0.88);
-          padding: clamp(22px, 3vw, 32px);
-        }
-
-        .progressive-fee-summary p {
-          color: var(--washi-dim);
-          font-size: 13px;
-          letter-spacing: 0.035em;
-          line-height: 1.9;
-          margin: 0;
-        }
-
-        .progressive-fee-summary p strong {
-          color: var(--washi);
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-        .progressive-fee-summary p[lang='en'] {
-          color: rgba(248,245,239,0.55);
-          font-size: 12.5px;
-          margin-top: 5px;
-        }
-
-        .progressive-fee-summary__formula {
-          align-items: center;
-          border-top: 1px solid rgba(201,168,76,0.18);
-          color: var(--washi);
-          display: grid;
-          font-family: 'Cormorant Garamond', 'Noto Serif JP', serif;
-          font-size: clamp(17px, 2vw, 23px);
-          gap: 12px;
-          grid-template-columns: max-content auto max-content auto max-content;
-          justify-content: center;
-          margin-top: 20px;
-          padding-top: 20px;
-        }
-
-        .progressive-fee-summary__formula b {
-          color: rgba(201,168,76,0.64);
-          font-weight: 300;
-        }
-
-        .progressive-fee-summary__formula strong {
-          color: var(--gold-light);
-          font-size: 1.16em;
-          font-weight: 500;
         }
 
         .fee-calculation-copy {
@@ -1921,11 +1852,6 @@ export default function PricingPage() {
           .pricing-tier-table thead th:first-child,
           .pricing-tier-table tbody th {
             width: 210px;
-          }
-
-          .progressive-fee-summary__formula {
-            grid-template-columns: 1fr;
-            text-align: center;
           }
 
           .fee-calculation-copy {
