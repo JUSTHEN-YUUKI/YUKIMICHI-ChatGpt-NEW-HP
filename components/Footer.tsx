@@ -51,6 +51,22 @@ export default function Footer() {
             </a>
             <p lang="ja">古物商許可証 第305581606050号</p>
             <p lang="ja">東京都公安委員会</p>
+            <div className="site-footer__business-card">
+              <p className="site-footer__business-card-label">
+                <span lang="en">Digital Business Card</span>
+                <small lang="ja">デジタル名刺</small>
+              </p>
+              <a
+                href="/images/yukimichi-digital-business-card.png"
+                className="site-footer__business-card-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Digital Business Card / デジタル名刺を見る"
+              >
+                <span lang="en">View Digital Business Card</span>
+                <small lang="ja">デジタル名刺を見る</small>
+              </a>
+            </div>
           </div>
         </section>
       </div>
@@ -185,6 +201,68 @@ export default function Footer() {
           padding-bottom: 3px;
         }
 
+        .site-footer__business-card {
+          display: grid;
+          gap: 8px;
+          width: fit-content;
+          max-width: 100%;
+          margin-top: 4px;
+          padding-top: 13px;
+          border-top: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        .site-footer__business-card-label {
+          display: grid;
+          gap: 1px;
+          color: var(--washi-faint);
+          line-height: 1.45;
+        }
+
+        .site-footer__business-card-label span {
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .site-footer__business-card-label small {
+          color: rgba(244, 239, 230, 0.5);
+          font-size: 10px;
+          letter-spacing: 0.08em;
+        }
+
+        .site-footer__business-card-link {
+          display: inline-grid;
+          gap: 1px;
+          width: fit-content;
+          max-width: 100%;
+          padding: 8px 12px;
+          border: 1px solid rgba(201, 168, 76, 0.34);
+          border-radius: 2px;
+          background: rgba(255, 255, 255, 0.025);
+          color: var(--washi);
+          line-height: 1.45;
+          text-decoration: none;
+          transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .site-footer__business-card-link span {
+          font-size: 11px;
+          letter-spacing: 0.06em;
+        }
+
+        .site-footer__business-card-link small {
+          color: rgba(244, 239, 230, 0.52);
+          font-size: 10px;
+          letter-spacing: 0.05em;
+        }
+
+        .site-footer__business-card-link:hover,
+        .site-footer__business-card-link:focus-visible {
+          border-color: rgba(201, 168, 76, 0.72);
+          background: rgba(201, 168, 76, 0.06);
+          color: var(--gold);
+        }
+
         .site-footer__bottom {
           max-width: 1180px;
           margin: 0 auto;
@@ -230,3 +308,4 @@ export default function Footer() {
     </footer>
   )
 }
+
