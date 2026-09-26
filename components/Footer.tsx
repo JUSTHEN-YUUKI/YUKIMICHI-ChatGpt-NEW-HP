@@ -46,6 +46,9 @@ export default function Footer() {
             <p lang="ja">株式会社ジャッセン</p>
             <p lang="ja">〒060-0032 北海道札幌市中央区北二条東8-5-15</p>
             <p lang="en">8-5-15 Kita 2-jo Higashi, Chuo-ku, Sapporo, Hokkaido 060-0032, Japan</p>
+            <a href="https://justhen.co.jp/" className="site-footer__website">
+              https://justhen.co.jp/
+            </a>
             <a href="mailto:exporter@justhen.co.jp" className="site-footer__email">
               exporter@justhen.co.jp
             </a>
@@ -154,6 +157,7 @@ export default function Footer() {
         }
 
         .site-footer__link,
+        .site-footer__website,
         .site-footer__email {
           color: var(--washi-faint);
           text-decoration: none;
@@ -177,6 +181,7 @@ export default function Footer() {
         }
 
         .site-footer__link:hover,
+        .site-footer__website:hover,
         .site-footer__email:hover {
           color: var(--gold);
         }
@@ -195,6 +200,7 @@ export default function Footer() {
           margin: 0;
         }
 
+        .site-footer__website,
         .site-footer__email {
           width: fit-content;
           border-bottom: 1px solid rgba(201, 168, 76, 0.28);
