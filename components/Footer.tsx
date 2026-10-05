@@ -52,6 +52,9 @@ export default function Footer() {
             <a href="mailto:exporter@justhen.co.jp" className="site-footer__email">
               exporter@justhen.co.jp
             </a>
+            <a href="mailto:exporter.justhen@gmail.com" className="site-footer__email">
+              Secondary Email: exporter.justhen@gmail.com
+            </a>
             <p lang="ja">古物商許可証 第305581606050号</p>
             <p lang="ja">東京都公安委員会</p>
             <div className="site-footer__business-card">
