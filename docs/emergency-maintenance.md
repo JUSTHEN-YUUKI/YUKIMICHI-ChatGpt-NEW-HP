@@ -25,6 +25,12 @@
 APIはJSON、その他は日本語・英語の静的HTML。画像・外部スクリプト・解析・外部フォントは不要。
 問い合わせPOSTハンドラーにも、JSON解析とメール処理より前の停止判定を追加。
 
+### 2026-10-23: Yahoo! JAPANアプリの表示互換対応
+
+スマホでもPCと同じお知らせを表示する修正依頼に基づき、Yahoo!アプリ（YJApp-ANDROID / YJApp-IOS）の公開HTMLページ閲覧（GET/HEAD、Acceptにtext/html）に限り、HTTP200で**同一のメンテナンスHTML**を返す。Yahoo!アプリが503を独自エラー画面に置き換える事象への互換対応であり、通常アプリを実行・再公開する経路は設けない。
+これは当初の「全通常ページ503」に対する表示用の例外。一般ブラウザー・検索クローラーは503を維持。API、admin、_next、ファイル、POST等もYahoo!アプリを含め503を維持する。
+200のお知らせにもno-storeを設定し、Vary: User-Agent, Acceptを明示。200にはRetry-Afterを付けず、noindexは追加しない。Productionのロック・環境変数・解除承認条件は変更しない。
+
 Vercel Productionで `MAINTENANCE_MODE=on` を永続設定する。環境変数変更は既存デプロイに反映されないため、新しいProductionデプロイを作成して確認する。
 `lib/maintenance.ts` の `PRODUCTION_MAINTENANCE_LOCK=true` が本番の二重ロック。Productionは環境変数がoff・欠落しても停止する。Vercel外のproduction実行も停止する。
 クエリ・リクエストヘッダー・Cookie・時刻による解除経路は設けない。

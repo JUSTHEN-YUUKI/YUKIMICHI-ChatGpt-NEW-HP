@@ -38,4 +38,30 @@ const policy = await robots.text()
 assert.match(policy, /Allow: \//)
 assert.match(policy, /Disallow: \/admin\//)
 assert.doesNotMatch(policy, /Disallow: \/\s*$/m)
-console.log(JSON.stringify({ base, blockedChecksPassed: count, robots: 200 }))
+const yahooHeaders = { 'User-Agent': 'Mozilla/5.0 (Linux; Android; wv) Mobile Safari/537.36 YJApp-ANDROID jp.co.yahoo.android.yjtop/3.229.1', Accept: 'text/html,application/xhtml+xml,*/*;q=0.8' }
+const originalNotice = await (await fetch(new URL('/', base))).text()
+let yahooChecks = 0
+for (const path of ['/', '/contact', '/quote', '/pricing', '/old-page', '/?maintenance=off']) {
+  const response = await fetch(new URL(path, base), { headers: yahooHeaders, redirect: 'manual' })
+  assert.equal(response.status, 200, `Yahoo ${path}`)
+  assert.equal(await response.text(), originalNotice, `Yahoo notice differs: ${path}`)
+  assert.match(response.headers.get('Cache-Control'), /no-store/)
+  assert.equal(response.headers.has('Retry-After'), false)
+  yahooChecks++
+}
+for (const path of ['/api/inquiry', '/admin', '/admin/outbound', '/%61dmin', '/_next/static/test.js', '/favicon.png']) {
+  assert.equal((await fetch(new URL(path, base), { headers: yahooHeaders, redirect: 'manual' })).status, 503, `Yahoo ${path}`)
+  yahooChecks++
+}
+for (const method of ['POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']) {
+  const response = await fetch(new URL('/api/inquiry', base), { method, headers: yahooHeaders, body: method === 'OPTIONS' ? undefined : '{' })
+  assert.equal(response.status, 503, `Yahoo API ${method}`)
+  yahooChecks++
+}
+assert.equal((await fetch(new URL('/contact', base), { method: 'POST', headers: yahooHeaders, body: '{' })).status, 503)
+yahooChecks++
+for (const userAgent of ['Mozilla/5.0 (iPhone) Version/18.0 Mobile Safari/604.1', 'Mozilla/5.0 Chrome/155.0.0.0 Mobile Safari/537.36', 'Googlebot/2.1', 'Yahoo! Slurp']) {
+  assert.equal((await fetch(new URL('/', base), { headers: { ...yahooHeaders, 'User-Agent': userAgent } })).status, 503, userAgent)
+  yahooChecks++
+}
+console.log(JSON.stringify({ base, blockedChecksPassed: count, yahooCompatibilityChecks: yahooChecks, robots: 200 }))

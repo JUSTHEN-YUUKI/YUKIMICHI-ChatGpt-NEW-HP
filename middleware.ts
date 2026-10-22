@@ -4,6 +4,7 @@ import {
   maintenanceApiResponse,
   maintenanceHeaders,
   maintenancePageResponse,
+  maintenancePageStatus,
 } from './lib/maintenance'
 
 export function middleware(request: NextRequest) {
@@ -21,9 +22,14 @@ export function middleware(request: NextRequest) {
 
   // Encoded/unknown paths are blocked too; the API distinction changes only
   // the response format. All methods stop before route handlers or actions.
-  return path === '/api' || path.startsWith('/api/')
-    ? maintenanceApiResponse()
-    : maintenancePageResponse()
+  if (path === '/api' || path.startsWith('/api/')) return maintenanceApiResponse()
+
+  return maintenancePageResponse(maintenancePageStatus({
+    pathname: path,
+    method: request.method,
+    userAgent: request.headers.get('user-agent') ?? '',
+    accept: request.headers.get('accept') ?? '',
+  }))
 }
 
 export const config = { matcher: '/:path*' }
