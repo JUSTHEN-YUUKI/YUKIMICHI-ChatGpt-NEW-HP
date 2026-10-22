@@ -64,14 +64,48 @@ export const maintenanceHtml = `<!doctype html>
 <footer><p lang="en">JUSTHEN Co., Ltd.</p><p>株式会社ジャッセン</p></footer>
 </main></body></html>`
 
-export function maintenancePageResponse() {
+// Yahoo! JAPAN's in-app browser replaces HTTP error responses with its own
+// error screen. Only its public HTML navigations use a successful transport
+// status; they still receive exactly the same static maintenance notice.
+// This is a presentation decision, never authorization to run the normal app.
+export function maintenancePageStatus({
+  pathname,
+  method,
+  userAgent,
+  accept,
+}: {
+  pathname: string
+  method: string
+  userAgent: string
+  accept: string
+}): 200 | 503 {
+  if (method !== 'GET' && method !== 'HEAD') return 503
+  if (!/\bYJApp-(?:ANDROID|IOS)\b/i.test(userAgent)) return 503
+  if (!accept.toLowerCase().includes('text/html')) return 503
+
+  let decodedPath: string
+  try {
+    decodedPath = decodeURIComponent(pathname)
+  } catch {
+    return 503
+  }
+  // Keep APIs, admin, framework internals and file downloads on 503 even if a
+  // caller supplies Yahoo's user agent and HTML Accept header.
+  if (/^\/(?:api|admin|_next)(?:\/|$)/i.test(decodedPath) || decodedPath.includes('.')) return 503
+  return 200
+}
+
+export function maintenancePageResponse(status: 200 | 503 = 503) {
+  const headers = new Headers({
+    ...maintenanceHeaders,
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Language': 'ja, en',
+    'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+    'Vary': 'User-Agent, Accept',
+  })
+  if (status === 200) headers.delete('Retry-After')
   return new Response(maintenanceHtml, {
-    status: 503,
-    headers: {
-      ...maintenanceHeaders,
-      'Content-Type': 'text/html; charset=utf-8',
-      'Content-Language': 'ja, en',
-      'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
-    },
+    status,
+    headers,
   })
 }
