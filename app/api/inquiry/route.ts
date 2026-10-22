@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
+import { isMaintenanceEnabled, maintenanceApiResponse } from '@/lib/maintenance'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
@@ -237,6 +238,9 @@ function renderCustomerHtml(rows: Array<[string, string]>, contactToEmail: strin
 }
 
 export async function POST(request: Request) {
+  // Defense in depth: stop before JSON parsing, config lookup or email sending.
+  if (isMaintenanceEnabled()) return maintenanceApiResponse()
+
   let payload: InquiryPayload
 
   try {
