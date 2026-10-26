@@ -4,8 +4,9 @@ import { test } from 'node:test'
 import vm from 'node:vm'
 import ts from 'typescript'
 
-function loadMaintenance(env) {
-  const source = readFileSync(new URL('../lib/maintenance.ts', import.meta.url), 'utf8')
+function loadMaintenance(env, simulateApprovedSourceUnlock = false) {
+  let source = readFileSync(new URL('../lib/maintenance.ts', import.meta.url), 'utf8')
+  if (simulateApprovedSourceUnlock) source = source.replace('const PRODUCTION_MAINTENANCE_LOCK = true', 'const PRODUCTION_MAINTENANCE_LOCK = false')
   const { outputText } = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   })
@@ -28,6 +29,14 @@ test('preview defaults closed; normal preview requires deliberate environment op
   assert.equal(loadMaintenance({ NODE_ENV: 'development' }).isMaintenanceEnabled(), false)
 })
 
+test('even an approved source unlock requires explicit off; on or missing configuration restores maintenance', () => {
+  for (const mode of [undefined, '', 'invalid', 'on']) {
+    assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: mode }, true).isMaintenanceEnabled(), true)
+  }
+  assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off' }, true).isMaintenanceEnabled(), false)
+  assert.equal(loadMaintenance({ NODE_ENV: 'production', MAINTENANCE_MODE: 'off' }, true).isMaintenanceEnabled(), false)
+})
+
 test('maintenance responses are 503, non-cacheable, with no deindex directives or external assets', async () => {
   const { maintenanceApiResponse, maintenancePageResponse } = loadMaintenance({})
   for (const response of [maintenanceApiResponse(), maintenancePageResponse()]) {
@@ -48,7 +57,7 @@ test('maintenance responses are 503, non-cacheable, with no deindex directives o
 test('inquiry handler checks the lock before parsing or sending', () => {
   const route = readFileSync(new URL('../app/api/inquiry/route.ts', import.meta.url), 'utf8')
   const handler = route.slice(route.indexOf('export async function POST'))
-  assert.ok(handler.indexOf('if (isMaintenanceEnabled())') < handler.indexOf('request.json()'))
+  assert.ok(handler.indexOf('if (isMaintenanceEnabled())') < handler.indexOf('readInquiryPayload(request)'))
 })
 
 test('Yahoo public HTML navigation displays the identical notice with 200; other clients retain 503', async () => {
