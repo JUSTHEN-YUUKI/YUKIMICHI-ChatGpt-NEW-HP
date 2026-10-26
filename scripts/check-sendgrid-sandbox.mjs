@@ -1,6 +1,14 @@
 // Explicit, no-delivery diagnostic. Never installs a public credentialed endpoint.
 // A mail diagnostic failure must not stop static public-page deployment.
 if (process.env.VERCEL_ENV === 'production' && process.env.SENDGRID_SANDBOX_VERIFY === 'on') {
+  // Inventory the existing fallback without connecting or transmitting its
+  // credentials. A saved password alone is not proof of a working SMTP route.
+  const smtpHost = process.env.SMTP_HOST?.trim().toLowerCase() || ''
+  const smtpProvider = /(?:^|\.)sakura\.ne\.jp$/.test(smtpHost) ? 'sakura'
+    : /(?:^|\.)onamae\.ne\.jp$/.test(smtpHost) ? 'onamae'
+    : smtpHost === 'smtp.sendgrid.net' ? 'sendgrid' : smtpHost ? 'other' : 'unset'
+  const smtpComplete = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM'].every(name => Boolean(process.env[name]?.trim()))
+  console.log(`Existing SMTP inventory: provider=${smtpProvider}; configuration=${smtpComplete ? 'complete' : 'incomplete'}; no connection or delivery attempted.`)
   const key = process.env.SENDGRID_API_KEY?.trim()
   const from = process.env.SENDGRID_FROM_EMAIL?.trim()
   const to = process.env.CONTACT_TO_EMAIL?.trim()
