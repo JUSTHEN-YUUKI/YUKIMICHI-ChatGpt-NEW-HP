@@ -1,7 +1,7 @@
 'use client'
 
 import type { ChangeEvent, FormEvent } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 import { translateStaticText } from '@/lib/staticTextTranslations'
@@ -263,6 +263,21 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
   const [formState, setFormState] = useState<FormState>(initialState)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [feedbackMessage, setFeedbackMessage] = useState('')
+  const [runtimeReady, setRuntimeReady] = useState(false)
+  const canSubmit = submissionEnabled && runtimeReady
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/api/inquiry/status', { cache: 'no-store', signal: controller.signal })
+      .then(async response => {
+        if (!response.ok) return false
+        const result = await response.json()
+        return result.available === true
+      })
+      .then(available => { if (!controller.signal.aborted) setRuntimeReady(available) })
+      .catch(() => { if (!controller.signal.aborted) setRuntimeReady(false) })
+    return () => controller.abort()
+  }, [])
   const formFields = formCopy.fields as readonly FieldConfig[]
   const fields = type === 'contact' ? orderContactFields(formFields) : formFields
   const complianceNotes = formCommon.complianceNotes
@@ -289,7 +304,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!submissionEnabled) return
+    if (!canSubmit || submitState === 'submitting') return
     setSubmitState('submitting')
     setFeedbackMessage('')
 
@@ -496,7 +511,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
         ))}
       </div>
 
-      {!submissionEnabled && (
+      {!canSubmit && (
         <div className="inquiry-form__notice" role="status">
           <p lang="ja">フォームでの受付は一時停止中です。<a href={mailtoHref}>exporter@justhen.co.jp へメールでご連絡ください。</a></p>
           <p lang="en">Form submissions are temporarily unavailable. <a href={mailtoHref}>Please email exporter@justhen.co.jp.</a></p>
@@ -510,7 +525,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
       )}
 
       <div className="inquiry-form__actions">
-        <button type="submit" disabled={!submissionEnabled || submitState === 'submitting'}>
+        <button type="submit" disabled={!canSubmit || submitState === 'submitting'}>
           {submitState === 'submitting' ? common.submitting : buttonLabel}
         </button>
         <a href={mailtoHref}>{common.emailUs}</a>

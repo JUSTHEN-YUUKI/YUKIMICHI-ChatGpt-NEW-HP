@@ -9,8 +9,10 @@ const nativeRequire = createRequire(import.meta.url)
 function fixture(extraEnv = {}, send) {
   const sent = []
   const errors = []
-  const env = { VERCEL_ENV: 'preview', MAINTENANCE_PREVIEW_SITE_ENABLED: 'on', SENDGRID_API_KEY: 'test-only-not-a-key',
-    SENDGRID_FROM_EMAIL: 'sender@example.invalid', CONTACT_TO_EMAIL: 'admin@example.invalid', ...extraEnv }
+  const env = { VERCEL_ENV: 'preview', MAINTENANCE_PREVIEW_SITE_ENABLED: 'on', SMTP_PREVIEW_SEND: 'on',
+    SMTP_HOST: 'example.sakura.ne.jp', SMTP_PORT: '587', SMTP_USER: 'exporter@justhen.co.jp',
+    SMTP_PASSWORD: 'test-only-not-a-password', SMTP_FROM: 'exporter@justhen.co.jp',
+    CONTACT_NOTIFICATION_EMAIL: 'exporter@justhen.co.jp', ...extraEnv }
   const cache = new Map()
   function load(path) {
     if (cache.has(path)) return cache.get(path)
@@ -24,8 +26,12 @@ function fixture(extraEnv = {}, send) {
       console: { error: (...args) => errors.push(args) },
       require: (name) => {
         if (name.startsWith('@/')) return load(name.slice(2))
+        if (name === './smtp-config') return load('lib/smtp-config')
         if (name === 'next/server') return { NextResponse: Response }
-        if (name === '@sendgrid/mail') return { setApiKey() {}, async send(message) { sent.push(message); await send?.(message, sent.length) } }
+        if (name === 'nodemailer') return { createTransport() { return {
+          async verify() { await send?.(null, 0) }, close() {},
+          async sendMail(message) { sent.push(message); await send?.(message, sent.length); return { accepted: [message.to], rejected: [] } },
+        } } }
         return nativeRequire(name)
       },
     })
@@ -35,7 +41,7 @@ function fixture(extraEnv = {}, send) {
   return { sent, errors, load, post }
 }
 
-const valid = { type: 'contact', name: '検証担当', email: 'test@example.invalid', destinationCountry: 'Japan', message: '動作検証です。' }
+const valid = { type: 'contact', name: '検証担当', email: 'exporter@justhen.co.jp', destinationCountry: 'Japan', message: '動作検証です。' }
 function request(body = valid, headers = {}, path = '/api/inquiry') {
   return new Request(`https://preview.example.invalid${path}`, { method: 'POST', headers: {
     Origin: 'https://preview.example.invalid', 'Content-Type': 'application/json', ...headers,
@@ -50,7 +56,9 @@ test('contact and quote succeed with quantity omitted; admin HTML escaped and ac
     assert.equal(res.status, 200)
     assert.match((await res.json()).receiptNumber, /^YKM-\d{8}-[A-Z0-9]{6}$/)
     assert.equal(f.sent.length, 2)
-    for (const msg of f.sent) assert.equal(msg.mailSettings.sandboxMode.enable, true)
+    assert.equal(f.sent[0].replyTo, valid.email)
+    assert.equal(f.sent[0].to, 'exporter@justhen.co.jp')
+    assert.equal(f.sent[1].to, valid.email)
     assert.ok(f.sent[0].html.includes('&lt;script&gt;'))
     assert.ok(!f.sent[0].html.includes('<script>'))
     assert.ok(!f.sent[1].html.includes('untrusted.example'))
@@ -130,10 +138,17 @@ test('reopened Production pages do not implicitly enable inquiry; explicit on st
   for (const message of f.sent) assert.equal(message.mailSettings, undefined)
 })
 
-test('preview sandbox never delivers; sandbox configuration fails closed outside preview', async () => {
-  const f = fixture({ INQUIRY_EMAIL_SANDBOX: 'on' })
-  assert.equal((await f.post(request())).status, 200)
-  for (const msg of f.sent) assert.equal(msg.mailSettings.sandboxMode.enable, true)
+test('preview verification never delivers or reports submission success; delivery is owner-only', async () => {
+  for (const env of [{ SMTP_PREVIEW_SEND: undefined }, { INQUIRY_EMAIL_SANDBOX: 'on' }]) {
+    const f = fixture(env)
+    const response = await f.post(request())
+    assert.equal(response.status, 409)
+    assert.equal((await response.json()).code, 'SMTP_VERIFIED_NO_DELIVERY')
+    assert.equal(f.sent.length, 0)
+  }
+  const restricted = fixture()
+  assert.equal((await restricted.post(request({ ...valid, email: 'third-party@example.invalid' }))).status, 403)
+  assert.equal(restricted.sent.length, 0)
   const unsafe = fixture({ VERCEL_ENV: 'development', INQUIRY_EMAIL_SANDBOX: 'on' })
   assert.equal((await unsafe.post(request())).status, 503)
   assert.equal(unsafe.sent.length, 0)
@@ -141,11 +156,26 @@ test('preview sandbox never delivers; sandbox configuration fails closed outside
 
 test('admin failure sends no acknowledgement; acknowledgement failure does not repeat accepted inquiry', async () => {
   const admin = fixture({}, async () => { throw new Error('sensitive-provider-details') })
-  assert.equal((await admin.post(request())).status, 500)
+  assert.equal((await admin.post(request())).status, 502)
   assert.equal(admin.sent.length, 1)
   assert.ok(!JSON.stringify(admin.errors).includes('sensitive-provider-details'))
   const ack = fixture({}, async (_, count) => { if (count === 2) throw new Error('provider-error') })
   const res = await ack.post(request())
   assert.equal(res.status, 200)
   assert.equal((await res.json()).autoReplyOk, false)
+})
+
+test('all existing language payloads and supplementary product fields reach the administrator only', async () => {
+  for (const language of ['ja', 'en', 'zh', 'es']) {
+    const f = fixture({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off', INQUIRY_MODE: 'on' })
+    const res = await f.post(request({ ...valid, language, productName: '雪道 / YUKIMICHI',
+      quantity: '', unitPrice: 'JPY 1200', sizeWeight: '10 cm / 50 g', material: '綿 / cotton / 棉', recipientType: 'Company' }))
+    assert.equal(res.status, 200)
+    for (const value of [language, 'JPY 1200', '10 cm / 50 g', '綿 / cotton / 棉', 'Company']) assert.ok(f.sent[0].text.includes(value))
+    assert.ok(!f.sent[1].text.includes('JPY 1200'))
+  }
+  const missing = fixture({ SMTP_PASSWORD: '' })
+  const response = await missing.post(request(null))
+  assert.equal(response.status, 503)
+  assert.equal(missing.sent.length, 0)
 })

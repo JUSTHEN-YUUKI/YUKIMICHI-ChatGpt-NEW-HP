@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server'
-import sgMail from '@sendgrid/mail'
 import { createHash } from 'node:crypto'
 import { isMaintenanceEnabled, maintenanceApiResponse, isInquirySubmissionEnabled, inquiryUnavailableResponse } from '@/lib/maintenance'
 import { allowInquiryAttempt, InquiryRequestError, readInquiryPayload } from '@/lib/inquiry-security'
 import { isPatchedNode } from '@/lib/runtime-security'
+import { getSmtpConfig, isMailbox } from '@/lib/smtp-config'
+import { createInquiryMailer, safeSmtpError } from '@/lib/smtp-mail'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
+export const maxDuration = 60
 
 type InquiryType = 'quote' | 'contact'
 
@@ -50,7 +52,7 @@ function normalizeType(value: unknown): InquiryType | null {
 }
 
 function isEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+  return isMailbox(value)
 }
 
 function isOptionalUrl(value: string) {
@@ -97,93 +99,6 @@ function generateRandomCode(length = 6) {
 
 function generateReceiptNumber(date: Date) {
   return `YKM-${getTokyoDatePart(date)}-${generateRandomCode()}`
-}
-
-function getRequiredEnv(name: string) {
-  const value = process.env[name]?.trim()
-  return value || null
-}
-
-function getSendGridConfig() {
-  const contactToEmail = getRequiredEnv('CONTACT_TO_EMAIL')
-  const sendGridApiKey = getRequiredEnv('SENDGRID_API_KEY')
-  const sendGridFromEmail = getRequiredEnv('SENDGRID_FROM_EMAIL')
-  const requiredEnv = [
-    { name: 'CONTACT_TO_EMAIL', value: contactToEmail },
-    { name: 'SENDGRID_API_KEY', value: sendGridApiKey },
-    { name: 'SENDGRID_FROM_EMAIL', value: sendGridFromEmail },
-  ]
-  const missing = requiredEnv.filter(({ value }) => !value).map(({ name }) => name)
-
-  if (missing.length > 0) {
-    return {
-      ok: false as const,
-      missing,
-    }
-  }
-
-  return {
-    ok: true as const,
-    contactToEmail: contactToEmail as string,
-    sendGridApiKey: sendGridApiKey as string,
-    sendGridFromEmail: sendGridFromEmail as string,
-  }
-}
-
-async function sendSendGridEmail({
-  to,
-  from,
-  replyTo,
-  subject,
-  text,
-  html,
-  sendGridApiKey,
-}: {
-  to: string
-  from: string
-  replyTo: string
-  subject: string
-  text: string
-  html: string
-  sendGridApiKey: string
-}) {
-  sgMail.setApiKey(sendGridApiKey)
-  await sgMail.send({
-    from,
-    to,
-    replyTo,
-    subject,
-    text,
-    html,
-    // Preview always uses SendGrid sandbox validation: it cannot deliver mail.
-    ...(process.env.VERCEL_ENV === 'preview'
-      ? { mailSettings: { sandboxMode: { enable: true } } } : {}),
-  })
-}
-
-function getSafeErrorDetails(error: unknown) {
-  if (error instanceof Error) {
-    const details = error as Error & {
-      code?: unknown
-      command?: unknown
-      responseCode?: unknown
-      response?: {
-        statusCode?: unknown
-      }
-    }
-
-    return {
-      name: error.name,
-      code: typeof details.code === 'string' ? details.code : undefined,
-      command: typeof details.command === 'string' ? details.command : undefined,
-      responseCode: typeof details.responseCode === 'number' ? details.responseCode : undefined,
-      responseStatusCode: typeof details.response?.statusCode === 'number' ? details.response.statusCode : undefined,
-    }
-  }
-
-  return {
-    name: 'UnknownSendGridError',
-  }
 }
 
 function escapeHtml(value: string) {
@@ -253,6 +168,12 @@ export async function POST(request: Request) {
   }
 
   if (!isInquirySubmissionEnabled()) return inquiryUnavailableResponse()
+
+  const smtpConfig = getSmtpConfig()
+  if (!smtpConfig.ok) {
+    console.error('[inquiry] SMTP configuration unavailable', { reason: smtpConfig.reason, missing: smtpConfig.missing })
+    return inquiryUnavailableResponse()
+  }
 
   let payload: InquiryPayload
 
@@ -329,6 +250,13 @@ export async function POST(request: Request) {
     )
   }
 
+  // Real preview trials are opt-in and restricted to the owner mailbox.
+  const preview = process.env.VERCEL_ENV === 'preview'
+  if (preview && process.env.SMTP_PREVIEW_SEND === 'on' && email.toLowerCase() !== smtpConfig.notificationEmail.toLowerCase()) {
+    return NextResponse.json({ ok: false, code: 'PREVIEW_RECIPIENT_RESTRICTED', error: USER_SEND_ERROR },
+      { status: 403, headers: { 'Cache-Control': 'no-store' } })
+  }
+
   const submittedDate = new Date()
   const receiptNumber = generateReceiptNumber(submittedDate)
   const adminSubject =
@@ -359,6 +287,11 @@ export async function POST(request: Request) {
     ['SDS / Ingredient List Availability', sdsAvailability],
     ['Product Photo / Document URL', documentUrl],
     ['Product Category', productCategory],
+    ['Unit Price', unitPrice],
+    ['Size / Weight', sizeWeight],
+    ['Material', material],
+    ['Recipient Type', recipientType],
+    ['Language', language],
     ['Quantity', quantityText],
     ['Destination', normalizedDestination],
     ['Desired Timing', deadline],
@@ -366,7 +299,7 @@ export async function POST(request: Request) {
     ['Submitted At', `${submittedAt} JST`],
     ['Source Page', sourcePage],
   ])
-  const sendGridAdminText = [
+  const adminText = [
     'YUKIMICHI inquiry received.',
     '',
     renderRowsText(adminRows),
@@ -400,47 +333,41 @@ export async function POST(request: Request) {
     '※本メールは自動返信です。',
   ].join('\n')
 
+  let mailer: ReturnType<typeof createInquiryMailer> | undefined
   try {
-    const sendGridConfig = getSendGridConfig()
-
-    if (!sendGridConfig.ok) {
-      console.error('[inquiry] SendGrid configuration is missing', {
-        missing: sendGridConfig.missing,
-      })
-      return NextResponse.json(
-        { ok: false, error: USER_SEND_ERROR },
-        { status: 500 },
-      )
+    mailer = createInquiryMailer(smtpConfig)
+    // By default Preview verifies SMTP authentication without delivery and
+    // does not present that diagnostic as a successful form submission.
+    if (preview && (process.env.SMTP_PREVIEW_SEND !== 'on' || process.env.INQUIRY_EMAIL_SANDBOX === 'on')) {
+      await mailer.verify()
+      return NextResponse.json({ ok: false, code: 'SMTP_VERIFIED_NO_DELIVERY',
+        error: 'SMTP接続・認証の確認が完了しました。検証モードのためメールは送信していません。 / SMTP verified; no email was sent.' },
+      { status: 409, headers: { 'Cache-Control': 'no-store' } })
     }
-
-    const customerAutoReplyText = autoReplyText.replace(contactToEmailPlaceholder, sendGridConfig.contactToEmail)
-    const customerAutoReplyHtml = renderCustomerHtml(customerRows, sendGridConfig.contactToEmail)
+    const customerAutoReplyText = autoReplyText.replace(contactToEmailPlaceholder, smtpConfig.notificationEmail)
+    const customerAutoReplyHtml = renderCustomerHtml(customerRows, smtpConfig.notificationEmail)
 
     // Do not let arbitrary submitted content become an email relay. The
     // customer acknowledgement contains only a fixed receipt and timestamp.
-    await sendSendGridEmail({
-        from: sendGridConfig.sendGridFromEmail,
-        to: sendGridConfig.contactToEmail,
+    await mailer.send({
+        to: smtpConfig.notificationEmail,
         replyTo: email,
         subject: adminSubject,
-        text: sendGridAdminText,
+        text: adminText,
         html: adminHtml,
-        sendGridApiKey: sendGridConfig.sendGridApiKey,
       })
     let autoReplyOk = true
     try {
-      await sendSendGridEmail({
-        from: sendGridConfig.sendGridFromEmail,
+      await mailer.send({
         to: email,
-        replyTo: sendGridConfig.contactToEmail,
+        replyTo: smtpConfig.notificationEmail,
         subject: autoReplySubject,
         text: customerAutoReplyText,
         html: customerAutoReplyHtml,
-        sendGridApiKey: sendGridConfig.sendGridApiKey,
       })
     } catch (error) {
       autoReplyOk = false
-      console.error('[inquiry] Acknowledgement failed after administrator delivery', getSafeErrorDetails(error))
+      console.error('[inquiry] Acknowledgement failed after SMTP accepted administrator mail', safeSmtpError(error))
     }
 
     return NextResponse.json({
@@ -449,11 +376,13 @@ export async function POST(request: Request) {
       receiptNumber,
     }, { headers: { 'Cache-Control': 'no-store' } })
   } catch (error) {
-    console.error('[inquiry] SendGrid inquiry email send failed', getSafeErrorDetails(error))
+    console.error('[inquiry] SMTP inquiry send failed', safeSmtpError(error))
 
     return NextResponse.json(
       { ok: false, error: USER_SEND_ERROR },
-      { status: 500 },
+      { status: 502, headers: { 'Cache-Control': 'no-store' } },
     )
+  } finally {
+    mailer?.close()
   }
 }
