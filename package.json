@@ -4,26 +4,32 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-runtime.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
     "autoprefixer": "^10.5.0",
-    "next": "15.3.9",
-    "postcss": "^8.5.15",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.3.0"
+    "next": "15.5.28",
+    "postcss": "8.5.31",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "tailwindcss": "^4.3.0",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^15.3.9",
+    "eslint-config-next": "15.5.28",
     "typescript": "^5"
-  }
+  },
+  "engines": { "node": "24.x" },
+  "overrides": { "postcss": "$postcss" }
 }

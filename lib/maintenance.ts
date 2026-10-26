@@ -1,16 +1,21 @@
-// Incident lock: remove only after the site owner explicitly says
-// 「メンテナンス解除OK」. Dates, builds and environment changes never unlock it.
+// Incident lock: remove only with explicit owner release authorization and
+// after all conditions attached to that authorization have been verified.
+// The owner's 2026-10-26 conditional approval is recorded in the release runbook.
+// Dates, builds and environment changes alone never unlock the source lock.
 const PRODUCTION_MAINTENANCE_LOCK = true
 
 export function isMaintenanceEnabled() {
   // Read only trusted server environment, never request headers/cookies/query.
-  if (process.env.VERCEL_ENV === 'production') return PRODUCTION_MAINTENANCE_LOCK
+  if (process.env.VERCEL_ENV === 'production') {
+    return PRODUCTION_MAINTENANCE_LOCK || process.env.MAINTENANCE_MODE?.trim().toLowerCase() !== 'off'
+  }
   if (process.env.MAINTENANCE_MODE?.trim().toLowerCase() === 'on') return true
   // Enable normal previews only AFTER Vercel Deployment Protection is verified.
   // New/automatic previews therefore remain closed by default during incident.
   if (process.env.VERCEL_ENV === 'preview') return process.env.MAINTENANCE_PREVIEW_SITE_ENABLED !== 'on'
   // Protect production-like deployments outside Vercel as well.
-  return process.env.NODE_ENV === 'production' && PRODUCTION_MAINTENANCE_LOCK
+  return process.env.NODE_ENV === 'production' &&
+    (PRODUCTION_MAINTENANCE_LOCK || process.env.MAINTENANCE_MODE?.trim().toLowerCase() !== 'off')
 }
 
 export const maintenanceHeaders = {

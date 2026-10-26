@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
+import { createHash } from 'node:crypto'
 import { isMaintenanceEnabled, maintenanceApiResponse } from '@/lib/maintenance'
+import { allowInquiryAttempt, InquiryRequestError, readInquiryPayload } from '@/lib/inquiry-security'
+import { isPatchedNode } from '@/lib/runtime-security'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
@@ -56,8 +59,8 @@ function isOptionalUrl(value: string) {
   }
 
   try {
-    new URL(value)
-    return true
+    const url = new URL(value)
+    return (url.protocol === 'https:' || url.protocol === 'http:') && !url.username && !url.password
   } catch {
     return false
   }
@@ -152,6 +155,9 @@ async function sendSendGridEmail({
     subject,
     text,
     html,
+    // Preview always uses SendGrid sandbox validation: it cannot deliver mail.
+    ...(process.env.VERCEL_ENV === 'preview'
+      ? { mailSettings: { sandboxMode: { enable: true } } } : {}),
   })
 }
 
@@ -168,7 +174,6 @@ function getSafeErrorDetails(error: unknown) {
 
     return {
       name: error.name,
-      message: error.message,
       code: typeof details.code === 'string' ? details.code : undefined,
       command: typeof details.command === 'string' ? details.command : undefined,
       responseCode: typeof details.responseCode === 'number' ? details.responseCode : undefined,
@@ -177,7 +182,7 @@ function getSafeErrorDetails(error: unknown) {
   }
 
   return {
-    message: typeof error === 'string' ? error : 'Unknown SendGrid error',
+    name: 'UnknownSendGridError',
   }
 }
 
@@ -241,16 +246,31 @@ export async function POST(request: Request) {
   // Defense in depth: stop before JSON parsing, config lookup or email sending.
   if (isMaintenanceEnabled()) return maintenanceApiResponse()
 
+  if (!isPatchedNode(process.versions.node) ||
+      (process.env.INQUIRY_EMAIL_SANDBOX === 'on' && process.env.VERCEL_ENV !== 'preview')) {
+    console.error('[inquiry] Runtime or mail-mode safety check failed', { node: process.versions.node })
+    return maintenanceApiResponse()
+  }
+
   let payload: InquiryPayload
 
   try {
-    payload = (await request.json()) as InquiryPayload
-  } catch {
+    payload = await readInquiryPayload(request)
+  } catch (error) {
     return NextResponse.json(
-      { ok: false, error: '入力内容を確認してください。' },
-      { status: 400 },
+      { ok: false, code: error instanceof InquiryRequestError ? error.code : 'INVALID_REQUEST', error: '入力内容を確認してください。' },
+      { status: error instanceof InquiryRequestError ? error.status : 400, headers: { 'Cache-Control': 'no-store' } },
     )
   }
+
+  // Vercel replaces x-forwarded-for at its trusted ingress. No client header is
+  // trusted as identity outside Vercel; the WAF remains the shared quota owner.
+  const ip = process.env.VERCEL ? request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown' : 'local'
+  const quotaKey = createHash('sha256').update(ip).digest('hex')
+  if (!allowInquiryAttempt(quotaKey)) return NextResponse.json(
+    { ok: false, error: '送信回数の上限に達しました。時間をおいて再度お試しください。' },
+    { status: 429, headers: { 'Cache-Control': 'no-store', 'Retry-After': '3600' } },
+  )
 
   const type = normalizeType(payload.type)
   const company = toText(payload.company, 300)
@@ -354,23 +374,7 @@ export async function POST(request: Request) {
   const customerRows = getDisplayRows([
     ['受付番号 / Reference No.', receiptNumber],
     ['送信種別 / Type', type],
-    ['会社名 / Company', company],
-    ['ご担当者名 / Name', name],
-    ['メールアドレス / Email', email],
-    ['電話番号 / Phone', phone],
-    ['国 / Country', destinationCountry || destination],
-    ['商品名 / Product Name', productName],
-    ['商品URL / Product URL', productUrl],
-    ['SDS・成分表の有無 / SDS or Ingredient List', sdsAvailability],
-    ['写真・資料URL / Product Photo or Document URL', documentUrl],
-    ['商品カテゴリ / Product Category', productCategory],
-    ['数量 / Quantity', quantityText],
-    ['配送先 / Destination', normalizedDestination],
-    ['希望納期 / Desired Timing', deadline],
-    ['配送方法 / Shipping Method', shippingMethod],
-    ['メッセージ / Message', message],
     ['送信日時 / Submitted At', `${submittedAt} JST`],
-    ['送信元ページ / Source Page', sourcePage],
   ])
   const autoReplySubject =
     type === 'quote'
@@ -378,8 +382,6 @@ export async function POST(request: Request) {
       : `【YUKIMICHI】お問い合わせを受け付けました（${receiptNumber}）`
   const contactToEmailPlaceholder = '{{CONTACT_TO_EMAIL}}'
   const autoReplyText = [
-    `${name} 様`,
-    '',
     'このたびは、YUKIMICHI へお問い合わせいただきありがとうございます。',
     '以下の内容でお問い合わせを受け付けました。',
     '',
@@ -412,8 +414,9 @@ export async function POST(request: Request) {
     const customerAutoReplyText = autoReplyText.replace(contactToEmailPlaceholder, sendGridConfig.contactToEmail)
     const customerAutoReplyHtml = renderCustomerHtml(customerRows, sendGridConfig.contactToEmail)
 
-    await Promise.all([
-      sendSendGridEmail({
+    // Do not let arbitrary submitted content become an email relay. The
+    // customer acknowledgement contains only a fixed receipt and timestamp.
+    await sendSendGridEmail({
         from: sendGridConfig.sendGridFromEmail,
         to: sendGridConfig.contactToEmail,
         replyTo: email,
@@ -421,8 +424,10 @@ export async function POST(request: Request) {
         text: sendGridAdminText,
         html: adminHtml,
         sendGridApiKey: sendGridConfig.sendGridApiKey,
-      }),
-      sendSendGridEmail({
+      })
+    let autoReplyOk = true
+    try {
+      await sendSendGridEmail({
         from: sendGridConfig.sendGridFromEmail,
         to: email,
         replyTo: sendGridConfig.contactToEmail,
@@ -430,14 +435,17 @@ export async function POST(request: Request) {
         text: customerAutoReplyText,
         html: customerAutoReplyHtml,
         sendGridApiKey: sendGridConfig.sendGridApiKey,
-      }),
-    ])
+      })
+    } catch (error) {
+      autoReplyOk = false
+      console.error('[inquiry] Acknowledgement failed after administrator delivery', getSafeErrorDetails(error))
+    }
 
     return NextResponse.json({
       ok: true,
-      autoReplyOk: true,
+      autoReplyOk,
       receiptNumber,
-    })
+    }, { headers: { 'Cache-Control': 'no-store' } })
   } catch (error) {
     console.error('[inquiry] SendGrid inquiry email send failed', getSafeErrorDetails(error))
 
