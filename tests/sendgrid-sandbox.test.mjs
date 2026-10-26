@@ -14,7 +14,8 @@ test('build diagnostic is explicit Production-only and always no-delivery; provi
     await vm.runInNewContext(`(async () => { ${source} })()`, {
       process: { env: { SENDGRID_API_KEY: 'test-secret', SENDGRID_FROM_EMAIL: 'sender@example.invalid', CONTACT_TO_EMAIL: 'admin@example.invalid', ...env } },
       AbortSignal, JSON, console: { log: x => logs.push(x), warn: x => logs.push(x) },
-      fetch: async (url, options) => { calls.push([url, options]); return { status: 401, body: { cancel: async () => {} } } },
+      fetch: async (url, options) => { calls.push([url, options]); return { status: 401,
+        json: async () => ({ errors: [{ message: 'The provided authorization grant is invalid, expired, or revoked. test-secret' }] }) } },
     })
     assert.equal(calls.length, shouldCall ? 1 : 0)
     assert.ok(!logs.join('').includes('test-secret'))
@@ -24,6 +25,7 @@ test('build diagnostic is explicit Production-only and always no-delivery; provi
       assert.equal(body.mail_settings.sandbox_mode.enable, true)
       assert.equal(body.personalizations[0].to[0].email, 'admin@example.invalid')
       assert.match(logs.join(''), /failed \(HTTP 401\)/)
+      assert.match(logs.join(''), /invalid_expired_or_revoked_grant/)
     }
   }
 })
