@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
 import { createHash } from 'node:crypto'
-import { isMaintenanceEnabled, maintenanceApiResponse } from '@/lib/maintenance'
+import { isMaintenanceEnabled, maintenanceApiResponse, isInquirySubmissionEnabled, inquiryUnavailableResponse } from '@/lib/maintenance'
 import { allowInquiryAttempt, InquiryRequestError, readInquiryPayload } from '@/lib/inquiry-security'
 import { isPatchedNode } from '@/lib/runtime-security'
 
@@ -249,8 +249,10 @@ export async function POST(request: Request) {
   if (!isPatchedNode(process.versions.node) ||
       (process.env.INQUIRY_EMAIL_SANDBOX === 'on' && process.env.VERCEL_ENV !== 'preview')) {
     console.error('[inquiry] Runtime or mail-mode safety check failed', { node: process.versions.node })
-    return maintenanceApiResponse()
+    return inquiryUnavailableResponse()
   }
+
+  if (!isInquirySubmissionEnabled()) return inquiryUnavailableResponse()
 
   let payload: InquiryPayload
 

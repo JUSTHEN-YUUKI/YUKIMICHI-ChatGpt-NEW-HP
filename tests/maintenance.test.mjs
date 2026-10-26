@@ -4,9 +4,9 @@ import { test } from 'node:test'
 import vm from 'node:vm'
 import ts from 'typescript'
 
-function loadMaintenance(env, simulateApprovedSourceUnlock = false) {
+function loadMaintenance(env, simulateEmergencySourceLock = false) {
   let source = readFileSync(new URL('../lib/maintenance.ts', import.meta.url), 'utf8')
-  if (simulateApprovedSourceUnlock) source = source.replace('const PRODUCTION_MAINTENANCE_LOCK = true', 'const PRODUCTION_MAINTENANCE_LOCK = false')
+  if (simulateEmergencySourceLock) source = source.replace('const PRODUCTION_MAINTENANCE_LOCK = false', 'const PRODUCTION_MAINTENANCE_LOCK = true')
   const { outputText } = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   })
@@ -15,11 +15,11 @@ function loadMaintenance(env, simulateApprovedSourceUnlock = false) {
   return context.exports
 }
 
-test('production lock survives missing/off/invalid environment configuration', () => {
+test('emergency source lock survives missing/off/invalid environment configuration', () => {
   for (const mode of [undefined, 'off', 'false', 'on', 'invalid', '']) {
-    assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: mode, MAINTENANCE_PREVIEW_SITE_ENABLED: 'on' }).isMaintenanceEnabled(), true)
+    assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: mode, MAINTENANCE_PREVIEW_SITE_ENABLED: 'on' }, true).isMaintenanceEnabled(), true)
   }
-  assert.equal(loadMaintenance({ NODE_ENV: 'production', MAINTENANCE_MODE: 'off' }).isMaintenanceEnabled(), true)
+  assert.equal(loadMaintenance({ NODE_ENV: 'production', MAINTENANCE_MODE: 'off' }, true).isMaintenanceEnabled(), true)
 })
 
 test('preview defaults closed; normal preview requires deliberate environment opt-in', () => {
@@ -29,12 +29,18 @@ test('preview defaults closed; normal preview requires deliberate environment op
   assert.equal(loadMaintenance({ NODE_ENV: 'development' }).isMaintenanceEnabled(), false)
 })
 
-test('even an approved source unlock requires explicit off; on or missing configuration restores maintenance', () => {
+test('approved public-page reopening requires explicit off; missing/invalid/on still stop', () => {
   for (const mode of [undefined, '', 'invalid', 'on']) {
-    assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: mode }, true).isMaintenanceEnabled(), true)
+    assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: mode }).isMaintenanceEnabled(), true)
   }
-  assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off' }, true).isMaintenanceEnabled(), false)
-  assert.equal(loadMaintenance({ NODE_ENV: 'production', MAINTENANCE_MODE: 'off' }, true).isMaintenanceEnabled(), false)
+  assert.equal(loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off' }).isMaintenanceEnabled(), false)
+  assert.equal(loadMaintenance({ NODE_ENV: 'production', MAINTENANCE_MODE: 'off' }).isMaintenanceEnabled(), false)
+  for (const mode of [undefined, '', 'off', 'invalid']) {
+    const controls = loadMaintenance({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off', INQUIRY_MODE: mode })
+    assert.equal(controls.isMaintenanceEnabled(), false)
+    assert.equal(controls.isInquirySubmissionEnabled(), false)
+  }
+  assert.equal(loadMaintenance({ VERCEL_ENV: 'production', INQUIRY_MODE: 'on' }).isInquirySubmissionEnabled(), true)
 })
 
 test('maintenance responses are 503, non-cacheable, with no deindex directives or external assets', async () => {

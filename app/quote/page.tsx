@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 import InquiryForm from '@/components/InquiryForm'
+import { isInquirySubmissionEnabled } from '@/lib/maintenance'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
@@ -131,7 +132,7 @@ export default function QuotePage() {
           </a>
         </div>
         <div className="quote-form-column">
-          <InquiryForm type="quote" mailtoHref={quoteMailto} />
+          <InquiryForm type="quote" mailtoHref={quoteMailto} submissionEnabled={isInquirySubmissionEnabled()} />
           <details className="quote-optional-details">
             <summary>
               <TranslatedText

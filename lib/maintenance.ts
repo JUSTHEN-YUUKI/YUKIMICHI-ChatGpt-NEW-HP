@@ -1,8 +1,7 @@
-// Incident lock: remove only with explicit owner release authorization and
-// after all conditions attached to that authorization have been verified.
-// The owner's 2026-10-26 conditional approval is recorded in the release runbook.
-// Dates, builds and environment changes alone never unlock the source lock.
-const PRODUCTION_MAINTENANCE_LOCK = true
+// Owner explicitly authorized static public-page reopening on 2026-10-26,
+// independently of inquiry availability. Emergency full-stop remains available.
+// Dates and builds never change either control automatically.
+const PRODUCTION_MAINTENANCE_LOCK = false
 
 export function isMaintenanceEnabled() {
   // Read only trusted server environment, never request headers/cookies/query.
@@ -16,6 +15,24 @@ export function isMaintenanceEnabled() {
   // Protect production-like deployments outside Vercel as well.
   return process.env.NODE_ENV === 'production' &&
     (PRODUCTION_MAINTENANCE_LOCK || process.env.MAINTENANCE_MODE?.trim().toLowerCase() !== 'off')
+}
+
+// Production inquiry sending is a separate explicit opt-in after runtime and
+// provider verification. Public pages can remain available while it is off.
+export function isInquirySubmissionEnabled() {
+  return process.env.VERCEL_ENV === 'production' ||
+    (process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'preview')
+    ? process.env.INQUIRY_MODE?.trim().toLowerCase() === 'on'
+    : true
+}
+
+export function inquiryUnavailableResponse() {
+  return Response.json({
+    ok: false,
+    code: 'INQUIRY_UNAVAILABLE',
+    error: 'フォームでの受付は一時停止中です。exporter@justhen.co.jp へメールでご連絡ください。 / Please email exporter@justhen.co.jp while form submissions are temporarily unavailable.',
+    contact: 'exporter@justhen.co.jp',
+  }, { status: 503, headers: maintenanceHeaders })
 }
 
 export const maintenanceHeaders = {

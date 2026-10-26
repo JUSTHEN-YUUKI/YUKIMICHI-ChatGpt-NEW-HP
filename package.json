@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-runtime.mjs",
+    "prebuild": "node scripts/check-runtime.mjs && node scripts/check-sendgrid-sandbox.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
