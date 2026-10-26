@@ -118,6 +118,18 @@ test('maintenance and an unpatched runtime stop before parsing or sending', asyn
   for (const version of ['20.20.0', '22.23.3', '24.22.0', '26.12.1', 'unknown']) assert.equal(isPatchedNode(version), false)
 })
 
+test('reopened Production pages do not implicitly enable inquiry; explicit on still needs patched Node', async () => {
+  for (const env of [{}, { INQUIRY_MODE: 'off' }, { INQUIRY_MODE: 'on', TEST_NODE: '24.21.0' }]) {
+    const f = fixture({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off', ...env })
+    assert.equal((await f.post(request(valid))).status, 503)
+    assert.equal(f.sent.length, 0)
+  }
+  const f = fixture({ VERCEL_ENV: 'production', MAINTENANCE_MODE: 'off', INQUIRY_MODE: 'on' })
+  assert.equal((await f.post(request(valid))).status, 200)
+  assert.equal(f.sent.length, 2)
+  for (const message of f.sent) assert.equal(message.mailSettings, undefined)
+})
+
 test('preview sandbox never delivers; sandbox configuration fails closed outside preview', async () => {
   const f = fixture({ INQUIRY_EMAIL_SANDBOX: 'on' })
   assert.equal((await f.post(request())).status, 200)

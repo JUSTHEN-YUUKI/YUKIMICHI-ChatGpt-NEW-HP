@@ -42,6 +42,7 @@ type FieldConfig = {
 type InquiryFormProps = {
   type: InquiryType
   mailtoHref: string
+  submissionEnabled?: boolean
 }
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
@@ -254,7 +255,7 @@ function splitBilingualText(text: string) {
   }
 }
 
-export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
+export default function InquiryForm({ type, mailtoHref, submissionEnabled = true }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
   const formCommon = translations[language].forms
@@ -288,6 +289,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (!submissionEnabled) return
     setSubmitState('submitting')
     setFeedbackMessage('')
 
@@ -494,6 +496,13 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
         ))}
       </div>
 
+      {!submissionEnabled && (
+        <div className="inquiry-form__notice" role="status">
+          <p lang="ja">フォームでの受付は一時停止中です。<a href={mailtoHref}>exporter@justhen.co.jp へメールでご連絡ください。</a></p>
+          <p lang="en">Form submissions are temporarily unavailable. <a href={mailtoHref}>Please email exporter@justhen.co.jp.</a></p>
+        </div>
+      )}
+
       {feedbackMessage && (
         <div className={`inquiry-form__feedback inquiry-form__feedback--${submitState}`} role="status">
           {feedbackMessage}
@@ -501,7 +510,7 @@ export default function InquiryForm({ type, mailtoHref }: InquiryFormProps) {
       )}
 
       <div className="inquiry-form__actions">
-        <button type="submit" disabled={submitState === 'submitting'}>
+        <button type="submit" disabled={!submissionEnabled || submitState === 'submitting'}>
           {submitState === 'submitting' ? common.submitting : buttonLabel}
         </button>
         <a href={mailtoHref}>{common.emailUs}</a>

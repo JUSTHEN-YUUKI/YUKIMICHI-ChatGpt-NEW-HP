@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from '@/components/NewTabLink'
 import InquiryForm from '@/components/InquiryForm'
+import { isInquirySubmissionEnabled } from '@/lib/maintenance'
 import { TranslatedText } from '@/components/TranslatedText'
 
 export const metadata: Metadata = {
@@ -125,7 +126,7 @@ export default function ContactPage() {
             Fill in the required fields and describe your request in the message field. Product URLs are optional.
           </p>
 
-          <InquiryForm type="contact" mailtoHref={inquiryMailto} />
+          <InquiryForm type="contact" mailtoHref={inquiryMailto} submissionEnabled={isInquirySubmissionEnabled()} />
         </div>
       </section>
 

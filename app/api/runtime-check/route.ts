@@ -9,7 +9,9 @@ export function GET() {
   if (process.env.VERCEL_ENV !== 'preview') return new Response(null, { status: 404 })
   const patched = isPatchedNode(process.versions.node)
   return Response.json({ node: process.versions.node, brotli: process.versions.brotli, patched }, {
-    status: patched ? 200 : 503,
+    // This is authenticated diagnostic metadata, not an availability signal.
+    // Keep it readable in browsers that replace JSON error-status navigations.
+    status: 200,
     headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
   })
 }
