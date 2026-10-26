@@ -42,12 +42,19 @@
 ## 検証と現時点の制約
 
 - ローカル検証用Node24.22.1はnodejs.orgの配布ZIPとSHA256一覧を照合して使用（PC全体のNodeは変更しない）。
-- 依存更新後の `npm audit` は0件。最終のnpm ci/build/型/lint/追加テストとPreview結果は後続記録で確定する。
+- `npm ci` 成功、インストール済みNext15.5.28/React・React DOM19.2.9/sharp0.35.5/PostCSS8.5.31/axios1.20.0を照合。更新後の `npm audit` は全重要度0件。rootサイトの依存関係に対する結果で、独立した未稼働ツールの依存ツリー全体を示すものではない。
+- `npm run build`、`npm run typecheck`、`npm run lint` 成功。ESLintは既存の未使用変数・フォント・imgに11件の警告（エラーなし）。NodeのTSモジュール判定とnext lint非推奨の警告も残るが、重大脆弱性の検出ではない。
+- ユニット/契約テスト14件成功。正常サイトのローカルHTTP26件、Production相当の停止HTTP31件とYahoo互換22件、robots200を確認。メールはモックまたは処理前停止で、実配信なし。
+- ビルド出力の追跡範囲をprocess.cwd()に固定し、Windows上の親ディレクトリのlockfileによってアプリ外へ範囲が広がらないようにした。
+- Vercelの24系候補：`fc459de2e91fa5c6bbae28d0eda6a0c224ee47c5`、Preview `3aw62z3CUvLk3RT2j5o8fQwB38Ev`。ビルド成功だが、実Functionsのログでは **Node24.21.0**。修正版24.22.1未満なので、問い合わせPOSTは追加した安全確認で503になった。
+- 代替22系候補：`343b6b7c15c602247a996f69d33681671122df6e`、Preview `CrH1ixzRNMdF9mJx41YYUjyEQxbR`。実Functionsは **Node22.23.2** で、必要な22.23.4未満。同様に見積POSTを処理前503で停止。22系への変更では解消しないため、最終構成は24.xへ戻す。
+- **ビルド成功やNode24.xという設定だけでは実ランタイムの修正済み判定にならない。現時点では条件3/7未達で通常サイトの再公開は禁止。** Vercel側のパッチ配布完了後、保護Previewで24.22.1以上を実測し、Sandbox連携成功まで確認する。
+- 保護Previewのトップ、問い合わせ/見積の日英併記とスマホ390px幅の表示、横はみ出しなし、数量等の任意属性、失敗時の入力保持を確認。実機Yahooテストや独立した英語ルーティングは未実施（既存構成は日本語メインの日英併記、言語切替無効を維持）。
 - Preview保護：Require Log In、Standard Protection有効。保護除外・共有リンク・自動化バイパスなしを確認。
 - 直近1時間のRuntime Logsは0件。Firewall直近1日ではAllowed114、Denied764、Challenged11、System DDoS775、active alertsなしを確認。この数値は確認時点のスナップショットで、侵害なしの証明ではない。詳細ログの選択可能期間は現Hobbyプランで1時間まで。長期ログ/過去侵害の確認は未完了。
 - PreviewにはSENDGRID_FROM_EMAILがあるが、SENDGRID_API_KEY・CONTACT_TO_EMAILはProductionのみ。秘密値はwrite-onlyで複製できない。Productionから移動・削除せず、検証専用キーを保護されたブランチへ設定してから外部連携検証を実施する。
 - 実メールの送受信や、さくら/SendGrid内部の安全性を、DNS不変更やモック成功だけで確認済みとはしない。
-- 別ローカルツールのtranslatorは全インターフェースの無認証API、開発専用adminのCSVは数式無害化に中程度の課題がある。いずれもrootのVercel公開経路は確認されない。本番復旧に無関係な大規模変更は避け、別途対処事項として保持する。
+- 別ローカルツールのtranslatorは全インターフェースの無認証API、開発専用adminのCSVは数式無害化に課題がある。いずれもrootのVercel公開経路は確認されず、ローカルの稼働/操作条件を考慮した静的監査の評価はLow。本番復旧に無関係な大規模変更は避け、別途対処事項として保持する。
 
 ## 将来の解除・安全な再停止
 
