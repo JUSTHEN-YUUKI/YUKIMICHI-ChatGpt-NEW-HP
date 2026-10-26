@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
+  // Keep tracing inside this application even when the workstation has parent lockfiles.
+  outputFileTracingRoot: process.cwd(),
   poweredByHeader: false,
   async headers() {
     return [{ source: '/:path*', headers: [
