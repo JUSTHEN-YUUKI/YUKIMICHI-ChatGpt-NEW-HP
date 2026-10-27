@@ -110,7 +110,7 @@ test('readiness uses actual runtime and SMTP settings; public response exposes o
 
 test('Git-integrated deployments skip every unrelated project and unknown project identity', () => {
   const source = readFileSync(new URL('../scripts/vercel-project-scope.mjs', import.meta.url), 'utf8')
-  for (const [projectId, code] of [['prj_qSdp3iNVTw2uI7RXlhiCX3hZnwUH', 1], ['unrelated-project', 0], [undefined, 0]]) {
+  for (const [projectId, code] of [['prj_Ns0akrPUBHdxKuX8U1BEiGtZWudq', 1], ['prj_qSdp3iNVTw2uI7RXlhiCX3hZnwUH', 0], ['unrelated-project', 0], [undefined, 0]]) {
     const process = { env: { VERCEL_PROJECT_ID: projectId }, exitCode: undefined }
     vm.runInNewContext(source, { process, console: { log() {} } })
     assert.equal(process.exitCode, code)
