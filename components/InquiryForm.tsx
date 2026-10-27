@@ -255,6 +255,35 @@ function splitBilingualText(text: string) {
   }
 }
 
+// Temporary safe intake: the client prepares a draft locally rather than
+// sending personal data through the unpatched Node.js SMTP function.
+function buildInquiryEmail(type: InquiryType, state: FormState) {
+  const quantity = [state.quantity, state.quantity ? state.quantityUnit : ''].filter(Boolean).join(' ')
+  const destination = [state.destinationCountry, state.destinationCity].filter(Boolean).join(' / ') || state.destination
+  const subject = type === 'quote' ? 'YUKIMICHI - Export Quotation Request' : 'YUKIMICHI - Contact Inquiry'
+  const rows: Array<[string, string]> = [
+    ['Inquiry Type', type],
+    ['Company', state.company],
+    ['Name', state.name],
+    ['Email', state.email],
+    ['Product Name', state.productName],
+    ['Product URL', state.productUrl],
+    ['Product Category', state.productCategory],
+    ['Quantity', quantity],
+    ['Destination', destination],
+    ['Desired Timing', state.deadline],
+    ['Shipping Method', state.shippingMethod],
+    ['SDS / Ingredients', state.sdsAvailability],
+    ['Product Photo / Document URL', state.documentUrl],
+    ['Message', state.message],
+  ]
+  const body = rows.filter(([, value]) => value.trim()).map(([label, value]) => `${label}: ${value}`).join('\n\n')
+  return {
+    body,
+    href: `mailto:exporter@justhen.co.jp?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  }
+}
+
 export default function InquiryForm({ type, mailtoHref, submissionEnabled = true }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
@@ -263,6 +292,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
   const [formState, setFormState] = useState<FormState>(initialState)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [feedbackMessage, setFeedbackMessage] = useState('')
+  const [manualMailDraft, setManualMailDraft] = useState('')
   const [runtimeReady, setRuntimeReady] = useState(false)
   const canSubmit = submissionEnabled && runtimeReady
 
@@ -304,8 +334,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!canSubmit || submitState === 'submitting') return
-    setSubmitState('submitting')
+    if (submitState === 'submitting') return
     setFeedbackMessage('')
 
     const submittedFormState = readSubmittedFormState(new FormData(event.currentTarget))
@@ -317,6 +346,26 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
       submittedFormState.destination
 
     setFormState(submittedFormState)
+    if (!canSubmit) {
+      const draft = buildInquiryEmail(type, submittedFormState)
+      setManualMailDraft(draft.body)
+      setSubmitState('idle')
+      // Mailto URLs are not reliable for long inquiries; never silently truncate.
+      if (draft.href.length > 1800) {
+        setFeedbackMessage(language === 'ja'
+          ? '入力内容が長いため、自動でメールアプリへ渡していません。下の本文をコピーし、公式メールアドレスへ送信してください。'
+          : 'Your message is too long for an email link. Please copy the complete draft below and email it to our official address.')
+      } else {
+        setFeedbackMessage(language === 'ja'
+          ? 'メールアプリで内容を確認し、必ず送信操作をしてください。この画面だけでは受付は完了しません。メールアプリが開かない場合は下の本文をコピーしてください。'
+          : 'Please review and SEND the message in your email app. This page has not submitted your inquiry. If no app opens, copy the draft below.')
+        window.location.href = draft.href
+      }
+      return
+    }
+
+    setSubmitState('submitting')
+    setManualMailDraft('')
 
     try {
       const response = await fetch('/api/inquiry', {
@@ -513,8 +562,9 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
 
       {!canSubmit && (
         <div className="inquiry-form__notice" role="status">
-          <p lang="ja">フォームでの受付は一時停止中です。<a href={mailtoHref}>exporter@justhen.co.jp へメールでご連絡ください。</a></p>
-          <p lang="en">Form submissions are temporarily unavailable. <a href={mailtoHref}>Please email exporter@justhen.co.jp.</a></p>
+          <p lang="ja">自動送信は一時停止中です。入力内容からメールを作成できます。メールアプリで送信操作をするとお問い合わせが届きます。</p>
+          <p lang="en">Automatic form submission is temporarily unavailable. You can compose an email using these fields. Your inquiry is sent only after you press Send in your email app.</p>
+          <p><a href={mailtoHref}>exporter@justhen.co.jp</a></p>
         </div>
       )}
 
@@ -524,9 +574,30 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
         </div>
       )}
 
+      {manualMailDraft && !canSubmit && (
+        <div className="inquiry-form__notice">
+          <label htmlFor={`inquiry-${type}-mail-draft`} lang="ja">メール本文（コピー用） / Email draft to copy</label>
+          <textarea
+            id={`inquiry-${type}-mail-draft`}
+            aria-label="Email draft to copy"
+            readOnly
+            rows={10}
+            value={manualMailDraft}
+            style={{ width: '100%', minHeight: 160, color: '#fff', background: '#071426', padding: 12, marginTop: 8 }}
+          />
+          <p lang="en">If needed, copy this text into a new email addressed to exporter@justhen.co.jp.</p>
+        </div>
+      )}
+
       <div className="inquiry-form__actions">
-        <button type="submit" disabled={!canSubmit || submitState === 'submitting'}>
-          {submitState === 'submitting' ? common.submitting : buttonLabel}
+        <button type="submit" disabled={submitState === 'submitting'}>
+          {submitState === 'submitting' ? common.submitting : (canSubmit ? buttonLabel : ({
+            ja: '入力内容をメールアプリで送信',
+            en: 'Continue in email app',
+            zh: '使用邮件应用发送',
+            th: 'ส่งต่อด้วยแอปอีเมล',
+            es: 'Continuar en la aplicación de correo',
+          } as Record<string, string>)[language] || 'Continue in email app')}
         </button>
         <a href={mailtoHref}>{common.emailUs}</a>
       </div>
