@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useLanguage } from '@/components/LanguageProvider'
 import { translations } from '@/lib/translations'
 import { translateStaticText } from '@/lib/staticTextTranslations'
+import { buildInquiryEmail, inquiryEmailRecipient } from '@/lib/inquiry-email'
 import { analyticsEventNames, trackAnalyticsEvent } from '@/lib/analytics'
 
 type InquiryType = 'quote' | 'contact'
@@ -255,35 +256,6 @@ function splitBilingualText(text: string) {
   }
 }
 
-// Temporary safe intake: the client prepares a draft locally rather than
-// sending personal data through the unpatched Node.js SMTP function.
-function buildInquiryEmail(type: InquiryType, state: FormState) {
-  const quantity = [state.quantity, state.quantity ? state.quantityUnit : ''].filter(Boolean).join(' ')
-  const destination = [state.destinationCountry, state.destinationCity].filter(Boolean).join(' / ') || state.destination
-  const subject = type === 'quote' ? 'YUKIMICHI - Export Quotation Request' : 'YUKIMICHI - Contact Inquiry'
-  const rows: Array<[string, string]> = [
-    ['Inquiry Type', type],
-    ['Company', state.company],
-    ['Name', state.name],
-    ['Email', state.email],
-    ['Product Name', state.productName],
-    ['Product URL', state.productUrl],
-    ['Product Category', state.productCategory],
-    ['Quantity', quantity],
-    ['Destination', destination],
-    ['Desired Timing', state.deadline],
-    ['Shipping Method', state.shippingMethod],
-    ['SDS / Ingredients', state.sdsAvailability],
-    ['Product Photo / Document URL', state.documentUrl],
-    ['Message', state.message],
-  ]
-  const body = rows.filter(([, value]) => value.trim()).map(([label, value]) => `${label}: ${value}`).join('\n\n')
-  return {
-    body,
-    href: `mailto:exporter@justhen.co.jp?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
-  }
-}
-
 export default function InquiryForm({ type, mailtoHref, submissionEnabled = true }: InquiryFormProps) {
   const { language } = useLanguage()
   const formCopy = translations[language].forms[type]
@@ -293,6 +265,8 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [feedbackMessage, setFeedbackMessage] = useState('')
   const [manualMailDraft, setManualMailDraft] = useState('')
+  const [manualMailHref, setManualMailHref] = useState<string | null>(null)
+  const [copyFeedback, setCopyFeedback] = useState('')
   const [runtimeReady, setRuntimeReady] = useState(false)
   const canSubmit = submissionEnabled && runtimeReady
 
@@ -349,9 +323,11 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
     if (!canSubmit) {
       const draft = buildInquiryEmail(type, submittedFormState)
       setManualMailDraft(draft.body)
+      setManualMailHref(draft.href)
+      setCopyFeedback('')
       setSubmitState('idle')
       // Mailto URLs are not reliable for long inquiries; never silently truncate.
-      if (draft.href.length > 1800) {
+      if (!draft.href) {
         setFeedbackMessage(language === 'ja'
           ? '入力内容が長いため、自動でメールアプリへ渡していません。下の本文をコピーし、公式メールアドレスへ送信してください。'
           : 'Your message is too long for an email link. Please copy the complete draft below and email it to our official address.')
@@ -406,6 +382,15 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
     } catch (error) {
       setSubmitState('error')
       setFeedbackMessage(error instanceof Error ? error.message : formCommon.defaultError)
+    }
+  }
+
+  async function copyMailDraft() {
+    try {
+      await navigator.clipboard.writeText(manualMailDraft)
+      setCopyFeedback('コピーしました。メールアプリに貼り付けて送信してください。 / Copied. Paste into your email app and press Send.')
+    } catch {
+      setCopyFeedback('下の本文を選択して手動でコピーしてください。 / Select the complete draft below and copy it manually.')
     }
   }
 
@@ -562,9 +547,12 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
 
       {!canSubmit && (
         <div className="inquiry-form__notice" role="status">
-          <p lang="ja">自動送信は一時停止中です。入力内容からメールを作成できます。メールアプリで送信操作をするとお問い合わせが届きます。</p>
+          <p lang="ja">自動送信は一時停止中です。入力内容からメールを作成できます。メールアプリで内容を確認し、送信操作をしてください。この画面では送信されません。</p>
           <p lang="en">Automatic form submission is temporarily unavailable. You can compose an email using these fields. Your inquiry is sent only after you press Send in your email app.</p>
-          <p><a href={mailtoHref}>exporter@justhen.co.jp</a></p>
+          <p lang="zh">自动提交暂时不可用。请生成邮件并在邮件应用中点击发送。若无法打开应用或内容较长，请复制下方完整正文，发送至 exporter@justhen.co.jp。本页面不会自动发送。</p>
+          <p lang="th">ระบบส่งอัตโนมัติหยุดชั่วคราว กรุณาสร้างอีเมลและกดส่งในแอปอีเมล หากเปิดแอปไม่ได้หรือข้อความยาว ให้คัดลอกข้อความทั้งหมดด้านล่างแล้วส่งไปที่ exporter@justhen.co.jp หน้านี้ไม่ได้ส่งอีเมลให้อัตโนมัติ</p>
+          <p lang="es">El envío automático no está disponible. Prepare el correo y pulse Enviar en su aplicación. Si no se abre o el mensaje es largo, copie el texto completo de abajo y envíelo a exporter@justhen.co.jp. Esta página no envía el correo.</p>
+          <p><a href={`mailto:${inquiryEmailRecipient}`}>{inquiryEmailRecipient}</a></p>
         </div>
       )}
 
@@ -585,16 +573,22 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
             value={manualMailDraft}
             style={{ width: '100%', minHeight: 160, color: '#fff', background: '#071426', padding: 12, marginTop: 8 }}
           />
-          <p lang="en">If needed, copy this text into a new email addressed to exporter@justhen.co.jp.</p>
+          <p>To: {inquiryEmailRecipient}<br />Subject: {type === 'quote' ? 'YUKIMICHI - Export Quotation Request' : 'YUKIMICHI - Contact Inquiry'}</p>
+          <div className="inquiry-form__actions">
+            <button type="button" onClick={copyMailDraft}>本文をすべてコピー / Copy full message</button>
+            {manualMailHref && <a href={manualMailHref}>メールアプリを開く / Open email app</a>}
+          </div>
+          <p lang="en">If needed, select and copy the complete text above into a new email addressed to exporter@justhen.co.jp. Review it and press Send in your email app.</p>
+          {copyFeedback && <p role="status">{copyFeedback}</p>}
         </div>
       )}
 
       <div className="inquiry-form__actions">
         <button type="submit" disabled={submitState === 'submitting'}>
           {submitState === 'submitting' ? common.submitting : (canSubmit ? buttonLabel : ({
-            ja: '入力内容をメールアプリで送信',
+            ja: '入力内容からメールを作成',
             en: 'Continue in email app',
-            zh: '使用邮件应用发送',
+            zh: '生成邮件草稿',
             th: 'ส่งต่อด้วยแอปอีเมล',
             es: 'Continuar en la aplicación de correo',
           } as Record<string, string>)[language] || 'Continue in email app')}
