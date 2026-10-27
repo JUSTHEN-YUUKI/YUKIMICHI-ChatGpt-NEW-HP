@@ -386,11 +386,19 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
   }
 
   async function copyMailDraft() {
+    let timeout: ReturnType<typeof setTimeout> | undefined
     try {
-      await navigator.clipboard.writeText(manualMailDraft)
+      await Promise.race([
+        navigator.clipboard.writeText(manualMailDraft),
+        new Promise<never>((_, reject) => {
+          timeout = setTimeout(() => reject(new Error('clipboard unavailable')), 2000)
+        }),
+      ])
       setCopyFeedback('コピーしました。メールアプリに貼り付けて送信してください。 / Copied. Paste into your email app and press Send.')
     } catch {
       setCopyFeedback('下の本文を選択して手動でコピーしてください。 / Select the complete draft below and copy it manually.')
+    } finally {
+      if (timeout) clearTimeout(timeout)
     }
   }
 
