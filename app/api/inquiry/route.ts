@@ -5,12 +5,13 @@ import { allowInquiryAttempt, InquiryRequestError, readInquiryPayload } from '@/
 import { isPatchedNode } from '@/lib/runtime-security'
 import { getSmtpConfig, isMailbox } from '@/lib/smtp-config'
 import { createInquiryMailer, safeSmtpError } from '@/lib/smtp-mail'
+import { validateTcgInquiry } from '@/lib/tcg/inquiry'
 
 export const runtime = 'nodejs'
 export const preferredRegion = 'hnd1'
 export const maxDuration = 60
 
-type InquiryType = 'quote' | 'contact'
+type InquiryType = 'quote' | 'contact' | 'tcg-quote'
 
 type InquiryPayload = {
   type?: unknown
@@ -48,7 +49,7 @@ function toText(value: unknown, maxLength = 2000) {
 }
 
 function normalizeType(value: unknown): InquiryType | null {
-  return value === 'quote' || value === 'contact' ? value : null
+  return value === 'quote' || value === 'contact' || value === 'tcg-quote' ? value : null
 }
 
 function isEmail(value: string) {
@@ -127,12 +128,12 @@ function renderTableHtml(rows: Array<[string, string]>) {
     .join('')
 }
 
-function renderAdminHtml(rows: Array<[string, string]>, message: string) {
+function renderAdminHtml(rows: Array<[string, string]>, message: string, heading = 'YUKIMICHI Inquiry') {
   const tableRows = renderTableHtml(rows)
 
   return [
     '<div style="font-family: -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; line-height: 1.7; color: #111827;">',
-    '<h1 style="font-size: 18px; margin: 0 0 16px;">YUKIMICHI Inquiry</h1>',
+    `<h1 style="font-size: 18px; margin: 0 0 16px;">${escapeHtml(heading)}</h1>`,
     `<table style="border-collapse: collapse; width: 100%; max-width: 760px;">${tableRows}</table>`,
     message
       ? `<h2 style="font-size: 15px; margin: 22px 0 8px;">Message</h2><div style="white-space: pre-wrap; border-left: 3px solid #c9a84c; padding: 10px 12px; background: #fbfaf7;">${escapeHtml(message)}</div>`
@@ -196,6 +197,10 @@ export async function POST(request: Request) {
   )
 
   const type = normalizeType(payload.type)
+  const tcg = type === 'tcg-quote' ? validateTcgInquiry(payload as Record<string, unknown>) : null
+  if (tcg && !tcg.ok) {
+    return NextResponse.json({ ok: false, error: 'TCG見積依頼の入力内容を確認してください。 / Please check your TCG quote request.' }, { status: 400 })
+  }
   const company = toText(payload.company, 300)
   const name = toText(payload.name, 200)
   const email = toText(payload.email, 300)
@@ -217,12 +222,13 @@ export async function POST(request: Request) {
   const sizeWeight = toText(payload.sizeWeight, 500)
   const material = toText(payload.material, 500)
   const recipientType = toText(payload.recipientType, 200)
-  const sourcePage = toText(payload.sourcePage, 300) || (type === 'quote' ? '/quote' : '/contact')
+  const sourcePage = type === 'tcg-quote' ? '/tcg/quote' : toText(payload.sourcePage, 300) || (type === 'quote' ? '/quote' : '/contact')
   const language = toText(payload.language, 20) || 'ja'
   const website = toText(payload.website, 300)
 
   if (website) {
     console.error('Inquiry honeypot triggered')
+    if (type === 'tcg-quote') return NextResponse.json({ ok: false, error: '入力内容を確認してください。' }, { status: 400 })
     return NextResponse.json({
       ok: true,
       autoReplyOk: false,
@@ -260,7 +266,9 @@ export async function POST(request: Request) {
   const submittedDate = new Date()
   const receiptNumber = generateReceiptNumber(submittedDate)
   const adminSubject =
-    type === 'quote'
+    type === 'tcg-quote'
+      ? `【YUKIMICHI】TCG B2B見積依頼（${receiptNumber}）`
+      : type === 'quote'
       ? `【YUKIMICHI】お見積り依頼が届きました（${receiptNumber}）`
       : `【YUKIMICHI】お問い合わせが届きました（${receiptNumber}）`
   const submittedAt = submittedDate.toLocaleString('ja-JP', {
@@ -279,6 +287,14 @@ export async function POST(request: Request) {
     ['Inquiry Type', type],
     ['Name', name],
     ['Company', company],
+    ...(tcg?.ok ? [
+      ['Business Type', tcg.values.businessType === 'company' ? 'Company / 法人' : 'Sole Proprietor / 個人事業主'],
+      ['Business Country / Region', tcg.values.businessCountry],
+      ['Business Website', tcg.values.businessWebsite || ''],
+      ['TCG Category', tcg.values.tcgCategory === 'pokemon' ? 'Pokémon TCG' : 'ONE PIECE TCG'],
+      ['Requested Order Unit', quantityUnit],
+      ['Consent', 'Business inquiry and privacy notice acknowledged'],
+    ] as Array<[string, string]> : []),
     ['Email', email],
     ['Phone', phone],
     ['Country', destinationCountry || destination],
@@ -300,19 +316,21 @@ export async function POST(request: Request) {
     ['Source Page', sourcePage],
   ])
   const adminText = [
-    'YUKIMICHI inquiry received.',
+    type === 'tcg-quote' ? 'YUKIMICHI TCG B2B quote inquiry received.' : 'YUKIMICHI inquiry received.',
     '',
     renderRowsText(adminRows),
     ...(message ? ['', `Message: ${message}`] : []),
   ].join('\n')
-  const adminHtml = renderAdminHtml(adminRows, message)
+  const adminHtml = renderAdminHtml(adminRows, message, type === 'tcg-quote' ? 'TCG B2B見積依頼' : undefined)
   const customerRows = getDisplayRows([
     ['受付番号 / Reference No.', receiptNumber],
     ['送信種別 / Type', type],
     ['送信日時 / Submitted At', `${submittedAt} JST`],
   ])
   const autoReplySubject =
-    type === 'quote'
+    type === 'tcg-quote'
+      ? `【YUKIMICHI】TCG B2B見積依頼を受け付けました（${receiptNumber}）`
+      : type === 'quote'
       ? `【YUKIMICHI】お見積り依頼を受け付けました（${receiptNumber}）`
       : `【YUKIMICHI】お問い合わせを受け付けました（${receiptNumber}）`
   const contactToEmailPlaceholder = '{{CONTACT_TO_EMAIL}}'

@@ -22,7 +22,7 @@ function fixture(extraEnv = {}, send) {
     const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } })
     vm.runInNewContext(outputText, {
       exports: result, process: { env, versions: { ...process.versions, node: extraEnv.TEST_NODE ?? '24.22.1' } },
-      Response, Headers, TextDecoder, Uint8Array, URL, crypto: globalThis.crypto,
+      Response, Headers, TextDecoder, Uint8Array, URL, URLSearchParams, crypto: globalThis.crypto,
       console: { error: (...args) => errors.push(args) },
       require: (name) => {
         if (name.startsWith('@/')) return load(name.slice(2))
@@ -178,4 +178,64 @@ test('all existing language payloads and supplementary product fields reach the 
   const response = await missing.post(request(null))
   assert.equal(response.status, 503)
   assert.equal(missing.sent.length, 0)
+})
+
+const tcgValid = {
+  type: 'tcg-quote', businessType: 'company', company: 'Test Business', name: '検証担当',
+  businessCountry: 'Singapore', email: 'exporter@justhen.co.jp', businessWebsite: 'https://example.invalid',
+  tcgCategory: 'pokemon', productName: '商品名 / Product', quantity: '2', quantityUnit: 'CASE',
+  destinationCountry: 'Singapore', destinationCity: 'Singapore', deadline: '', message: '',
+  tcgConsent: 'accepted', website: '', sourcePage: '/untrusted-source',
+}
+
+test('TCG company and sole proprietor requests preserve business details and distinguish notification subjects', async () => {
+  for (const businessType of ['company', 'sole_proprietor']) {
+    const f = fixture()
+    const payload = { ...tcgValid, businessType, company: businessType === 'company' ? '<b>Test Business</b>' : '' }
+    const response = await f.post(request(payload))
+    assert.equal(response.status, 200)
+    assert.equal((await response.json()).ok, true)
+    assert.equal(f.sent.length, 2)
+    assert.match(f.sent[0].subject, /TCG B2B見積依頼/)
+    assert.match(f.sent[0].text, /Singapore/)
+    assert.match(f.sent[0].text, /Requested Order Unit: CASE/)
+    assert.match(f.sent[0].text, /Business Website: https:\/\/example.invalid/)
+    assert.match(f.sent[0].text, /Source Page: \/tcg\/quote/)
+    assert.ok(!f.sent[0].html.includes('<b>Test Business</b>'))
+    assert.ok(!f.sent[1].text.includes('Test Business'))
+    assert.match(f.sent[1].subject, /TCG B2B/)
+  }
+})
+
+test('TCG rejects missing consent, invalid business data, quantities and units before sending', async () => {
+  for (const change of [
+    { tcgConsent: '' }, { tcgConsent: 'true' }, { company: '' }, { businessType: 'consumer' },
+    { quantity: '' }, { quantity: '0' }, { quantity: '-1' }, { quantity: '1.5' }, { quantity: '1000001' },
+    { quantityUnit: 'PACK' }, { tcgCategory: 'other' }, { businessCountry: '' }, { destinationCity: '' },
+    { productName: '' }, { name: 'x'.repeat(201) }, { website: 'bot' },
+    { businessWebsite: 'javascript:alert(1)' }, { businessWebsite: 'https://user:pass@example.invalid' },
+  ]) {
+    const f = fixture()
+    assert.equal((await f.post(request({ ...tcgValid, ...change }))).status, 400, JSON.stringify(change))
+    assert.equal(f.sent.length, 0)
+  }
+})
+
+test('TCG draft keeps the complete request without reporting delivery; unpublished references are not served', () => {
+  const f = fixture()
+  const { tcgEmailDraft, validateTcgInquiry } = f.load('lib/tcg/inquiry')
+  const result = validateTcgInquiry({ ...tcgValid, businessType: 'sole_proprietor', company: '', message: '長いご要望'.repeat(400) })
+  assert.equal(result.ok, true)
+  const draft = tcgEmailDraft(result.values)
+  assert.ok(draft.body.includes('長いご要望'.repeat(400)))
+  assert.ok(draft.href.startsWith('mailto:exporter@justhen.co.jp?'))
+  const { getProduct, products, quoteHref } = f.load('lib/tcg/catalog')
+  assert.equal(getProduct('unknown', 'unknown'), undefined)
+  for (const product of products) {
+    assert.equal(product.moq, null)
+    assert.equal(product.unitsPerCase, null)
+    assert.equal(product.availability, 'confirmation_required')
+    assert.equal(product.imageUrl, null)
+    assert.ok(quoteHref(product.category, product.slug).includes(`product=${product.slug}`))
+  }
 })
