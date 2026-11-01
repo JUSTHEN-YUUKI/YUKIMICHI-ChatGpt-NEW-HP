@@ -138,6 +138,19 @@
 @media(max-width:520px){.tcg-site .tcg-container{width:calc(100% - 36px)}.tcg-site .tcg-category-grid,.tcg-site .tcg-product-grid,.tcg-site .tcg-form-grid{grid-template-columns:1fr}.tcg-site .tcg-category-card{min-height:235px}.tcg-site .tcg-category-index{margin-bottom:25px}.tcg-site .tcg-form-shell{padding:20px}.tcg-site .tcg-service-grid article{padding:20px 15px}.tcg-site .tcg-service-grid h3{font-size:12px}.tcg-site .tcg-service-grid .tcg-en{font-size:10px}.tcg-site h2{font-size:20px}.tcg-site .tcg-image-placeholder-large{min-height:270px}.tcg-site .tcg-specs>div{grid-template-columns:1fr 1.2fr;font-size:11px;gap:12px}}
 @media(prefers-reduced-motion:reduce){.tcg-site *{scroll-behavior:auto;transition:none}}
 
+/* Only the two category introductions receive the approved corner accents. */
+.tcg-site .tcg-category-intro{display:grid;grid-template-columns:minmax(0,1fr);isolation:isolate;--tcg-intro-accent:#f4b400}
+.tcg-site .tcg-category-intro-onepiece{--tcg-intro-accent:#287bc3}
+.tcg-site .tcg-category-intro>.tcg-breadcrumb{grid-area:1/1}
+.tcg-site .tcg-category-intro>.tcg-eyebrow{grid-area:2/1}
+.tcg-site .tcg-category-intro>h1{grid-area:3/1;padding:24px 28px 0;position:relative;z-index:1}
+.tcg-site .tcg-category-intro>.tcg-lead{grid-area:4/1;max-width:none;padding:0 28px 24px;position:relative;z-index:1}
+.tcg-site .tcg-category-intro>.tcg-lead>.tcg-bilingual{display:block;max-width:780px}
+.tcg-site .tcg-category-intro::before{content:"";grid-area:3/1/5/2;margin-bottom:30px;background:#fff;border:2px solid var(--tcg-intro-accent);border-radius:18px;pointer-events:none;z-index:0}
+.tcg-site .tcg-category-intro::after,.tcg-site .tcg-category-intro>.tcg-lead::after{content:"";width:34px;height:34px;background:var(--tcg-intro-accent);pointer-events:none;z-index:0}
+.tcg-site .tcg-category-intro::after{grid-area:3/1;align-self:start;justify-self:start;border-top-left-radius:18px;clip-path:polygon(0 0,100% 0,0 100%)}
+.tcg-site .tcg-category-intro>.tcg-lead::after{position:absolute;right:0;bottom:0;border-bottom-right-radius:18px;clip-path:polygon(100% 0,100% 100%,0 100%);z-index:-1}
+
 /* Typography is scoped to TCG; shared site navigation and footer are untouched. */
 .tcg-site{
   --tcg-type-body:18px;
