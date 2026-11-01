@@ -8,6 +8,7 @@ const links = [
   { href: '/tcg', ja: 'トップ', en: 'Home' },
   { href: '/tcg/pokemon', ja: 'ポケモンカード', en: 'Pokémon TCG' },
   { href: '/tcg/onepiece', ja: 'ワンピースカード', en: 'ONE PIECE TCG' },
+  { href: '/tcg/fee-calculator', ja: '手数料シミュレーション', en: 'Fee Calculator' },
   { href: '/tcg/how-to-order', ja: 'お取引の流れ', en: 'How to Order' },
   { href: '/tcg/quote', ja: 'お見積り', en: 'Request a Quote' },
   { href: '/tcg/faq', ja: 'よくある質問', en: 'FAQ' },
