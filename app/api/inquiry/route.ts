@@ -236,19 +236,12 @@ export async function POST(request: Request) {
   }
 
   const normalizedDestination = destination || [destinationCountry, destinationCity].filter(Boolean).join(' / ')
-  const missingProductReference = !productName && !productUrl
-  const quoteMissingRequired = type === 'quote' && (!normalizedDestination || !message || missingProductReference)
-  const contactMissingRequired = type === 'contact' && (!normalizedDestination || !message)
-
   if (
     !type ||
-    !name ||
     !email ||
     !isEmail(email) ||
     !isOptionalUrl(productUrl) ||
-    !isOptionalUrl(documentUrl) ||
-    quoteMissingRequired ||
-    contactMissingRequired
+    !isOptionalUrl(documentUrl)
   ) {
     return NextResponse.json(
       { ok: false, error: '入力内容を確認してください。' },
