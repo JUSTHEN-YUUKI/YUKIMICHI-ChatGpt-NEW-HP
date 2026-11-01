@@ -4,7 +4,7 @@ const required = ['name', 'email', 'businessCountry', 'productName', 'quantity',
   'destinationCountry', 'destinationCity', 'tcgCategory'] as const
 const limits: Record<string, number> = {
   name: 200, email: 300, company: 300, businessCountry: 200, businessWebsite: 1000,
-  productName: 500, quantity: 7, quantityUnit: 4, destinationCountry: 200,
+  productName: 500, quantity: 7, quantityUnit: 6, destinationCountry: 200,
   destinationCity: 200, deadline: 300, message: 5000,
 }
 
@@ -20,7 +20,7 @@ export function validateTcgInquiry(payload: Record<string, unknown>) {
       !['company', 'sole_proprietor'].includes(values.businessType) ||
       (values.businessType === 'company' && !values.company) ||
       !['pokemon', 'onepiece'].includes(values.tcgCategory) ||
-      !['BOX', 'CASE'].includes(values.quantityUnit) ||
+      !['BOX', 'CARTON'].includes(values.quantityUnit) ||
       !/^[1-9]\d{0,6}$/.test(values.quantity) || Number(values.quantity) > 1_000_000 ||
       values.tcgConsent !== 'accepted') return { ok: false as const }
   if (values.businessWebsite) {
