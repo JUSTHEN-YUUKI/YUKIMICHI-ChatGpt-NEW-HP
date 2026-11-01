@@ -1,4 +1,4 @@
-.tcg-site{--tcg-navy:#162940;--tcg-yellow:#ffcb05;--tcg-blue:#2a75bb;--tcg-ink:#183b75;--tcg-cream:#fff9e9;padding-top:var(--nav-h);background:#f8f8f5;color:var(--tcg-navy);font-weight:400;line-height:1.8;overflow-wrap:anywhere}
+.tcg-site{--tcg-navy:#162940;--tcg-yellow:#ffcb05;--tcg-blue:#2a75bb;--tcg-ink:#183b75;--tcg-cream:#fff9e9;padding-top:var(--nav-h);background:linear-gradient(#07111f 0 var(--nav-h),#f8f8f5 var(--nav-h) 100%);color:var(--tcg-navy);font-weight:400;line-height:1.8;overflow-wrap:anywhere}
 .tcg-site *{box-sizing:border-box}
 .tcg-site a{color:inherit;text-decoration:none}
 .tcg-site a:focus-visible,.tcg-site button:focus-visible,.tcg-site input:focus-visible,.tcg-site select:focus-visible,.tcg-site textarea:focus-visible{outline:3px solid var(--tcg-blue);outline-offset:4px}
