@@ -5,7 +5,8 @@
   border: 1px solid #dce1e5;
   border-radius: 4px;
   background: #fff;
-  font-size: 13px;
+  font-size: var(--tcg-type-body);
+  line-height: 1.7;
 }
 
 .product label { font-weight: 500; }
@@ -13,7 +14,7 @@
   display: block;
   margin: 18px 0 20px;
   color: var(--tcg-navy);
-  font-size: clamp(30px, 5vw, 50px);
+  font-size: clamp(36px, 5vw, 50px);
   font-weight: 500;
   line-height: 1.3;
   font-variant-numeric: tabular-nums;
@@ -33,10 +34,10 @@
   gap: 16px;
   margin-top: 8px;
   color: #647085;
-  font-size: 11px;
+  font-size: var(--tcg-type-note);
 }
 .limits > span:last-child { text-align: right; }
-.limits [lang=en] { display: block; font-size: 10px; }
+.limits [lang=en] { display: block; font-size: inherit; }
 .presets {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -52,7 +53,8 @@
   background: #fff;
   color: var(--tcg-navy);
   font: inherit;
-  font-size: 12px;
+  font-size: var(--tcg-type-button);
+  line-height: 1.5;
   cursor: pointer;
 }
 .presets button:hover, .presets button[aria-pressed=true] {
@@ -74,7 +76,7 @@
 }
 .results dt { font-weight: 400; }
 .results dd { margin: 18px 0 0; font-variant-numeric: tabular-nums; }
-.metric dd { font-size: clamp(28px, 4vw, 38px); font-weight: 500; line-height: 1.4; }
+.metric dd { font-size: clamp(32px, 4vw, 38px); font-weight: 500; line-height: 1.4; }
 .total {
   display: flex;
   grid-column: 1 / -1;
@@ -85,8 +87,8 @@
   padding-top: 26px;
   border-top: 1px solid #dce1e5;
 }
-.total dd { margin: 0; font-size: clamp(26px, 4vw, 34px); font-weight: 500; line-height: 1.4; }
-.note { margin: 24px 0 0; color: #647085; font-size: 11px; }
+.total dd { margin: 0; font-size: clamp(30px, 4vw, 34px); font-weight: 500; line-height: 1.4; }
+.note { margin: 24px 0 0; color: #647085; font-size: var(--tcg-type-note); line-height: 1.7; }
 
 @media (max-width: 720px) {
   .calculator { padding: 24px; }
