@@ -188,6 +188,10 @@ const alwaysOptionalFieldNames = new Set<keyof FormState>([
 ])
 
 function isFieldRequired(field: FieldConfig) {
+  return field.name === 'email' && Boolean(field.required)
+}
+
+function isPrimaryField(field: FieldConfig) {
   return Boolean(field.required) && !alwaysOptionalFieldNames.has(field.name)
 }
 
@@ -313,8 +317,8 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
   const complianceNotes = formCommon.complianceNotes
   const buttonLabel = formCopy.button
   const sourcePage = type === 'quote' ? '/quote' : '/contact'
-  const requiredFields = fields.filter(isFieldRequired)
-  const optionalFields = fields.filter((field) => !isFieldRequired(field))
+  const primaryFields = fields.filter(isPrimaryField)
+  const optionalFields = fields.filter((field) => !isPrimaryField(field))
   const optionalDetailsLabel = {
     ja: '任意項目（より正確なお見積りのために）',
     en: 'Optional details for a more accurate quote',
@@ -527,7 +531,7 @@ export default function InquiryForm({ type, mailtoHref, submissionEnabled = true
       <p className="inquiry-form__intro">{formCopy.intro}</p>
 
       <div className="inquiry-form__grid">
-        {requiredFields.map(renderField)}
+        {primaryFields.map(renderField)}
       </div>
 
       {optionalFields.length > 0 && (
