@@ -12,6 +12,15 @@ const routes = [
   '/privacy',
   '/contact',
   '/quote',
+  '/tcg',
+  '/tcg/pokemon',
+  '/tcg/onepiece',
+  '/tcg/how-to-order',
+  '/tcg/quote',
+  '/tcg/faq',
+  '/tcg/pokemon/scarlet-ex',
+  '/tcg/pokemon/violet-ex',
+  '/tcg/onepiece/romance-dawn',
 ] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {

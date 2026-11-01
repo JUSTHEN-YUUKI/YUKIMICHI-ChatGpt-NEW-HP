@@ -158,6 +158,11 @@ export default function Navigation() {
               </li>
             )
           })}
+          <li>
+            <Link href="/tcg" className="nav-tcg" aria-label="TCG B2B" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px", minHeight: "38px", padding: "8px 12px", background: "#FFCB05", color: "#183B75", border: "2px solid #2A75BB", borderRadius: "2px", textDecoration: "none", fontSize: "11px", fontWeight: 600, whiteSpace: "nowrap" }}>
+              TCG B2B <span aria-hidden="true">↗</span>
+            </Link>
+          </li>
           {multilingualUiEnabled && (
             <li style={{ marginLeft: "10px" }}>
               <LanguageSwitcher />
@@ -251,6 +256,7 @@ export default function Navigation() {
             alignItems: "center",
             justifyContent: "center",
             padding: "120px 24px 40px",
+            overflowY: "auto",
           }}
         >
           <div
@@ -260,6 +266,7 @@ export default function Navigation() {
               maxWidth: "420px",
               display: "grid",
               gap: "18px",
+              margin: "auto 0",
               textAlign: "center",
             }}
           >
@@ -312,6 +319,9 @@ export default function Navigation() {
               )
             })}
 
+            <Link href="/tcg" className="nav-tcg" onClick={() => setMenuOpen(false)} style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", gap: "12px", padding: "14px 20px", background: "#FFCB05", color: "#183B75", border: "2px solid #2A75BB", borderRadius: "2px", textDecoration: "none", fontSize: "16px", fontWeight: 600 }}>
+              TCG B2B <span aria-hidden="true">↗</span>
+            </Link>
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
@@ -326,7 +336,8 @@ export default function Navigation() {
       )}
 
       <style>{`
-        @media (max-width: 1120px) {
+        .nav-tcg:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+        @media (max-width: 1280px) {
           .nav-desktop { display: none !important; }
           .nav-burger { display: flex !important; }
         }
