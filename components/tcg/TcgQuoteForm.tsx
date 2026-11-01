@@ -81,11 +81,10 @@ export default function TcgQuoteForm({ initialCategory, initialProduct }: { init
   }
 
   return <form className="tcg-form-shell" onSubmit={submit} autoComplete="on">
-    <div className="tcg-availability" role="status">
+    {ready !== false && <div className="tcg-availability" role="status">
       {ready === null ? <Bilingual ja="受付方法を確認しています。" en="Checking the available inquiry method." />
-        : ready ? <Bilingual ja="必要事項をご入力ください。見積依頼のみでは購入義務は生じません。" en="Please complete the required fields. A quote request alone does not commit you to a purchase." />
-          : <Bilingual ja="現在、自動受付を停止しています。入力内容からメール下書きを作成できます。メールアプリで送信するまで受付は完了しません。" en="Automatic form submission is currently unavailable. You can prepare an email draft using this form. Your inquiry is not sent until you send it from your email app." />}
-    </div>
+        : <Bilingual ja="必要事項をご入力ください。見積依頼のみでは購入義務は生じません。" en="Please complete the required fields. A quote request alone does not commit you to a purchase." />}
+    </div>}
     <fieldset className="tcg-form-fields" disabled={state === 'sending' || state === 'success'}>
       <legend className="tcg-form-legend"><Bilingual ja="ご依頼内容" en="Your Inquiry" /></legend>
       <div className="tcg-form-grid">
@@ -109,7 +108,7 @@ export default function TcgQuoteForm({ initialCategory, initialProduct }: { init
         </Field>
         <Field name="productName" ja="希望商品" en="Requested Products" required wide><textarea id="tcg-productName" name="productName" required maxLength={500} defaultValue={initialProduct} placeholder="商品名・シリーズ・参考URL / Product name, series, or reference URL" /></Field>
         <Field name="quantity" ja="希望数量" en="Requested Quantity" required><input id="tcg-quantity" name="quantity" type="text" inputMode="numeric" pattern="[1-9][0-9]{0,6}" required maxLength={7} placeholder="例 / e.g. 10" /><small className="tcg-field-note"><Bilingual ja="1～1,000,000の整数。数量は希望であり、MOQの確約ではありません。" en="A whole number from 1 to 1,000,000. This is your request, not a confirmed MOQ." /></small></Field>
-        <Field name="quantityUnit" ja="希望単位" en="Requested Order Unit" required><select id="tcg-quantityUnit" name="quantityUnit" required defaultValue=""><option value="">選択してください / Please select</option><option value="BOX">BOX / ボックス</option><option value="CASE">CASE / ケース</option></select><small className="tcg-field-note"><Bilingual ja="ケース入数・未開封条件は別途確認します。マスターケースのご希望はその他要望へご記入ください。" en="Case contents and factory-sealed condition require confirmation. Note master-case requests under Additional Requirements." /></small></Field>
+        <Field name="quantityUnit" ja="希望単位" en="Requested Order Unit" required><select id="tcg-quantityUnit" name="quantityUnit" required defaultValue=""><option value="">選択してください / Please select</option><option value="BOX">BOX / ボックス</option><option value="CARTON">CARTON / カートン</option></select><small className="tcg-field-note"><Bilingual ja="カートン入数・未開封条件は別途確認します。マスターケースのご希望はその他要望へご記入ください。" en="Carton contents and factory-sealed condition require confirmation. Note master-case requests under Additional Requirements." /></small></Field>
         <Field name="destinationCountry" ja="配送先国" en="Destination Country" required><input id="tcg-destinationCountry" name="destinationCountry" autoComplete="shipping country-name" required maxLength={200} /></Field>
         <Field name="destinationCity" ja="配送先都市" en="Destination City" required><input id="tcg-destinationCity" name="destinationCity" autoComplete="shipping address-level2" required maxLength={200} /></Field>
         <Field name="deadline" ja="希望納期" en="Preferred Delivery Schedule" wide><input id="tcg-deadline" name="deadline" maxLength={300} placeholder="ご希望を記入 / Tell us your preferred timing" /></Field>
