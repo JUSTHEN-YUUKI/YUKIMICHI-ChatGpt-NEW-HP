@@ -197,7 +197,7 @@ test('all existing language payloads and supplementary product fields reach the 
 const tcgValid = {
   type: 'tcg-quote', businessType: 'company', company: 'Test Business', name: '検証担当',
   businessCountry: 'Singapore', email: 'exporter@justhen.co.jp', businessWebsite: 'https://example.invalid',
-  tcgCategory: 'pokemon', productName: '商品名 / Product', quantity: '2', quantityUnit: 'CASE',
+  tcgCategory: 'pokemon', productName: '商品名 / Product', quantity: '2', quantityUnit: 'CARTON',
   destinationCountry: 'Singapore', destinationCity: 'Singapore', deadline: '', message: '',
   tcgConsent: 'accepted', website: '', sourcePage: '/untrusted-source',
 }
@@ -212,7 +212,7 @@ test('TCG company and sole proprietor requests preserve business details and dis
     assert.equal(f.sent.length, 2)
     assert.match(f.sent[0].subject, /TCG B2B見積依頼/)
     assert.match(f.sent[0].text, /Singapore/)
-    assert.match(f.sent[0].text, /Requested Order Unit: CASE/)
+    assert.match(f.sent[0].text, /Requested Order Unit: CARTON/)
     assert.match(f.sent[0].text, /Business Website: https:\/\/example.invalid/)
     assert.match(f.sent[0].text, /Source Page: \/tcg\/quote/)
     assert.ok(!f.sent[0].html.includes('<b>Test Business</b>'))
@@ -225,7 +225,7 @@ test('TCG rejects missing consent, invalid business data, quantities and units b
   for (const change of [
     { tcgConsent: '' }, { tcgConsent: 'true' }, { company: '' }, { businessType: 'consumer' },
     { quantity: '' }, { quantity: '0' }, { quantity: '-1' }, { quantity: '1.5' }, { quantity: '1000001' },
-    { quantityUnit: 'PACK' }, { tcgCategory: 'other' }, { businessCountry: '' }, { destinationCity: '' },
+    { quantityUnit: 'PACK' }, { quantityUnit: 'CASE' }, { tcgCategory: 'other' }, { businessCountry: '' }, { destinationCity: '' },
     { productName: '' }, { name: 'x'.repeat(201) }, { website: 'bot' },
     { businessWebsite: 'javascript:alert(1)' }, { businessWebsite: 'https://user:pass@example.invalid' },
   ]) {
