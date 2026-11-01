@@ -67,6 +67,20 @@ test('contact and quote succeed with quantity omitted; admin HTML escaped and ac
   }
 })
 
+test('contact and quote require only email; all other inquiry fields are optional', async () => {
+  for (const type of ['contact', 'quote']) {
+    const validInquiry = fixture()
+    const response = await validInquiry.post(request({ type, email: valid.email }))
+    assert.equal(response.status, 200)
+    assert.equal(validInquiry.sent.length, 2)
+
+    const missingEmail = fixture()
+    const rejected = await missingEmail.post(request({ type }))
+    assert.equal(rejected.status, 400)
+    assert.equal(missingEmail.sent.length, 0)
+  }
+})
+
 test('invalid shape, field types, JSON, origins, encodings and oversized bodies never send mail', async () => {
   const cases = [
     [request(null), 400], [request([]), 400], [request({ ...valid, name: 42 }), 400],
