@@ -13,7 +13,7 @@
 .tcg-site .tcg-brand small{font-size:10px;color:#c4cfdd;letter-spacing:.07em}
 .tcg-site .tcg-back{display:flex;gap:18px;align-items:center;font-size:11px;flex-shrink:0;color:#fff}
 .tcg-site .tcg-back .tcg-en{font-size:10px;margin-top:1px}
-.tcg-site .tcg-navigation{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-bottom:1px solid #16294020;padding:16px 0;gap:8px}
+.tcg-site .tcg-navigation{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid #16294020;padding:16px 0;gap:8px}
 .tcg-site .tcg-navigation a{font-size:11px;padding:10px 8px;text-align:center;border-bottom:2px solid transparent;line-height:1.5;border-radius:2px}
 .tcg-site .tcg-navigation a .tcg-en{font-size:10px;margin-top:3px}
 .tcg-site .tcg-navigation a:hover,.tcg-site .tcg-navigation a[aria-current=page]{color:var(--tcg-ink);background:#fff;border-bottom-color:var(--tcg-blue)}
