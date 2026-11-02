@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Bilingual from './Bilingual'
-import { calculateTcgFee, TCG_FEE_MIN_VALUE, TCG_FEE_MAX_VALUE, TCG_FEE_VALUE_STEP, TCG_FEE_PRESETS } from '@/lib/tcg/fees'
+import { calculateTcgFee, TCG_FEE_MIN_VALUE, TCG_FEE_MAX_VALUE, TCG_FEE_VALUE_STEP } from '@/lib/tcg/fees'
 import styles from './TcgFeeCalculator.module.css'
 
 const yenFormatter = new Intl.NumberFormat('ja-JP')
@@ -25,11 +25,6 @@ export default function TcgFeeCalculator() {
         <span>1万円 <span lang="en">/ JPY 10,000</span></span>
         <span>500万円 <span lang="en">/ JPY 5,000,000</span></span>
       </div>
-    </div>
-
-    <div className={styles.presets} role="group" aria-label="商品代金を選択 / Select Product Value">
-      {TCG_FEE_PRESETS.map(value => <button key={value} type="button"
-        aria-pressed={productValue === value} onClick={() => setProductValue(value)}>{yen(value)}</button>)}
     </div>
 
     <div aria-live="polite" aria-atomic="true">
