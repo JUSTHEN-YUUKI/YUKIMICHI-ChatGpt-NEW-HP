@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Bilingual from './Bilingual'
 
-export default function TcgPageHeading({ ja, en, descriptionJa, descriptionEn }: {
-  ja: string; en: string; descriptionJa?: string; descriptionEn?: string
+export default function TcgPageHeading({ ja, en, descriptionJa, descriptionEn, className }: {
+  ja: string; en: string; descriptionJa?: string; descriptionEn?: string; className?: string
 }) {
-  return <header className="tcg-page-heading">
+  return <header className={`tcg-page-heading${className ? ` ${className}` : ''}`}>
     <nav className="tcg-breadcrumb" aria-label="パンくずリスト / Breadcrumb">
       <Link href="/">YUKIMICHI</Link><span aria-hidden="true">/</span>
       <Link href="/tcg">TCG B2B</Link><span aria-hidden="true">/</span>

@@ -7,7 +7,7 @@ import TradeNotice from './TradeNotice'
 export default function CategoryProducts({ category }: { category: TcgCategory }) {
   const info = categories.find(item => item.id === category)!
   return <>
-    <TcgPageHeading {...info.name}
+    <TcgPageHeading {...info.name} className={`tcg-category-intro tcg-category-intro-${category}`}
       descriptionJa="特定の商品・シリーズに限定せず、日本語版トレーディングカードの仕入れについてご相談いただけます。仕入れ可否・価格・数量条件は案件ごとに確認します。"
       descriptionEn="We welcome sourcing inquiries for any Japanese-edition product or series in this category. Availability, pricing, and order conditions are reviewed individually." />
     <section className="tcg-section" aria-label="仕入れのご相談 / Sourcing inquiries">
