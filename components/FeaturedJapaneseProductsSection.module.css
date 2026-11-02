@@ -1,0 +1,33 @@
+.section{display:grid;gap:32px;border-top:1px solid rgba(201,168,76,.18);padding-top:56px}
+.header{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:end}
+.heading{display:grid;gap:8px;font-family:'Noto Serif JP',serif;font-size:clamp(26px,3.3vw,42px);font-weight:300;line-height:1.4}
+.heading em{color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px,3.6vw,44px)}
+.intro{display:grid;gap:12px}.intro p,.description p,.check p,.guidanceCopy p{color:var(--washi-dim);font-size:13px;line-height:1.85;margin:0;overflow-wrap:anywhere}
+.intro p[lang=en],.description p[lang=en],.check p[lang=en],.guidanceCopy p[lang=en]{font-family:'Cormorant Garamond',serif;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.card{min-width:0;display:flex;flex-direction:column;border:1px solid rgba(201,168,76,.18);padding:24px;background:linear-gradient(150deg,rgba(201,168,76,.06),transparent 48%),rgba(7,17,31,.55);scroll-margin-top:120px}
+.cardTop{display:flex;justify-content:space-between;gap:8px;min-height:66px;border-bottom:1px solid rgba(201,168,76,.16)}
+.index{font-size:12px;color:var(--gold);letter-spacing:.18em}
+.categoryCode{color:rgba(201,168,76,.45);font:300 29px 'Cormorant Garamond',serif;overflow-wrap:anywhere}
+.cardTitle{display:grid;gap:8px;margin:24px 0 16px;line-height:1.35}
+.cardTitle span[lang=ja]{color:var(--washi);font:300 clamp(17px,1.6vw,21px) 'Noto Serif JP',serif}
+.cardTitle span[lang=en]{color:var(--gold);font:400 clamp(18px,2vw,25px) 'Cormorant Garamond',serif}
+.description{display:grid;gap:10px}
+.description p{font-size:12px}
+.check{display:grid;gap:7px;border-top:1px solid rgba(201,168,76,.14);padding-top:16px;margin-top:18px}
+.check p{font-size:12px}
+.check .checkLabel{display:grid;gap:3px;color:var(--gold);font-size:10px;letter-spacing:.08em}
+.checkLabel span[lang=en]{color:var(--gold);font-size:10px}
+.link{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;margin-top:auto;padding-top:19px;color:var(--gold-light);font-size:11px;text-decoration:none}
+.link span:first-child{display:grid;gap:3px}
+.link span[lang=en]{font:400 13px 'Cormorant Garamond',serif}
+.link>span:last-child{font-size:22px}
+.link:hover{color:var(--washi)}.link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.guidance{display:grid;grid-template-columns:1fr 2fr;gap:25px;border-top:1px solid rgba(201,168,76,.16);padding-top:26px}
+.guidance h3{color:var(--washi);font:300 20px 'Noto Serif JP',serif}
+.guidance .guidanceEnTitle{margin:7px 0 0;color:var(--gold);font:400 19px 'Cormorant Garamond',serif}
+.guidanceCopy{display:grid;gap:11px}.guidanceCopy p{font-size:12px}
+.guidanceCopy .sources{display:flex;gap:8px;flex-wrap:wrap;font-size:11px}.sources a{color:var(--gold-light);text-underline-offset:3px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){.header,.guidance{grid-template-columns:1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.card{padding:20px}.cardTop{min-height:50px}}

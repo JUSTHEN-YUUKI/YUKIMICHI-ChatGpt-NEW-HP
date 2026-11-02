@@ -2,6 +2,7 @@
 
 import ScrollReveal from "@/components/ScrollReveal"
 import ImportGuideSection from "@/components/ImportGuideSection"
+import FeaturedJapaneseProductsSection from "@/components/FeaturedJapaneseProductsSection"
 import { useLanguage } from "@/components/LanguageProvider"
 import { translations } from "@/lib/translations"
 
@@ -47,6 +48,7 @@ export default function ProductShowcaseSection() {
         </ScrollReveal>
 
         <ImportGuideSection />
+        <FeaturedJapaneseProductsSection />
       </div>
 
       <style>{`
