@@ -98,8 +98,11 @@ export default function TcgFeeCalculator() {
         ))}
       </div>
       <p className={styles.shippingCaution}><Bilingual
-        ja="外部サイトが別タブで開きます。表示送料は参考金額であり、実際の送料・引受可否・補償条件は商品内容、申告価格、重量、サイズ、仕向国、各社規定等により異なります。EMSは料金計算画面でEMSを選択してください。"
-        en="Links open official external websites in a new tab. Rates are indicative, not final quotes. Actual charges, acceptance, and coverage depend on the goods, declared value, weight, dimensions, destination, and each carrier's terms. For Japan Post, select EMS in the rate calculator." /></p>
+        ja="外部サイトが別タブで開きます。各社の料金表示は参考値であり、実際の送料・引受可否・補償条件は商品内容、申告価格、重量、容積・梱包サイズ、配送先、各社の引受条件等により異なります。EMSは料金計算画面でEMSを選択してください。"
+        en="Links open official external websites in a new tab. Rates are indicative, not final quotes. Actual charges, acceptance, and coverage depend on the goods, declared value, weight, volume, parcel dimensions, destination, and each carrier's acceptance conditions. For Japan Post, select EMS in the rate calculator." /></p>
+      <p className={styles.shippingCaution}><Bilingual
+        ja="YUKIMICHIはフォワーダー・通関業者・保険会社ではありません。日本側の仕入れ確認と国際配送手配を支援します。"
+        en="YUKIMICHI is not a freight forwarder, customs broker, or insurance company. We support sourcing checks in Japan and coordination of international shipping arrangements." /></p>
     </section>
     <p className={styles.note}><Bilingual ja="各金額帯の該当部分に料率を適用する累進方式です。最低取扱手数料は5,000円です。シミュレーションは概算であり、正式な条件はお見積りでご確認ください。"
       en="Fees are calculated progressively for each portion of the product value, with a minimum handling fee of JPY 5,000. This is an estimate; final terms are confirmed in a quotation." /></p>
