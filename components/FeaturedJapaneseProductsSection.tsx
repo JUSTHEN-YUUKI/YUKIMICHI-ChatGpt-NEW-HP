@@ -4,6 +4,10 @@ import styles from "./FeaturedJapaneseProductsSection.module.css"
 type FeaturedCategory = {
   id: string
   code: string
+  imageSrc: string
+  imageAlt: string
+  imageCredit: string
+  imageSourceUrl: string
   titleJa: string
   titleEn: string
   descriptionJa: string
@@ -17,6 +21,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "trading-cards",
     code: "TCG",
+    imageSrc: "https://images.unsplash.com/photo-1728165932410-4238dd745af2?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "カードを重ねた参考写真（トレーディングカードの商品写真ではありません）",
+    imageCredit: "Samyam Kittur",
+    imageSourceUrl: "https://unsplash.com/photos/a-stack-of-cards-sitting-on-top-of-a-table-OijC1PS6_AA",
     titleJa: "日本のトレーディングカード",
     titleEn: "Japanese Trading Cards",
     descriptionJa: "ポケモンカード・ONE PIECEカードなどの未開封BOXやケース単位の仕入れ相談。国内供給元への確認を支援します。",
@@ -28,6 +36,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "matcha-tea",
     code: "TEA",
+    imageSrc: "https://images.unsplash.com/photo-1753009712810-3f72c3f72548?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "茶碗の抹茶と茶筅の写真",
+    imageCredit: "Zed Can",
+    imageSourceUrl: "https://unsplash.com/photos/matcha-tea-being-whisked-in-a-bowl-BFeHprrF4Aw",
     titleJa: "日本産抹茶・緑茶",
     titleEn: "Japanese Matcha & Green Tea",
     descriptionJa: "抹茶、煎茶、ほうじ茶など。業務用から贈答用まで、仕入れ条件や必要書類の確認を支援します。",
@@ -39,6 +51,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "skincare",
     code: "BEAUTY",
+    imageSrc: "https://images.unsplash.com/photo-1629133597481-be00f7cbabb8?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "化粧品用の小さなガラスボトルの参考写真",
+    imageCredit: "Magda Vrabetz",
+    imageSourceUrl: "https://unsplash.com/photos/clear-glass-bottle-on-white-table-ERa3ybA8OnU",
     titleJa: "日本製化粧品・スキンケア",
     titleEn: "Japanese Skincare & Beauty",
     descriptionJa: "化粧水、クリーム、シャンプーなど。国内メーカー・卸への取引条件確認や書類整理を支援します。",
@@ -50,6 +66,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "stationery",
     code: "PAPER",
+    imageSrc: "https://images.unsplash.com/photo-1776762249708-31d7e1579748?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "ノートと鉛筆などの文房具の写真",
+    imageCredit: "Aliona Zahrai",
+    imageSourceUrl: "https://unsplash.com/photos/pencils-and-a-notepad-with-green-leaves-on-white-pTiVm4VlkLc",
     titleJa: "日本製文房具・ノート",
     titleEn: "Japanese Stationery",
     descriptionJa: "筆記具、ノート、和紙文具など。商品仕様・ロット・梱包条件を整理し、仕入れ可否を確認します。",
@@ -61,6 +81,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "kitchenware",
     code: "HOME",
+    imageSrc: "https://images.unsplash.com/photo-1672110786148-3b1013d90c94?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "京都の店頭に並ぶ陶磁器と茶器の写真",
+    imageCredit: "Diana Lisunova",
+    imageSourceUrl: "https://unsplash.com/photos/a-shelf-filled-with-lots-of-dishes-and-cups-Yp5ZqcnNGrw",
     titleJa: "日本製キッチン用品・食器",
     titleEn: "Japanese Kitchenware & Tableware",
     descriptionJa: "陶磁器、調理用品、箸など。用途と材質を確認し、適切な梱包や配送方法を検討します。",
@@ -72,6 +96,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "snacks",
     code: "FOOD",
+    imageSrc: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "色鮮やかな和菓子の写真",
+    imageCredit: "Vicky Ng",
+    imageSourceUrl: "https://unsplash.com/photos/purple-and-white-flower-bouquet-on-brown-round-table-Ayy_K-y_dLA",
     titleJa: "日本のお菓子・加工食品",
     titleEn: "Japanese Snacks & Confectionery",
     descriptionJa: "菓子、スナック、常温加工食品など。原材料・賞味期限・保存条件を確認したうえで相談を承ります。",
@@ -83,6 +111,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "textiles",
     code: "TEXTILE",
+    imageSrc: "https://images.unsplash.com/photo-1766727923581-d4df2f4e9308?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "色とりどりのタオルを重ねた写真",
+    imageCredit: "Sohail Asim",
+    imageSourceUrl: "https://unsplash.com/photos/stack-of-colorful-folded-towels-on-a-white-background-685H8ISuNO8",
     titleJa: "日本製タオル・繊維製品",
     titleEn: "Japanese Towels & Textiles",
     descriptionJa: "タオル、手ぬぐい、生活繊維製品など。素材、発注単位、ブランドの取引条件を確認します。",
@@ -94,6 +126,10 @@ const featuredCategories: FeaturedCategory[] = [
   {
     id: "crafts",
     code: "CRAFT",
+    imageSrc: "https://images.unsplash.com/photo-1760619020864-b1d275143cd8?auto=format&fit=crop&w=1000&q=78",
+    imageAlt: "和紙の折り鶴が並ぶ日本の伝統工芸の参考写真",
+    imageCredit: "Tsuyoshi Kozu",
+    imageSourceUrl: "https://unsplash.com/photos/many-blue-origami-cranes-hanging-with-yellow-background-Vuq9GqYlnT0",
     titleJa: "日本の伝統工芸品・ギフト雑貨",
     titleEn: "Japanese Crafts & Gifts",
     descriptionJa: "工芸小物、風呂敷、地域限定ギフトなど。仕入れ条件と素材・形状に応じた輸送方法を確認します。",
@@ -107,7 +143,7 @@ const featuredCategories: FeaturedCategory[] = [
 const itemListJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Featured Japanese Product Categories for Overseas Buyers",
+  name: "Japanese Product Picks for Overseas Buyers",
   description: "Japanese product categories presented for sourcing and export coordination inquiries by YUKIMICHI, not an inventory or confirmed offer for sale.",
   numberOfItems: featuredCategories.length,
   itemListElement: featuredCategories.map((item, index) => ({
@@ -137,11 +173,11 @@ export default function FeaturedJapaneseProductsSection() {
         <div>
           <div className="section-label">
             <div className="section-label-line" />
-            <span className="section-label-text">YUKIMICHI · FEATURED JAPANESE PRODUCTS</span>
+            <span className="section-label-text">YUKIMICHI · JAPANESE PRODUCT PICKS</span>
           </div>
           <h2 id="featured-japanese-products-heading" className={styles.heading}>
-            <span lang="ja">おすすめ・注目の日本商品</span>
-            <em lang="en">Featured Japanese Products</em>
+            <span lang="ja">日本商品ピックアップ</span>
+            <em lang="en">Japanese Product Picks</em>
           </h2>
         </div>
         <div className={styles.intro}>
@@ -156,9 +192,31 @@ export default function FeaturedJapaneseProductsSection() {
         </div>
       </div>
 
+      <p className={styles.photoDisclaimer}>
+        <span lang="ja">※写真は各カテゴリーの参考イメージです。YUKIMICHIが販売・在庫保有する商品や、輸出・輸入が認められた商品を示すものではありません。</span>
+        <span lang="en">Photos are illustrative category images, not YUKIMICHI inventory, product offers, or confirmation of export/import eligibility.</span>
+      </p>
       <div className={styles.grid}>
         {featuredCategories.map((item, index) => (
           <article id={"featured-" + item.id} className={styles.card} key={item.id}>
+            <figure className={styles.media}>
+              <img
+                className={styles.photo}
+                src={item.imageSrc}
+                alt={item.imageAlt}
+                width="1000"
+                height="625"
+                loading={index < 3 ? "eager" : "lazy"}
+                decoding="async"
+                referrerPolicy="no-referrer"
+              />
+              <figcaption className={styles.mediaCredit}>
+                <span lang="ja">参考イメージ</span>
+                <a href={item.imageSourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`Photo by ${item.imageCredit} on Unsplash (opens in a new tab)`}>
+                  Photo: {item.imageCredit} / Unsplash ↗
+                </a>
+              </figcaption>
+            </figure>
             <div className={styles.cardTop}>
               <span className={styles.index}>{String(index + 1).padStart(2, "0")} / 08</span>
               <span className={styles.categoryCode} aria-hidden="true">{item.code}</span>
