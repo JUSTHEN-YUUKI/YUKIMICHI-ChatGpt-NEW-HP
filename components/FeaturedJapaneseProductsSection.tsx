@@ -248,31 +248,6 @@ export default function FeaturedJapaneseProductsSection() {
         ))}
       </div>
 
-      <div className={styles.guidance}>
-        <div>
-          <h3 lang="ja">掲載商品について</h3>
-          <p lang="en" className={styles.guidanceEnTitle}>About These Featured Categories</p>
-        </div>
-        <div className={styles.guidanceCopy}>
-          <p lang="ja">
-            こちらは仕入れ相談の参考カテゴリーであり、人気順位・在庫・価格・正規代理店契約・輸出可否・
-            仕向国での輸入や販売の可否を保証するものではありません。商品情報、仕向国、用途、数量、
-            配送方法等に応じて、関係先への確認が必要です。
-          </p>
-          <p lang="en">
-            These categories are examples for sourcing inquiries, not a popularity ranking or
-            a guarantee of stock, prices, authorized distributorship, export eligibility,
-            or permission to import or sell in the destination country. Requirements must be
-            checked case by case based on the product, destination, use, quantity, and shipping method.
-          </p>
-          <p className={styles.sources}>
-            <span lang="ja">参考： </span>
-            <a href="https://www.maff.go.jp/j/shokusan/export/e_info/zisseki.html" target="_blank" rel="noopener noreferrer">農林水産省・食品輸出統計</a>
-            <span aria-hidden="true"> · </span>
-            <a href="https://www.post.japanpost.jp/service/send/oversea/attention/restriction/" target="_blank" rel="noopener noreferrer">日本郵便・国際郵便の禁制品</a>
-          </p>
-        </div>
-      </div>
     </section>
   )
 }
