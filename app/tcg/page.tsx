@@ -43,6 +43,39 @@ export default function TcgHome() {
       <p className="tcg-lead"><Bilingual ja="カードショップ、TCG専門EC、輸入・卸売事業者などからのご相談を承ります。一般個人の趣味目的の購入は、初期段階では原則対象外です。"
         en="We welcome inquiries from card shops, TCG e-commerce businesses, importers, and wholesalers. Personal hobby purchases are generally outside our initial scope." /></p>
     </section>
+    <section className="tcg-section" aria-labelledby="tcg-payment-terms">
+      <div className="tcg-section-heading"><h2 id="tcg-payment-terms"><Bilingual ja="お支払い・取引条件" en="Payment & Terms" /></h2></div>
+      <div lang="ja">
+        <h3>日本語</h3>
+        <p className="tcg-lead">TCG商品のご注文は、正式なお見積り・請求書の内容にご同意いただいた後、日本円（JPY）による全額前払いをお願いしております。</p>
+        <p className="tcg-lead">お支払いは、株式会社ジャッセン指定の法人口座への銀行振込、またはWiseを利用した同口座への海外送金に対応しています。</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>お支払い通貨：日本円（JPY）</li>
+          <li>お支払い条件：請求金額の100%前払い</li>
+          <li>お振込先：株式会社ジャッセン指定法人口座</li>
+          <li>海外送金：Wiseまたは通常の銀行送金（T/T）</li>
+          <li>送金・銀行手数料：原則としてお客様負担</li>
+          <li>商品手配：弊社での全額着金確認後に開始</li>
+        </ul>
+        <p className="tcg-lead">正式な振込先情報は、請求書発行時に個別にご案内いたします。</p>
+        <p className="tcg-lead">在庫状況、最終金額、送料、キャンセル・返金条件については、ご注文確定前に個別に確認いたします。</p>
+      </div>
+      <div lang="en">
+        <h3>English</h3>
+        <p className="tcg-lead">All TCG orders require 100% advance payment in Japanese Yen (JPY), based on an agreed quotation and invoice.</p>
+        <p className="tcg-lead">Payments can be made by bank transfer to JUSTHEN Co., Ltd.&apos;s designated corporate bank account, either through Wise or a conventional international bank transfer (T/T).</p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Currency: Japanese Yen (JPY)</li>
+          <li>Payment Terms: 100% advance payment of the invoiced amount</li>
+          <li>Beneficiary: JUSTHEN Co., Ltd.</li>
+          <li>Payment Methods: Wise transfer or bank transfer (T/T)</li>
+          <li>Transfer and Bank Fees: Generally borne by the buyer</li>
+          <li>Order Processing: Begins after full payment has been received and verified</li>
+        </ul>
+        <p className="tcg-lead">Official bank details will be provided individually with the invoice.</p>
+        <p className="tcg-lead">Stock availability, final pricing, shipping charges, and cancellation or refund terms will be confirmed before the order is finalized.</p>
+      </div>
+    </section>
     <TradeNotice />
   </>
 }
