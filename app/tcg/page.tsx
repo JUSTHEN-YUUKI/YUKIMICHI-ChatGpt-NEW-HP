@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Bilingual from '@/components/tcg/Bilingual'
 import TradeNotice from '@/components/tcg/TradeNotice'
 import { categories } from '@/lib/tcg/catalog'
@@ -44,9 +45,13 @@ export default function TcgHome() {
         en="We welcome inquiries from card shops, TCG e-commerce businesses, importers, and wholesalers. Personal hobby purchases are generally outside our initial scope." /></p>
     </section>
     <section className="tcg-section" aria-labelledby="tcg-payment-terms">
-      <div className="tcg-section-heading"><h2 id="tcg-payment-terms"><Bilingual ja="お支払い・取引条件" en="Payment & Terms" /></h2></div>
+      <div className="tcg-section-heading flex flex-wrap items-center gap-4">
+        <h2 id="tcg-payment-terms"><Bilingual ja="お支払い・取引条件" en="Payment & Terms" /></h2>
+        <span className="flex h-10 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#edf8dd]">
+          <Image src="/wise-wordmark.png" alt="" width={72} height={72} unoptimized />
+        </span>
+      </div>
       <div lang="ja">
-        <h3>日本語</h3>
         <p className="tcg-lead">TCG商品のご注文は、正式なお見積り・請求書の内容にご同意いただいた後、日本円（JPY）による全額前払いをお願いしております。</p>
         <p className="tcg-lead">お支払いは、株式会社ジャッセン指定の法人口座への銀行振込、またはWiseを利用した同口座への海外送金に対応しています。</p>
         <ul className="list-disc pl-6 space-y-2">
@@ -61,7 +66,6 @@ export default function TcgHome() {
         <p className="tcg-lead">在庫状況、最終金額、送料、キャンセル・返金条件については、ご注文確定前に個別に確認いたします。</p>
       </div>
       <div lang="en">
-        <h3>English</h3>
         <p className="tcg-lead">All TCG orders require 100% advance payment in Japanese Yen (JPY), based on an agreed quotation and invoice.</p>
         <p className="tcg-lead">Payments can be made by bank transfer to JUSTHEN Co., Ltd.&apos;s designated corporate bank account, either through Wise or a conventional international bank transfer (T/T).</p>
         <ul className="list-disc pl-6 space-y-2">
